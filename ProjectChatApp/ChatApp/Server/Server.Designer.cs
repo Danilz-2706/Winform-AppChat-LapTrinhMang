@@ -52,6 +52,7 @@
             this.IPtxt.Name = "IPtxt";
             this.IPtxt.Size = new System.Drawing.Size(243, 27);
             this.IPtxt.TabIndex = 1;
+            this.IPtxt.TextChanged += new System.EventHandler(this.IPtxt_TextChanged);
             // 
             // Portlbl
             // 

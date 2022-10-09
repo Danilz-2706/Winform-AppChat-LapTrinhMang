@@ -39,7 +39,7 @@ namespace ChatApp
             {
                 //khi nào cắm mạng LAN thì xài dòng này:
                 //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
                 {
                     //Console.WriteLine(ni.Name);
                     foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
@@ -132,11 +132,20 @@ namespace ChatApp
                         break;
                     case "dangnhapthanhcong":
                         MessageBox.Show("Welcome to loza!!!!");
-                        this.Close();
+                        //this.Visible = false;
                         // new Thread(new ThreadStart(this.mainchatapp)).Start();
-                        Form1 f = new Form1();
-                        f.Visible = true;
+                        //MainChatApp f = new MainChatApp();
+                        //f.Visible = true;
+                        MainChatApp f = new MainChatApp();
+                        //f.Visible = true;
+                        //this.Hide();
+                        //f.ShowDialog();
+                        
 
+                        this.Hide();
+                        var form2 = new MainChatApp();
+                        form2.Closed += (s, args) => this.Close();
+                        form2.Show();
                         break;
                     default:
                         break;
@@ -151,13 +160,12 @@ namespace ChatApp
                 iep = new IPEndPoint(IPAddress.Parse(ipaddress), 2008);
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.Connect(iep);
-                Thread trd = new Thread(new ThreadStart(this.LoginConnect));
-                trd.IsBackground = true;
-                trd.Start();
+                //Thread trd = new Thread(new ThreadStart(this.LoginConnect));
+                //trd.IsBackground = true;
+                //trd.Start();
+                LoginConnect();
 
-               
 
-                
             }
             catch (Exception)
             {

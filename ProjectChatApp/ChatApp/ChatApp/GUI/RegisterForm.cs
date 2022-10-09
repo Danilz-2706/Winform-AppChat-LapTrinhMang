@@ -38,7 +38,7 @@ namespace ChatApp.GUI
             {
                 //khi nào cắm mạng LAN thì xài dòng này:
                 //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
                 {
                     //Console.WriteLine(ni.Name);
                     foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
@@ -150,10 +150,12 @@ namespace ChatApp.GUI
                 Thread trd = new Thread(new ThreadStart(this.RegisterConnect));
                 trd.IsBackground = true;
                 trd.Start();
-                
-                 
-                
-                
+                this.Visible = false;
+                MainChatApp f = new MainChatApp();
+                f.Visible = true;
+
+
+
             }
             catch (Exception)
             {

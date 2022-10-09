@@ -12,9 +12,8 @@
       }
     ],
     "additionalProbingPaths": [
-      "C:\\Users\\tanda\\.dotnet\\store\\|arch|\\|tfm|",
-      "C:\\Users\\tanda\\.nuget\\packages",
-      "E:\\setup-sgu\\vs\\sdk\\NuGetPackages"
+      "C:\\Users\\Khanh Katsu\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Khanh Katsu\\.nuget\\packages"
     ],
     "configProperties": {
       "Microsoft.NETCore.DotNetHostPolicy.SetAppPaths": true

@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {}
+    "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {}
   },
   "projects": {
-    "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {
+    "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
+        "projectUniqueName": "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
         "projectName": "ChatApp",
-        "projectPath": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
-        "packagesPath": "C:\\Users\\tanda\\.nuget\\packages\\",
-        "outputPath": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\ChatApp\\obj\\",
+        "projectPath": "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
+        "packagesPath": "C:\\Users\\Khanh Katsu\\.nuget\\packages\\",
+        "outputPath": "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "E:\\setup-sgu\\vs\\sdk\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\tanda\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Khanh Katsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -32,8 +28,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
-                "projectPath": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
+              "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
+                "projectPath": "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
               }
             }
           }
@@ -80,21 +76,17 @@
         }
       }
     },
-    "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
+    "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+        "projectUniqueName": "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
         "projectName": "Packet",
-        "projectPath": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
-        "packagesPath": "C:\\Users\\tanda\\.nuget\\packages\\",
-        "outputPath": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\obj\\",
+        "projectPath": "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+        "packagesPath": "C:\\Users\\Khanh Katsu\\.nuget\\packages\\",
+        "outputPath": "D:\\T10-2022\\project-chat-app\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "E:\\setup-sgu\\vs\\sdk\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\tanda\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Khanh Katsu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

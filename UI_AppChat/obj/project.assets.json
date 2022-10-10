@@ -41,11 +41,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SGU\\LTM\\Winfom-AppChat_LapTrinhMang\\UI_AppChat\\UI_AppChat.csproj",
+      "projectUniqueName": "D:\\SGU\\LTM\\Winform-AppChat-LapTrinhMang\\UI_AppChat\\UI_AppChat.csproj",
       "projectName": "UI_AppChat",
-      "projectPath": "D:\\SGU\\LTM\\Winfom-AppChat_LapTrinhMang\\UI_AppChat\\UI_AppChat.csproj",
+      "projectPath": "D:\\SGU\\LTM\\Winform-AppChat-LapTrinhMang\\UI_AppChat\\UI_AppChat.csproj",
       "packagesPath": "C:\\Users\\tanda\\.nuget\\packages\\",
-      "outputPath": "D:\\SGU\\LTM\\Winfom-AppChat_LapTrinhMang\\UI_AppChat\\obj\\",
+      "outputPath": "D:\\SGU\\LTM\\Winform-AppChat-LapTrinhMang\\UI_AppChat\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "E:\\setup-sgu\\vs\\sdk\\NuGetPackages"

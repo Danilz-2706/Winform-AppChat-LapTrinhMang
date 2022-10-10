@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Dk8zo6I/Xz2u+pqgg0ZGXMJisuKSF0VxNlzsRmJz8eq5ocgQrlFpSMDmc4dj6WoJelC8InWKzmE+cuavjTG4Cw==",
+  "dgSpecHash": "W6s6Lmg3TlyUayPyRkFVAkHkUsFpNUxx7TLY0CJsd5X24bqOAWsB5ArBWnNrIAHNHX+rVLWERVrHIaIOOQ+zHw==",
   "success": true,
-  "projectFilePath": "D:\\SGU\\LTM\\Winfom-AppChat_LapTrinhMang\\UI_AppChat\\UI_AppChat.csproj",
+  "projectFilePath": "D:\\SGU\\LTM\\Winform-AppChat-LapTrinhMang\\UI_AppChat\\UI_AppChat.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tanda\\.nuget\\packages\\guna.ui2.winforms\\2.0.3.5\\guna.ui2.winforms.2.0.3.5.nupkg.sha512"
   ],

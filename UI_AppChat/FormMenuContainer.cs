@@ -120,7 +120,6 @@ namespace UI_AppChat
         private void btnChatting_Click(object sender, EventArgs e)
         {
             OpenChildForm(new FormListFriendChatting(), sender);
-
         }
 
         private void btnSetting_Click(object sender, EventArgs e)

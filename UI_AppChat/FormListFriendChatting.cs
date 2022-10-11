@@ -18,6 +18,11 @@ namespace UI_AppChat
             InitializeComponent();
             
         }
+        private void FormListFriendChatting_Load(object sender, EventArgs e)
+        {
+            PopulateItems();
+
+        }
 
         private void OpenChildForm(Form childForm, object btnSender)
         {
@@ -35,14 +40,37 @@ namespace UI_AppChat
             childForm.Show();
         }
 
-        private void itPerson_Click(object sender, EventArgs e)
+        private void PopulateItems()
         {
-            this.itPerson.FillColor = Color.FromArgb(250, 48, 90);
-            this.itPerson.FillColor2 = Color.FromArgb(128, 36, 206);
-            OpenChildForm(new FormChatting(), sender);
+            ItemFriend[] itemFriends = new ItemFriend[8];
+            for(int i = 0; i < itemFriends.Length; i++)
+            {
+                itemFriends[i] = new ItemFriend();
+                itemFriends[i].UserName = "Danilz Dinh";
+                itemFriends[i].Message = "What'up,............mic check......";
+                itemFriends[i].Status = 1;
 
+                if (flpListItem.Controls.Count < 0)
+                {
+                    flpListItem.Controls.Clear();
+                }
+                else
+                {
+                    flpListItem.Controls.Add(itemFriends[i]);
+                    itemFriends[i].Click += new EventHandler(UserControl_Click);
+                }
+
+            }
+
+            
         }
-        
+        public void UserControl_Click(object sender, EventArgs e)
+        {
+            //ItemFriend obj = (ItemFriend)sender;
+            
+            //MessageBox.Show("day");
+            OpenChildForm(new FormChatting(), sender);
+        }
 
 
     }

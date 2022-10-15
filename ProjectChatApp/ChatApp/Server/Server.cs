@@ -99,10 +99,10 @@ namespace Server
                                         sendJson(client, com);
                                         break;
                                     case "dangnhapthanhcong":
+                                        //tra ve cho client thong tin dang nhap thanh cong
                                         OnlineClientList.Add(client.AddressFamily.ToString(),client);
                                         com = new Packet.Packet(mess, "OK");
-                                        int id = BLLuser.getId(login.username);
-                                        MessageBox.Show("Id :" + id.ToString());
+                                        int id = BLLuser.getId(login.username);                                      
                                         sendJson(client, com);
                                         AppendTextBox("IP: " + client.AddressFamily.ToString()  + client.RemoteEndPoint.ToString() + " voi username la " + login.username + "da ket noi toi server!" + Environment.NewLine); ;
                                         break;

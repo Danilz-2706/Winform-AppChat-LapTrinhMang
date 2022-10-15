@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {}
+    "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {}
   },
   "projects": {
-    "D:\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {
+    "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
+        "projectUniqueName": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
         "projectName": "ChatApp",
-        "projectPath": "D:\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
+        "projectPath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\ProjectChatApp\\ChatApp\\ChatApp\\obj\\",
+        "outputPath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
-                "projectPath": "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
+              "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
+                "projectPath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
               }
             }
           }
@@ -76,14 +76,14 @@
         }
       }
     },
-    "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
+    "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+        "projectUniqueName": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
         "projectName": "Packet",
-        "projectPath": "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+        "projectPath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "D:\\ProjectChatApp\\ChatApp\\Packet\\obj\\",
+        "outputPath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

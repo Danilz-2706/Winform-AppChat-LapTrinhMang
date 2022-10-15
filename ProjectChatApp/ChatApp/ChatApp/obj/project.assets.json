@@ -943,11 +943,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
+      "projectUniqueName": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
       "projectName": "ChatApp",
-      "projectPath": "D:\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
+      "projectPath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\ProjectChatApp\\ChatApp\\ChatApp\\obj\\",
+      "outputPath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -964,8 +964,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
-              "projectPath": "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
+            "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
+              "projectPath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
             }
           }
         }

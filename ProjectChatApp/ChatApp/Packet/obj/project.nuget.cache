@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Kw85a8rUGHahhkdW8BaGy/h/Yz3GtYZ7FydVFggQLa/SzbJEoHt+jvVhdrnTiJf65I9IDBVVbkeenTgl4otbzA==",
+  "dgSpecHash": "qs5sIS2YTEeQZKZgoFtoPSQxEti4u3xfmvimkwdcThfvXb3LmDuMJsLaSRqWmCifxKaDVDeFDiEEznlM61QsbQ==",
   "success": true,
-  "projectFilePath": "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+  "projectFilePath": "D:\\ProjectChatApp\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

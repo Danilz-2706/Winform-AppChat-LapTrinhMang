@@ -118,6 +118,34 @@ namespace Server.DAL
             return userlist;
         }
 
+        public int getId(string email)
+        {
+            int id = 0;
+            MySqlConnection conn = DB.dbconnect.getconnect();
+            try
+            {
+                string query = "SELECT Id from user  where email='"+email+"'";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while(dataReader.Read())
+                {
+                    id= dataReader.GetInt32("Id");
+                }
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+            if(id == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return id;
+            }
+            
+        }
     }
 }

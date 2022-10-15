@@ -8,24 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\tanda\\.nuget\\packages\\": {},
-    "E:\\setup-sgu\\vs\\sdk\\NuGetPackages": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+      "projectUniqueName": "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
       "projectName": "Packet",
-      "projectPath": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
-      "packagesPath": "C:\\Users\\tanda\\.nuget\\packages\\",
-      "outputPath": "D:\\SGU\\LTM\\test\\ProjectChatApp\\ChatApp\\Packet\\obj\\",
+      "projectPath": "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\ProjectChatApp\\ChatApp\\Packet\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "E:\\setup-sgu\\vs\\sdk\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\tanda\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

@@ -1,4 +1,4 @@
-namespace ChatApp
+namespace ChatApp.GUI
 {
     internal static class Program
     {

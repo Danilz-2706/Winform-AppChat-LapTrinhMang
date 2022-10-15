@@ -137,5 +137,18 @@ namespace Server.BLL
             }
             return message;
         }
+
+        public int getId(string email)
+        {
+            int id = DALuser.getId(email);
+            if(id == 0)
+            {
+                return 0;
+            }
+            else
+            {
+                return id;
+            }
+        }
     }
 }

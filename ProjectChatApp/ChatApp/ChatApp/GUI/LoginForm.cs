@@ -18,7 +18,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ChatApp
+namespace ChatApp.GUI
 {
     public partial class LoginForm : Form
     {
@@ -37,8 +37,6 @@ namespace ChatApp
             string t = "";
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
-                //khi nào cắm mạng LAN thì xài dòng này:
-                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
                     //Console.WriteLine(ni.Name);
@@ -91,13 +89,7 @@ namespace ChatApp
             byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
             client.Send(jsonUtf8Bytes, jsonUtf8Bytes.Length, SocketFlags.None);
         }
-        private void mainchatapp()
-        {
-            MainChatApp mca = new MainChatApp();
-            mca.Visible = true;
-            this.Visible = false;
-            
-        }
+       
         private void LoginConnect()
         {
             byte[] data = new byte[1024];
@@ -132,17 +124,17 @@ namespace ChatApp
                         break;
                     case "dangnhapthanhcong":
                         MessageBox.Show("Welcome to loza!!!!");
-                        this.Close();
-                        // new Thread(new ThreadStart(this.mainchatapp)).Start();
-                        Form1 f = new Form1();
-                        f.Visible = true;
 
+                        this.Visible = false;
+                        MainChatApp mainChatApp = new MainChatApp();
+                        mainChatApp.Show();
                         break;
                     default:
                         break;
                 }
             }
         }
+       
         private void Loginbtn_Click(object sender, EventArgs e)
         {
             try
@@ -151,9 +143,10 @@ namespace ChatApp
                 iep = new IPEndPoint(IPAddress.Parse(ipaddress), 2008);
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.Connect(iep);
-                Thread trd = new Thread(new ThreadStart(this.LoginConnect));
+                LoginConnect();
+                /*Thread trd = new Thread(new ThreadStart(this.LoginConnect));
                 trd.IsBackground = true;
-                trd.Start();
+                trd.Start();*/
 
                
 
@@ -164,6 +157,16 @@ namespace ChatApp
                 MessageBox.Show("Khong the ket noi den Server!!!");
                 throw;
             }
+        }
+
+        private void Usertxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -45,6 +45,11 @@ namespace Packet
         public string? bd { get; set; }
     }
 
+
+    public class LOGINSUCESS
+    {
+
+    }
     public class SENDMESSAGE
     {
         public SENDMESSAGE(string ? usernameSender, string ? usernameReceiver, string ? content)

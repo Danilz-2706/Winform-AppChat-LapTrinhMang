@@ -126,7 +126,7 @@ namespace ChatApp
                         MessageBox.Show("Chưa nhập password!");
                         break;
                     case "dangnhapthatbai":
-                        MessageBox.Show("Tài khoản sai không tồn tại hoặc mật khẩu sai!");
+                        MessageBox.Show("Tài khoản sai không tồn tại hoặc mật khẩu sai rồi!");
                         Usertxt.Text = "";
                         Usertxt.Focus();
                         break;
@@ -136,6 +136,7 @@ namespace ChatApp
                         // new Thread(new ThreadStart(this.mainchatapp)).Start();
                         Form1 f = new Form1();
                         f.Visible = true;
+                        //test commit
 
                         break;
                     default:

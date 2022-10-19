@@ -9,11 +9,13 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Server.DAL
 {
     public class DALUser
     {
-
+        /*Database thêm 1 user*/
         public void addUser(string email, string password, string name, int sex, string bd)
         {
             MySqlConnection conn = DB.dbconnect.getconnect();
@@ -45,7 +47,7 @@ namespace Server.DAL
 
             conn.Close();
         }
-
+        /*Database lấy tất cả user*/
         public List<user> LoadAllUser()
         {
             MySqlConnection conn = DB.dbconnect.getconnect();
@@ -81,7 +83,7 @@ namespace Server.DAL
             conn.Close();
             return userlist;
         }
-
+        /*Database kiểm tra thông tin đăng nhập (login)*/
         public List<user> login(string email, string pass)
         {
             MySqlConnection conn = DB.dbconnect.getconnect();
@@ -117,19 +119,28 @@ namespace Server.DAL
             conn.Close();
             return userlist;
         }
-
-        public int getId(string email)
+        /*Database lấy thông tin 1 user*/
+        public user getInfoUser(string email)
         {
-            int id = 0;
+            user u = new user();
             MySqlConnection conn = DB.dbconnect.getconnect();
             try
             {
-                string query = "SELECT Id from user  where email='"+email+"'";
+                string query = "SELECT * from user  where email='"+email+"'";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while(dataReader.Read())
                 {
-                    id= dataReader.GetInt32("Id");
+                    
+                    u.Id = dataReader.GetInt32("Id");
+                    u.Email = dataReader["email"].ToString();
+                    u.Password = dataReader["password"].ToString();
+                    u.Name = dataReader["name"].ToString();
+                    u.Sex = dataReader.GetInt32("sex");
+                    u.Bd = dataReader["birthday"].ToString();
+                    u.Online_status = dataReader.GetInt32("online_status");
+                    u.Is_active = dataReader.GetInt32("is_active");
+                    u.Server_block = dataReader.GetInt32("ServerBlock");
                 }
             }
             catch (Exception)
@@ -137,14 +148,7 @@ namespace Server.DAL
 
                 throw;
             }
-            if(id == 0)
-            {
-                return 0;
-            }
-            else
-            {
-                return id;
-            }
+            return u;
             
         }
     }

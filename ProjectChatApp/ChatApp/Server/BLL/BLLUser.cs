@@ -16,6 +16,7 @@ namespace Server.BLL
     {
         DAL.DALUser DALuser = new DAL.DALUser();
 
+        /*Hàm giả mã password MD5*/
         public string MD5Hash(string text)
         {
             MD5 md5 = MD5.Create();
@@ -27,12 +28,15 @@ namespace Server.BLL
             }
             return hashSb.ToString();
         }
+        /*Hàm lấy tất cả thông tin user*/
         public List<user> LoadAllUser()
         {
             List<user> userList = new List<user>();
             userList = DALuser.LoadAllUser();
             return userList;
         }
+
+        /*Hàm thêm 1 user (đăng ký tài khoản)*/
         public string addAcount(string email, string password, string confirmpass, string name, int sex, string bd)
         {
             string message = "";
@@ -84,6 +88,8 @@ namespace Server.BLL
             }
             return message;
         }
+        
+        /*Hàm kiểm tra thông tin đăng nhập*/
         public string Login(string email, string pass)
         {
             List<user> userlist = new List<user>();
@@ -138,16 +144,18 @@ namespace Server.BLL
             return message;
         }
 
-        public int getId(string email)
+        /*Hàm lấy thông tin 1 user*/ 
+        public user getInfoUser(string email)
         {
-            int id = DALuser.getId(email);
-            if(id == 0)
+            user u = new user();
+            u = DALuser.getInfoUser(email);
+            if(u == null)
             {
-                return 0;
+                return null;
             }
             else
             {
-                return id;
+                return u;
             }
         }
     }

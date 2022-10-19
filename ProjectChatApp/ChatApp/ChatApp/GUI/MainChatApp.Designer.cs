@@ -35,7 +35,7 @@
             this.FriendDenybtn = new System.Windows.Forms.Button();
             this.FriendAcpectbtn = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
-            this.Loginbtn = new System.Windows.Forms.Button();
+            this.Logoutbtn = new System.Windows.Forms.Button();
             this.HeadPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
@@ -44,17 +44,17 @@
             this.SearchFriendtxt = new System.Windows.Forms.TextBox();
             this.ImageUser = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2GradientPanel2 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.Chat_Online_Panel = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.guna2GradientPanel1 = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.Chat_ActiveOnline_Panel = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ChatPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.Chat_Offline_Panel = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.UserChatNamelbl = new System.Windows.Forms.Label();
@@ -74,11 +74,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).BeginInit();
             this.guna2Panel1.SuspendLayout();
-            this.guna2GradientPanel2.SuspendLayout();
+            this.Chat_Online_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.guna2GradientPanel1.SuspendLayout();
+            this.Chat_ActiveOnline_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.ChatPanel.SuspendLayout();
+            this.Chat_Offline_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageChatUser)).BeginInit();
             this.ChattingPanel.SuspendLayout();
             this.MyFriendChattingPanel.SuspendLayout();
@@ -90,7 +90,7 @@
             this.RightPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(40)))));
             this.RightPanel.BorderColor = System.Drawing.Color.FloralWhite;
             this.RightPanel.Controls.Add(this.NotiPanel);
-            this.RightPanel.Controls.Add(this.Loginbtn);
+            this.RightPanel.Controls.Add(this.Logoutbtn);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanel.Location = new System.Drawing.Point(900, 0);
             this.RightPanel.Name = "RightPanel";
@@ -147,20 +147,20 @@
             this.label10.TabIndex = 3;
             this.label10.Text = "User2 muốn kết bạn ";
             // 
-            // Loginbtn
+            // Logoutbtn
             // 
-            this.Loginbtn.BackColor = System.Drawing.Color.OrangeRed;
-            this.Loginbtn.FlatAppearance.BorderSize = 0;
-            this.Loginbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Loginbtn.Font = new System.Drawing.Font("Bauhaus 93", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Loginbtn.ForeColor = System.Drawing.Color.White;
-            this.Loginbtn.Location = new System.Drawing.Point(96, 626);
-            this.Loginbtn.Name = "Loginbtn";
-            this.Loginbtn.Size = new System.Drawing.Size(177, 64);
-            this.Loginbtn.TabIndex = 5;
-            this.Loginbtn.Text = "LOG OUT";
-            this.Loginbtn.UseVisualStyleBackColor = false;
-            this.Loginbtn.Click += new System.EventHandler(this.Loginbtn_Click);
+            this.Logoutbtn.BackColor = System.Drawing.Color.OrangeRed;
+            this.Logoutbtn.FlatAppearance.BorderSize = 0;
+            this.Logoutbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Logoutbtn.Font = new System.Drawing.Font("Bauhaus 93", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Logoutbtn.ForeColor = System.Drawing.Color.White;
+            this.Logoutbtn.Location = new System.Drawing.Point(96, 626);
+            this.Logoutbtn.Name = "Logoutbtn";
+            this.Logoutbtn.Size = new System.Drawing.Size(177, 64);
+            this.Logoutbtn.TabIndex = 5;
+            this.Logoutbtn.Text = "LOG OUT";
+            this.Logoutbtn.UseVisualStyleBackColor = false;
+            this.Logoutbtn.Click += new System.EventHandler(this.Loginbtn_Click);
             // 
             // HeadPanel
             // 
@@ -181,7 +181,7 @@
             // 
             this.pictureBox3.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
-            this.pictureBox3.Location = new System.Drawing.Point(609, 28);
+            this.pictureBox3.Location = new System.Drawing.Point(609, 24);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(28, 25);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -246,9 +246,9 @@
             // 
             // guna2Panel1
             // 
-            this.guna2Panel1.Controls.Add(this.guna2GradientPanel2);
-            this.guna2Panel1.Controls.Add(this.guna2GradientPanel1);
-            this.guna2Panel1.Controls.Add(this.ChatPanel);
+            this.guna2Panel1.Controls.Add(this.Chat_Online_Panel);
+            this.guna2Panel1.Controls.Add(this.Chat_ActiveOnline_Panel);
+            this.guna2Panel1.Controls.Add(this.Chat_Offline_Panel);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 73);
             this.guna2Panel1.Name = "guna2Panel1";
@@ -256,18 +256,18 @@
             this.guna2Panel1.TabIndex = 3;
             this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
             // 
-            // guna2GradientPanel2
+            // Chat_Online_Panel
             // 
-            this.guna2GradientPanel2.Controls.Add(this.label6);
-            this.guna2GradientPanel2.Controls.Add(this.label7);
-            this.guna2GradientPanel2.Controls.Add(this.label8);
-            this.guna2GradientPanel2.Controls.Add(this.pictureBox2);
-            this.guna2GradientPanel2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            this.guna2GradientPanel2.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            this.guna2GradientPanel2.Location = new System.Drawing.Point(12, 279);
-            this.guna2GradientPanel2.Name = "guna2GradientPanel2";
-            this.guna2GradientPanel2.Size = new System.Drawing.Size(284, 103);
-            this.guna2GradientPanel2.TabIndex = 0;
+            this.Chat_Online_Panel.Controls.Add(this.label6);
+            this.Chat_Online_Panel.Controls.Add(this.label7);
+            this.Chat_Online_Panel.Controls.Add(this.label8);
+            this.Chat_Online_Panel.Controls.Add(this.pictureBox2);
+            this.Chat_Online_Panel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
+            this.Chat_Online_Panel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
+            this.Chat_Online_Panel.Location = new System.Drawing.Point(12, 279);
+            this.Chat_Online_Panel.Name = "Chat_Online_Panel";
+            this.Chat_Online_Panel.Size = new System.Drawing.Size(284, 103);
+            this.Chat_Online_Panel.TabIndex = 0;
             // 
             // label6
             // 
@@ -315,18 +315,18 @@
             this.pictureBox2.TabIndex = 0;
             this.pictureBox2.TabStop = false;
             // 
-            // guna2GradientPanel1
+            // Chat_ActiveOnline_Panel
             // 
-            this.guna2GradientPanel1.Controls.Add(this.label3);
-            this.guna2GradientPanel1.Controls.Add(this.label4);
-            this.guna2GradientPanel1.Controls.Add(this.label5);
-            this.guna2GradientPanel1.Controls.Add(this.pictureBox1);
-            this.guna2GradientPanel1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
-            this.guna2GradientPanel1.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(158)))), ((int)(((byte)(224)))));
-            this.guna2GradientPanel1.Location = new System.Drawing.Point(12, 149);
-            this.guna2GradientPanel1.Name = "guna2GradientPanel1";
-            this.guna2GradientPanel1.Size = new System.Drawing.Size(284, 103);
-            this.guna2GradientPanel1.TabIndex = 0;
+            this.Chat_ActiveOnline_Panel.Controls.Add(this.label3);
+            this.Chat_ActiveOnline_Panel.Controls.Add(this.label4);
+            this.Chat_ActiveOnline_Panel.Controls.Add(this.label5);
+            this.Chat_ActiveOnline_Panel.Controls.Add(this.pictureBox1);
+            this.Chat_ActiveOnline_Panel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
+            this.Chat_ActiveOnline_Panel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(158)))), ((int)(((byte)(224)))));
+            this.Chat_ActiveOnline_Panel.Location = new System.Drawing.Point(12, 149);
+            this.Chat_ActiveOnline_Panel.Name = "Chat_ActiveOnline_Panel";
+            this.Chat_ActiveOnline_Panel.Size = new System.Drawing.Size(284, 103);
+            this.Chat_ActiveOnline_Panel.TabIndex = 0;
             // 
             // label3
             // 
@@ -376,18 +376,19 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // ChatPanel
+            // Chat_Offline_Panel
             // 
-            this.ChatPanel.Controls.Add(this.label1);
-            this.ChatPanel.Controls.Add(this.label2);
-            this.ChatPanel.Controls.Add(this.UserChatNamelbl);
-            this.ChatPanel.Controls.Add(this.ImageChatUser);
-            this.ChatPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            this.ChatPanel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            this.ChatPanel.Location = new System.Drawing.Point(12, 20);
-            this.ChatPanel.Name = "ChatPanel";
-            this.ChatPanel.Size = new System.Drawing.Size(284, 103);
-            this.ChatPanel.TabIndex = 0;
+            this.Chat_Offline_Panel.Controls.Add(this.label1);
+            this.Chat_Offline_Panel.Controls.Add(this.label2);
+            this.Chat_Offline_Panel.Controls.Add(this.UserChatNamelbl);
+            this.Chat_Offline_Panel.Controls.Add(this.ImageChatUser);
+            this.Chat_Offline_Panel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
+            this.Chat_Offline_Panel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
+            this.Chat_Offline_Panel.Location = new System.Drawing.Point(12, 20);
+            this.Chat_Offline_Panel.Name = "Chat_Offline_Panel";
+            this.Chat_Offline_Panel.Size = new System.Drawing.Size(284, 103);
+            this.Chat_Offline_Panel.TabIndex = 0;
+            this.Chat_Offline_Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.ChatPanel_Paint);
             // 
             // label1
             // 
@@ -537,14 +538,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).EndInit();
             this.guna2Panel1.ResumeLayout(false);
-            this.guna2GradientPanel2.ResumeLayout(false);
-            this.guna2GradientPanel2.PerformLayout();
+            this.Chat_Online_Panel.ResumeLayout(false);
+            this.Chat_Online_Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.guna2GradientPanel1.ResumeLayout(false);
-            this.guna2GradientPanel1.PerformLayout();
+            this.Chat_ActiveOnline_Panel.ResumeLayout(false);
+            this.Chat_ActiveOnline_Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ChatPanel.ResumeLayout(false);
-            this.ChatPanel.PerformLayout();
+            this.Chat_Offline_Panel.ResumeLayout(false);
+            this.Chat_Offline_Panel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ImageChatUser)).EndInit();
             this.ChattingPanel.ResumeLayout(false);
             this.MyFriendChattingPanel.ResumeLayout(false);
@@ -561,15 +562,15 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2CirclePictureBox ImageUser;
-        private Guna.UI2.WinForms.Guna2GradientPanel ChatPanel;
+        private Guna.UI2.WinForms.Guna2GradientPanel Chat_Offline_Panel;
         private Label UserChatNamelbl;
         private PictureBox ImageChatUser;
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel2;
+        private Guna.UI2.WinForms.Guna2GradientPanel Chat_Online_Panel;
         private Label label6;
         private Label label7;
         private Label label8;
         private PictureBox pictureBox2;
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel1;
+        private Guna.UI2.WinForms.Guna2GradientPanel Chat_ActiveOnline_Panel;
         private Label label3;
         private Label label4;
         private Label label5;
@@ -583,7 +584,7 @@
         private Panel MyFriendChattingPanel;
         private Label MyFriendlbl;
         private TextBox MyFriendChattxt;
-        private Button Loginbtn;
+        private Button Logoutbtn;
         private Panel panel4;
         private TextBox SearchFriendtxt;
         private Label Username;

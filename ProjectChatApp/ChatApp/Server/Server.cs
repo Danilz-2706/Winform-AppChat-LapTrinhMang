@@ -60,6 +60,10 @@ namespace Server
         {       
             TotalUsertxt.Text = UserListFromDB.Count().ToString();
         }
+        private void updateOnlineUser()
+        {
+            OnlineUsertxt.Text = OnlineClientList.Count().ToString();
+        }
         private void ThreadClient(Socket client)
         {
             string mess="";
@@ -100,11 +104,16 @@ namespace Server
                                         break;
                                     case "dangnhapthanhcong":
                                         //tra ve cho client thong tin dang nhap thanh cong
-                                        OnlineClientList.Add(client.AddressFamily.ToString(),client);
+                                        user temp = new user();
+                                        temp = BLLuser.getInfoUser(login.username);
+                                        OnlineClientList.Add(login.username, client);
+                                        updateOnlineUser();
                                         com = new Packet.Packet(mess, "OK");
-                                        int id = BLLuser.getId(login.username);                                      
+                                        //tra thong tin ve cho client mo len mainchatapp
                                         sendJson(client, com);
-                                        AppendTextBox("IP: " + client.AddressFamily.ToString()  + client.RemoteEndPoint.ToString() + " voi username la " + login.username + "da ket noi toi server!" + Environment.NewLine); ;
+                                        AppendTextBox("IP: " + client.AddressFamily.ToString()  + 
+                                            client.RemoteEndPoint.ToString() + " voi username la " + 
+                                            login.username + "da ket noi toi server!" + Environment.NewLine); 
                                         break;
                                     default:
                                         break;
@@ -150,18 +159,29 @@ namespace Server
                                     case "themuserthanhcong":
                                         updateTotalUser();
                                         //sua o day
-                                        int id = BLLuser.getId(register.username);
-                                        UserListFromDB.Add(id, register.pass);
+                                        user temp = new user();
+                                        temp = BLLuser.getInfoUser(register.username);
+                                        UserListFromDB.Add(temp.Id, register.username);
                                         updateTotalUser();
                                         com = new Packet.Packet(mess, "OK");
                                         sendJson(client, com);
                                         AppendTextBox(register.username + " da dang ky thanh cong!!!" + Environment.NewLine);
-
                                         break;                              
                                     default:
                                         break;
                                 }
 
+                            }
+                            break;
+                        case "ExitApp":
+                            EXIT? exit = JsonSerializer.Deserialize<EXIT>(com.content);
+                            if(exit != null)
+                            {
+                                OnlineClientList.Remove(exit.username);
+                                updateOnlineUser();
+                                com = new Packet.Packet("OK", "LOGOUT");
+                                AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
+                                sendJson(client, com);
                             }
                             break;
                         default:
@@ -224,6 +244,7 @@ namespace Server
             } 
             KhoiTaoUser();
             updateTotalUser();
+            updateOnlineUser();
         }
 
         public void AppendTextBox(string value)

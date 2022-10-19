@@ -1,5 +1,6 @@
 ﻿
 using ChatApp.GUI;
+using Microsoft.VisualBasic.Logging;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Bcpg;
 using Org.BouncyCastle.Math.Field;
@@ -23,6 +24,7 @@ namespace ChatApp.GUI
     public partial class LoginForm : Form
     {
         IPEndPoint iep;
+        string username = null;
         Socket server;
         Socket client;
         bool flag = false;
@@ -60,7 +62,8 @@ namespace ChatApp.GUI
        
 
         private void Exit_Click(object sender, EventArgs e)
-        {
+        {         
+            
             this.Close();
             //Environment.Exit(1);
         }
@@ -94,6 +97,7 @@ namespace ChatApp.GUI
         {
             byte[] data = new byte[1024];
             Packet.LOGIN login = new Packet.LOGIN(Usertxt.Text, Passwordtxt.Text);
+            username = Usertxt.Text;
             string jsonString = JsonSerializer.Serialize(login);
             Packet.Packet packet = new Packet.Packet("Login", jsonString);
             //MessageBox.Show(jsonString);
@@ -126,7 +130,7 @@ namespace ChatApp.GUI
                         MessageBox.Show("Welcome to loza!!!!");
 
                         this.Visible = false;
-                        MainChatApp mainChatApp = new MainChatApp();
+                        MainChatApp mainChatApp = new MainChatApp(iep,username,5);
                         mainChatApp.Show();
                         break;
                     default:
@@ -139,18 +143,14 @@ namespace ChatApp.GUI
         {
             try
             {
-                string ipaddress = getIPAdress();
+                string ipaddress = getIPAdress();               
                 iep = new IPEndPoint(IPAddress.Parse(ipaddress), 2008);
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.Connect(iep);
                 LoginConnect();
                 /*Thread trd = new Thread(new ThreadStart(this.LoginConnect));
                 trd.IsBackground = true;
-                trd.Start();*/
-
-               
-
-                
+                trd.Start();*/                
             }
             catch (Exception)
             {

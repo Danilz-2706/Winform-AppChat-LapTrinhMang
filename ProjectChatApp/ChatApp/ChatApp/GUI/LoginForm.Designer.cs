@@ -150,6 +150,7 @@
             this.Usertxt.Name = "Usertxt";
             this.Usertxt.Size = new System.Drawing.Size(221, 21);
             this.Usertxt.TabIndex = 6;
+            this.Usertxt.Text = "test123@gmail.com";
             this.Usertxt.TextChanged += new System.EventHandler(this.Usertxt_TextChanged);
             // 
             // Passwordtxt
@@ -162,6 +163,7 @@
             this.Passwordtxt.PasswordChar = '*';
             this.Passwordtxt.Size = new System.Drawing.Size(221, 21);
             this.Passwordtxt.TabIndex = 6;
+            this.Passwordtxt.Text = "123";
             // 
             // Registerbtn
             // 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,14 @@ namespace UI_AppChat
 {
     public partial class ItemFriend : UserControl
     {
+        private bool _bgColor = false;
+        private bool _border = false;
+        private BorderStyle border;
+
         public ItemFriend()
         {
             InitializeComponent();
+            base.BorderStyle = BorderStyle.None;
         }
 
 
@@ -61,23 +67,19 @@ namespace UI_AppChat
             }
         }
 
-        
+
 
         #endregion
 
-
-
-        private void pnItemFriend_MouseHover(object sender, EventArgs e)
+        #region Events
+        public new BorderStyle BorderStyle
         {
-            this.pnItemFriend.BorderColor = Color.FromArgb(128, 36, 206);
-            this.pnItemFriend.BorderThickness = 1;
-        }
-
-        private void pnItemFriend_MouseLeave(object sender, EventArgs e)
-        {
-            this.pnItemFriend.BorderThickness = 0;
-            this.pnItemFriend.FillColor = Color.FromArgb(23, 28, 41);
-            this.pnItemFriend.FillColor2 = Color.FromArgb(23, 28, 41);
+            get { return border; }
+            set
+            {
+                border = value;
+                Invalidate();
+            }
         }
 
         public new event EventHandler Click
@@ -88,8 +90,6 @@ namespace UI_AppChat
                 foreach (Control control in Controls)
                 {
                     control.Click += value;
-
-
                 }
             }
             remove
@@ -101,13 +101,91 @@ namespace UI_AppChat
                 }
             }
         }
-
-
-        private void ItemFriend_MouseEnter(object sender, EventArgs e)
+        public new event EventHandler MouseHover
         {
-            //this.pnItemFriend.FillColor = Color.FromArgb(250, 48, 90);
-            //this.pnItemFriend.FillColor2 = Color.FromArgb(128, 36, 206);
+            add
+            {
+                base.MouseHover += value;
+                foreach (Control control in Controls)
+                {
+                    control.MouseHover += value;
+                }
+            }
+            remove
+            {
+                base.MouseHover -= value;
+                foreach (Control control in Controls)
+                {
+                    control.MouseHover -= value;
+                }
+            }
+        }
+        public new event EventHandler MouseLeave
+        {
+            add
+            {
+                base.MouseLeave += value;
+                foreach (Control control in Controls)
+                {
+                    control.MouseLeave += value;
+                }
+            }
+            remove
+            {
+                base.MouseLeave -= value;
+                foreach (Control control in Controls)
+                {
+                    control.MouseLeave -= value;
+                }
+            }
+        }
+        #endregion
+
+
+        private void ItemFriend_Paint(object sender, PaintEventArgs e)
+        {
+            if(_bgColor == true)
+            {
+
+
+                Point startPoint = new Point(0, 0);
+                Point endPoint = new Point(174, 174);
+                using (LinearGradientBrush lgb =
+                    new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(250, 48, 90), Color.FromArgb(128, 36, 206)))
+                {
+                    Graphics g = e.Graphics;
+                    g.FillRectangle(lgb, 0, 0, 270, 77);
+                }
+            }
+            if (_border == true)
+            {
+                if (this.BorderStyle == BorderStyle.None)
+                    ControlPaint.DrawBorder(e.Graphics, this.ClientRectangle, Color.FromArgb(128, 36, 206), ButtonBorderStyle.Solid);
+
+            }
+
         }
 
+        private void ItemFriend_MouseHover(object sender, EventArgs e)
+        {
+            _border = true;
+            Refresh();
+
+        }
+
+        private void ItemFriend_MouseLeave(object sender, EventArgs e)
+        {
+            _border = false;
+            _bgColor = false;
+            Refresh();
+        }
+
+        private void ItemFriend_Click(object sender, EventArgs e)
+        {
+           
+            _bgColor = true;
+            _border = false;
+            Refresh();
+        }
     }
 }

@@ -16,5 +16,11 @@
     <Compile Update="UserControls\ItemFriend.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\ReceiverMessageContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\SenderMessageContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
   </ItemGroup>
 </Project>

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormListFriendChatting));
             this.pnlListFriend = new Guna.UI2.WinForms.Guna2Panel();
             this.flpListItem = new System.Windows.Forms.FlowLayoutPanel();
@@ -37,6 +38,7 @@
             this.txbSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
             this.panelChattingDetail = new System.Windows.Forms.Panel();
+            this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.pnlListFriend.SuspendLayout();
             this.flpListItem.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
@@ -111,10 +113,10 @@
             this.txbSearch.Location = new System.Drawing.Point(38, 0);
             this.txbSearch.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.txbSearch.MinimumSize = new System.Drawing.Size(227, 24);
+            this.txbSearch.Multiline = true;
             this.txbSearch.Name = "txbSearch";
             this.txbSearch.Size = new System.Drawing.Size(227, 24);
             this.txbSearch.TabIndex = 11;
-            this.txbSearch.TextChanged += new System.EventHandler(this.txbSearch_TextChanged);
             // 
             // btnSearch
             // 
@@ -173,5 +175,6 @@
         private Panel panel1;
         private Guna.UI2.WinForms.Guna2Button btnSearch;
         private TextBox txbSearch;
+        private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
     }
 }

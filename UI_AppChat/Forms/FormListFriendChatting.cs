@@ -58,6 +58,7 @@ namespace UI_AppChat
                 {
                     flpListItem.Controls.Add(itemFriends[i]);
                     itemFriends[i].Click += new EventHandler(UserControl_Click);
+                    
                 }
 
             }
@@ -66,15 +67,10 @@ namespace UI_AppChat
         }
         public void UserControl_Click(object sender, EventArgs e)
         {
-            //ItemFriend obj = (ItemFriend)sender;
-            
-            //MessageBox.Show("day");
             OpenChildForm(new FormChatting(), sender);
         }
 
-        private void txbSearch_TextChanged(object sender, EventArgs e)
-        {
-            txbSearch.Multiline = true;
-        }
+
+
     }
 }

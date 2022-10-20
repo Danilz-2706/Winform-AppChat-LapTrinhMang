@@ -72,6 +72,9 @@ namespace UI_AppChat
             OpenChildForm(new FormChatting(), sender);
         }
 
-
+        private void txbSearch_TextChanged(object sender, EventArgs e)
+        {
+            txbSearch.Multiline = true;
+        }
     }
 }

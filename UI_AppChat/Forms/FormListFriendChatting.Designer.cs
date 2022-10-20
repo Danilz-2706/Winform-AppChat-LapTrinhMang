@@ -95,17 +95,18 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.txbSearch);
             this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Location = new System.Drawing.Point(16, 17);
+            this.panel1.Location = new System.Drawing.Point(12, 26);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(265, 38);
+            this.panel1.Size = new System.Drawing.Size(265, 24);
             this.panel1.TabIndex = 3;
             // 
             // txbSearch
             // 
+            this.txbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.txbSearch.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txbSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txbSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txbSearch.Dock = System.Windows.Forms.DockStyle.Right;
             this.txbSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txbSearch.Location = new System.Drawing.Point(38, 0);
             this.txbSearch.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
@@ -113,6 +114,7 @@
             this.txbSearch.Name = "txbSearch";
             this.txbSearch.Size = new System.Drawing.Size(227, 24);
             this.txbSearch.TabIndex = 11;
+            this.txbSearch.TextChanged += new System.EventHandler(this.txbSearch_TextChanged);
             // 
             // btnSearch
             // 
@@ -130,7 +132,7 @@
             this.btnSearch.IndicateFocus = true;
             this.btnSearch.Location = new System.Drawing.Point(0, 0);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(40, 38);
+            this.btnSearch.Size = new System.Drawing.Size(40, 24);
             this.btnSearch.TabIndex = 7;
             // 
             // panelChattingDetail

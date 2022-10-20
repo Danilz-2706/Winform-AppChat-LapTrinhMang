@@ -1,5 +1,6 @@
 ﻿
 using ChatApp.GUI;
+using Microsoft.VisualBasic.Logging;
 using MySql.Data.MySqlClient;
 using Org.BouncyCastle.Bcpg;
 using Org.BouncyCastle.Math.Field;
@@ -18,11 +19,12 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ChatApp
+namespace ChatApp.GUI
 {
     public partial class LoginForm : Form
     {
         IPEndPoint iep;
+        string username = null;
         Socket server;
         Socket client;
         bool flag = false;
@@ -37,8 +39,6 @@ namespace ChatApp
             string t = "";
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
-                //khi nào cắm mạng LAN thì xài dòng này:
-                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
                     //Console.WriteLine(ni.Name);
@@ -62,7 +62,8 @@ namespace ChatApp
        
 
         private void Exit_Click(object sender, EventArgs e)
-        {
+        {         
+            
             this.Close();
             //Environment.Exit(1);
         }
@@ -91,17 +92,12 @@ namespace ChatApp
             byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
             client.Send(jsonUtf8Bytes, jsonUtf8Bytes.Length, SocketFlags.None);
         }
-        private void mainchatapp()
-        {
-            MainChatApp mca = new MainChatApp();
-            mca.Visible = true;
-            this.Visible = false;
-            
-        }
+       
         private void LoginConnect()
         {
             byte[] data = new byte[1024];
             Packet.LOGIN login = new Packet.LOGIN(Usertxt.Text, Passwordtxt.Text);
+            username = Usertxt.Text;
             string jsonString = JsonSerializer.Serialize(login);
             Packet.Packet packet = new Packet.Packet("Login", jsonString);
             //MessageBox.Show(jsonString);
@@ -126,45 +122,54 @@ namespace ChatApp
                         MessageBox.Show("Chưa nhập password!");
                         break;
                     case "dangnhapthatbai":
-                        MessageBox.Show("Tài khoản sai không tồn tại hoặc mật khẩu sai rồi!");
+                        MessageBox.Show("Tài khoản sai không tồn tại hoặc mật khẩu sai!");
                         Usertxt.Text = "";
                         Usertxt.Focus();
                         break;
+                    case "taikhoanbikhoa":
+                        MessageBox.Show("Tai khoan cua ban hien tai dang bi khoa!");
+                        break;
                     case "dangnhapthanhcong":
                         MessageBox.Show("Welcome to loza!!!!");
-                        this.Close();
-                        // new Thread(new ThreadStart(this.mainchatapp)).Start();
-                        Form1 f = new Form1();
-                        f.Visible = true;
-                        //test commit
 
+                        this.Visible = false;
+                        MainChatApp mainChatApp = new MainChatApp(iep,username,5);
+                        mainChatApp.Show();
                         break;
                     default:
                         break;
                 }
             }
         }
+       
         private void Loginbtn_Click(object sender, EventArgs e)
         {
             try
             {
-                string ipaddress = getIPAdress();
+                string ipaddress = getIPAdress();               
                 iep = new IPEndPoint(IPAddress.Parse(ipaddress), 2008);
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.Connect(iep);
-                Thread trd = new Thread(new ThreadStart(this.LoginConnect));
+                LoginConnect();
+                /*Thread trd = new Thread(new ThreadStart(this.LoginConnect));
                 trd.IsBackground = true;
-                trd.Start();
-
-               
-
-                
+                trd.Start();*/                
             }
             catch (Exception)
             {
                 MessageBox.Show("Khong the ket noi den Server!!!");
                 throw;
             }
+        }
+
+        private void Usertxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoginForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

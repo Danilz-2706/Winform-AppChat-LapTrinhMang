@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ehKnAU7ASbUMd5N6NpYE9LxMQ9OuI69m9667yQgLraPBceEOAPVun00ms8ttlDPwXuqyvgRLviGExpPtzQGR1w==",
+  "dgSpecHash": "VVqsE4xljzQ2lcdu/jnlixdW6lOgGCsaNWK8bh3NAqFlEzsA4rSB1mNWLFuybwZWESrJnBwRVMV2VbSQCrDhIw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Server\\Server.csproj",
   "expectedPackageFiles": [
@@ -30,7 +30,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Guna.UI2.WinForms 2.0.3.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "message": "Package 'Guna.UI2.WinForms 2.0.3.5' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
       "libraryId": "Guna.UI2.WinForms",
       "targetGraphs": [
         "net6.0-windows7.0"

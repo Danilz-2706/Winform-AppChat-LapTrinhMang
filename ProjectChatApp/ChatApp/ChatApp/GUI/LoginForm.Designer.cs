@@ -1,4 +1,4 @@
-﻿namespace ChatApp
+﻿namespace ChatApp.GUI
 {
     partial class LoginForm
     {
@@ -65,7 +65,6 @@
             this.LoginTitle.Size = new System.Drawing.Size(141, 45);
             this.LoginTitle.TabIndex = 1;
             this.LoginTitle.Text = "LOG IN";
-            
             // 
             // UserPic
             // 
@@ -84,7 +83,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(250, 1);
             this.panel1.TabIndex = 3;
-           
             // 
             // PasswordPic
             // 
@@ -152,6 +150,8 @@
             this.Usertxt.Name = "Usertxt";
             this.Usertxt.Size = new System.Drawing.Size(221, 21);
             this.Usertxt.TabIndex = 6;
+            this.Usertxt.Text = "test123@gmail.com";
+            this.Usertxt.TextChanged += new System.EventHandler(this.Usertxt_TextChanged);
             // 
             // Passwordtxt
             // 
@@ -163,7 +163,7 @@
             this.Passwordtxt.PasswordChar = '*';
             this.Passwordtxt.Size = new System.Drawing.Size(221, 21);
             this.Passwordtxt.TabIndex = 6;
-            
+            this.Passwordtxt.Text = "123";
             // 
             // Registerbtn
             // 
@@ -202,7 +202,7 @@
             this.Name = "LoginForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LoginForm";
-            
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.LogoLogin)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.UserPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PasswordPic)).EndInit();

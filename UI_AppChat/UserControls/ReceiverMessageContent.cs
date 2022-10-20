@@ -8,21 +8,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace UI_AppChat
+namespace UI_AppChat.UserControls
 {
-    public partial class FormChatting : Form
+    public partial class ReceiverMessageContent : UserControl
     {
-        public FormChatting()
+        public ReceiverMessageContent()
         {
             InitializeComponent();
         }
 
-        private void guna2CircleButton8_Click(object sender, EventArgs e)
+        private void MessageContent_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void guna2GradientPanel9_Paint(object sender, PaintEventArgs e)
+        private void lbUsername_Click(object sender, EventArgs e)
         {
 
         }

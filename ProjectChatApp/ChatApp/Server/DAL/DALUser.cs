@@ -10,6 +10,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.VisualBasic;
+using Org.BouncyCastle.Utilities.Collections;
 
 namespace Server.DAL
 {
@@ -149,7 +151,29 @@ namespace Server.DAL
                 throw;
             }
             return u;
-            
+            conn.Close();
+        }
+
+        /*Database cập nhật status_online user*/
+        public void updateonlinestatus(int id,string act)
+        {
+            int temp = 0;
+            if(act.Equals("online"))
+                temp = 1;
+         
+            MySqlConnection conn = DB.dbconnect.getconnect();
+            try
+            {
+                string query = "UPDATE user SET online_status="+temp+" where Id="+id+"";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            conn.Close();
         }
     }
 }

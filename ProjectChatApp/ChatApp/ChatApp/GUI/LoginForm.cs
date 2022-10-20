@@ -126,6 +126,9 @@ namespace ChatApp.GUI
                         Usertxt.Text = "";
                         Usertxt.Focus();
                         break;
+                    case "taikhoanbikhoa":
+                        MessageBox.Show("Tai khoan cua ban hien tai dang bi khoa!");
+                        break;
                     case "dangnhapthanhcong":
                         MessageBox.Show("Welcome to loza!!!!");
 

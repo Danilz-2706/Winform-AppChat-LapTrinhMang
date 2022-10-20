@@ -92,6 +92,7 @@ namespace Server.BLL
         /*Hàm kiểm tra thông tin đăng nhập*/
         public string Login(string email, string pass)
         {
+            int active = 0;
             List<user> userlist = new List<user>();
             bool flag = false;
             string newpass = MD5Hash(pass);
@@ -104,7 +105,7 @@ namespace Server.BLL
 
                 if (userlist[i].Email.ToString().Equals(email) && userlist[i].Password.ToString().Equals(newpass))
                 {
-
+                    active = userlist[i].Is_active;
                     flag = true;
                     break;
                 }
@@ -126,9 +127,13 @@ namespace Server.BLL
                 }
                 else
                 {
-                    if (flag)
+                    if (flag && active == 1)
                     {
                         message = "dangnhapthanhcong";
+                    }
+                    else if (flag && active == 0)
+                    {
+                        message = "taikhoanbikhoa";
                     }
                     else
                     {
@@ -157,6 +162,18 @@ namespace Server.BLL
             {
                 return u;
             }
+        }
+        /*Hàm update user online status*/
+        public void updateonlinestatus(int id,string act)
+        {
+             if(act.Equals("online") || act.Equals("offline"))
+             {
+                DALuser.updateonlinestatus(id,act);
+             }
+             else
+             {
+                MessageBox.Show("Sai status!!!");
+             }
         }
     }
 }

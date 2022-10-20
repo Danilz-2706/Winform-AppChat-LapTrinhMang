@@ -98,16 +98,21 @@ namespace Server
                                         com = new Packet.Packet(mess, "CANCEL");
                                         sendJson(client, com);
                                         break;
+                                    case "taikhoanbikhoa":
+                                        com = new Packet.Packet(mess, "CANCEL");
+                                        sendJson(client, com);
+                                        break;
                                     case "passdetrong":
                                         com = new Packet.Packet(mess, "CANCEL");
                                         sendJson(client, com);
                                         break;
                                     case "dangnhapthanhcong":
                                         //tra ve cho client thong tin dang nhap thanh cong
-                                        user temp = new user();
+                                        user temp = new user();                                     
                                         temp = BLLuser.getInfoUser(login.username);
                                         OnlineClientList.Add(login.username, client);
-                                        updateOnlineUser();
+                                        updateOnlineUser();                                      
+                                        BLLuser.updateonlinestatus(temp.Id, "online");
                                         com = new Packet.Packet(mess, "OK");
                                         //tra thong tin ve cho client mo len mainchatapp
                                         sendJson(client, com);
@@ -177,8 +182,11 @@ namespace Server
                             EXIT? exit = JsonSerializer.Deserialize<EXIT>(com.content);
                             if(exit != null)
                             {
+                                user temp = new user();
+                                temp = BLLuser.getInfoUser(exit.username);
                                 OnlineClientList.Remove(exit.username);
                                 updateOnlineUser();
+                                BLLuser.updateonlinestatus(temp.Id, "offline");
                                 com = new Packet.Packet("OK", "LOGOUT");
                                 AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
                                 sendJson(client, com);

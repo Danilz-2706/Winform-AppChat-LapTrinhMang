@@ -1,3 +1,9 @@
-/UI_AppChat/.vs
-/UI_AppChat/bin
-/UI_AppChat/obj
+/Winform-ChatApp/Server/bin
+/Winform-ChatApp/Server/obj
+/Winform-ChatApp/UI_AppChat/bin
+/Winform-ChatApp/UI_AppChat/obj
+/Winform-ChatApp/UI_AppChat/.vs
+/Winform-ChatApp/Packet/bin
+/Winform-ChatApp/Packet/obj
+/.vs
+/Winform-ChatApp/.vs

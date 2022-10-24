@@ -14,6 +14,9 @@ using System.Windows.Forms;
 using Packet;
 using System.Net.NetworkInformation;
 using Server.DAL;
+using Microsoft.VisualBasic.Logging;
+using Microsoft.Win32;
+using System.Net.WebSockets;
 
 namespace Server
 {   
@@ -28,6 +31,8 @@ namespace Server
         BLLUser BLLuser = new BLLUser();
         //DALUser DALuser = new DALUser();
         MySqlConnection conn = DB.dbconnect.getconnect();
+        private Packet.Packet com;
+
         public Server() 
         {
             InitializeComponent();
@@ -67,9 +72,10 @@ namespace Server
         private void ThreadClient(Socket client)
         {
             string mess="";
-            byte[] data = new byte[1024];
+            byte[] data = new byte[65000];
             //nhan thong tin tu client
             int recv = client.Receive(data);
+            
             if (recv == 0) return;
             string jsonString = Encoding.ASCII.GetString(data, 0, recv);
             Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
@@ -110,15 +116,24 @@ namespace Server
                                         //tra ve cho client thong tin dang nhap thanh cong
                                         user temp = new user();                                     
                                         temp = BLLuser.getInfoUser(login.username);
-                                        OnlineClientList.Add(login.username, client);
+                                        OnlineClientList.Add(temp.Name, client);
                                         updateOnlineUser();                                      
                                         BLLuser.updateonlinestatus(temp.Id, "online");
-                                        com = new Packet.Packet(mess, "OK");
+                                        //com = new Packet.Packet(mess, "OK");
+
+                                        Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block);
+                                        string ResultJson = JsonSerializer.Serialize(lgsucess);
+                                        com = new Packet.Packet(mess, ResultJson);
                                         //tra thong tin ve cho client mo len mainchatapp
                                         sendJson(client, com);
                                         AppendTextBox("IP: " + client.AddressFamily.ToString()  + 
                                             client.RemoteEndPoint.ToString() + " voi username la " + 
-                                            login.username + "da ket noi toi server!" + Environment.NewLine); 
+                                            login.username + "da ket noi toi server!" + Environment.NewLine);
+
+                                        //send status user (online or offline cho mainchatapp
+                                        
+                                        SendDataToMainChatApp(OnlineClientList,login.username);
+                                       
                                         break;
                                     default:
                                         break;
@@ -199,9 +214,51 @@ namespace Server
             }
             
         }
+        private List<string> getListUserOnlineFromAnotherSocket(Dictionary<string, Socket> OnlineClientList)
+        {
+            List<string> list = new List<string>();
+            foreach (KeyValuePair<string, Socket> item in OnlineClientList)
+            {
+                var itemKey = item.Key;
+                list.Add(itemKey);
+            }
+            return list;
+        }
+        private void SendDataToMainChatApp(Dictionary<string, Socket> OnlineClientList,string email)
+        {
+            if(OnlineClientList != null)
+            {  
+                foreach(KeyValuePair<string, Socket> item in OnlineClientList)
+                {
+                    List<string> list = getListUserOnlineFromAnotherSocket(OnlineClientList);
+                    var itemKey = item.Key;
+                    var itemValue = item.Value;
+                    string line = itemKey.ToString() + "|" +itemValue.AddressFamily.ToString() + "|" + itemValue.RemoteEndPoint;
+                    AppendTextBox(line + Environment.NewLine);
+                   
+                    foreach(string s in list){
+                        if (!s.Equals(itemKey.ToString()))
+                        {
+                            com = new Packet.Packet("Online", s);
+                            sendJson(item.Value, com);
+                        }
+                    }
+                   
+                }
+                AppendTextBox("======================================" + Environment.NewLine);
+              
+               /* foreach (var kvp in OnlineClientList)
+                {
+                   
+                }*/
+            }
+                 else
+                {
+                AppendTextBox("OnlineClientList is null " + Environment.NewLine);
+            }
 
-
-
+            }
+        
         private void ServerWaitConnect()
         {
             while(active)

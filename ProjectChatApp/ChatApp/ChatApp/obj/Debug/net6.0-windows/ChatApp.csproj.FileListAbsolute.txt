@@ -62,3 +62,4 @@ D:\ProjectChatApp\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\ob
 D:\ProjectChatApp\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.pdb
 D:\ProjectChatApp\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.genruntimeconfig.cache
 D:\ProjectChatApp\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\obj\Debug\net6.0-windows\ref\ChatApp.dll
+D:\ProjectChatApp\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.GUI.ChatFriendListView.resources

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 
@@ -59,7 +60,28 @@ namespace Packet
 
     public class LOGINSUCESS
     {
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block)
+        {
+            this.id = id;
+            this.email = email;
+            this.password = password;
+            this.name = name;
+            this.sex = sex;
+            this.bd = bd;
+            this.online_status = online_status;
+            this.is_active = is_active;
+            this.server_block = server_block;
+        }
 
+        public int? id { get; set; }
+        public string? email { get; set; }
+        public string? password { get; set; }
+        public string? name { get; set; }
+        public int? sex { get; set; }
+        public string? bd { get; set; }
+        public int? online_status { get; set; }
+        public int? is_active { get; set; }
+        public int? server_block { get; set; }
     }
     public class SENDMESSAGE
     {

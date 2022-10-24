@@ -43,22 +43,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.SearchFriendtxt = new System.Windows.Forms.TextBox();
             this.ImageUser = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.Chat_Online_Panel = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.Chat_ActiveOnline_Panel = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.Chat_Offline_Panel = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.UserChatNamelbl = new System.Windows.Forms.Label();
-            this.ImageChatUser = new System.Windows.Forms.PictureBox();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.ChattingPanel = new System.Windows.Forms.Panel();
             this.MyFriendChattingPanel = new System.Windows.Forms.Panel();
@@ -67,19 +51,13 @@
             this.MyUsernameChattingPanel = new System.Windows.Forms.Panel();
             this.MyUsernameChatlbl = new System.Windows.Forms.Label();
             this.MyUsernameChattxt = new System.Windows.Forms.TextBox();
+            this.ChatFriendPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.RightPanel.SuspendLayout();
             this.NotiPanel.SuspendLayout();
             this.NofiItemPanel.SuspendLayout();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).BeginInit();
-            this.guna2Panel1.SuspendLayout();
-            this.Chat_Online_Panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.Chat_ActiveOnline_Panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.Chat_Offline_Panel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageChatUser)).BeginInit();
             this.ChattingPanel.SuspendLayout();
             this.MyFriendChattingPanel.SuspendLayout();
             this.MyUsernameChattingPanel.SuspendLayout();
@@ -176,6 +154,7 @@
             this.HeadPanel.Name = "HeadPanel";
             this.HeadPanel.Size = new System.Drawing.Size(900, 73);
             this.HeadPanel.TabIndex = 2;
+            this.HeadPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HeadPanel_Paint);
             // 
             // pictureBox3
             // 
@@ -193,7 +172,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label9.ForeColor = System.Drawing.Color.Lime;
-            this.label9.Location = new System.Drawing.Point(181, 9);
+            this.label9.Location = new System.Drawing.Point(215, 9);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(58, 25);
             this.label9.TabIndex = 11;
@@ -244,212 +223,20 @@
             this.ImageUser.TabIndex = 0;
             this.ImageUser.TabStop = false;
             // 
-            // guna2Panel1
-            // 
-            this.guna2Panel1.Controls.Add(this.Chat_Online_Panel);
-            this.guna2Panel1.Controls.Add(this.Chat_ActiveOnline_Panel);
-            this.guna2Panel1.Controls.Add(this.Chat_Offline_Panel);
-            this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.guna2Panel1.Location = new System.Drawing.Point(0, 73);
-            this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(313, 637);
-            this.guna2Panel1.TabIndex = 3;
-            this.guna2Panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel1_Paint);
-            // 
-            // Chat_Online_Panel
-            // 
-            this.Chat_Online_Panel.Controls.Add(this.label6);
-            this.Chat_Online_Panel.Controls.Add(this.label7);
-            this.Chat_Online_Panel.Controls.Add(this.label8);
-            this.Chat_Online_Panel.Controls.Add(this.pictureBox2);
-            this.Chat_Online_Panel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            this.Chat_Online_Panel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            this.Chat_Online_Panel.Location = new System.Drawing.Point(12, 279);
-            this.Chat_Online_Panel.Name = "Chat_Online_Panel";
-            this.Chat_Online_Panel.Size = new System.Drawing.Size(284, 103);
-            this.Chat_Online_Panel.TabIndex = 0;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label6.ForeColor = System.Drawing.Color.Gray;
-            this.label6.Location = new System.Drawing.Point(64, 42);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(97, 21);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Hello Word!!!";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.ForeColor = System.Drawing.Color.Lime;
-            this.label7.Location = new System.Drawing.Point(222, 17);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(52, 21);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Online";
-            this.label7.Click += new System.EventHandler(this.UserChatNamelbl_Click);
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.ForeColor = System.Drawing.Color.Silver;
-            this.label8.Location = new System.Drawing.Point(64, 17);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(75, 21);
-            this.label8.TabIndex = 1;
-            this.label8.Text = "Username";
-            this.label8.Click += new System.EventHandler(this.UserChatNamelbl_Click);
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = global::ChatApp.Properties.Resources.male_default;
-            this.pictureBox2.Location = new System.Drawing.Point(12, 17);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(46, 46);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 0;
-            this.pictureBox2.TabStop = false;
-            // 
-            // Chat_ActiveOnline_Panel
-            // 
-            this.Chat_ActiveOnline_Panel.Controls.Add(this.label3);
-            this.Chat_ActiveOnline_Panel.Controls.Add(this.label4);
-            this.Chat_ActiveOnline_Panel.Controls.Add(this.label5);
-            this.Chat_ActiveOnline_Panel.Controls.Add(this.pictureBox1);
-            this.Chat_ActiveOnline_Panel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(249)))), ((int)(((byte)(243)))));
-            this.Chat_ActiveOnline_Panel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(24)))), ((int)(((byte)(158)))), ((int)(((byte)(224)))));
-            this.Chat_ActiveOnline_Panel.Location = new System.Drawing.Point(12, 149);
-            this.Chat_ActiveOnline_Panel.Name = "Chat_ActiveOnline_Panel";
-            this.Chat_ActiveOnline_Panel.Size = new System.Drawing.Size(284, 103);
-            this.Chat_ActiveOnline_Panel.TabIndex = 0;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.Transparent;
-            this.label3.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label3.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label3.Location = new System.Drawing.Point(64, 42);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(97, 21);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Hello Word!!!";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label4.ForeColor = System.Drawing.Color.Lime;
-            this.label4.Location = new System.Drawing.Point(222, 17);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 21);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Online";
-            this.label4.Click += new System.EventHandler(this.UserChatNamelbl_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.BackColor = System.Drawing.Color.Transparent;
-            this.label5.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(64, 17);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(75, 21);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Username";
-            this.label5.Click += new System.EventHandler(this.UserChatNamelbl_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ChatApp.Properties.Resources.male_default;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 17);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(46, 46);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
-            // 
-            // Chat_Offline_Panel
-            // 
-            this.Chat_Offline_Panel.Controls.Add(this.label1);
-            this.Chat_Offline_Panel.Controls.Add(this.label2);
-            this.Chat_Offline_Panel.Controls.Add(this.UserChatNamelbl);
-            this.Chat_Offline_Panel.Controls.Add(this.ImageChatUser);
-            this.Chat_Offline_Panel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            this.Chat_Offline_Panel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
-            this.Chat_Offline_Panel.Location = new System.Drawing.Point(12, 20);
-            this.Chat_Offline_Panel.Name = "Chat_Offline_Panel";
-            this.Chat_Offline_Panel.Size = new System.Drawing.Size(284, 103);
-            this.Chat_Offline_Panel.TabIndex = 0;
-            this.Chat_Offline_Panel.Paint += new System.Windows.Forms.PaintEventHandler(this.ChatPanel_Paint);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(64, 42);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 21);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Hello Word!!!";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(222, 17);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(52, 21);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Offline";
-            this.label2.Click += new System.EventHandler(this.UserChatNamelbl_Click);
-            // 
-            // UserChatNamelbl
-            // 
-            this.UserChatNamelbl.AutoSize = true;
-            this.UserChatNamelbl.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.UserChatNamelbl.ForeColor = System.Drawing.Color.Silver;
-            this.UserChatNamelbl.Location = new System.Drawing.Point(64, 17);
-            this.UserChatNamelbl.Name = "UserChatNamelbl";
-            this.UserChatNamelbl.Size = new System.Drawing.Size(75, 21);
-            this.UserChatNamelbl.TabIndex = 1;
-            this.UserChatNamelbl.Text = "Username";
-            this.UserChatNamelbl.Click += new System.EventHandler(this.UserChatNamelbl_Click);
-            // 
-            // ImageChatUser
-            // 
-            this.ImageChatUser.Image = global::ChatApp.Properties.Resources.male_default;
-            this.ImageChatUser.Location = new System.Drawing.Point(12, 17);
-            this.ImageChatUser.Name = "ImageChatUser";
-            this.ImageChatUser.Size = new System.Drawing.Size(46, 46);
-            this.ImageChatUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.ImageChatUser.TabIndex = 0;
-            this.ImageChatUser.TabStop = false;
-            // 
             // guna2Panel2
             // 
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel2.Location = new System.Drawing.Point(313, 626);
+            this.guna2Panel2.Location = new System.Drawing.Point(0, 626);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(587, 84);
+            this.guna2Panel2.Size = new System.Drawing.Size(900, 84);
             this.guna2Panel2.TabIndex = 4;
+            this.guna2Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel2_Paint);
             // 
             // ChattingPanel
             // 
             this.ChattingPanel.AutoScroll = true;
             this.ChattingPanel.Controls.Add(this.MyFriendChattingPanel);
             this.ChattingPanel.Controls.Add(this.MyUsernameChattingPanel);
-            this.ChattingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ChattingPanel.Location = new System.Drawing.Point(313, 73);
             this.ChattingPanel.Name = "ChattingPanel";
             this.ChattingPanel.Size = new System.Drawing.Size(587, 553);
@@ -514,15 +301,24 @@
             this.MyUsernameChattxt.TabIndex = 0;
             this.MyUsernameChattxt.Text = "Hello";
             // 
+            // ChatFriendPanel
+            // 
+            this.ChatFriendPanel.AutoScroll = true;
+            this.ChatFriendPanel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ChatFriendPanel.Location = new System.Drawing.Point(0, 73);
+            this.ChatFriendPanel.Name = "ChatFriendPanel";
+            this.ChatFriendPanel.Size = new System.Drawing.Size(315, 553);
+            this.ChatFriendPanel.TabIndex = 6;
+            // 
             // MainChatApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.ClientSize = new System.Drawing.Size(1239, 710);
+            this.Controls.Add(this.ChatFriendPanel);
             this.Controls.Add(this.ChattingPanel);
             this.Controls.Add(this.guna2Panel2);
-            this.Controls.Add(this.guna2Panel1);
             this.Controls.Add(this.HeadPanel);
             this.Controls.Add(this.RightPanel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -537,16 +333,6 @@
             this.HeadPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).EndInit();
-            this.guna2Panel1.ResumeLayout(false);
-            this.Chat_Online_Panel.ResumeLayout(false);
-            this.Chat_Online_Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.Chat_ActiveOnline_Panel.ResumeLayout(false);
-            this.Chat_ActiveOnline_Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.Chat_Offline_Panel.ResumeLayout(false);
-            this.Chat_Offline_Panel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ImageChatUser)).EndInit();
             this.ChattingPanel.ResumeLayout(false);
             this.MyFriendChattingPanel.ResumeLayout(false);
             this.MyFriendChattingPanel.PerformLayout();
@@ -559,24 +345,8 @@
         #endregion
         private Guna.UI2.WinForms.Guna2Panel RightPanel;
         private Guna.UI2.WinForms.Guna2Panel HeadPanel;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2CirclePictureBox ImageUser;
-        private Guna.UI2.WinForms.Guna2GradientPanel Chat_Offline_Panel;
-        private Label UserChatNamelbl;
-        private PictureBox ImageChatUser;
-        private Guna.UI2.WinForms.Guna2GradientPanel Chat_Online_Panel;
-        private Label label6;
-        private Label label7;
-        private Label label8;
-        private PictureBox pictureBox2;
-        private Guna.UI2.WinForms.Guna2GradientPanel Chat_ActiveOnline_Panel;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private PictureBox pictureBox1;
-        private Label label1;
-        private Label label2;
         private Panel ChattingPanel;
         private Panel MyUsernameChattingPanel;
         private Label MyUsernameChatlbl;
@@ -595,5 +365,6 @@
         private Button FriendAcpectbtn;
         private Label label10;
         private PictureBox pictureBox3;
+        private FlowLayoutPanel ChatFriendPanel;
     }
 }

@@ -24,7 +24,7 @@ namespace ChatApp.GUI
     public partial class LoginForm : Form
     {
         IPEndPoint iep;
-        string username = null;
+       // string username = null;
         Socket server;
         Socket client;
         bool flag = false;
@@ -97,7 +97,7 @@ namespace ChatApp.GUI
         {
             byte[] data = new byte[1024];
             Packet.LOGIN login = new Packet.LOGIN(Usertxt.Text, Passwordtxt.Text);
-            username = Usertxt.Text;
+            //username = Usertxt.Text;
             string jsonString = JsonSerializer.Serialize(login);
             Packet.Packet packet = new Packet.Packet("Login", jsonString);
             //MessageBox.Show(jsonString);
@@ -131,9 +131,9 @@ namespace ChatApp.GUI
                         break;
                     case "dangnhapthanhcong":
                         MessageBox.Show("Welcome to loza!!!!");
-
+                        LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
-                        MainChatApp mainChatApp = new MainChatApp(iep,username,5);
+                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name,5 ,(Socket)client);
                         mainChatApp.Show();
                         break;
                     default:

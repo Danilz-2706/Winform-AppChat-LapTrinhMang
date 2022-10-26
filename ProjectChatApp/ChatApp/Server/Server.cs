@@ -123,7 +123,7 @@ namespace Server
                                         //com = new Packet.Packet(mess, "OK");
 
 
-                                        //------------------khanh-------------------------
+                                        //------------------khanh---------------------------
                                         List<int> listFriendOfUsserId = BLLfriend.getFriendByID(temp.Id);
                                         List<user> listFriendOfUsser = new List<user>();
                                         foreach (int i in listFriendOfUsserId)
@@ -133,7 +133,7 @@ namespace Server
                                             listFriendOfUsser.Add(friend);
                                         }
                                         
-                                        //-------------------khanh-------------------------
+                                        //-------------------khanh---------------------------
 
 
                                         Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);

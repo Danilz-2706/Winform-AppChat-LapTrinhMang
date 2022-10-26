@@ -35,6 +35,10 @@
             this.Startbtn = new System.Windows.Forms.Button();
             this.Stopbtn = new System.Windows.Forms.Button();
             this.Logtxt = new System.Windows.Forms.TextBox();
+            this.TotalUserlbl = new System.Windows.Forms.Label();
+            this.TotalUsertxt = new System.Windows.Forms.TextBox();
+            this.OnlineUserlbl = new System.Windows.Forms.Label();
+            this.OnlineUsertxt = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // IPlbl
@@ -99,11 +103,48 @@
             this.Logtxt.Size = new System.Drawing.Size(624, 185);
             this.Logtxt.TabIndex = 6;
             // 
+            // TotalUserlbl
+            // 
+            this.TotalUserlbl.AutoSize = true;
+            this.TotalUserlbl.Location = new System.Drawing.Point(90, 429);
+            this.TotalUserlbl.Name = "TotalUserlbl";
+            this.TotalUserlbl.Size = new System.Drawing.Size(84, 20);
+            this.TotalUserlbl.TabIndex = 7;
+            this.TotalUserlbl.Text = "Total Users:";
+            this.TotalUserlbl.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // TotalUsertxt
+            // 
+            this.TotalUsertxt.Location = new System.Drawing.Point(180, 426);
+            this.TotalUsertxt.Name = "TotalUsertxt";
+            this.TotalUsertxt.Size = new System.Drawing.Size(44, 27);
+            this.TotalUsertxt.TabIndex = 8;
+            // 
+            // OnlineUserlbl
+            // 
+            this.OnlineUserlbl.AutoSize = true;
+            this.OnlineUserlbl.Location = new System.Drawing.Point(258, 429);
+            this.OnlineUserlbl.Name = "OnlineUserlbl";
+            this.OnlineUserlbl.Size = new System.Drawing.Size(94, 20);
+            this.OnlineUserlbl.TabIndex = 9;
+            this.OnlineUserlbl.Text = "Online Users:";
+            // 
+            // OnlineUsertxt
+            // 
+            this.OnlineUsertxt.Location = new System.Drawing.Point(355, 426);
+            this.OnlineUsertxt.Name = "OnlineUsertxt";
+            this.OnlineUsertxt.Size = new System.Drawing.Size(57, 27);
+            this.OnlineUsertxt.TabIndex = 10;
+            // 
             // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 494);
+            this.Controls.Add(this.OnlineUsertxt);
+            this.Controls.Add(this.OnlineUserlbl);
+            this.Controls.Add(this.TotalUsertxt);
+            this.Controls.Add(this.TotalUserlbl);
             this.Controls.Add(this.Logtxt);
             this.Controls.Add(this.Stopbtn);
             this.Controls.Add(this.Startbtn);
@@ -112,7 +153,7 @@
             this.Controls.Add(this.IPtxt);
             this.Controls.Add(this.IPlbl);
             this.Name = "Server";
-            this.Text = "Form1";
+            this.Text = "Server";
             this.Load += new System.EventHandler(this.Server_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -128,5 +169,9 @@
         private Button Startbtn;
         private Button Stopbtn;
         private TextBox Logtxt;
+        private Label TotalUserlbl;
+        private TextBox TotalUsertxt;
+        private Label OnlineUserlbl;
+        private TextBox OnlineUsertxt;
     }
 }

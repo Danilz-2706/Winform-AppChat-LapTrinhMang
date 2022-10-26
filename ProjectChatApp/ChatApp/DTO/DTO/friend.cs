@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Server.DTO
+namespace DTO.DTO
 {
     public class friend
     {
@@ -17,8 +18,8 @@ namespace Server.DTO
 
         public friend(int id_user_1, int id_user_2)
         {
-            this.id_user_1 = id_user_1;
-            this.id_user_2 = id_user_2;
+            this.Id_user_1 = id_user_1;
+            this.Id_user_2 = id_user_2;
         }
 
         public int Id_user_1 { get => id_user_1; set => id_user_1 = value; }

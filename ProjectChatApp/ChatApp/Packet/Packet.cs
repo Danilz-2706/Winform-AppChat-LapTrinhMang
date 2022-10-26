@@ -1,4 +1,7 @@
-﻿using System.ComponentModel;
+﻿using Server.DTO;
+using System.ComponentModel;
+using System.Reflection.Metadata;
+using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 
 namespace Packet
@@ -14,7 +17,17 @@ namespace Packet
         public string? content { get; set; }
         
     }
+    public class EXIT
+    {
+        public EXIT(string username, string? content)
+        {
+            this.username = username;
+            this.content = content;
+        }
 
+        public string username { get; set; }
+        public string? content { get; set; }
+    }
     public class LOGIN
     {
         public LOGIN(string ? username,string ? pass)
@@ -45,6 +58,35 @@ namespace Packet
         public string? bd { get; set; }
     }
 
+
+    public class LOGINSUCESS
+    {
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser)
+        {
+            this.id = id;
+            this.email = email;
+            this.password = password;
+            this.name = name;
+            this.sex = sex;
+            this.bd = bd;
+            this.online_status = online_status;
+            this.is_active = is_active;
+            this.server_block = server_block;
+            this.listFriendOfUser = listFriendOfUser;
+        }
+
+        public int? id { get; set; }
+        public string? email { get; set; }
+        public string? password { get; set; }
+        public string? name { get; set; }
+        public int? sex { get; set; }
+        public string? bd { get; set; }
+        public int? online_status { get; set; }
+        public int? is_active { get; set; }
+        public int? server_block { get; set; }
+
+        public List<user>? listFriendOfUser { get; set; }
+    }
     public class SENDMESSAGE
     {
         public SENDMESSAGE(string ? usernameSender, string ? usernameReceiver, string ? content)

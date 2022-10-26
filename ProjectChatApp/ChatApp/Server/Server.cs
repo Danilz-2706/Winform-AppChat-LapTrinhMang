@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +13,10 @@ using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Packet;
 using System.Net.NetworkInformation;
+using Server.DAL;
+using Microsoft.VisualBasic.Logging;
+using Microsoft.Win32;
+using System.Net.WebSockets;
 
 namespace Server
 {   
@@ -20,11 +24,16 @@ namespace Server
     {
         IPEndPoint iep;
         Socket server;
+        List<user> userlist;
         Dictionary<string, Socket> OnlineClientList;
-        Dictionary<string, string> UserListFromDB;
+        Dictionary<int, string> UserListFromDB;
         bool active = false;
         BLLUser BLLuser = new BLLUser();
+        //DALUser DALuser = new DALUser();
+        BLLFriend BLLfriend = new BLLFriend();
         MySqlConnection conn = DB.dbconnect.getconnect();
+        private Packet.Packet com;
+
         public Server() 
         {
             InitializeComponent();
@@ -36,23 +45,38 @@ namespace Server
         }
         private void KhoiTaoUser()
         {
-            UserListFromDB = new Dictionary<string, string>();
-            List<user> userlist = new List<user>();
+            UserListFromDB = new Dictionary<int, string>();
+            userlist = new List<user>();
             userlist = BLLuser.LoadAllUser();
             for(int i=0;i<userlist.Count();i++)
             {
-                UserListFromDB.Add(userlist[i].Email, userlist[i].Password);
+                UserListFromDB.Add(userlist[i].Id, userlist[i].Email);
             }
             OnlineClientList = new Dictionary<string, Socket>();
 
         }
-
+         
+        /*private List<user> getAllUser()
+        {
+            userlist = new List<user>();
+            userlist = DALuser.LoadAllUser();
+            return userlist;
+        }*/
+        private void updateTotalUser()
+        {       
+            TotalUsertxt.Text = UserListFromDB.Count().ToString();
+        }
+        private void updateOnlineUser()
+        {
+            OnlineUsertxt.Text = OnlineClientList.Count().ToString();
+        }
         private void ThreadClient(Socket client)
         {
             string mess="";
-            byte[] data = new byte[1024];
+            byte[] data = new byte[65000];
             //nhan thong tin tu client
             int recv = client.Receive(data);
+            
             if (recv == 0) return;
             string jsonString = Encoding.ASCII.GetString(data, 0, recv);
             Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
@@ -81,14 +105,50 @@ namespace Server
                                         com = new Packet.Packet(mess, "CANCEL");
                                         sendJson(client, com);
                                         break;
+                                    case "taikhoanbikhoa":
+                                        com = new Packet.Packet(mess, "CANCEL");
+                                        sendJson(client, com);
+                                        break;
                                     case "passdetrong":
                                         com = new Packet.Packet(mess, "CANCEL");
                                         sendJson(client, com);
                                         break;
                                     case "dangnhapthanhcong":
-                                        com = new Packet.Packet(mess, "OK");
+                                        //tra ve cho client thong tin dang nhap thanh cong
+                                        user temp = new user();                                     
+                                        temp = BLLuser.getInfoUser(login.username);
+                                        OnlineClientList.Add(temp.Name, client);
+                                        updateOnlineUser();                                      
+                                        BLLuser.updateonlinestatus(temp.Id, "online");
+                                        //com = new Packet.Packet(mess, "OK");
+
+
+                                        //------------------khanh-------------------------
+                                        List<int> listFriendOfUsserId = BLLfriend.getFriendByID(temp.Id);
+                                        List<user> listFriendOfUsser = new List<user>();
+                                        foreach (int i in listFriendOfUsserId)
+                                        {
+                                            user friend = new user();
+                                            friend = BLLuser.getInfoUserById(i);
+                                            listFriendOfUsser.Add(friend);
+                                        }
+                                        
+                                        //-------------------khanh-------------------------
+
+
+                                        Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);
+                                        string ResultJson = JsonSerializer.Serialize(lgsucess);
+                                        com = new Packet.Packet(mess, ResultJson);
+                                        //tra thong tin ve cho client mo len mainchatapp
                                         sendJson(client, com);
-                                        AppendTextBox(login.username + "da ket noi toi server!" + Environment.NewLine);
+                                        AppendTextBox("IP: " + client.AddressFamily.ToString()  + 
+                                            client.RemoteEndPoint.ToString() + " voi username la " + 
+                                            login.username + "da ket noi toi server!" + Environment.NewLine);
+
+                                        //send status user (online or offline cho mainchatapp
+                                        
+                                        SendDataToMainChatApp(OnlineClientList,login.username);
+                                       
                                         break;
                                     default:
                                         break;
@@ -132,15 +192,34 @@ namespace Server
                                         sendJson(client, com);
                                         break;
                                     case "themuserthanhcong":
+                                        updateTotalUser();
+                                        //sua o day
+                                        user temp = new user();
+                                        temp = BLLuser.getInfoUser(register.username);
+                                        UserListFromDB.Add(temp.Id, register.username);
+                                        updateTotalUser();
                                         com = new Packet.Packet(mess, "OK");
                                         sendJson(client, com);
                                         AppendTextBox(register.username + " da dang ky thanh cong!!!" + Environment.NewLine);
-
                                         break;                              
                                     default:
                                         break;
                                 }
 
+                            }
+                            break;
+                        case "ExitApp":
+                            EXIT? exit = JsonSerializer.Deserialize<EXIT>(com.content);
+                            if(exit != null)
+                            {
+                                user temp = new user();
+                                temp = BLLuser.getInfoUser(exit.username);
+                                OnlineClientList.Remove(exit.username);
+                                updateOnlineUser();
+                                BLLuser.updateonlinestatus(temp.Id, "offline");
+                                com = new Packet.Packet("OK", "LOGOUT");
+                                AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
+                                sendJson(client, com);
                             }
                             break;
                         default:
@@ -150,9 +229,51 @@ namespace Server
             }
             
         }
+        private List<string> getListUserOnlineFromAnotherSocket(Dictionary<string, Socket> OnlineClientList)
+        {
+            List<string> list = new List<string>();
+            foreach (KeyValuePair<string, Socket> item in OnlineClientList)
+            {
+                var itemKey = item.Key;
+                list.Add(itemKey);
+            }
+            return list;
+        }
+        private void SendDataToMainChatApp(Dictionary<string, Socket> OnlineClientList,string email)
+        {
+            if(OnlineClientList != null)
+            {  
+                foreach(KeyValuePair<string, Socket> item in OnlineClientList)
+                {
+                    List<string> list = getListUserOnlineFromAnotherSocket(OnlineClientList);
+                    var itemKey = item.Key;
+                    var itemValue = item.Value;
+                    string line = itemKey.ToString() + "|" +itemValue.AddressFamily.ToString() + "|" + itemValue.RemoteEndPoint;
+                    AppendTextBox(line + Environment.NewLine);
+                   
+                    foreach(string s in list){
+                        if (!s.Equals(itemKey.ToString()))
+                        {
+                            com = new Packet.Packet("Online", s);
+                            sendJson(item.Value, com);
+                        }
+                    }
+                   
+                }
+                AppendTextBox("======================================" + Environment.NewLine);
+              
+               /* foreach (var kvp in OnlineClientList)
+                {
+                   
+                }*/
+            }
+                 else
+                {
+                AppendTextBox("OnlineClientList is null " + Environment.NewLine);
+            }
 
-
-
+            }
+        
         private void ServerWaitConnect()
         {
             while(active)
@@ -186,10 +307,9 @@ namespace Server
 
         private void Server_Load(object sender, EventArgs e)
         {
+            
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
-                //khi nào cắm mạng LAN thì xài dòng này:
-                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
                     //Console.WriteLine(ni.Name);
@@ -201,8 +321,10 @@ namespace Server
                         }
                     }
                 }
-            }   
+            } 
             KhoiTaoUser();
+            updateTotalUser();
+            updateOnlineUser();
         }
 
         public void AppendTextBox(string value)
@@ -232,6 +354,11 @@ namespace Server
                 throw;
             }
             
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

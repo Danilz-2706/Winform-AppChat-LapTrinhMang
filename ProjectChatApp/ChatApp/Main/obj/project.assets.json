@@ -1,0 +1,149 @@
+{
+  "version": 3,
+  "targets": {
+    "net6.0": {
+      "ChatApp/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/ChatApp.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ChatApp.dll": {}
+        }
+      },
+      "Packet/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/Packet.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Packet.dll": {}
+        }
+      },
+      "Server/1.0.0": {
+        "type": "project",
+        "framework": "Unsupported,Version=v0.0",
+        "compile": {
+          "bin/placeholder/Server.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Server.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ChatApp/1.0.0": {
+      "type": "project",
+      "path": "../ChatApp/ChatApp.csproj",
+      "msbuildProject": "../ChatApp/ChatApp.csproj"
+    },
+    "Packet/1.0.0": {
+      "type": "project",
+      "path": "../Packet/Packet.csproj",
+      "msbuildProject": "../Packet/Packet.csproj"
+    },
+    "Server/1.0.0": {
+      "type": "project",
+      "path": "../Server/Server.csproj",
+      "msbuildProject": "../Server/Server.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net6.0": [
+      "ChatApp >= 1.0.0",
+      "Packet >= 1.0.0",
+      "Server >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\ProjectChatApp\\ChatApp\\Main\\Main.csproj",
+      "projectName": "Main",
+      "projectPath": "D:\\ProjectChatApp\\ChatApp\\Main\\Main.csproj",
+      "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
+      "outputPath": "D:\\ProjectChatApp\\ChatApp\\Main\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net6.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "projectReferences": {
+            "D:\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {
+              "projectPath": "D:\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj"
+            },
+            "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
+              "projectPath": "D:\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
+            },
+            "D:\\ProjectChatApp\\ChatApp\\Server\\Server.csproj": {
+              "projectPath": "D:\\ProjectChatApp\\ChatApp\\Server\\Server.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net6.0": {
+        "targetAlias": "net6.0",
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
+      }
+    }
+  },
+  "logs": [
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project ChatApp is not compatible with net6.0 (.NETCoreApp,Version=v6.0). Project ChatApp supports: net6.0-windows7.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "ChatApp",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1201",
+      "level": "Error",
+      "message": "Project Server is not compatible with net6.0 (.NETCoreApp,Version=v6.0). Project Server supports: net6.0-windows7.0 (.NETCoreApp,Version=v6.0)",
+      "libraryId": "Server",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}

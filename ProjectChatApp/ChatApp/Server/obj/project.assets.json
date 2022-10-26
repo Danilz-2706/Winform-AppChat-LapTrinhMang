@@ -340,6 +340,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "DTO": "1.0.0",
           "Guna.UI2.WinForms": "2.0.3.5",
           "MySql.Data": "8.0.30",
           "Packet": "1.0.0"
@@ -354,9 +355,22 @@
           "Microsoft.WindowsDesktop.App.WindowsForms"
         ]
       },
+      "DTO/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/DTO.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DTO.dll": {}
+        }
+      },
       "Packet/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "DTO": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Packet.dll": {}
         },
@@ -947,6 +961,11 @@
       "path": "../ChatApp/ChatApp.csproj",
       "msbuildProject": "../ChatApp/ChatApp.csproj"
     },
+    "DTO/1.0.0": {
+      "type": "project",
+      "path": "../DTO/DTO.csproj",
+      "msbuildProject": "../DTO/DTO.csproj"
+    },
     "Packet/1.0.0": {
       "type": "project",
       "path": "../Packet/Packet.csproj",
@@ -956,6 +975,7 @@
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "ChatApp >= 1.0.0",
+      "DTO >= 1.0.0",
       "Packet >= 1.0.0"
     ]
   },
@@ -986,6 +1006,9 @@
           "projectReferences": {
             "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {
               "projectPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj"
+            },
+            "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj"
             },
             "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
               "projectPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"

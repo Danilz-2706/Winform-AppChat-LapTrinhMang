@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "ChatApp/1.0.0": {
         "dependencies": {
+          "DTO": "1.0.0",
           "Guna.UI2.WinForms": "2.0.3.5",
           "MySql.Data": "8.0.30",
           "Packet": "1.0.0"
@@ -144,7 +145,15 @@
           "System.Drawing.Common": "4.7.0"
         }
       },
+      "DTO/1.0.0": {
+        "runtime": {
+          "DTO.dll": {}
+        }
+      },
       "Packet/1.0.0": {
+        "dependencies": {
+          "DTO": "1.0.0"
+        },
         "runtime": {
           "Packet.dll": {}
         }
@@ -296,6 +305,11 @@
       "sha512": "sha512-CeWTdRNfRaSh0pm2gDTJFwVaXfTq6Xwv/sA887iwPTneW7oMtMlpvDIO+U60+3GWTB7Aom6oQwv5VZVUhQRdPQ==",
       "path": "system.windows.extensions/4.7.0",
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
+    },
+    "DTO/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Packet/1.0.0": {
       "type": "project",

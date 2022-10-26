@@ -36,6 +36,8 @@ namespace ChatApp.GUI
             string t = "";
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
+                //khi nào cắm mạng LAN thì xài dòng này:
+                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
                     //Console.WriteLine(ni.Name);
@@ -126,10 +128,10 @@ namespace ChatApp.GUI
                         ConfirmPasswordtxt.Text = "";
                         break;
                     case "themuserthanhcong":
-                        MessageBox.Show("Chào mừng bạn đến với loza");                    
-                        this.Visible = false;
+                        MessageBox.Show("Chào mừng bạn đến với loza");
+                        this.Close();
                         LoginForm login = new LoginForm();
-                        login.Show();
+                        login.Visible = true;
                         break;
                     default:
                         break;
@@ -145,10 +147,9 @@ namespace ChatApp.GUI
                 iep = new IPEndPoint(IPAddress.Parse(ipaddress), 2008);
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);            
                 client.Connect(iep);
-                /*Thread trd = new Thread(new ThreadStart(this.RegisterConnect));
+                Thread trd = new Thread(new ThreadStart(this.RegisterConnect));
                 trd.IsBackground = true;
-                trd.Start();*/
-                RegisterConnect();
+                trd.Start();
                 
                  
                 
@@ -159,11 +160,6 @@ namespace ChatApp.GUI
                 MessageBox.Show("Khong the ket noi den Server!!!");
                 throw;
             }
-        }
-
-        private void panelRight_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 
 namespace Packet
@@ -15,17 +14,7 @@ namespace Packet
         public string? content { get; set; }
         
     }
-    public class EXIT
-    {
-        public EXIT(string username, string? content)
-        {
-            this.username = username;
-            this.content = content;
-        }
 
-        public string username { get; set; }
-        public string? content { get; set; }
-    }
     public class LOGIN
     {
         public LOGIN(string ? username,string ? pass)
@@ -56,11 +45,6 @@ namespace Packet
         public string? bd { get; set; }
     }
 
-
-    public class LOGINSUCESS
-    {
-
-    }
     public class SENDMESSAGE
     {
         public SENDMESSAGE(string ? usernameSender, string ? usernameReceiver, string ? content)
@@ -72,16 +56,5 @@ namespace Packet
         public string? usernameSender { get; set; }
         public string? usernameReceiver { get; set; }
         public string? content { get; set; }
-    }
-
-    public class SENFRIENDREQUEST
-    {
-
-        public string ? usernameRequest { get; set; }
-
-        public SENFRIENDREQUEST(string? usernameRequest)
-        {
-            this.usernameRequest = usernameRequest;
-        }
     }
 }

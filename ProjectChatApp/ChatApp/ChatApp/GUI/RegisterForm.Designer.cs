@@ -121,7 +121,7 @@
             this.panelRight.Name = "panelRight";
             this.panelRight.Size = new System.Drawing.Size(356, 680);
             this.panelRight.TabIndex = 1;
-            this.panelRight.Paint += new System.Windows.Forms.PaintEventHandler(this.panelRight_Paint);
+            
             // 
             // pictureBox2
             // 
@@ -167,6 +167,7 @@
             this.FemaleradioButton.TabStop = true;
             this.FemaleradioButton.Text = "Female";
             this.FemaleradioButton.UseVisualStyleBackColor = true;
+            
             // 
             // MaleradioButton
             // 
@@ -221,6 +222,7 @@
             this.Fullnametxt.PlaceholderText = "Nguyễn Văn A";
             this.Fullnametxt.Size = new System.Drawing.Size(248, 21);
             this.Fullnametxt.TabIndex = 7;
+            
             // 
             // ConfirmPasswordtxt
             // 
@@ -243,6 +245,7 @@
             this.Passwordtxt.PasswordChar = '*';
             this.Passwordtxt.Size = new System.Drawing.Size(248, 21);
             this.Passwordtxt.TabIndex = 7;
+            
             // 
             // Mailtxt
             // 
@@ -254,6 +257,7 @@
             this.Mailtxt.PlaceholderText = "abc123@gmail.com";
             this.Mailtxt.Size = new System.Drawing.Size(248, 21);
             this.Mailtxt.TabIndex = 7;
+            
             // 
             // Birthdaylbl
             // 
@@ -265,6 +269,7 @@
             this.Birthdaylbl.Size = new System.Drawing.Size(93, 23);
             this.Birthdaylbl.TabIndex = 0;
             this.Birthdaylbl.Text = "Birthday:";
+            
             // 
             // Sexlbl
             // 
@@ -276,6 +281,7 @@
             this.Sexlbl.Size = new System.Drawing.Size(48, 23);
             this.Sexlbl.TabIndex = 0;
             this.Sexlbl.Text = "Sex:";
+          
             // 
             // label4
             // 
@@ -287,6 +293,7 @@
             this.label4.Size = new System.Drawing.Size(114, 23);
             this.label4.TabIndex = 0;
             this.label4.Text = "Full Name:";
+            
             // 
             // ConfirmPasswordlbl
             // 
@@ -298,6 +305,7 @@
             this.ConfirmPasswordlbl.Size = new System.Drawing.Size(189, 23);
             this.ConfirmPasswordlbl.TabIndex = 0;
             this.ConfirmPasswordlbl.Text = "Confirm Password:";
+            
             // 
             // Passwordlbl
             // 
@@ -309,6 +317,7 @@
             this.Passwordlbl.Size = new System.Drawing.Size(108, 23);
             this.Passwordlbl.TabIndex = 0;
             this.Passwordlbl.Text = "Password:";
+            
             // 
             // UserEmaillbl
             // 
@@ -320,6 +329,7 @@
             this.UserEmaillbl.Size = new System.Drawing.Size(67, 23);
             this.UserEmaillbl.TabIndex = 0;
             this.UserEmaillbl.Text = "Email:";
+         
             // 
             // Title
             // 
@@ -331,6 +341,7 @@
             this.Title.Size = new System.Drawing.Size(122, 34);
             this.Title.TabIndex = 0;
             this.Title.Text = "SIGN UP";
+            
             // 
             // RegisterForm
             // 

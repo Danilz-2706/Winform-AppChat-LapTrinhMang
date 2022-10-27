@@ -35,7 +35,7 @@
             this.btnChatting = new Guna.UI2.WinForms.Guna2Button();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.titleBar = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lbUsername = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnMaxxed = new Guna.UI2.WinForms.Guna2Button();
             this.btnMinimize = new Guna.UI2.WinForms.Guna2ControlBox();
             this.btnMaximize = new Guna.UI2.WinForms.Guna2ControlBox();
@@ -136,7 +136,7 @@
             // titleBar
             // 
             this.titleBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(40)))));
-            this.titleBar.Controls.Add(this.guna2HtmlLabel1);
+            this.titleBar.Controls.Add(this.lbUsername);
             this.titleBar.Controls.Add(this.btnMaxxed);
             this.titleBar.Controls.Add(this.btnMinimize);
             this.titleBar.Controls.Add(this.btnMaximize);
@@ -148,15 +148,15 @@
             this.titleBar.TabIndex = 3;
             this.titleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.titleBar_MouseDown);
             // 
-            // guna2HtmlLabel1
+            // lbUsername
             // 
-            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.LightGray;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(16, 6);
-            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(59, 17);
-            this.guna2HtmlLabel1.TabIndex = 4;
-            this.guna2HtmlLabel1.Text = "User name";
+            this.lbUsername.BackColor = System.Drawing.Color.Transparent;
+            this.lbUsername.ForeColor = System.Drawing.Color.LightGray;
+            this.lbUsername.Location = new System.Drawing.Point(16, 6);
+            this.lbUsername.Name = "lbUsername";
+            this.lbUsername.Size = new System.Drawing.Size(59, 17);
+            this.lbUsername.TabIndex = 4;
+            this.lbUsername.Text = "User name";
             // 
             // btnMaxxed
             // 
@@ -261,6 +261,6 @@
         private Guna.UI2.WinForms.Guna2ControlBox btnMaximize;
         private Guna.UI2.WinForms.Guna2ControlBox btnClose;
         private Guna.UI2.WinForms.Guna2Button btnMaxxed;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lbUsername;
     }
 }

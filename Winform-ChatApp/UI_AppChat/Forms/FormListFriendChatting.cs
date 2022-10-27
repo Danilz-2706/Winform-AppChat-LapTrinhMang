@@ -42,13 +42,13 @@ namespace UI_AppChat
 
         private void PopulateItems()
         {
-            ItemFriend[] itemFriends = new ItemFriend[8];
+            ItemFriend[] itemFriends = new ItemFriend[2];
             for(int i = 0; i < itemFriends.Length; i++)
             {
                 itemFriends[i] = new ItemFriend();
                 itemFriends[i].UserName = "Danilz Dinh";
-                itemFriends[i].Message = "What'up,............mic check......";
-                itemFriends[i].Status = 1;
+                itemFriends[i].Lastmessage = "What'up,............mic check......";
+                itemFriends[i].Status = "Online";
 
                 if (flpListItem.Controls.Count < 0)
                 {

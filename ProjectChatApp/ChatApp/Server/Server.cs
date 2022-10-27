@@ -8,7 +8,6 @@ using System.Text.Json.Serialization;
 using MySql.Data.MySqlClient;
 using Server.BLL;
 using Server.DB;
-using Server.DTO;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Packet;
@@ -17,6 +16,7 @@ using Server.DAL;
 using Microsoft.VisualBasic.Logging;
 using Microsoft.Win32;
 using System.Net.WebSockets;
+using DTO.DTO;
 
 namespace Server
 {   
@@ -117,7 +117,7 @@ namespace Server
                                         //tra ve cho client thong tin dang nhap thanh cong
                                         user temp = new user();                                     
                                         temp = BLLuser.getInfoUser(login.username);
-                                        OnlineClientList.Add(temp.Name, client);
+                                        OnlineClientList.Add(temp.Email, client);
                                         updateOnlineUser();                                      
                                         BLLuser.updateonlinestatus(temp.Id, "online");
                                         //com = new Packet.Packet(mess, "OK");
@@ -133,7 +133,7 @@ namespace Server
                                             listFriendOfUsser.Add(friend);
                                         }
                                         
-                                        //-------------------khanh---------------------------
+                                        //-------------------khanh---------------------------`
 
 
                                         Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);

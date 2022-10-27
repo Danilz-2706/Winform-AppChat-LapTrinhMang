@@ -1,5 +1,4 @@
-﻿using Server.DTO;
-using Server.DB;
+﻿using Server.DB;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections;
@@ -12,6 +11,7 @@ using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.VisualBasic;
 using Org.BouncyCastle.Utilities.Collections;
+using DTO.DTO;
 
 namespace Server.DAL
 {

@@ -1,7 +1,7 @@
 ﻿using ChatApp.Properties;
+using DTO.DTO;
 using Microsoft.VisualBasic.Logging;
 using Packet;
-using Server.DTO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;

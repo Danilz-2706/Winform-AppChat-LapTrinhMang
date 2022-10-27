@@ -17,6 +17,15 @@ namespace UI_AppChat
         private bool _border = false;
         private BorderStyle border;
 
+        private Image _avatar;
+        private string _userName;
+        private string _lastmessage;
+        private string _status;
+        private Color _statusColor;
+        private Color _lastmessageColor;
+        private Color _usernameColor;
+
+
         public ItemFriend()
         {
             InitializeComponent();
@@ -26,49 +35,66 @@ namespace UI_AppChat
 
         #region Properties
 
-        private string _avatar;
+        
 
         [Category("Custom Props")]
-        public string Avatar
+        public Image Avatar
         {
             get { return this._avatar; }
-            set { this._avatar = value; }
+            set { this._avatar = value; imgAvatar.Image = value; }
         }
-        private string _userName;
+        
         [Category("Custom Props")]
-
         public string UserName
         {
             get { return this._userName; }
             set { this._userName = value; lbUsername.Text = value; }
         }
-
-        private string _message;
+        
         [Category("Custom Props")]
-
-        public string Message
+        public string Lastmessage
         {
-            get { return this._message; }
-            set { this._message = value; lbMess.Text = value; }
+            get { return this._lastmessage; }
+            set { this._lastmessage = value; lbMess.Text = value; }
         }
-
-        private int _status;
+        
         [Category("Custom Props")]
-
-        public int Status
+        public string Status
         {
             get { return this._status; }
-            set { this._status = value;
-                if (value == 1)
-                {
-                    lbStatus.Text = "Just now";
-                }
-                else lbStatus.Text = "Offline";
+            set { this._status = value; lbStatus.Text = value;
             }
         }
-
-
-
+        
+        [Category("Custom Props")]
+        public Color StatusColor
+        {
+            get { return this._statusColor; }
+            set
+            {
+                this._statusColor = value; lbStatus.ForeColor = value;
+            }
+        }
+        
+        [Category("Custom Props")]
+        public Color UsernameColor
+        {
+            get { return this._usernameColor; }
+            set
+            {
+                this._usernameColor = value; lbUsername.ForeColor = value;
+            }
+        }
+        
+        [Category("Custom Props")]
+        public Color LastmessageColor
+        {
+            get { return this._lastmessageColor; }
+            set
+            {
+                this._lastmessageColor = value; lbMess.ForeColor = value;
+            }
+        }
         #endregion
 
         #region Events
@@ -81,7 +107,6 @@ namespace UI_AppChat
                 Invalidate();
             }
         }
-
         public new event EventHandler Click
         {
             add

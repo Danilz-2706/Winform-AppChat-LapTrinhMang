@@ -13,12 +13,7 @@ namespace ChatApp.GUI
 {
     public partial class MainChatApp : Form
     {
-
-        /// <summary>
-        /// Khanh naf
-        /// </summary>
-
-        private volatile bool m_StopThread;
+        //private volatile bool m_StopThread;
         Thread trd;
         IPEndPoint iep;
         Socket _client;

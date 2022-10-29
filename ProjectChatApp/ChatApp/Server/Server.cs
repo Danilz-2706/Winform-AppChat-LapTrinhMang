@@ -135,20 +135,12 @@ namespace Server
                                             user friend = new user();
                                             friend = BLLuser.getInfoUserById(i);
                                             listFriendOfUsser.Add(friend);
-<<<<<<< HEAD
-                                        }
-                                        
-
-                                        List<int> list = BLLfriend.
-                                        //-------------------khanh---------------------------`
-=======
                                         }*/
 
                                         //-------------------khanh-------------------------
 
                                         List<user> listFriendOfUsser = new List<user>();
                                         listFriendOfUsser = getFriendofUser(temp.Id);
->>>>>>> a52df22ca1b149317d29523fad6685698836b270
 
 
                                         Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);

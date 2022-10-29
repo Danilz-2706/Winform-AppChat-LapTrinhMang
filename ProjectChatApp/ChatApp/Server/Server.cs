@@ -134,7 +134,7 @@ namespace Server
                                         }
                                         
 
-                       
+                                        List<int> list = BLLfriend.
                                         //-------------------khanh---------------------------`
 
 

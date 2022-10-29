@@ -27,6 +27,20 @@ namespace Server.BLL
                 return null;
             }
         }
+
+
+        public List<int> getFriendRequestByID(int id)
+        {
+            List<int> list = dalFriend.getFriendByID(id);
+            if (list != null)
+            {
+                return list;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
    
 }

@@ -34,6 +34,34 @@ namespace Server.DAL
             conn.Close();
             return listFriend;
         }
-        
+
+
+        public List<int> getFriendRequestByID(int id)
+        {
+            MySqlConnection conn = DB.dbconnect.getconnect();
+            List<int> listFriend = new List<int>();
+            try
+            {
+                string query = "select id_user_1 from friend where id_user_2='"+id+"'";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    listFriend.Add(dataReader.GetInt32("id_user_1"));
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            conn.Close();
+            return listFriend;
+        }
+      
+
+
     }
 }

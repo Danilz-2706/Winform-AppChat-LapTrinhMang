@@ -133,6 +133,8 @@ namespace Server
                                             listFriendOfUsser.Add(friend);
                                         }
                                         
+
+                       
                                         //-------------------khanh---------------------------`
 
 

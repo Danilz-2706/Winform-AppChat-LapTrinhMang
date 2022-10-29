@@ -39,6 +39,7 @@
             this.TotalUsertxt = new System.Windows.Forms.TextBox();
             this.OnlineUserlbl = new System.Windows.Forms.Label();
             this.OnlineUsertxt = new System.Windows.Forms.TextBox();
+            this.testlb = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // IPlbl
@@ -136,11 +137,21 @@
             this.OnlineUsertxt.Size = new System.Drawing.Size(57, 27);
             this.OnlineUsertxt.TabIndex = 10;
             // 
+            // testlb
+            // 
+            this.testlb.AutoSize = true;
+            this.testlb.Location = new System.Drawing.Point(556, 432);
+            this.testlb.Name = "testlb";
+            this.testlb.Size = new System.Drawing.Size(50, 20);
+            this.testlb.TabIndex = 11;
+            this.testlb.Text = "label1";
+            // 
             // Server
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 494);
+            this.Controls.Add(this.testlb);
             this.Controls.Add(this.OnlineUsertxt);
             this.Controls.Add(this.OnlineUserlbl);
             this.Controls.Add(this.TotalUsertxt);
@@ -173,5 +184,6 @@
         private TextBox TotalUsertxt;
         private Label OnlineUserlbl;
         private TextBox OnlineUsertxt;
+        private Label testlb;
     }
 }

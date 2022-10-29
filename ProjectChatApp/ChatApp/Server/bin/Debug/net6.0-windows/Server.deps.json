@@ -9,6 +9,7 @@
       "Server/1.0.0": {
         "dependencies": {
           "ChatApp": "1.0.0",
+          "DTO": "1.0.0",
           "Packet": "1.0.0"
         },
         "runtime": {
@@ -145,6 +146,7 @@
       },
       "ChatApp/1.0.0": {
         "dependencies": {
+          "DTO": "1.0.0",
           "Guna.UI2.WinForms": "2.0.3.5",
           "MySql.Data": "8.0.30",
           "Packet": "1.0.0"
@@ -153,7 +155,15 @@
           "ChatApp.dll": {}
         }
       },
+      "DTO/1.0.0": {
+        "runtime": {
+          "DTO.dll": {}
+        }
+      },
       "Packet/1.0.0": {
+        "dependencies": {
+          "DTO": "1.0.0"
+        },
         "runtime": {
           "Packet.dll": {}
         }
@@ -307,6 +317,11 @@
       "hashPath": "system.windows.extensions.4.7.0.nupkg.sha512"
     },
     "ChatApp/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DTO/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

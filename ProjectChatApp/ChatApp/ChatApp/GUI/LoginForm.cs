@@ -133,7 +133,7 @@ namespace ChatApp.GUI
                         MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
-                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name,5 ,(Socket)client);
+                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name,5 ,(Socket)client, lgsucess.listFriendOfUser);
                         mainChatApp.Show();
                         break;
                     default:

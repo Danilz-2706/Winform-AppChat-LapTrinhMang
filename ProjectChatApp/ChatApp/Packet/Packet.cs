@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Server.DTO;
+using System.ComponentModel;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
@@ -56,11 +57,20 @@ namespace Packet
         public int? sex { get; set; }
         public string? bd { get; set; }
     }
+    public class SENDUSERSTATUS
+    {
+        public SENDUSERSTATUS(user u)
+        {
+            this.u = u;
+        }
 
+        public user? u { get; set; }
+    }
+        
 
     public class LOGINSUCESS
     {
-        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block)
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser)
         {
             this.id = id;
             this.email = email;
@@ -71,6 +81,7 @@ namespace Packet
             this.online_status = online_status;
             this.is_active = is_active;
             this.server_block = server_block;
+            this.listFriendOfUser = listFriendOfUser;
         }
 
         public int? id { get; set; }
@@ -82,6 +93,8 @@ namespace Packet
         public int? online_status { get; set; }
         public int? is_active { get; set; }
         public int? server_block { get; set; }
+
+        public List<user>? listFriendOfUser { get; set; }
     }
     public class SENDMESSAGE
     {
@@ -95,4 +108,7 @@ namespace Packet
         public string? usernameReceiver { get; set; }
         public string? content { get; set; }
     }
+
+    
+        
 }

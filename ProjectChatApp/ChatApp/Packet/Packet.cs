@@ -1,4 +1,4 @@
-﻿using DTO.DTO;
+﻿using Server.DTO;
 using System.ComponentModel;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
@@ -57,7 +57,16 @@ namespace Packet
         public int? sex { get; set; }
         public string? bd { get; set; }
     }
+    public class SENDUSERSTATUS
+    {
+        public SENDUSERSTATUS(user u)
+        {
+            this.u = u;
+        }
 
+        public user? u { get; set; }
+    }
+        
 
     public class LOGINSUCESS
     {
@@ -99,4 +108,7 @@ namespace Packet
         public string? usernameReceiver { get; set; }
         public string? content { get; set; }
     }
+
+    
+        
 }

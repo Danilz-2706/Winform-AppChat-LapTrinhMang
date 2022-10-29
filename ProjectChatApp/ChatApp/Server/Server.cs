@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 using MySql.Data.MySqlClient;
 using Server.BLL;
 using Server.DB;
+using Server.DTO;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 using Packet;
@@ -16,7 +17,6 @@ using Server.DAL;
 using Microsoft.VisualBasic.Logging;
 using Microsoft.Win32;
 using System.Net.WebSockets;
-using DTO.DTO;
 
 namespace Server
 {   
@@ -24,6 +24,7 @@ namespace Server
     {
         IPEndPoint iep;
         Socket server;
+        List<int> listFriendOfUsserId = new List<int>();
         List<user> userlist;
         Dictionary<string, Socket> OnlineClientList;
         Dictionary<int, string> UserListFromDB;
@@ -66,14 +67,16 @@ namespace Server
         {       
             TotalUsertxt.Text = UserListFromDB.Count().ToString();
         }
+        
         private void updateOnlineUser()
         {
             OnlineUsertxt.Text = OnlineClientList.Count().ToString();
+
         }
         private void ThreadClient(Socket client)
         {
             string mess="";
-            byte[] data = new byte[65000];
+            byte[] data = new byte[1024];
             //nhan thong tin tu client
             int recv = client.Receive(data);
             
@@ -118,22 +121,26 @@ namespace Server
                                         user temp = new user();                                     
                                         temp = BLLuser.getInfoUser(login.username);
                                         OnlineClientList.Add(temp.Email, client);
+
                                         updateOnlineUser();                                      
                                         BLLuser.updateonlinestatus(temp.Id, "online");
                                         //com = new Packet.Packet(mess, "OK");
 
 
-                                        //------------------khanh---------------------------
-                                        List<int> listFriendOfUsserId = BLLfriend.getFriendByID(temp.Id);
+                                        //------------------khanh-------------------------
+                                        /*List<int> listFriendOfUsserId = BLLfriend.getFriendByID(temp.Id);
                                         List<user> listFriendOfUsser = new List<user>();
                                         foreach (int i in listFriendOfUsserId)
                                         {
                                             user friend = new user();
                                             friend = BLLuser.getInfoUserById(i);
                                             listFriendOfUsser.Add(friend);
-                                        }
-                                        
-                                        //-------------------khanh---------------------------`
+                                        }*/
+
+                                        //-------------------khanh-------------------------
+
+                                        List<user> listFriendOfUsser = new List<user>();
+                                        listFriendOfUsser = getFriendofUser(temp.Id);
 
 
                                         Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);
@@ -147,7 +154,7 @@ namespace Server
 
                                         //send status user (online or offline cho mainchatapp
                                         
-                                        SendDataToMainChatApp(OnlineClientList,login.username);
+                                        SendDataToMainChatApp(OnlineClientList,temp.Email,(int)temp.Id);
                                        
                                         break;
                                     default:
@@ -210,16 +217,43 @@ namespace Server
                             break;
                         case "ExitApp":
                             EXIT? exit = JsonSerializer.Deserialize<EXIT>(com.content);
-                            if(exit != null)
+                            if (exit != null)
                             {
+                                string s = "";
                                 user temp = new user();
                                 temp = BLLuser.getInfoUser(exit.username);
-                                OnlineClientList.Remove(exit.username);
-                                updateOnlineUser();
                                 BLLuser.updateonlinestatus(temp.Id, "offline");
+                                List<user> listFriendOfUsser = new List<user>();
+                                listFriendOfUsser = getFriendofUser(temp.Id);
+                                SendDataToMainChatApp(OnlineClientList, temp.Email, (int)temp.Id);
+
+                                
+                                
                                 com = new Packet.Packet("OK", "LOGOUT");
                                 AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
                                 sendJson(client, com);
+                                client.Close();
+                                foreach (KeyValuePair<string, Socket> item in OnlineClientList)
+                                {
+                                    var itemKey = item.Key;
+                                    var itemValue = item.Value;
+                                    if(itemKey.Equals(exit.username))
+                                    {
+                                        try
+                                        {
+                                            itemValue.Shutdown(SocketShutdown.Both);
+                                            break;
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            MessageBox.Show(e.ToString());
+                                            throw;
+                                        }
+                                    }
+                                }
+                                OnlineClientList.Remove(exit.username);
+                                updateOnlineUser();
+                                //client.Close();
                             }
                             break;
                         default:
@@ -228,6 +262,19 @@ namespace Server
                 }
             }
             
+        }
+
+        public List<user> getFriendofUser(int id)
+        {
+            List<int> listFriendOfUsserId = BLLfriend.getFriendByID(id);
+            List<user> listFriendOfUsser = new List<user>();
+            foreach (int i in listFriendOfUsserId)
+            {
+                user friend = new user();
+                friend = BLLuser.getInfoUserById(i);
+                listFriendOfUsser.Add(friend);
+            }
+            return listFriendOfUsser;
         }
         private List<string> getListUserOnlineFromAnotherSocket(Dictionary<string, Socket> OnlineClientList)
         {
@@ -239,40 +286,35 @@ namespace Server
             }
             return list;
         }
-        private void SendDataToMainChatApp(Dictionary<string, Socket> OnlineClientList,string email)
+        private void SendDataToMainChatApp(Dictionary<string, Socket> OnlineClientList,string email,int id)
         {
-            if(OnlineClientList != null)
-            {  
-                foreach(KeyValuePair<string, Socket> item in OnlineClientList)
+            List<user> temp = new List<user>();
+            temp = getFriendofUser(id);
+            user u = new user();
+            u = BLLuser.getInfoUser(email);
+           
+            if (OnlineClientList.Count > 1)
+            {
+                foreach (KeyValuePair<string, Socket> item in OnlineClientList)
                 {
                     List<string> list = getListUserOnlineFromAnotherSocket(OnlineClientList);
                     var itemKey = item.Key;
                     var itemValue = item.Value;
-                    string line = itemKey.ToString() + "|" +itemValue.AddressFamily.ToString() + "|" + itemValue.RemoteEndPoint;
-                    AppendTextBox(line + Environment.NewLine);
-                   
-                    foreach(string s in list){
-                        if (!s.Equals(itemKey.ToString()))
+                    for (int i = 0; i < temp.Count; i++)
+                    {
+                        if (itemKey == temp[i].Email)
                         {
-                            com = new Packet.Packet("Online", s);
+                            byte[] data = new byte[1024];
+                            Packet.SENDUSERSTATUS senduserstatus = new Packet.SENDUSERSTATUS(u);
+                            string jsonString = JsonSerializer.Serialize(senduserstatus);
+                            com = new Packet.Packet("StatusUser", jsonString);
                             sendJson(item.Value, com);
                         }
-                    }
-                   
-                }
-                AppendTextBox("======================================" + Environment.NewLine);
-              
-               /* foreach (var kvp in OnlineClientList)
-                {
-                   
-                }*/
+                    } 
+                }                           
             }
-                 else
-                {
-                AppendTextBox("OnlineClientList is null " + Environment.NewLine);
-            }
-
-            }
+        }
+        
         
         private void ServerWaitConnect()
         {
@@ -343,7 +385,7 @@ namespace Server
             try
             {
                 if (!active)
-                {
+                {                
                     server.Close();
                 }
                 Close();

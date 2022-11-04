@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 using System.Text.Json;
+using Server.DTO;
+using Packet;
+using UI_AppChat.Properties;
 
 namespace UI_AppChat
 {
@@ -23,11 +26,12 @@ namespace UI_AppChat
 
         IPEndPoint iep;
         Socket _client;
-        string username = null;
+        string email = null;
         int id_user = 0;
         string name_user = null;
         bool active = false;
         int n;
+        List<user> listFriendOfUser = new List<user>();
 
         public FormMenuContainer()
         {
@@ -37,63 +41,21 @@ namespace UI_AppChat
             this.Padding = new Padding(borderSize);
         }
 
-        public FormMenuContainer(IPEndPoint ipep, int id, string user, string name, int num, Socket client)
+        public FormMenuContainer(IPEndPoint ipep, int id, string emailuser, string name, int num, Socket client,List<user> listFriendOfUser)
         {
             InitializeComponent();
             active = true;
             iep = ipep;
             _client = client;
-            username = user;
+            email = emailuser;
             id_user = id;
             name_user = name;
-            n = num;
+            n = listFriendOfUser.Count; ;
             lbUsername.Text = name_user;
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            new Thread(new ThreadStart(this.NewThread)).Start();
-            /*  trd.IsBackground = true;*/
-            /*    trd.Start();*/
+            this.listFriendOfUser = listFriendOfUser;
 
         }
 
-        private void NewThread()
-        {
-            while (active)
-            {
-                try
-                {
-                    /* _client.Connect(iep);*/
-
-                    /*  var t = new Thread(() => MainChatAppWaitForInfo());
-                      t.Start();*/
-                    string jsonString = null;
-                    byte[] data = new byte[1024];
-                    int recv = _client.Receive(data);
-                    jsonString = Encoding.ASCII.GetString(data, 0, recv);
-                    jsonString.Replace("\\u0022", "\"");
-
-                    MessageBox.Show(jsonString + id_user.ToString());
-                    Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-                    if (com != null)
-                    {
-                        switch (com.mess)
-                        {
-                            case "Online":
-                                lbUsername.Text = com.content.ToString();
-                                MessageBox.Show(lbUsername.Text);
-                                break;
-                            default:
-                                break;
-                        }
-                    }
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.ToString());
-                    active = false;
-                    throw;
-                }
-            }
-        }
 
         #region Drag - Resize Window
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -190,7 +152,7 @@ namespace UI_AppChat
 
         private void btnChatting_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormListFriendChatting(), sender);
+            OpenChildForm(new FormListFriendChatting(iep, id_user, email, name_user, 5, _client, listFriendOfUser), sender);
         }
 
         private void btnSetting_Click(object sender, EventArgs e)

@@ -175,5 +175,20 @@ namespace Server.BLL
                 MessageBox.Show("Sai status!!!");
              }
         }
+
+
+        public user getInfoUserById(int id)
+        {
+            user u = new user();
+            u = DALuser.getInfoUserById(id);
+            if (u == null)
+            {
+                return null;
+            }
+            else
+            {
+                return u;
+            }
+        }
     }
 }

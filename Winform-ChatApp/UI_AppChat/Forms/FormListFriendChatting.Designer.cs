@@ -155,7 +155,6 @@
             this.Controls.Add(this.pnlListFriend);
             this.Name = "FormListFriendChatting";
             this.Text = "FormListFriendChatting";
-            this.Load += new System.EventHandler(this.FormListFriendChatting_Load);
             this.pnlListFriend.ResumeLayout(false);
             this.flpListItem.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);

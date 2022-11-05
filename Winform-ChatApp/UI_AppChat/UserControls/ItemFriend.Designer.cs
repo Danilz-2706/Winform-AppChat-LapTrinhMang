@@ -30,7 +30,6 @@
         {
             this.lbUsername = new System.Windows.Forms.Label();
             this.lbMess = new System.Windows.Forms.Label();
-            this.guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.lbStatus = new System.Windows.Forms.Label();
             this.imgAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).BeginInit();
@@ -64,24 +63,6 @@
             this.lbMess.TabIndex = 8;
             this.lbMess.Text = "Nguoi dung khong ton tai";
             // 
-            // guna2CircleButton2
-            // 
-            this.guna2CircleButton2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton2.FillColor = System.Drawing.Color.Magenta;
-            this.guna2CircleButton2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.guna2CircleButton2.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton2.Location = new System.Drawing.Point(217, 34);
-            this.guna2CircleButton2.Name = "guna2CircleButton2";
-            this.guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton2.Size = new System.Drawing.Size(25, 25);
-            this.guna2CircleButton2.TabIndex = 10;
-            this.guna2CircleButton2.Text = "8";
-            this.guna2CircleButton2.TextFormatNoPrefix = true;
-            // 
             // lbStatus
             // 
             this.lbStatus.AutoSize = true;
@@ -114,7 +95,6 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
             this.Controls.Add(this.lbUsername);
             this.Controls.Add(this.lbMess);
-            this.Controls.Add(this.guna2CircleButton2);
             this.Controls.Add(this.lbStatus);
             this.Controls.Add(this.imgAvatar);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -134,7 +114,6 @@
 
         private Label lbUsername;
         private Label lbMess;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
         private Label lbStatus;
         private Guna.UI2.WinForms.Guna2CirclePictureBox imgAvatar;
     }

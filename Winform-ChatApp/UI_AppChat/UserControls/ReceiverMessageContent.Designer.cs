@@ -44,10 +44,9 @@
             this.guna2GradientPanel10.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(48)))), ((int)(((byte)(90)))));
             this.guna2GradientPanel10.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(36)))), ((int)(((byte)(206)))));
             this.guna2GradientPanel10.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.guna2GradientPanel10.Location = new System.Drawing.Point(0, 37);
-            this.guna2GradientPanel10.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.guna2GradientPanel10.Location = new System.Drawing.Point(0, 28);
             this.guna2GradientPanel10.Name = "guna2GradientPanel10";
-            this.guna2GradientPanel10.Size = new System.Drawing.Size(345, 55);
+            this.guna2GradientPanel10.Size = new System.Drawing.Size(302, 41);
             this.guna2GradientPanel10.TabIndex = 17;
             // 
             // label22
@@ -55,9 +54,9 @@
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label22.ForeColor = System.Drawing.Color.Silver;
-            this.label22.Location = new System.Drawing.Point(88, 5);
+            this.label22.Location = new System.Drawing.Point(77, 4);
             this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(102, 20);
+            this.label22.Size = new System.Drawing.Size(80, 15);
             this.label22.TabIndex = 18;
             this.label22.Text = "THU 5:33 PM";
             // 
@@ -65,13 +64,12 @@
             // 
             this.imgAvatar.BackColor = System.Drawing.Color.Transparent;
             this.imgAvatar.ImageRotate = 0F;
-            this.imgAvatar.Location = new System.Drawing.Point(3, 5);
-            this.imgAvatar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.imgAvatar.Location = new System.Drawing.Point(3, 4);
             this.imgAvatar.Name = "imgAvatar";
             this.imgAvatar.ShadowDecoration.Color = System.Drawing.Color.Fuchsia;
             this.imgAvatar.ShadowDecoration.Enabled = true;
             this.imgAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.imgAvatar.Size = new System.Drawing.Size(24, 24);
+            this.imgAvatar.Size = new System.Drawing.Size(21, 21);
             this.imgAvatar.TabIndex = 19;
             this.imgAvatar.TabStop = false;
             // 
@@ -81,9 +79,9 @@
             this.lbUsername.BackColor = System.Drawing.Color.Transparent;
             this.lbUsername.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lbUsername.ForeColor = System.Drawing.Color.Silver;
-            this.lbUsername.Location = new System.Drawing.Point(33, 5);
+            this.lbUsername.Location = new System.Drawing.Point(29, 4);
             this.lbUsername.Name = "lbUsername";
-            this.lbUsername.Size = new System.Drawing.Size(49, 20);
+            this.lbUsername.Size = new System.Drawing.Size(38, 15);
             this.lbUsername.TabIndex = 20;
             this.lbUsername.Text = "Katsu";
             this.lbUsername.Click += new System.EventHandler(this.lbUsername_Click);
@@ -103,11 +101,10 @@
             this.btnChatting.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.btnChatting.Image = ((System.Drawing.Image)(resources.GetObject("btnChatting.Image")));
             this.btnChatting.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnChatting.Location = new System.Drawing.Point(266, 99);
-            this.btnChatting.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnChatting.Location = new System.Drawing.Point(233, 74);
             this.btnChatting.Name = "btnChatting";
             this.btnChatting.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
-            this.btnChatting.Size = new System.Drawing.Size(24, 24);
+            this.btnChatting.Size = new System.Drawing.Size(21, 18);
             this.btnChatting.TabIndex = 21;
             // 
             // label1
@@ -116,15 +113,15 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(294, 103);
+            this.label1.Location = new System.Drawing.Point(257, 77);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 20);
+            this.label1.Size = new System.Drawing.Size(35, 15);
             this.label1.TabIndex = 22;
             this.label1.Text = "Seen";
             // 
             // ReceiverMessageContent
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.Controls.Add(this.label1);
@@ -134,8 +131,9 @@
             this.Controls.Add(this.label22);
             this.Controls.Add(this.guna2GradientPanel10);
             this.ForeColor = System.Drawing.Color.Coral;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ReceiverMessageContent";
-            this.Size = new System.Drawing.Size(345, 134);
+            this.Size = new System.Drawing.Size(302, 100);
             this.Load += new System.EventHandler(this.MessageContent_Load);
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).EndInit();
             this.ResumeLayout(false);

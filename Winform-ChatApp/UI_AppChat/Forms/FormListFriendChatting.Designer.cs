@@ -140,6 +140,8 @@
             // panelChattingDetail
             // 
             this.panelChattingDetail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
+            this.panelChattingDetail.BackgroundImage = global::UI_AppChat.Properties.Resources.background_2;
+            this.panelChattingDetail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panelChattingDetail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelChattingDetail.Location = new System.Drawing.Point(298, 0);
             this.panelChattingDetail.Name = "panelChattingDetail";

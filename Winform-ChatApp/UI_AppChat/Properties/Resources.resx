@@ -130,8 +130,8 @@
   <data name="backicon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\imgs\backicon.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="male_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\imgs\male-default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="background_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\background_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,6 +151,9 @@
   <data name="icon_friends" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-friends.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="logoteam1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\logoteam1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_send" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-send.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -163,11 +166,14 @@
   <data name="icon_search" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-search.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="background_image" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\background_image.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_chat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-chat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logoteam1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\imgs\logoteam1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="male_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\male-default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -181,7 +187,7 @@
   <data name="icon_maxxed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-maxxed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="background_2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\imgs\background_2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\icons\icon-logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

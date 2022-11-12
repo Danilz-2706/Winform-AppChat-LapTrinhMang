@@ -93,6 +93,16 @@ namespace UI_AppChat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap background_image {
+            get {
+                object obj = ResourceManager.GetObject("background_image", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap backicon {
             get {
                 object obj = ResourceManager.GetObject("backicon", resourceCulture);
@@ -146,6 +156,16 @@ namespace UI_AppChat.Properties {
         internal static System.Drawing.Bitmap icon_friends {
             get {
                 object obj = ResourceManager.GetObject("icon_friends", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap icon_logout {
+            get {
+                object obj = ResourceManager.GetObject("icon-logout", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

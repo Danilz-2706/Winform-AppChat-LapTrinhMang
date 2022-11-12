@@ -174,7 +174,7 @@ namespace UI_AppChat
 
 
                 Point startPoint = new Point(0, 0);
-                Point endPoint = new Point(174, 174);
+                Point endPoint = new Point(194, 194);
                 using (LinearGradientBrush lgb =
                     new LinearGradientBrush(startPoint, endPoint, Color.FromArgb(250, 48, 90), Color.FromArgb(128, 36, 206)))
                 {
@@ -208,7 +208,7 @@ namespace UI_AppChat
         private void ItemFriend_Click(object sender, EventArgs e)
         {
            
-            _bgColor = true;
+            _bgColor = false;
             _border = false;
             Refresh();
         }

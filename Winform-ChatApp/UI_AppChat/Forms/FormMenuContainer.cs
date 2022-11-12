@@ -16,6 +16,7 @@ using System.Text.Json;
 using Server.DTO;
 using Packet;
 using UI_AppChat.Properties;
+using UI_AppChat.Forms;
 
 namespace UI_AppChat
 {
@@ -54,6 +55,20 @@ namespace UI_AppChat
             lbUsername.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
 
+        }
+
+        private void sendJson(object obj)
+        {
+            try
+            {
+                byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
+                _client.Send(jsonUtf8Bytes, jsonUtf8Bytes.Length, SocketFlags.None);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
 
@@ -155,10 +170,6 @@ namespace UI_AppChat
             OpenChildForm(new FormListFriendChatting(iep, id_user, email, name_user, 5, _client, listFriendOfUser), sender);
         }
 
-        private void btnSetting_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -191,6 +202,32 @@ namespace UI_AppChat
             SendMessage(this.Handle, 0x112, 0xf012, 0);
         }
 
-      
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            active = false;
+
+            _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _client.Connect(iep);
+            byte[] data = new byte[1024];
+            Packet.EXIT exit = new Packet.EXIT(email, "Exit");
+            string jsonString = JsonSerializer.Serialize(exit);
+            Packet.Packet packet = new Packet.Packet("ExitApp", jsonString);
+            sendJson(packet);
+            int recv = _client.Receive(data);
+            jsonString = Encoding.ASCII.GetString(data, 0, recv);
+            jsonString.Replace("\\u0022", "\"");
+            Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
+            if (com != null)
+            {
+                if (com.mess.Equals("OK"))
+                {
+                    this.Close();
+                    FormLogin lf = new FormLogin();
+                    lf.Show();
+                }
+            }
+
+            _client.Close();
+        }
     }
 }

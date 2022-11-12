@@ -19,6 +19,7 @@ namespace ChatApp.GUI
 
 
         private string lastchat;
+        private int iduser;
         private string status;
         private string username;
         private Image userimage;
@@ -52,6 +53,11 @@ namespace ChatApp.GUI
             get { return username; }
             set { username = value; UserChatNamelbl.Text = value; }
         }
+        public int Iduser
+        {
+            get { return iduser; }
+            set { iduser = value; }
+        }
 
         [Category("CustomPros")]
         public string LastChat
@@ -84,6 +90,11 @@ namespace ChatApp.GUI
         }
 
         private void LastChatlbl_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ChatFriendListView_Load(object sender, EventArgs e)
         {
 
         }

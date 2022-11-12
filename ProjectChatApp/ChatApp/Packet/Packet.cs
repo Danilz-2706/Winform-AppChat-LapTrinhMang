@@ -17,6 +17,21 @@ namespace Packet
         public string? content { get; set; }
         
     }
+
+    public class SENDMESSAGE
+    {
+        public SENDMESSAGE(int idsender, int idrec, string? content, int url)
+        {
+            this.idsender = idsender; 
+            this.idrec = idrec;
+            this.contentmess = content;
+            this.url = url;
+        }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+        public string? contentmess { get; set; }
+        public int? url { get; set; }
+    }
     public class EXIT
     {
         public EXIT(string username, string? content)
@@ -96,18 +111,7 @@ namespace Packet
 
         public List<user>? listFriendOfUser { get; set; }
     }
-    public class SENDMESSAGE
-    {
-        public SENDMESSAGE(string ? usernameSender, string ? usernameReceiver, string ? content)
-        {
-            this.usernameSender = usernameSender;
-            this.usernameReceiver = usernameReceiver;
-            this.content = content;
-        }
-        public string? usernameSender { get; set; }
-        public string? usernameReceiver { get; set; }
-        public string? content { get; set; }
-    }
+    
 
     
         

@@ -19,7 +19,7 @@ using Microsoft.Win32;
 using System.Net.WebSockets;
 
 namespace Server
-{   
+{
     public partial class Server : Form
     {
         IPEndPoint iep;
@@ -35,7 +35,7 @@ namespace Server
         MySqlConnection conn = DB.dbconnect.getconnect();
         private Packet.Packet com;
 
-        public Server() 
+        public Server()
         {
             InitializeComponent();
         }
@@ -49,14 +49,14 @@ namespace Server
             UserListFromDB = new Dictionary<int, string>();
             userlist = new List<user>();
             userlist = BLLuser.LoadAllUser();
-            for(int i=0;i<userlist.Count();i++)
+            for (int i = 0; i < userlist.Count(); i++)
             {
                 UserListFromDB.Add(userlist[i].Id, userlist[i].Email);
             }
             OnlineClientList = new Dictionary<string, Socket>();
 
         }
-         
+
         /*private List<user> getAllUser()
         {
             userlist = new List<user>();
@@ -64,10 +64,10 @@ namespace Server
             return userlist;
         }*/
         private void updateTotalUser()
-        {       
+        {
             TotalUsertxt.Text = UserListFromDB.Count().ToString();
         }
-        
+
         private void updateOnlineUser()
         {
             OnlineUsertxt.Text = OnlineClientList.Count().ToString();
@@ -75,20 +75,24 @@ namespace Server
         }
         private void ThreadClient(Socket client)
         {
-            string mess="";
+            string mess = "";
             byte[] data = new byte[1024];
             //nhan thong tin tu client
             int recv = client.Receive(data);
-            
+
             if (recv == 0) return;
             string jsonString = Encoding.ASCII.GetString(data, 0, recv);
             Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-            if(com!=null)
-            { 
-                if(com.content != null)
+            AppendTextBox("Nhan duoc goi:"+com.mess+ Environment.NewLine);
+            if (com != null)
+            {
+                if (com.content != null)
                 {
                     switch (com.mess)
                     {
+                        case "SendMessage":
+                            SENDMESSAGE? sendmessage = JsonSerializer.Deserialize<SENDMESSAGE>(com.content);
+                            break;
                         case "Login":
                             LOGIN? login = JsonSerializer.Deserialize<LOGIN>(com.content);
                             if (login != null && login.username != null && login.pass != null)
@@ -118,11 +122,11 @@ namespace Server
                                         break;
                                     case "dangnhapthanhcong":
                                         //tra ve cho client thong tin dang nhap thanh cong
-                                        user temp = new user();                                     
+                                        user temp = new user();
                                         temp = BLLuser.getInfoUser(login.username);
                                         OnlineClientList.Add(temp.Email, client);
 
-                                        updateOnlineUser();                                      
+                                        updateOnlineUser();
                                         BLLuser.updateonlinestatus(temp.Id, "online");
                                         //com = new Packet.Packet(mess, "OK");
 
@@ -148,14 +152,14 @@ namespace Server
                                         com = new Packet.Packet(mess, ResultJson);
                                         //tra thong tin ve cho client mo len mainchatapp
                                         sendJson(client, com);
-                                        AppendTextBox("IP: " + client.AddressFamily.ToString()  + 
-                                            client.RemoteEndPoint.ToString() + " voi username la " + 
+                                        AppendTextBox("IP: " + client.AddressFamily.ToString() +
+                                            client.RemoteEndPoint.ToString() + " voi username la " +
                                             login.username + "da ket noi toi server!" + Environment.NewLine);
 
                                         //send status user (online or offline cho mainchatapp
-                                        
-                                        SendDataToMainChatApp(OnlineClientList,temp.Email,(int)temp.Id);
-                                       
+
+                                        SendDataToMainChatApp(OnlineClientList, temp.Email, (int)temp.Id);
+
                                         break;
                                     default:
                                         break;
@@ -165,9 +169,9 @@ namespace Server
 
                         case "Register":
                             REGISTER? register = JsonSerializer.Deserialize<REGISTER>(com.content);
-                            if(register != null)
+                            if (register != null)
                             {
-                                mess = BLLuser.addAcount(register.username,register.pass,register.confirmpass,register.name, (int)register.sex,register.bd);
+                                mess = BLLuser.addAcount(register.username, register.pass, register.confirmpass, register.name, (int)register.sex, register.bd);
                                 switch (mess)
                                 {
                                     case "khongduocdetrong":
@@ -208,13 +212,14 @@ namespace Server
                                         com = new Packet.Packet(mess, "OK");
                                         sendJson(client, com);
                                         AppendTextBox(register.username + " da dang ky thanh cong!!!" + Environment.NewLine);
-                                        break;                              
+                                        break;
                                     default:
                                         break;
                                 }
 
                             }
                             break;
+
                         case "ExitApp":
                             EXIT? exit = JsonSerializer.Deserialize<EXIT>(com.content);
                             if (exit != null)
@@ -227,8 +232,8 @@ namespace Server
                                 listFriendOfUsser = getFriendofUser(temp.Id);
                                 SendDataToMainChatApp(OnlineClientList, temp.Email, (int)temp.Id);
 
-                                
-                                
+
+
                                 com = new Packet.Packet("OK", "LOGOUT");
                                 AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
                                 sendJson(client, com);
@@ -237,7 +242,7 @@ namespace Server
                                 {
                                     var itemKey = item.Key;
                                     var itemValue = item.Value;
-                                    if(itemKey.Equals(exit.username))
+                                    if (itemKey.Equals(exit.username))
                                     {
                                         try
                                         {
@@ -261,7 +266,7 @@ namespace Server
                     }
                 }
             }
-            
+
         }
 
         public List<user> getFriendofUser(int id)
@@ -286,13 +291,13 @@ namespace Server
             }
             return list;
         }
-        private void SendDataToMainChatApp(Dictionary<string, Socket> OnlineClientList,string email,int id)
+        private void SendDataToMainChatApp(Dictionary<string, Socket> OnlineClientList, string email, int id)
         {
             List<user> temp = new List<user>();
             temp = getFriendofUser(id);
             user u = new user();
             u = BLLuser.getInfoUser(email);
-           
+
             if (OnlineClientList.Count > 1)
             {
                 foreach (KeyValuePair<string, Socket> item in OnlineClientList)
@@ -310,15 +315,15 @@ namespace Server
                             com = new Packet.Packet("StatusUser", jsonString);
                             sendJson(item.Value, com);
                         }
-                    } 
-                }                           
+                    }
+                }
             }
         }
-        
-        
+
+
         private void ServerWaitConnect()
         {
-            while(active)
+            while (active)
             {
                 try
                 {
@@ -349,7 +354,7 @@ namespace Server
 
         private void Server_Load(object sender, EventArgs e)
         {
-            
+
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
@@ -363,7 +368,7 @@ namespace Server
                         }
                     }
                 }
-            } 
+            }
             KhoiTaoUser();
             updateTotalUser();
             updateOnlineUser();
@@ -385,7 +390,7 @@ namespace Server
             try
             {
                 if (!active)
-                {                
+                {
                     server.Close();
                 }
                 Close();
@@ -395,7 +400,7 @@ namespace Server
 
                 throw;
             }
-            
+
         }
 
         private void label1_Click(object sender, EventArgs e)

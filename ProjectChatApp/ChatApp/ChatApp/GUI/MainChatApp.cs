@@ -1,8 +1,11 @@
 ﻿using ChatApp.Properties;
 using Microsoft.VisualBasic.Logging;
+using Org.BouncyCastle.Bcpg;
 using Packet;
 using Server.DTO;
+using System.Globalization;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Security.Permissions;
 using System.Text;
@@ -13,28 +16,25 @@ namespace ChatApp.GUI
 {
     public partial class MainChatApp : Form
     {
-        //private volatile bool m_StopThread;
-        Thread trd;
+        int IdSender = 0;
+        int IdRec = 0;        
+        Thread trd;  
         IPEndPoint iep;
-        Socket _client;
-        string email = null;
-        int id_user = 0;
+        Socket _clientToServer;
+        string email = null;     
         string name_user = null;
         bool active = false;
         int n;
         List<user> listFriendOfUser = new List<user>();
-        public MainChatApp()
-        {
-            InitializeComponent();
-        }
+        
         public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser)
         {
             InitializeComponent();
             active = true;
-            iep= ipep;
-            _client = client;
+            iep = ipep;
+            _clientToServer = client;         
             email = emailuser;
-            id_user = id;
+            IdSender = id;
             name_user = name;
             n = listFriendOfUser.Count;
             Username.Text = name_user;
@@ -44,6 +44,28 @@ namespace ChatApp.GUI
             trd = new Thread(NewThread);
             //trd.IsBackground = true;
             trd.Start();
+            ChattingPanel.Hide();
+            SendMessgapanel.Hide();
+            
+        }
+        public string getIPAdress()
+        {
+            string t = "";
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                {
+                    //Console.WriteLine(ni.Name);
+                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            t = ip.Address.ToString();
+                        }
+                    }
+                }
+            }
+            return t;
         }
         private void NewThread()
         {
@@ -54,7 +76,7 @@ namespace ChatApp.GUI
               
                     string jsonString = null;
                     byte[] data = new byte[1024];
-                    int recv = _client.Receive(data);
+                    int recv = _clientToServer.Receive(data);
                     jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     jsonString.Replace("\\u0022", "\"");                   
                     Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);               
@@ -74,9 +96,7 @@ namespace ChatApp.GUI
                                 }
                                 //muốn thay đổi 1 thứ gì đó không đồng bộ 
                                 BeginInvoke((Action)(() => populateListView(n)));
-                                //MessageBox.Show(u.Name);                               
-                                break;                   
-                                BeginInvoke((Action)(() => populateListView(n)));
+                                //MessageBox.Show(u.Name);                                                             
                                 break;
                             default:
                                 break;
@@ -99,12 +119,12 @@ namespace ChatApp.GUI
             ChatFriendListView[] listItem = new ChatFriendListView[n];
             for(int i=0;i< listItem.Length;i++)
             {
-
+              
 
                 listItem[i] = new ChatFriendListView();
                 listItem[i].Username = listFriendOfUser[i].Name;
                 listItem[i].UsernameColor = Color.Silver;
-
+                
                 if (listFriendOfUser[i].Online_status == 1)
                 {
                     listItem[i].Status = "Online";
@@ -121,7 +141,8 @@ namespace ChatApp.GUI
                 listItem[i].LastchatColor = Color.Gray;
                 listItem[i].UserIcon = Resources.male_default;
                 //list[i].Click += (sender, e) => TestEvent(sender, e);
-                listItem[i].Name = "Friend" + i;
+                listItem[i].Name = listItem[i].Username;
+                listItem[i].Iduser = listFriendOfUser[i].Id;
                 ChatFriendPanel.Controls.Add(listItem[i]);
 
                 listItem[i].Click += new System.EventHandler(this.ClickEvent);
@@ -134,9 +155,10 @@ namespace ChatApp.GUI
 
         void ClickEvent(object sender,EventArgs e)
         {
+            ChattingPanel.Show();
+            SendMessgapanel.Show();
             ChatFriendListView obj = (ChatFriendListView)sender;
-
-           MessageBox.Show(obj.Name);
+            IdRec = obj.Iduser;                    
            
         }
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
@@ -163,11 +185,7 @@ namespace ChatApp.GUI
         {
 
         }
-        private void sendJson(object obj)
-        {
-            byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
-            _client.Send(jsonUtf8Bytes, jsonUtf8Bytes.Length, SocketFlags.None);
-        }
+       
         [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
         public void killthread(Thread trd)
         {
@@ -178,16 +196,16 @@ namespace ChatApp.GUI
         }
         private void Loginbtn_Click(object sender, EventArgs e)
         {
-            active = false;               
-           
-            _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _client.Connect(iep);
+            active = false;
+
+            _clientToServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _clientToServer.Connect(iep);
             byte[] data = new byte[1024];
             Packet.EXIT exit = new Packet.EXIT(email, "Exit");
             string jsonString = JsonSerializer.Serialize(exit);
             Packet.Packet packet = new Packet.Packet("ExitApp", jsonString);
             sendJson(packet);
-            int recv = _client.Receive(data);
+            int recv = _clientToServer.Receive(data);
             jsonString = Encoding.ASCII.GetString(data, 0, recv);
             jsonString.Replace("\\u0022", "\"");
             Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
@@ -200,8 +218,8 @@ namespace ChatApp.GUI
                     lf.Show();
                 }
             }
-            
-           _client.Close();
+
+            _clientToServer.Close();
         }
 
         private void Fullnametxt_TextChanged(object sender, EventArgs e)
@@ -221,12 +239,46 @@ namespace ChatApp.GUI
 
         private void HeadPanel_Paint(object sender, PaintEventArgs e)
         {
-
+            
         }
 
         private void guna2Panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void SendMessgapanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+        private void sendJson(object obj)
+        {
+            try
+            {
+                byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
+                _clientToServer.Send(jsonUtf8Bytes, jsonUtf8Bytes.Length, SocketFlags.None);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void SendMessage()
+        {
+
+            string mess = Messagetxt.Text;        
+            Packet.SENDMESSAGE sendmess = new Packet.SENDMESSAGE(IdSender, IdRec, mess, 0);
+            string jsonString = JsonSerializer.Serialize(sendmess);
+            Packet.Packet packet = new Packet.Packet("SendMessage", jsonString);
+            sendJson(packet);
+           // MessageBox.Show("ID gui:" + IdSender + "ID nhan:" + IdRec + "ND:" + packet.content);
+            Messagetxt.Text = "";
+        }
+        private void SendMessagebtn_Click(object sender, EventArgs e)
+        {
+           // MessageBox.Show(_clientToServer.Connected.ToString());
+            SendMessage();        
         }
     }
 }

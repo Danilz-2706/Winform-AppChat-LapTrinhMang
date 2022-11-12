@@ -43,24 +43,18 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.SearchFriendtxt = new System.Windows.Forms.TextBox();
             this.ImageUser = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
-            this.ChattingPanel = new System.Windows.Forms.Panel();
-            this.MyFriendChattingPanel = new System.Windows.Forms.Panel();
-            this.MyFriendlbl = new System.Windows.Forms.Label();
-            this.MyFriendChattxt = new System.Windows.Forms.TextBox();
-            this.MyUsernameChattingPanel = new System.Windows.Forms.Panel();
-            this.MyUsernameChatlbl = new System.Windows.Forms.Label();
-            this.MyUsernameChattxt = new System.Windows.Forms.TextBox();
             this.ChatFriendPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.SendMessgapanel = new System.Windows.Forms.Panel();
+            this.SendMessagebtn = new System.Windows.Forms.Button();
+            this.Messagetxt = new System.Windows.Forms.TextBox();
+            this.ChattingPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.RightPanel.SuspendLayout();
             this.NotiPanel.SuspendLayout();
             this.NofiItemPanel.SuspendLayout();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).BeginInit();
-            this.ChattingPanel.SuspendLayout();
-            this.MyFriendChattingPanel.SuspendLayout();
-            this.MyUsernameChattingPanel.SuspendLayout();
+            this.SendMessgapanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // RightPanel
@@ -223,92 +217,51 @@
             this.ImageUser.TabIndex = 0;
             this.ImageUser.TabStop = false;
             // 
-            // guna2Panel2
-            // 
-            this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2Panel2.Location = new System.Drawing.Point(0, 626);
-            this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(900, 84);
-            this.guna2Panel2.TabIndex = 4;
-            this.guna2Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.guna2Panel2_Paint);
-            // 
-            // ChattingPanel
-            // 
-            this.ChattingPanel.AutoScroll = true;
-            this.ChattingPanel.Controls.Add(this.MyFriendChattingPanel);
-            this.ChattingPanel.Controls.Add(this.MyUsernameChattingPanel);
-            this.ChattingPanel.Location = new System.Drawing.Point(313, 73);
-            this.ChattingPanel.Name = "ChattingPanel";
-            this.ChattingPanel.Size = new System.Drawing.Size(587, 553);
-            this.ChattingPanel.TabIndex = 5;
-            this.ChattingPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.ChattingPanel_Paint);
-            // 
-            // MyFriendChattingPanel
-            // 
-            this.MyFriendChattingPanel.Controls.Add(this.MyFriendlbl);
-            this.MyFriendChattingPanel.Controls.Add(this.MyFriendChattxt);
-            this.MyFriendChattingPanel.Location = new System.Drawing.Point(299, 126);
-            this.MyFriendChattingPanel.Name = "MyFriendChattingPanel";
-            this.MyFriendChattingPanel.Size = new System.Drawing.Size(255, 50);
-            this.MyFriendChattingPanel.TabIndex = 2;
-            // 
-            // MyFriendlbl
-            // 
-            this.MyFriendlbl.BackColor = System.Drawing.Color.Transparent;
-            this.MyFriendlbl.ForeColor = System.Drawing.Color.White;
-            this.MyFriendlbl.Location = new System.Drawing.Point(180, 12);
-            this.MyFriendlbl.Name = "MyFriendlbl";
-            this.MyFriendlbl.Size = new System.Drawing.Size(62, 25);
-            this.MyFriendlbl.TabIndex = 1;
-            this.MyFriendlbl.Text = "label9";
-            // 
-            // MyFriendChattxt
-            // 
-            this.MyFriendChattxt.ForeColor = System.Drawing.Color.OrangeRed;
-            this.MyFriendChattxt.Location = new System.Drawing.Point(13, 10);
-            this.MyFriendChattxt.Name = "MyFriendChattxt";
-            this.MyFriendChattxt.Size = new System.Drawing.Size(151, 27);
-            this.MyFriendChattxt.TabIndex = 0;
-            this.MyFriendChattxt.Text = "Hello";
-            this.MyFriendChattxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // MyUsernameChattingPanel
-            // 
-            this.MyUsernameChattingPanel.Controls.Add(this.MyUsernameChatlbl);
-            this.MyUsernameChattingPanel.Controls.Add(this.MyUsernameChattxt);
-            this.MyUsernameChattingPanel.Location = new System.Drawing.Point(37, 37);
-            this.MyUsernameChattingPanel.Name = "MyUsernameChattingPanel";
-            this.MyUsernameChattingPanel.Size = new System.Drawing.Size(255, 50);
-            this.MyUsernameChattingPanel.TabIndex = 1;
-            // 
-            // MyUsernameChatlbl
-            // 
-            this.MyUsernameChatlbl.BackColor = System.Drawing.Color.Transparent;
-            this.MyUsernameChatlbl.ForeColor = System.Drawing.Color.White;
-            this.MyUsernameChatlbl.Location = new System.Drawing.Point(19, 13);
-            this.MyUsernameChatlbl.Name = "MyUsernameChatlbl";
-            this.MyUsernameChatlbl.Size = new System.Drawing.Size(62, 25);
-            this.MyUsernameChatlbl.TabIndex = 1;
-            this.MyUsernameChatlbl.Text = "label9";
-            this.MyUsernameChatlbl.Click += new System.EventHandler(this.label9_Click);
-            // 
-            // MyUsernameChattxt
-            // 
-            this.MyUsernameChattxt.ForeColor = System.Drawing.Color.OrangeRed;
-            this.MyUsernameChattxt.Location = new System.Drawing.Point(88, 9);
-            this.MyUsernameChattxt.Name = "MyUsernameChattxt";
-            this.MyUsernameChattxt.Size = new System.Drawing.Size(151, 27);
-            this.MyUsernameChattxt.TabIndex = 0;
-            this.MyUsernameChattxt.Text = "Hello";
-            // 
             // ChatFriendPanel
             // 
             this.ChatFriendPanel.AutoScroll = true;
             this.ChatFriendPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ChatFriendPanel.Location = new System.Drawing.Point(0, 73);
             this.ChatFriendPanel.Name = "ChatFriendPanel";
-            this.ChatFriendPanel.Size = new System.Drawing.Size(315, 553);
+            this.ChatFriendPanel.Size = new System.Drawing.Size(315, 637);
             this.ChatFriendPanel.TabIndex = 6;
+            // 
+            // SendMessgapanel
+            // 
+            this.SendMessgapanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.SendMessgapanel.Controls.Add(this.SendMessagebtn);
+            this.SendMessgapanel.Controls.Add(this.Messagetxt);
+            this.SendMessgapanel.Location = new System.Drawing.Point(313, 637);
+            this.SendMessgapanel.Name = "SendMessgapanel";
+            this.SendMessgapanel.Size = new System.Drawing.Size(588, 70);
+            this.SendMessgapanel.TabIndex = 7;
+            this.SendMessgapanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SendMessgapanel_Paint);
+            // 
+            // SendMessagebtn
+            // 
+            this.SendMessagebtn.Location = new System.Drawing.Point(469, 26);
+            this.SendMessagebtn.Name = "SendMessagebtn";
+            this.SendMessagebtn.Size = new System.Drawing.Size(94, 29);
+            this.SendMessagebtn.TabIndex = 1;
+            this.SendMessagebtn.Text = "Send";
+            this.SendMessagebtn.UseVisualStyleBackColor = true;
+            this.SendMessagebtn.Click += new System.EventHandler(this.SendMessagebtn_Click);
+            // 
+            // Messagetxt
+            // 
+            this.Messagetxt.Location = new System.Drawing.Point(244, 26);
+            this.Messagetxt.Name = "Messagetxt";
+            this.Messagetxt.Size = new System.Drawing.Size(219, 27);
+            this.Messagetxt.TabIndex = 0;
+            // 
+            // ChattingPanel
+            // 
+            this.ChattingPanel.AutoScroll = true;
+            this.ChattingPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ChattingPanel.Location = new System.Drawing.Point(313, 73);
+            this.ChattingPanel.Name = "ChattingPanel";
+            this.ChattingPanel.Size = new System.Drawing.Size(588, 569);
+            this.ChattingPanel.TabIndex = 8;
             // 
             // MainChatApp
             // 
@@ -316,9 +269,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.ClientSize = new System.Drawing.Size(1239, 710);
-            this.Controls.Add(this.ChatFriendPanel);
             this.Controls.Add(this.ChattingPanel);
-            this.Controls.Add(this.guna2Panel2);
+            this.Controls.Add(this.SendMessgapanel);
+            this.Controls.Add(this.ChatFriendPanel);
             this.Controls.Add(this.HeadPanel);
             this.Controls.Add(this.RightPanel);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
@@ -333,11 +286,8 @@
             this.HeadPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).EndInit();
-            this.ChattingPanel.ResumeLayout(false);
-            this.MyFriendChattingPanel.ResumeLayout(false);
-            this.MyFriendChattingPanel.PerformLayout();
-            this.MyUsernameChattingPanel.ResumeLayout(false);
-            this.MyUsernameChattingPanel.PerformLayout();
+            this.SendMessgapanel.ResumeLayout(false);
+            this.SendMessgapanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -345,15 +295,7 @@
         #endregion
         private Guna.UI2.WinForms.Guna2Panel RightPanel;
         private Guna.UI2.WinForms.Guna2Panel HeadPanel;
-        private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
         private Guna.UI2.WinForms.Guna2CirclePictureBox ImageUser;
-        private Panel ChattingPanel;
-        private Panel MyUsernameChattingPanel;
-        private Label MyUsernameChatlbl;
-        private TextBox MyUsernameChattxt;
-        private Panel MyFriendChattingPanel;
-        private Label MyFriendlbl;
-        private TextBox MyFriendChattxt;
         private Button Logoutbtn;
         private Panel panel4;
         private TextBox SearchFriendtxt;
@@ -366,5 +308,9 @@
         private Label label10;
         private PictureBox pictureBox3;
         private FlowLayoutPanel ChatFriendPanel;
+        private Panel SendMessgapanel;
+        private Button SendMessagebtn;
+        private TextBox Messagetxt;
+        private FlowLayoutPanel ChattingPanel;
     }
 }

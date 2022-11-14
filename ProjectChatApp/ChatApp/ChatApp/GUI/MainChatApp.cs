@@ -23,14 +23,13 @@ namespace ChatApp.GUI
         Socket _clientToServer;
         string email = null;     
         string name_user = null;
-        bool active = false;
+        bool active = true;
         int n;
         List<user> listFriendOfUser = new List<user>();
         
         public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser)
         {
-            InitializeComponent();
-            active = true;
+            InitializeComponent();            
             iep = ipep;
             _clientToServer = client;         
             email = emailuser;
@@ -42,7 +41,7 @@ namespace ChatApp.GUI
             populateListView(n);       
             //new Thread(new ThreadStart(this.NewThread)).Start();
             trd = new Thread(NewThread);
-            //trd.IsBackground = true;
+            trd.IsBackground = true;
             trd.Start();
             ChattingPanel.Hide();
             SendMessgapanel.Hide();
@@ -68,48 +67,48 @@ namespace ChatApp.GUI
             return t;
         }
         private void NewThread()
-        {
-            while (active)
-            {
-                try
-                {
-              
-                    string jsonString = null;
-                    byte[] data = new byte[1024];
-                    int recv = _clientToServer.Receive(data);
-                    jsonString = Encoding.ASCII.GetString(data, 0, recv);
-                    jsonString.Replace("\\u0022", "\"");                   
-                    Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);               
-                    if (com != null)
+        {          
+                /*try
+                {                
+                    while (active)
                     {
-                        switch (com.mess)
+                        byte[] data = new byte[1024];
+                        int recv = _clientToServer.Receive(data);
+                        string jsonString = Encoding.ASCII.GetString(data, 0, recv);
+                        jsonString.Replace("\\u0022", "\"");
+                        Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
+
+                        if (com != null)
                         {
-                            case "StatusUser":
-                                SENDUSERSTATUS? senduserstatusonline = JsonSerializer.Deserialize<SENDUSERSTATUS>(com.content);                             
-                                for(int i=0;i<listFriendOfUser.Count();i++)
-                                {
-                                    if (listFriendOfUser[i].Email == senduserstatusonline.u.Email)
+                            switch (com.mess)
+                            {
+                                case "StatusUser":
+                                    SENDUSERSTATUS? senduserstatusonline = JsonSerializer.Deserialize<SENDUSERSTATUS>(com.content);
+                                    for (int i = 0; i < listFriendOfUser.Count(); i++)
                                     {
-                                        listFriendOfUser[i].Online_status = senduserstatusonline.u.Online_status;
-                                        break;
+                                        if (listFriendOfUser[i].Email == senduserstatusonline.u.Email)
+                                        {
+                                            listFriendOfUser[i].Online_status = senduserstatusonline.u.Online_status;
+                                            break;
+                                        }
                                     }
-                                }
-                                //muốn thay đổi 1 thứ gì đó không đồng bộ 
-                                BeginInvoke((Action)(() => populateListView(n)));
-                                //MessageBox.Show(u.Name);                                                             
-                                break;
-                            default:
-                                break;
+                                    //muốn thay đổi 1 thứ gì đó không đồng bộ 
+                                    BeginInvoke((Action)(() => populateListView(n)));
+                                    //MessageBox.Show(u.Name);                                                             
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
+                    
                 }
                 catch (Exception e)
                 {
                     MessageBox.Show(e.ToString());
                     active = false;
                     throw;
-                }
-            }
+                }*/          
             //MessageBox.Show("Thread da chet");
         }
 
@@ -217,9 +216,7 @@ namespace ChatApp.GUI
                     LoginForm lf = new LoginForm();
                     lf.Show();
                 }
-            }
-
-            _clientToServer.Close();
+            }          
         }
 
         private void Fullnametxt_TextChanged(object sender, EventArgs e)
@@ -268,7 +265,7 @@ namespace ChatApp.GUI
         {
 
             string mess = Messagetxt.Text;        
-            Packet.SENDMESSAGE sendmess = new Packet.SENDMESSAGE(IdSender, IdRec, mess, 0);
+            Packet.SENDMESSAGE sendmess = new Packet.SENDMESSAGE(IdSender, IdRec, mess, 0.ToString());
             string jsonString = JsonSerializer.Serialize(sendmess);
             Packet.Packet packet = new Packet.Packet("SendMessage", jsonString);
             sendJson(packet);
@@ -277,8 +274,14 @@ namespace ChatApp.GUI
         }
         private void SendMessagebtn_Click(object sender, EventArgs e)
         {
+
            // MessageBox.Show(_clientToServer.Connected.ToString());
             SendMessage();        
+        }
+
+        private void FriendAcpectbtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

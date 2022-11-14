@@ -10,7 +10,7 @@ namespace Server.BLL
     public class BLLMessage
     {
         DALMessage DALmessage = new DALMessage();
-        public void addMessage(int idsender, int idreceiver, string messagecontent, int url)
+        public void addMessage(int idsender, int idreceiver, string messagecontent, string url)
         {
             DALmessage.addMessage(idsender, idreceiver, messagecontent, url);
         }

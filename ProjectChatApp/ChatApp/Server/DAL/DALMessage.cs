@@ -9,7 +9,7 @@ namespace Server.DAL
 {
     public class DALMessage
     {
-        public void addMessage(int idsender, int idreceiver,string messagecontent, int url)
+        public void addMessage(int idsender, int idreceiver,string messagecontent, string url)
         {
             MySqlConnection conn = DB.dbconnect.getconnect();
             try

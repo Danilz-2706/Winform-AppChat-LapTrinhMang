@@ -30,7 +30,7 @@ namespace Server
         Dictionary<int, string> UserListFromDB;
         bool active = false;
         BLLUser BLLuser = new BLLUser();
-        //DALUser DALuser = new DALUser();
+        BLLMessage BLLmessage = new BLLMessage();
         BLLFriend BLLfriend = new BLLFriend();
         MySqlConnection conn = DB.dbconnect.getconnect();
         private Packet.Packet com;
@@ -75,197 +75,219 @@ namespace Server
         }
         private void ThreadClient(Socket client)
         {
-            string mess = "";
-            byte[] data = new byte[1024];
-            //nhan thong tin tu client
-            int recv = client.Receive(data);
-
-            if (recv == 0) return;
-            string jsonString = Encoding.ASCII.GetString(data, 0, recv);
-            Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-            AppendTextBox("Nhan duoc goi:"+com.mess+ Environment.NewLine);
-            if (com != null)
+            try
             {
-                if (com.content != null)
+                bool tieptuc = true;
+                while(tieptuc)
                 {
-                    switch (com.mess)
+                    string mess = "";
+                    byte[] data = new byte[1024];
+                    //nhan thong tin tu client
+                    int recv = client.Receive(data);
+
+                    if (recv == 0) return;
+                    string jsonString = Encoding.ASCII.GetString(data, 0, recv);
+                    Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
+                    AppendTextBox("Nhan duoc goi:" + com.mess + Environment.NewLine);
+                    if (com != null)
                     {
-                        case "SendMessage":
-                            SENDMESSAGE? sendmessage = JsonSerializer.Deserialize<SENDMESSAGE>(com.content);
-                            break;
-                        case "Login":
-                            LOGIN? login = JsonSerializer.Deserialize<LOGIN>(com.content);
-                            if (login != null && login.username != null && login.pass != null)
+                        if (com.content != null)
+                        {
+                            switch (com.mess)
                             {
-                                mess = BLLuser.Login(login.username, login.pass);
-                                switch (mess)
-                                {
-                                    case "khongduocdetrong":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "emaildetrong":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "dangnhapthatbai":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "taikhoanbikhoa":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "passdetrong":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "dangnhapthanhcong":
-                                        //tra ve cho client thong tin dang nhap thanh cong
-                                        user temp = new user();
-                                        temp = BLLuser.getInfoUser(login.username);
-                                        OnlineClientList.Add(temp.Email, client);
-
-                                        updateOnlineUser();
-                                        BLLuser.updateonlinestatus(temp.Id, "online");
-                                        //com = new Packet.Packet(mess, "OK");
-
-
-                                        //------------------khanh-------------------------
-                                        /*List<int> listFriendOfUsserId = BLLfriend.getFriendByID(temp.Id);
-                                        List<user> listFriendOfUsser = new List<user>();
-                                        foreach (int i in listFriendOfUsserId)
-                                        {
-                                            user friend = new user();
-                                            friend = BLLuser.getInfoUserById(i);
-                                            listFriendOfUsser.Add(friend);
-                                        }*/
-
-                                        //-------------------khanh-------------------------
-
-                                        List<user> listFriendOfUsser = new List<user>();
-                                        listFriendOfUsser = getFriendofUser(temp.Id);
-
-
-                                        Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);
-                                        string ResultJson = JsonSerializer.Serialize(lgsucess);
-                                        com = new Packet.Packet(mess, ResultJson);
-                                        //tra thong tin ve cho client mo len mainchatapp
-                                        sendJson(client, com);
-                                        AppendTextBox("IP: " + client.AddressFamily.ToString() +
-                                            client.RemoteEndPoint.ToString() + " voi username la " +
-                                            login.username + "da ket noi toi server!" + Environment.NewLine);
-
-                                        //send status user (online or offline cho mainchatapp
-
-                                        SendDataToMainChatApp(OnlineClientList, temp.Email, (int)temp.Id);
-
-                                        break;
-                                    default:
-                                        break;
-                                }
-                            }
-                            break;
-
-                        case "Register":
-                            REGISTER? register = JsonSerializer.Deserialize<REGISTER>(com.content);
-                            if (register != null)
-                            {
-                                mess = BLLuser.addAcount(register.username, register.pass, register.confirmpass, register.name, (int)register.sex, register.bd);
-                                switch (mess)
-                                {
-                                    case "khongduocdetrong":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "emailtrong":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "passwordtrong":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "confirmpasstrong":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "nametrong":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "saidinhdangemail":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "passwordvaconfirmkhongtrung":
-                                        com = new Packet.Packet(mess, "CANCEL");
-                                        sendJson(client, com);
-                                        break;
-                                    case "themuserthanhcong":
-                                        updateTotalUser();
-                                        //sua o day
-                                        user temp = new user();
-                                        temp = BLLuser.getInfoUser(register.username);
-                                        UserListFromDB.Add(temp.Id, register.username);
-                                        updateTotalUser();
-                                        com = new Packet.Packet(mess, "OK");
-                                        sendJson(client, com);
-                                        AppendTextBox(register.username + " da dang ky thanh cong!!!" + Environment.NewLine);
-                                        break;
-                                    default:
-                                        break;
-                                }
-
-                            }
-                            break;
-
-                        case "ExitApp":
-                            EXIT? exit = JsonSerializer.Deserialize<EXIT>(com.content);
-                            if (exit != null)
-                            {
-                                string s = "";
-                                user temp = new user();
-                                temp = BLLuser.getInfoUser(exit.username);
-                                BLLuser.updateonlinestatus(temp.Id, "offline");
-                                List<user> listFriendOfUsser = new List<user>();
-                                listFriendOfUsser = getFriendofUser(temp.Id);
-                                SendDataToMainChatApp(OnlineClientList, temp.Email, (int)temp.Id);
-
-
-
-                                com = new Packet.Packet("OK", "LOGOUT");
-                                AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
-                                sendJson(client, com);
-                                client.Close();
-                                foreach (KeyValuePair<string, Socket> item in OnlineClientList)
-                                {
-                                    var itemKey = item.Key;
-                                    var itemValue = item.Value;
-                                    if (itemKey.Equals(exit.username))
+                                case "SendMessage":
+                                    SENDMESSAGE? sm = JsonSerializer.Deserialize<SENDMESSAGE>(com.content);                              
+                                    if(sm!=null)
                                     {
-                                        try
+                                        BLLmessage.addMessage(sm.idsender, sm.idrec, sm.contentmess, sm.url);
+                                    }
+                                    break;
+                                case "Login":
+                                    LOGIN? login = JsonSerializer.Deserialize<LOGIN>(com.content);
+                                    if (login != null && login.username != null && login.pass != null)
+                                    {
+                                        mess = BLLuser.Login(login.username, login.pass);
+                                        switch (mess)
                                         {
-                                            itemValue.Shutdown(SocketShutdown.Both);
-                                            break;
-                                        }
-                                        catch (Exception e)
-                                        {
-                                            MessageBox.Show(e.ToString());
-                                            throw;
+                                            case "khongduocdetrong":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "emaildetrong":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "dangnhapthatbai":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "taikhoanbikhoa":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "passdetrong":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "dangnhapthanhcong":
+                                                //tra ve cho client thong tin dang nhap thanh cong
+                                                user temp = new user();
+                                                temp = BLLuser.getInfoUser(login.username);
+                                                OnlineClientList.Add(temp.Email, client);
+                                                BeginInvoke((Action)(() => updateOnlineUser()));
+
+                                                BLLuser.updateonlinestatus(temp.Id, "online");
+                                                //com = new Packet.Packet(mess, "OK");
+
+
+                                                //------------------khanh-------------------------
+                                                /*List<int> listFriendOfUsserId = BLLfriend.getFriendByID(temp.Id);
+                                                List<user> listFriendOfUsser = new List<user>();
+                                                foreach (int i in listFriendOfUsserId)
+                                                {
+                                                    user friend = new user();
+                                                    friend = BLLuser.getInfoUserById(i);
+                                                    listFriendOfUsser.Add(friend);
+                                                }*/
+
+                                                //-------------------khanh-------------------------
+
+                                                List<user> listFriendOfUsser = new List<user>();
+                                                listFriendOfUsser = getFriendofUser(temp.Id);
+
+
+                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);
+                                                string ResultJson = JsonSerializer.Serialize(lgsucess);
+                                                com = new Packet.Packet(mess, ResultJson);
+                                                //tra thong tin ve cho client mo len mainchatapp
+                                                sendJson(client, com);
+                                                AppendTextBox("IP: " + client.AddressFamily.ToString() +
+                                                    client.RemoteEndPoint.ToString() + " voi username la " +
+                                                    login.username + "da ket noi toi server!" + Environment.NewLine);
+
+                                                //send status user (online or offline cho mainchatapp
+
+                                                SendDataToMainChatApp(OnlineClientList, temp.Email, (int)temp.Id);
+
+                                                break;
+                                            default:
+                                                break;
                                         }
                                     }
-                                }
-                                OnlineClientList.Remove(exit.username);
-                                updateOnlineUser();
-                                //client.Close();
+                                    break;
+
+                                case "Register":
+                                    REGISTER? register = JsonSerializer.Deserialize<REGISTER>(com.content);
+                                    if (register != null)
+                                    {
+                                        mess = BLLuser.addAcount(register.username, register.pass, register.confirmpass, register.name, (int)register.sex, register.bd);
+                                        switch (mess)
+                                        {
+                                            case "khongduocdetrong":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "emailtrong":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "passwordtrong":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "confirmpasstrong":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "nametrong":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "saidinhdangemail":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "passwordvaconfirmkhongtrung":
+                                                com = new Packet.Packet(mess, "CANCEL");
+                                                sendJson(client, com);
+                                                break;
+                                            case "themuserthanhcong":
+                                                updateTotalUser();
+                                                //sua o day
+                                                user temp = new user();
+                                                temp = BLLuser.getInfoUser(register.username);
+                                                UserListFromDB.Add(temp.Id, register.username);
+                                                updateTotalUser();
+                                                com = new Packet.Packet(mess, "OK");
+                                                sendJson(client, com);
+                                                AppendTextBox(register.username + " da dang ky thanh cong!!!" + Environment.NewLine);
+                                                //tieptuc = false;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+
+                                    }
+                                    break;
+
+                                case "ExitApp":
+                                    EXIT? exit = JsonSerializer.Deserialize<EXIT>(com.content);
+                                    if (exit != null)
+                                    {
+                                        string s = "";
+                                        user temp = new user();
+                                        temp = BLLuser.getInfoUser(exit.username);
+                                        BLLuser.updateonlinestatus(temp.Id, "offline");
+                                        List<user> listFriendOfUsser = new List<user>();
+                                        listFriendOfUsser = getFriendofUser(temp.Id);
+                                        SendDataToMainChatApp(OnlineClientList, temp.Email, (int)temp.Id);
+
+
+
+                                        com = new Packet.Packet("OK", "LOGOUT");
+                                        AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
+                                        sendJson(client, com);
+                                        client.Close();
+                                        foreach (KeyValuePair<string, Socket> item in OnlineClientList)
+                                        {
+                                            var itemKey = item.Key;
+                                            var itemValue = item.Value;
+                                            if (itemKey.Equals(exit.username))
+                                            {
+                                                try
+                                                {
+                                                    itemValue.Shutdown(SocketShutdown.Both);
+                                                    break;
+                                                }
+                                                catch (Exception e)
+                                                {
+                                                    MessageBox.Show(e.ToString());
+                                                    throw;
+                                                }
+                                            }
+                                        }
+                                        OnlineClientList.Remove(exit.username);
+                                        updateOnlineUser();
+                                        tieptuc = false;
+                                        //client.Close();
+                                    }
+                                    break;
+                                default:
+                                    break;
                             }
-                            break;
-                        default:
-                            break;
+                        }
                     }
                 }
+
+                client.Shutdown(SocketShutdown.Both);
+                client.Close();
             }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
 
         }
 
@@ -334,7 +356,6 @@ namespace Server
                 catch (Exception)
                 {
                     active = false;
-                    throw;
                 }
             }
         }

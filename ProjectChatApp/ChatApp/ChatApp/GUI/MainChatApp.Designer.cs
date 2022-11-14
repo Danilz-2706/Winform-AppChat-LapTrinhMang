@@ -107,6 +107,7 @@
             this.FriendAcpectbtn.TabIndex = 4;
             this.FriendAcpectbtn.Text = "Đồng ý";
             this.FriendAcpectbtn.UseVisualStyleBackColor = true;
+            this.FriendAcpectbtn.Click += new System.EventHandler(this.FriendAcpectbtn_Click);
             // 
             // label10
             // 

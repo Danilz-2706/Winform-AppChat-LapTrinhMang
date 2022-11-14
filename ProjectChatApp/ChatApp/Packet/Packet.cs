@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 
 namespace Packet
-{
+{ 
     public class Packet
     {
         public Packet(string mess, string? content)
@@ -20,17 +20,17 @@ namespace Packet
 
     public class SENDMESSAGE
     {
-        public SENDMESSAGE(int idsender, int idrec, string? content, int url)
+        public SENDMESSAGE(int idsender, int idrec, string? contentmess, string? url)
         {
             this.idsender = idsender; 
             this.idrec = idrec;
-            this.contentmess = content;
+            this.contentmess = contentmess;
             this.url = url;
         }
         public int idsender { get; set; }
         public int idrec { get; set; }
         public string? contentmess { get; set; }
-        public int? url { get; set; }
+        public string? url { get; set; }
     }
     public class EXIT
     {

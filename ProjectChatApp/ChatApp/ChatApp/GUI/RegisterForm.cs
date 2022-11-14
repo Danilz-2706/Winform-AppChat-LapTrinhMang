@@ -135,6 +135,8 @@ namespace ChatApp.GUI
                         break;
                 }
             }
+            client.Disconnect(true);
+            client.Close();
 
         }
         private void Signupbtn_Click(object sender, EventArgs e)

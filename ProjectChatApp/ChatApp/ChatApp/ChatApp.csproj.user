@@ -4,6 +4,9 @@
     <Compile Update="GUI\ChatFriendListView.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="GUI\FriendChat.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="GUI\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

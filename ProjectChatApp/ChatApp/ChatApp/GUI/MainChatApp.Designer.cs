@@ -48,6 +48,7 @@
             this.SendMessagebtn = new System.Windows.Forms.Button();
             this.Messagetxt = new System.Windows.Forms.TextBox();
             this.ChattingPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.starttochatlbl = new System.Windows.Forms.Label();
             this.RightPanel.SuspendLayout();
             this.NotiPanel.SuspendLayout();
             this.NofiItemPanel.SuspendLayout();
@@ -55,6 +56,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).BeginInit();
             this.SendMessgapanel.SuspendLayout();
+            this.ChattingPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // RightPanel
@@ -217,6 +219,7 @@
             this.ImageUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.ImageUser.TabIndex = 0;
             this.ImageUser.TabStop = false;
+            this.ImageUser.Click += new System.EventHandler(this.ImageUser_Click);
             // 
             // ChatFriendPanel
             // 
@@ -259,10 +262,22 @@
             // 
             this.ChattingPanel.AutoScroll = true;
             this.ChattingPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.ChattingPanel.Controls.Add(this.starttochatlbl);
             this.ChattingPanel.Location = new System.Drawing.Point(313, 73);
             this.ChattingPanel.Name = "ChattingPanel";
             this.ChattingPanel.Size = new System.Drawing.Size(588, 569);
             this.ChattingPanel.TabIndex = 8;
+            // 
+            // starttochatlbl
+            // 
+            this.starttochatlbl.AutoSize = true;
+            this.starttochatlbl.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.starttochatlbl.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.starttochatlbl.Location = new System.Drawing.Point(3, 0);
+            this.starttochatlbl.Name = "starttochatlbl";
+            this.starttochatlbl.Size = new System.Drawing.Size(166, 38);
+            this.starttochatlbl.TabIndex = 0;
+            this.starttochatlbl.Text = "Start to chat";
             // 
             // MainChatApp
             // 
@@ -289,6 +304,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).EndInit();
             this.SendMessgapanel.ResumeLayout(false);
             this.SendMessgapanel.PerformLayout();
+            this.ChattingPanel.ResumeLayout(false);
+            this.ChattingPanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -313,5 +330,6 @@
         private Button SendMessagebtn;
         private TextBox Messagetxt;
         private FlowLayoutPanel ChattingPanel;
+        private Label starttochatlbl;
     }
 }

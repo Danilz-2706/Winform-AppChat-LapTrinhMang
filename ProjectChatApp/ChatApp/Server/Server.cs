@@ -17,6 +17,7 @@ using Server.DAL;
 using Microsoft.VisualBasic.Logging;
 using Microsoft.Win32;
 using System.Net.WebSockets;
+using DTO.DTO;
 
 namespace Server
 {
@@ -247,8 +248,8 @@ namespace Server
                                         com = new Packet.Packet("OK", "LOGOUT");
                                         AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
                                         sendJson(client, com);
-                                        client.Close();
-                                        foreach (KeyValuePair<string, Socket> item in OnlineClientList)
+                                       // client.Close();
+                                        /*foreach (KeyValuePair<string, Socket> item in OnlineClientList)
                                         {
                                             var itemKey = item.Key;
                                             var itemValue = item.Value;
@@ -265,13 +266,42 @@ namespace Server
                                                     throw;
                                                 }
                                             }
-                                        }
+                                        }*/
                                         OnlineClientList.Remove(exit.username);
-                                        updateOnlineUser();
+                                        BeginInvoke((Action)(() => updateOnlineUser()));
+                                        
                                         tieptuc = false;
                                         //client.Close();
                                     }
                                     break;
+
+                                case "RequestHistoryChat":                    
+                                    Socket socket = null;
+                                    List<message> listHostoryChat = new List<message>();
+                                    REQUESTHISTORYCHAT? rq = JsonSerializer.Deserialize<REQUESTHISTORYCHAT>(com.content);
+                                    user usend = new user();
+                                    user urev = new user();
+                                    usend = BLLuser.getInfoUserById(rq.idsender);
+                                    urev = BLLuser.getInfoUserById(rq.idrec);
+                                    listHostoryChat = BLLmessage.getHistoryChat(rq.idsender, rq.idrec);
+                                    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHostoryChat);
+                                    string Json = JsonSerializer.Serialize(send);
+                                    com = new Packet.Packet("SendHistoryChat", Json);
+                                    if(OnlineClientList.ContainsKey(usend.Email))
+                                    {
+                                        socket = OnlineClientList[usend.Email];
+                                        sendJson(socket, com);
+                                        AppendTextBox("Da gui history chat den id " + usend.Id + Environment.NewLine);
+                                    }
+                                    if(OnlineClientList.ContainsKey(urev.Email))
+                                    {
+                                        socket = OnlineClientList[urev.Email];
+                                        sendJson(socket, com);
+                                        AppendTextBox("Da gui history chat den id " + urev.Id + Environment.NewLine);
+                                    }
+                                    //sendJson(client, Json);
+                                    
+                                    break;                                  
                                 default:
                                     break;
                             }

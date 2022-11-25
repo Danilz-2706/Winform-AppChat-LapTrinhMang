@@ -1,4 +1,5 @@
 ﻿using ChatApp.Properties;
+using DTO.DTO;
 using Microsoft.VisualBasic.Logging;
 using Org.BouncyCastle.Bcpg;
 using Packet;
@@ -26,6 +27,7 @@ namespace ChatApp.GUI
         bool active = true;
         int n;
         List<user> listFriendOfUser = new List<user>();
+        List<message> HistoryChat = new List<message>();
         
         public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser)
         {
@@ -38,14 +40,14 @@ namespace ChatApp.GUI
             n = listFriendOfUser.Count;
             Username.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
-            populateListView(n);       
+            populateFriendListView(n);       
             //new Thread(new ThreadStart(this.NewThread)).Start();
             trd = new Thread(NewThread);
             trd.IsBackground = true;
             trd.Start();
             ChattingPanel.Hide();
             SendMessgapanel.Hide();
-            
+            starttochatlbl.Show();
         }
         public string getIPAdress()
         {
@@ -67,52 +69,109 @@ namespace ChatApp.GUI
             return t;
         }
         private void NewThread()
-        {          
-                /*try
-                {                
-                    while (active)
-                    {
-                        byte[] data = new byte[1024];
-                        int recv = _clientToServer.Receive(data);
-                        string jsonString = Encoding.ASCII.GetString(data, 0, recv);
-                        jsonString.Replace("\\u0022", "\"");
-                        Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-
-                        if (com != null)
-                        {
-                            switch (com.mess)
-                            {
-                                case "StatusUser":
-                                    SENDUSERSTATUS? senduserstatusonline = JsonSerializer.Deserialize<SENDUSERSTATUS>(com.content);
-                                    for (int i = 0; i < listFriendOfUser.Count(); i++)
-                                    {
-                                        if (listFriendOfUser[i].Email == senduserstatusonline.u.Email)
-                                        {
-                                            listFriendOfUser[i].Online_status = senduserstatusonline.u.Online_status;
-                                            break;
-                                        }
-                                    }
-                                    //muốn thay đổi 1 thứ gì đó không đồng bộ 
-                                    BeginInvoke((Action)(() => populateListView(n)));
-                                    //MessageBox.Show(u.Name);                                                             
-                                    break;
-                                default:
-                                    break;
-                            }
-                        }
-                    }
-                    
-                }
-                catch (Exception e)
+        {
+            try
+            {
+                while (active)
                 {
-                    MessageBox.Show(e.ToString());
-                    active = false;
-                    throw;
-                }*/          
+                    byte[] data = new byte[1024];
+                    int recv = _clientToServer.Receive(data);
+                    string jsonString = Encoding.ASCII.GetString(data, 0, recv);
+                    jsonString.Replace("\\u0022", "\"");
+                    Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
+
+                    if (com != null)
+                    {
+                        switch (com.mess)
+                        {
+                            case "StatusUser":
+                                SENDUSERSTATUS? senduserstatusonline = JsonSerializer.Deserialize<SENDUSERSTATUS>(com.content);
+                                for (int i = 0; i < listFriendOfUser.Count(); i++)
+                                {
+                                    if (listFriendOfUser[i].Email == senduserstatusonline.u.Email)
+                                    {
+                                        listFriendOfUser[i].Online_status = senduserstatusonline.u.Online_status;
+                                        break;
+                                    }
+                                }
+                                //muốn thay đổi 1 thứ gì đó không đồng bộ 
+                                BeginInvoke((Action)(() => populateFriendListView(n)));
+                                //MessageBox.Show(u.Name);                                                             
+                                break;
+                            case "SendHistoryChat": //lay lich su chat box giua 2 nguoi dung
+                                SENDHISTORYCHAT? send = JsonSerializer.Deserialize<SENDHISTORYCHAT>(com.content);
+                                HistoryChat = send.listHistoryChat;
+                                //MessageBox.Show(HistoryChat.Count.ToString());
+                                BeginInvoke((Action)(() => populateHistoryChat(HistoryChat)));
+                                    break;
+                            case "OK":                                                                
+                                    active = false;                                                                   
+                                break;
+                            default:
+                                break;
+                        }
+                    }                
+                }
+
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.ToString());
+                active = false;
+                throw;
+            }
+            BeginInvoke((Action)(() => OpenLF()));
+            
+        }
+        public void OpenLF()
+        {
+            this.Close();
+            LoginForm lf = new LoginForm();
+            lf.Show();
             //MessageBox.Show("Thread da chet");
+            
         }
 
-        private void populateListView(int n)
+        private void populateHistoryChat(List<message> HistoryChat)
+        {
+            if(HistoryChat.Count == 0)
+            {
+                ChattingPanel.Controls.Clear();
+                ChattingPanel.Controls.Add(starttochatlbl);
+                starttochatlbl.Show();
+            }
+            else
+            {
+                ChattingPanel.Controls.Clear();
+                FriendChat[] FriendChatMess = new FriendChat[HistoryChat.Count];
+                MeChat[] MeChatMess = new MeChat[HistoryChat.Count];
+                for(int i=0;i< HistoryChat.Count;i++)
+                {
+                    if (HistoryChat[i].Idsender == IdSender)
+                    {
+                        MeChatMess[i] = new MeChat();
+                        MeChatMess[i].Message = HistoryChat[i].Messagecontent;
+                        ChattingPanel.Controls.Add(MeChatMess[i]);
+                    }
+                    else
+                    {
+                        FriendChatMess[i] = new FriendChat();
+                        for(int j=0;j<listFriendOfUser.Count;j++)
+                        {
+                            if (HistoryChat[i].Idsender == listFriendOfUser[j].Id)
+                            {
+                                FriendChatMess[i].Username = listFriendOfUser[j].Name;
+                                break;
+                            }
+                        }
+                        FriendChatMess[i].Message = HistoryChat[i].Messagecontent;
+                        ChattingPanel.Controls.Add(FriendChatMess[i]);
+                    }
+                }
+            }
+            
+        }
+        private void populateFriendListView(int n)
         {
             ChatFriendPanel.Controls.Clear();
             ChatFriendListView[] listItem = new ChatFriendListView[n];
@@ -157,8 +216,16 @@ namespace ChatApp.GUI
             ChattingPanel.Show();
             SendMessgapanel.Show();
             ChatFriendListView obj = (ChatFriendListView)sender;
-            IdRec = obj.Iduser;                    
-           
+            IdRec = obj.Iduser;
+
+
+            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender, IdRec);
+            string jsonString = JsonSerializer.Serialize(rqhc);
+            Packet.Packet packet = new Packet.Packet("RequestHistoryChat", jsonString);
+            sendJson(packet);
+         
+
+
         }
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -194,29 +261,13 @@ namespace ChatApp.GUI
             
         }
         private void Loginbtn_Click(object sender, EventArgs e)
-        {
-            active = false;
-
-            _clientToServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _clientToServer.Connect(iep);
-            byte[] data = new byte[1024];
+        {                  
+            
             Packet.EXIT exit = new Packet.EXIT(email, "Exit");
             string jsonString = JsonSerializer.Serialize(exit);
             Packet.Packet packet = new Packet.Packet("ExitApp", jsonString);
-            sendJson(packet);
-            int recv = _clientToServer.Receive(data);
-            jsonString = Encoding.ASCII.GetString(data, 0, recv);
-            jsonString.Replace("\\u0022", "\"");
-            Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-            if (com != null)
-            {
-                if (com.mess.Equals("OK"))
-                {                 
-                    this.Close();
-                    LoginForm lf = new LoginForm();
-                    lf.Show();
-                }
-            }          
+            sendJson(packet);         
+
         }
 
         private void Fullnametxt_TextChanged(object sender, EventArgs e)
@@ -271,6 +322,11 @@ namespace ChatApp.GUI
             sendJson(packet);
            // MessageBox.Show("ID gui:" + IdSender + "ID nhan:" + IdRec + "ND:" + packet.content);
             Messagetxt.Text = "";
+
+            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender, IdRec);
+            string jsonString1 = JsonSerializer.Serialize(rqhc);
+            Packet.Packet packet1 = new Packet.Packet("RequestHistoryChat", jsonString1);
+            sendJson(packet1);
         }
         private void SendMessagebtn_Click(object sender, EventArgs e)
         {
@@ -280,6 +336,11 @@ namespace ChatApp.GUI
         }
 
         private void FriendAcpectbtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ImageUser_Click(object sender, EventArgs e)
         {
 
         }

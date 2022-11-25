@@ -9,6 +9,7 @@ namespace DTO.DTO
 {
     public class message
     {
+        private int id;
         private int idsender;
         private int idreceiver;
         private string time;
@@ -16,8 +17,9 @@ namespace DTO.DTO
         private int url;
 
 
-        public message(int idsender, int idreceiver, string messagecontent, string time, int url)
+        public message(int id,int idsender, int idreceiver, string messagecontent, string time, int url)
         {
+            this.id = id;
             this.idsender = idsender;
             this.idreceiver = idreceiver;
             this.messagecontent = messagecontent;
@@ -29,11 +31,12 @@ namespace DTO.DTO
 
         }
 
-        public int Idsender { get => idsender; set => idreceiver = value; }
+        public int Idsender { get => idsender; set => idsender = value; }
         public int Idreceiver { get => idreceiver; set => idreceiver = value; }
         public string Time { get => time; set => time = value; }
         public string Messagecontent { get => messagecontent; set => messagecontent = value; }
         public int Url { get => url; set => url = value; }
+        public int Id { get => id; set => id = value; }
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using Server.DTO;
+﻿using DTO.DTO;
+using Server.DTO;
 using System.ComponentModel;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
@@ -16,6 +17,26 @@ namespace Packet
         public string mess { get; set; }
         public string? content { get; set; }
         
+    }
+
+    public class REQUESTHISTORYCHAT
+    {
+        public REQUESTHISTORYCHAT(int idsender, int idrec)
+        {
+            this.idsender = idsender;
+            this.idrec = idrec;
+        }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+    }
+    
+    public class SENDHISTORYCHAT
+    {
+        public SENDHISTORYCHAT(List<message> listHistoryChat)
+        {
+            this.listHistoryChat = listHistoryChat;         
+        }
+        public List<message>? listHistoryChat { get; set; }
     }
 
     public class SENDMESSAGE

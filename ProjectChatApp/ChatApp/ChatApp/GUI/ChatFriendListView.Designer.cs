@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatFriendListView));
             this.LastChatlbl = new System.Windows.Forms.Label();
             this.Statuslbl = new System.Windows.Forms.Label();
             this.UserChatNamelbl = new System.Windows.Forms.Label();
             this.ImageChatUser = new System.Windows.Forms.PictureBox();
+            this.noti = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.ImageChatUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noti)).BeginInit();
             this.SuspendLayout();
             // 
             // LastChatlbl
@@ -52,7 +55,7 @@
             this.Statuslbl.AutoSize = true;
             this.Statuslbl.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Statuslbl.ForeColor = System.Drawing.Color.Red;
-            this.Statuslbl.Location = new System.Drawing.Point(221, 28);
+            this.Statuslbl.Location = new System.Drawing.Point(185, 28);
             this.Statuslbl.Name = "Statuslbl";
             this.Statuslbl.Size = new System.Drawing.Size(52, 21);
             this.Statuslbl.TabIndex = 8;
@@ -79,6 +82,16 @@
             this.ImageChatUser.TabIndex = 7;
             this.ImageChatUser.TabStop = false;
             // 
+            // noti
+            // 
+            this.noti.Image = ((System.Drawing.Image)(resources.GetObject("noti.Image")));
+            this.noti.Location = new System.Drawing.Point(243, 3);
+            this.noti.Name = "noti";
+            this.noti.Size = new System.Drawing.Size(38, 33);
+            this.noti.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.noti.TabIndex = 7;
+            this.noti.TabStop = false;
+            // 
             // ChatFriendListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -87,11 +100,13 @@
             this.Controls.Add(this.LastChatlbl);
             this.Controls.Add(this.Statuslbl);
             this.Controls.Add(this.UserChatNamelbl);
+            this.Controls.Add(this.noti);
             this.Controls.Add(this.ImageChatUser);
             this.Name = "ChatFriendListView";
             this.Size = new System.Drawing.Size(284, 103);
             this.Load += new System.EventHandler(this.ChatFriendListView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ImageChatUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noti)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -103,5 +118,6 @@
         private Label Statuslbl;
         private Label UserChatNamelbl;
         private PictureBox ImageChatUser;
+        private PictureBox noti;
     }
 }

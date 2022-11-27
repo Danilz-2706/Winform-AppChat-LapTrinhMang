@@ -32,11 +32,15 @@ namespace Packet
     
     public class SENDHISTORYCHAT
     {
-        public SENDHISTORYCHAT(List<message> listHistoryChat)
+        public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec)
         {
-            this.listHistoryChat = listHistoryChat;         
+            this.listHistoryChat = listHistoryChat;
+            this.idsender = idsender;
+            this.idrec = idrec; 
         }
         public List<message>? listHistoryChat { get; set; }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
     }
 
     public class SENDMESSAGE

@@ -17,6 +17,7 @@ namespace ChatApp.GUI
 {
     public partial class MainChatApp : Form
     {
+        int checkFlag = 1;
         int IdSender = 0;
         int IdRec = 0;        
         Thread trd;  
@@ -40,7 +41,7 @@ namespace ChatApp.GUI
             n = listFriendOfUser.Count;
             Username.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
-            populateFriendListView(n);       
+            populateFriendListView(n,0);       
             //new Thread(new ThreadStart(this.NewThread)).Start();
             trd = new Thread(NewThread);
             trd.IsBackground = true;
@@ -74,7 +75,8 @@ namespace ChatApp.GUI
             {
                 while (active)
                 {
-                    byte[] data = new byte[1024];
+                    int size = 1024 * 1000 * 3;
+                    byte[] data = new byte[size];
                     int recv = _clientToServer.Receive(data);
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     jsonString.Replace("\\u0022", "\"");
@@ -95,15 +97,22 @@ namespace ChatApp.GUI
                                     }
                                 }
                                 //muốn thay đổi 1 thứ gì đó không đồng bộ 
-                                BeginInvoke((Action)(() => populateFriendListView(n)));
+                                BeginInvoke((Action)(() => populateFriendListView(n,0)));
                                 //MessageBox.Show(u.Name);                                                             
                                 break;
                             case "SendHistoryChat": //lay lich su chat box giua 2 nguoi dung
-                                SENDHISTORYCHAT? send = JsonSerializer.Deserialize<SENDHISTORYCHAT>(com.content);
+                                SENDHISTORYCHAT? send = JsonSerializer.Deserialize<SENDHISTORYCHAT>(com.content);                                                             
                                 HistoryChat = send.listHistoryChat;
                                 //MessageBox.Show(HistoryChat.Count.ToString());
-                                BeginInvoke((Action)(() => populateHistoryChat(HistoryChat)));
-                                    break;
+                                if(send.idrec == IdRec)
+                                {
+                                    BeginInvoke((Action)(() => populateHistoryChat(HistoryChat)));
+                                }
+                                else
+                                {
+                                    BeginInvoke((Action)(() => populateFriendListView(n, send.idsender)));
+                                }                           
+                                break;
                             case "OK":                                                                
                                     active = false;                                                                   
                                 break;
@@ -171,44 +180,132 @@ namespace ChatApp.GUI
             }
             
         }
-        private void populateFriendListView(int n)
+        private void populateFriendListView(int n,int Noti)
         {
-            ChatFriendPanel.Controls.Clear();
-            ChatFriendListView[] listItem = new ChatFriendListView[n];
-            for(int i=0;i< listItem.Length;i++)
+            
+            if (Noti == 0)
             {
-              
-
-                listItem[i] = new ChatFriendListView();
-                listItem[i].Username = listFriendOfUser[i].Name;
-                listItem[i].UsernameColor = Color.Silver;
-                
-                if (listFriendOfUser[i].Online_status == 1)
+                ChatFriendPanel.Controls.Clear();
+                ChatFriendListView[] listItem = new ChatFriendListView[n];
+                for (int i = 0; i < listItem.Length; i++)
                 {
-                    listItem[i].Status = "Online";
-                    listItem[i].StatusColor = Color.Lime;
+
+
+                    listItem[i] = new ChatFriendListView();
+                    listItem[i].ShowNoti = false;
+                    listItem[i].Username = listFriendOfUser[i].Name;
+                    listItem[i].UsernameColor = Color.Silver;
+
+                    if (listFriendOfUser[i].Online_status == 1)
+                    {
+                        listItem[i].Status = "Online";
+                        listItem[i].StatusColor = Color.Lime;
+                    }
+                    else
+                    {
+                        listItem[i].Status = "Offline";
+                        listItem[i].StatusColor = Color.Red;
+                    }
+
+
+                    listItem[i].LastChat = "Hello World";
+                    listItem[i].LastchatColor = Color.Gray;
+                    listItem[i].UserIcon = Resources.male_default;
+                    //list[i].Click += (sender, e) => TestEvent(sender, e);
+                    listItem[i].Name = listItem[i].Username;
+                    listItem[i].Iduser = listFriendOfUser[i].Id;
+                    ChatFriendPanel.Controls.Add(listItem[i]);
+
+                    listItem[i].Click += new System.EventHandler(this.ClickEvent);
+
+
+                }
+            }
+            else
+            {
+
+                if(checkFlag == 1)
+                {
+                    ChatFriendPanel.Controls.Clear();
+                    ChatFriendListView[] listItem = new ChatFriendListView[n];
+                    for (int i = 0; i < listItem.Length; i++)
+                    {
+
+
+                        listItem[i] = new ChatFriendListView();
+                        listItem[i].ShowNoti = false;
+                        listItem[i].Username = listFriendOfUser[i].Name;
+                        listItem[i].UsernameColor = Color.Silver;
+
+                        if (listFriendOfUser[i].Online_status == 1)
+                        {
+                            listItem[i].Status = "Online";
+                            listItem[i].StatusColor = Color.Lime;
+                        }
+                        else
+                        {
+                            listItem[i].Status = "Offline";
+                            listItem[i].StatusColor = Color.Red;
+                        }
+
+
+                        listItem[i].LastChat = "Hello World";
+                        listItem[i].LastchatColor = Color.Gray;
+                        listItem[i].UserIcon = Resources.male_default;
+                        //list[i].Click += (sender, e) => TestEvent(sender, e);
+                        listItem[i].Name = listItem[i].Username;
+                        listItem[i].Iduser = listFriendOfUser[i].Id;
+                        ChatFriendPanel.Controls.Add(listItem[i]);
+
+                        listItem[i].Click += new System.EventHandler(this.ClickEvent);
+                        checkFlag = 2;
+
+                    }
                 }
                 else
                 {
-                    listItem[i].Status = "Offline";
-                    listItem[i].StatusColor = Color.Red;
+                    ChatFriendPanel.Controls.Clear();
+                    ChatFriendListView[] listItem = new ChatFriendListView[n];
+                    for (int i = 0; i < listItem.Length; i++)
+                    {
+                        listItem[i] = new ChatFriendListView();
+                        listItem[i].Iduser = listFriendOfUser[i].Id;
+                        if (listItem[i].Iduser == Noti)
+                        {
+                            listItem[i].ShowNoti = true;
+                        }
+                        else
+                        {
+                            listItem[i].ShowNoti = false;
+                        }
+                        listItem[i].Username = listFriendOfUser[i].Name;
+                        listItem[i].UsernameColor = Color.Silver;
+
+                        if (listFriendOfUser[i].Online_status == 1)
+                        {
+                            listItem[i].Status = "Online";
+                            listItem[i].StatusColor = Color.Lime;
+                        }
+                        else
+                        {
+                            listItem[i].Status = "Offline";
+                            listItem[i].StatusColor = Color.Red;
+                        }
+
+
+                        listItem[i].LastChat = "Hello World";
+                        listItem[i].LastchatColor = Color.Gray;
+                        listItem[i].UserIcon = Resources.male_default;
+                        //list[i].Click += (sender, e) => TestEvent(sender, e);
+                        listItem[i].Name = listItem[i].Username;
+
+                        ChatFriendPanel.Controls.Add(listItem[i]);
+
+                        listItem[i].Click += new System.EventHandler(this.ClickEvent);
+                    }
                 }
 
-
-                listItem[i].LastChat = "Hello World";
-                listItem[i].LastchatColor = Color.Gray;
-                listItem[i].UserIcon = Resources.male_default;
-                //list[i].Click += (sender, e) => TestEvent(sender, e);
-                listItem[i].Name = listItem[i].Username;
-                listItem[i].Iduser = listFriendOfUser[i].Id;
-                ChatFriendPanel.Controls.Add(listItem[i]);
-
-                listItem[i].Click += new System.EventHandler(this.ClickEvent);
-
-
             }
-
-            
         }
 
         void ClickEvent(object sender,EventArgs e)
@@ -216,6 +313,7 @@ namespace ChatApp.GUI
             ChattingPanel.Show();
             SendMessgapanel.Show();
             ChatFriendListView obj = (ChatFriendListView)sender;
+            obj.ShowNoti = false;
             IdRec = obj.Iduser;
 
 
@@ -327,6 +425,8 @@ namespace ChatApp.GUI
             string jsonString1 = JsonSerializer.Serialize(rqhc);
             Packet.Packet packet1 = new Packet.Packet("RequestHistoryChat", jsonString1);
             sendJson(packet1);
+
+            populateHistoryChat(HistoryChat);
         }
         private void SendMessagebtn_Click(object sender, EventArgs e)
         {

@@ -284,7 +284,7 @@ namespace Server
                                     usend = BLLuser.getInfoUserById(rq.idsender);
                                     urev = BLLuser.getInfoUserById(rq.idrec);
                                     listHostoryChat = BLLmessage.getHistoryChat(rq.idsender, rq.idrec);
-                                    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHostoryChat);
+                                    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHostoryChat, rq.idsender, rq.idrec);
                                     string Json = JsonSerializer.Serialize(send);
                                     com = new Packet.Packet("SendHistoryChat", Json);
                                     if(OnlineClientList.ContainsKey(usend.Email))

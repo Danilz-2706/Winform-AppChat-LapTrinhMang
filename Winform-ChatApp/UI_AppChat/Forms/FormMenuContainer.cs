@@ -204,30 +204,10 @@ namespace UI_AppChat
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
-            active = false;
-
-            _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            _client.Connect(iep);
-            byte[] data = new byte[1024];
             Packet.EXIT exit = new Packet.EXIT(email, "Exit");
             string jsonString = JsonSerializer.Serialize(exit);
             Packet.Packet packet = new Packet.Packet("ExitApp", jsonString);
             sendJson(packet);
-            int recv = _client.Receive(data);
-            jsonString = Encoding.ASCII.GetString(data, 0, recv);
-            jsonString.Replace("\\u0022", "\"");
-            Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-            if (com != null)
-            {
-                if (com.mess.Equals("OK"))
-                {
-                    this.Close();
-                    FormLogin lf = new FormLogin();
-                    lf.Show();
-                }
-            }
-
-            _client.Close();
         }
     }
 }

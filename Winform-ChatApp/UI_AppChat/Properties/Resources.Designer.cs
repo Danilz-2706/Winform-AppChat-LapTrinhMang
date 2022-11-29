@@ -253,6 +253,26 @@ namespace UI_AppChat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ImageIntro {
+            get {
+                object obj = ResourceManager.GetObject("ImageIntro", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_Project_AM {
+            get {
+                object obj = ResourceManager.GetObject("Logo Project AM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap logoteam {
             get {
                 object obj = ResourceManager.GetObject("logoteam", resourceCulture);

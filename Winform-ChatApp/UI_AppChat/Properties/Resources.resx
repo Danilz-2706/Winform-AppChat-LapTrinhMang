@@ -190,4 +190,10 @@
   <data name="icon-logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="ImageIntro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\ImageIntro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Logo Project AM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\Logo Project AM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

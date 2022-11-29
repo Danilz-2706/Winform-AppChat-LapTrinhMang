@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.MessPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.UserMessage = new System.Windows.Forms.Label();
             this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.imgAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.UserNameMessage = new System.Windows.Forms.Label();
-            this.UserMessage = new System.Windows.Forms.Label();
             this.MessPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).BeginInit();
@@ -47,21 +47,36 @@
             this.MessPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(48)))), ((int)(((byte)(90)))));
             this.MessPanel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(36)))), ((int)(((byte)(206)))));
             this.MessPanel.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.MessPanel.Location = new System.Drawing.Point(19, 28);
-            this.MessPanel.MaximumSize = new System.Drawing.Size(283, 10000);
+            this.MessPanel.Location = new System.Drawing.Point(22, 37);
+            this.MessPanel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MessPanel.MaximumSize = new System.Drawing.Size(323, 13333);
             this.MessPanel.Name = "MessPanel";
-            this.MessPanel.Size = new System.Drawing.Size(65, 41);
+            this.MessPanel.Size = new System.Drawing.Size(80, 55);
             this.MessPanel.TabIndex = 17;
+            // 
+            // UserMessage
+            // 
+            this.UserMessage.AllowDrop = true;
+            this.UserMessage.AutoSize = true;
+            this.UserMessage.BackColor = System.Drawing.Color.Transparent;
+            this.UserMessage.ForeColor = System.Drawing.Color.Black;
+            this.UserMessage.Location = new System.Drawing.Point(27, 19);
+            this.UserMessage.MaximumSize = new System.Drawing.Size(274, 13333);
+            this.UserMessage.Name = "UserMessage";
+            this.UserMessage.Size = new System.Drawing.Size(50, 20);
+            this.UserMessage.TabIndex = 2;
+            this.UserMessage.Text = "label1";
             // 
             // guna2CirclePictureBox1
             // 
             this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(-12, -14);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(-14, -19);
+            this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(38, 34);
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(43, 45);
             this.guna2CirclePictureBox1.TabIndex = 1;
             this.guna2CirclePictureBox1.TabStop = false;
             this.guna2CirclePictureBox1.Click += new System.EventHandler(this.guna2CirclePictureBox1_Click);
@@ -70,12 +85,13 @@
             // 
             this.imgAvatar.BackColor = System.Drawing.Color.Transparent;
             this.imgAvatar.ImageRotate = 0F;
-            this.imgAvatar.Location = new System.Drawing.Point(7, 7);
+            this.imgAvatar.Location = new System.Drawing.Point(8, 9);
+            this.imgAvatar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.imgAvatar.Name = "imgAvatar";
             this.imgAvatar.ShadowDecoration.Color = System.Drawing.Color.Fuchsia;
             this.imgAvatar.ShadowDecoration.Enabled = true;
             this.imgAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.imgAvatar.Size = new System.Drawing.Size(34, 34);
+            this.imgAvatar.Size = new System.Drawing.Size(39, 45);
             this.imgAvatar.TabIndex = 19;
             this.imgAvatar.TabStop = false;
             // 
@@ -85,28 +101,16 @@
             this.UserNameMessage.BackColor = System.Drawing.Color.Transparent;
             this.UserNameMessage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.UserNameMessage.ForeColor = System.Drawing.Color.Silver;
-            this.UserNameMessage.Location = new System.Drawing.Point(43, 10);
+            this.UserNameMessage.Location = new System.Drawing.Point(49, 13);
             this.UserNameMessage.Name = "UserNameMessage";
-            this.UserNameMessage.Size = new System.Drawing.Size(38, 15);
+            this.UserNameMessage.Size = new System.Drawing.Size(49, 20);
             this.UserNameMessage.TabIndex = 20;
             this.UserNameMessage.Text = "Katsu";
             this.UserNameMessage.Click += new System.EventHandler(this.lbUsername_Click);
             // 
-            // UserMessage
-            // 
-            this.UserMessage.AllowDrop = true;
-            this.UserMessage.AutoSize = true;
-            this.UserMessage.BackColor = System.Drawing.Color.Transparent;
-            this.UserMessage.Location = new System.Drawing.Point(24, 14);
-            this.UserMessage.MaximumSize = new System.Drawing.Size(240, 10000);
-            this.UserMessage.Name = "UserMessage";
-            this.UserMessage.Size = new System.Drawing.Size(38, 15);
-            this.UserMessage.TabIndex = 2;
-            this.UserMessage.Text = "label1";
-            // 
             // ReceiverMessageContent
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
@@ -114,9 +118,8 @@
             this.Controls.Add(this.UserNameMessage);
             this.Controls.Add(this.MessPanel);
             this.ForeColor = System.Drawing.Color.Coral;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ReceiverMessageContent";
-            this.Size = new System.Drawing.Size(302, 100);
+            this.Size = new System.Drawing.Size(345, 133);
             this.Load += new System.EventHandler(this.MessageContent_Load);
             this.MessPanel.ResumeLayout(false);
             this.MessPanel.PerformLayout();

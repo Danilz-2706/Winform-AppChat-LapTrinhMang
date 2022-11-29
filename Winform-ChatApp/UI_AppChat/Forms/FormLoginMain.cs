@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace UI_AppChat.Forms
 {
-    public partial class FormLoginMai : Form
+    public partial class FormLoginMain : Form
     {
-        public FormLoginMai()
+        public FormLoginMain()
         {
             InitializeComponent();
         }

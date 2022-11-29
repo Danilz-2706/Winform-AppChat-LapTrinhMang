@@ -1,6 +1,6 @@
 ﻿namespace UI_AppChat.Forms
 {
-    partial class FormLoginMai
+    partial class FormLoginMain
     {
         /// <summary>
         /// Required designer variable.

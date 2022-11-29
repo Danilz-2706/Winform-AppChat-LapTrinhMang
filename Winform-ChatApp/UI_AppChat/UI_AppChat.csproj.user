@@ -7,6 +7,12 @@
     <Compile Update="Forms\FormListFriendChatting.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Forms\FormLoginMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Forms\FormLoginRedesign.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="Forms\FormMenuContainer.cs">
       <SubType>Form</SubType>
     </Compile>

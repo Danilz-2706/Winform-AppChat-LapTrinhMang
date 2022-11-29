@@ -4,9 +4,6 @@
     <Compile Update="Forms\FormAllFriend.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="Forms\FormChatting.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Update="Forms\FormListFriendChatting.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -204,6 +204,7 @@ namespace UI_AppChat
 
         private void btnLogout_Click(object sender, EventArgs e)
         {
+
             Packet.EXIT exit = new Packet.EXIT(email, "Exit");
             string jsonString = JsonSerializer.Serialize(exit);
             Packet.Packet packet = new Packet.Packet("ExitApp", jsonString);

@@ -24,6 +24,8 @@ namespace UI_AppChat
         private Color _statusColor;
         private Color _lastmessageColor;
         private Color _usernameColor;
+        private int iduser;
+
 
 
         public ItemFriend()
@@ -35,7 +37,19 @@ namespace UI_AppChat
 
         #region Properties
 
-        
+        public bool ShowNoti
+        {
+            get { return noti.Visible; }
+            set { noti.Visible = true; }
+        }
+
+
+        [Category("Custom Props")]
+        public int Iduser
+        {
+            get { return iduser; }
+            set { iduser = value; }
+        }
 
         [Category("Custom Props")]
         public Image Avatar
@@ -207,7 +221,7 @@ namespace UI_AppChat
 
         private void ItemFriend_Click(object sender, EventArgs e)
         {
-           
+            noti.FillColor=Color.Transparent;
             _bgColor = false;
             _border = false;
             Refresh();

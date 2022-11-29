@@ -37,12 +37,20 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.txbSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
-            this.panelChattingDetail = new System.Windows.Forms.Panel();
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.ChattingPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.SendMessagePanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2CircleButton2 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.guna2CircleButton1 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.Messagetxt = new System.Windows.Forms.TextBox();
+            this.SendMessagebtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.pnlListFriend.SuspendLayout();
             this.flpListItem.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
+            this.SendMessagePanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // pnlListFriend
@@ -137,23 +145,113 @@
             this.btnSearch.Size = new System.Drawing.Size(40, 24);
             this.btnSearch.TabIndex = 7;
             // 
-            // panelChattingDetail
+            // panel2
             // 
-            this.panelChattingDetail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
-            this.panelChattingDetail.BackgroundImage = global::UI_AppChat.Properties.Resources.background_2;
-            this.panelChattingDetail.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.panelChattingDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChattingDetail.Location = new System.Drawing.Point(298, 0);
-            this.panelChattingDetail.Name = "panelChattingDetail";
-            this.panelChattingDetail.Size = new System.Drawing.Size(610, 646);
-            this.panelChattingDetail.TabIndex = 5;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
+            this.panel2.BackgroundImage = global::UI_AppChat.Properties.Resources.background_2;
+            this.panel2.Controls.Add(this.ChattingPanel);
+            this.panel2.Controls.Add(this.SendMessagePanel);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(298, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(610, 646);
+            this.panel2.TabIndex = 5;
+            // 
+            // ChattingPanel
+            // 
+            this.ChattingPanel.AutoScroll = true;
+            this.ChattingPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
+            this.ChattingPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ChattingPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.ChattingPanel.Location = new System.Drawing.Point(0, 0);
+            this.ChattingPanel.Name = "ChattingPanel";
+            this.ChattingPanel.Size = new System.Drawing.Size(610, 592);
+            this.ChattingPanel.TabIndex = 14;
+            this.ChattingPanel.WrapContents = false;
+            // 
+            // SendMessagePanel
+            // 
+            this.SendMessagePanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
+            this.SendMessagePanel.Controls.Add(this.guna2CircleButton2);
+            this.SendMessagePanel.Controls.Add(this.guna2CircleButton1);
+            this.SendMessagePanel.Controls.Add(this.Messagetxt);
+            this.SendMessagePanel.Controls.Add(this.SendMessagebtn);
+            this.SendMessagePanel.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.SendMessagePanel.Location = new System.Drawing.Point(0, 592);
+            this.SendMessagePanel.Name = "SendMessagePanel";
+            this.SendMessagePanel.Size = new System.Drawing.Size(610, 54);
+            this.SendMessagePanel.TabIndex = 13;
+            // 
+            // guna2CircleButton2
+            // 
+            this.guna2CircleButton2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2CircleButton2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2CircleButton2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2CircleButton2.FillColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.guna2CircleButton2.ForeColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton2.Image = ((System.Drawing.Image)(resources.GetObject("guna2CircleButton2.Image")));
+            this.guna2CircleButton2.Location = new System.Drawing.Point(410, 11);
+            this.guna2CircleButton2.Name = "guna2CircleButton2";
+            this.guna2CircleButton2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CircleButton2.Size = new System.Drawing.Size(32, 32);
+            this.guna2CircleButton2.TabIndex = 4;
+            this.guna2CircleButton2.Click += new System.EventHandler(this.guna2CircleButton2_Click);
+            // 
+            // guna2CircleButton1
+            // 
+            this.guna2CircleButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.guna2CircleButton1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2CircleButton1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2CircleButton1.FillColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.guna2CircleButton1.ForeColor = System.Drawing.Color.White;
+            this.guna2CircleButton1.Image = ((System.Drawing.Image)(resources.GetObject("guna2CircleButton1.Image")));
+            this.guna2CircleButton1.Location = new System.Drawing.Point(372, 11);
+            this.guna2CircleButton1.Name = "guna2CircleButton1";
+            this.guna2CircleButton1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CircleButton1.Size = new System.Drawing.Size(32, 32);
+            this.guna2CircleButton1.TabIndex = 3;
+            this.guna2CircleButton1.Click += new System.EventHandler(this.guna2CircleButton1_Click);
+            // 
+            // Messagetxt
+            // 
+            this.Messagetxt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Messagetxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.Messagetxt.Location = new System.Drawing.Point(12, 11);
+            this.Messagetxt.Multiline = true;
+            this.Messagetxt.Name = "Messagetxt";
+            this.Messagetxt.Size = new System.Drawing.Size(307, 32);
+            this.Messagetxt.TabIndex = 2;
+            // 
+            // SendMessagebtn
+            // 
+            this.SendMessagebtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.SendMessagebtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.SendMessagebtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.SendMessagebtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.SendMessagebtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.SendMessagebtn.FillColor = System.Drawing.Color.Transparent;
+            this.SendMessagebtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SendMessagebtn.ForeColor = System.Drawing.Color.White;
+            this.SendMessagebtn.Image = ((System.Drawing.Image)(resources.GetObject("SendMessagebtn.Image")));
+            this.SendMessagebtn.Location = new System.Drawing.Point(330, 11);
+            this.SendMessagebtn.Name = "SendMessagebtn";
+            this.SendMessagebtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.SendMessagebtn.Size = new System.Drawing.Size(32, 32);
+            this.SendMessagebtn.TabIndex = 0;
+            this.SendMessagebtn.Click += new System.EventHandler(this.SendMessagebtn_Click);
             // 
             // FormListFriendChatting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(908, 646);
-            this.Controls.Add(this.panelChattingDetail);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.pnlListFriend);
             this.Name = "FormListFriendChatting";
             this.Text = "FormListFriendChatting";
@@ -162,6 +260,9 @@
             this.guna2Panel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.SendMessagePanel.ResumeLayout(false);
+            this.SendMessagePanel.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -169,7 +270,6 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2Panel pnlListFriend;
-        private Panel panelChattingDetail;
         private FlowLayoutPanel flpListItem;
         private FlowLayoutPanel flowLayoutPanel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
@@ -177,5 +277,12 @@
         private Guna.UI2.WinForms.Guna2Button btnSearch;
         private TextBox txbSearch;
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
+        private Panel panel2;
+        private FlowLayoutPanel ChattingPanel;
+        private Guna.UI2.WinForms.Guna2Panel SendMessagePanel;
+        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton2;
+        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
+        private TextBox Messagetxt;
+        private Guna.UI2.WinForms.Guna2CircleButton SendMessagebtn;
     }
 }

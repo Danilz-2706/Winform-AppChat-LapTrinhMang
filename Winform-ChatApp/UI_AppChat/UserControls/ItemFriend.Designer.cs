@@ -32,7 +32,9 @@
             this.lbMess = new System.Windows.Forms.Label();
             this.lbStatus = new System.Windows.Forms.Label();
             this.imgAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.noti = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noti)).BeginInit();
             this.SuspendLayout();
             // 
             // lbUsername
@@ -88,11 +90,23 @@
             this.imgAvatar.TabIndex = 11;
             this.imgAvatar.TabStop = false;
             // 
+            // noti
+            // 
+            this.noti.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(192)))));
+            this.noti.ImageRotate = 0F;
+            this.noti.Location = new System.Drawing.Point(224, 35);
+            this.noti.Name = "noti";
+            this.noti.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.noti.Size = new System.Drawing.Size(12, 12);
+            this.noti.TabIndex = 12;
+            this.noti.TabStop = false;
+            // 
             // ItemFriend
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(23)))), ((int)(((byte)(28)))), ((int)(((byte)(41)))));
+            this.Controls.Add(this.noti);
             this.Controls.Add(this.lbUsername);
             this.Controls.Add(this.lbMess);
             this.Controls.Add(this.lbStatus);
@@ -105,6 +119,7 @@
             this.MouseLeave += new System.EventHandler(this.ItemFriend_MouseLeave);
             this.MouseHover += new System.EventHandler(this.ItemFriend_MouseHover);
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.noti)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -116,5 +131,6 @@
         private Label lbMess;
         private Label lbStatus;
         private Guna.UI2.WinForms.Guna2CirclePictureBox imgAvatar;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox noti;
     }
 }

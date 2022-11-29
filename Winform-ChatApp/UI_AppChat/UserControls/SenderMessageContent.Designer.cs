@@ -28,113 +28,94 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SenderMessageContent));
-            this.guna2GradientPanel10 = new Guna.UI2.WinForms.Guna2GradientPanel();
-            this.label22 = new System.Windows.Forms.Label();
+            this.MessPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
+            this.UserMessage = new System.Windows.Forms.Label();
+            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.imgAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.lbUsername = new System.Windows.Forms.Label();
-            this.btnChatting = new Guna.UI2.WinForms.Guna2Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.MessPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).BeginInit();
             this.SuspendLayout();
             // 
-            // guna2GradientPanel10
+            // MessPanel
             // 
-            this.guna2GradientPanel10.BorderRadius = 16;
-            this.guna2GradientPanel10.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(93)))));
-            this.guna2GradientPanel10.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(61)))), ((int)(((byte)(87)))));
-            this.guna2GradientPanel10.ForeColor = System.Drawing.Color.CornflowerBlue;
-            this.guna2GradientPanel10.Location = new System.Drawing.Point(0, 28);
-            this.guna2GradientPanel10.Name = "guna2GradientPanel10";
-            this.guna2GradientPanel10.Size = new System.Drawing.Size(302, 41);
-            this.guna2GradientPanel10.TabIndex = 17;
+            this.MessPanel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.MessPanel.AutoSize = true;
+            this.MessPanel.BorderRadius = 16;
+            this.MessPanel.Controls.Add(this.UserMessage);
+            this.MessPanel.Controls.Add(this.guna2CirclePictureBox1);
+            this.MessPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(93)))));
+            this.MessPanel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(61)))), ((int)(((byte)(87)))));
+            this.MessPanel.ForeColor = System.Drawing.Color.CornflowerBlue;
+            this.MessPanel.Location = new System.Drawing.Point(14, 28);
+            this.MessPanel.MaximumSize = new System.Drawing.Size(283, 10000);
+            this.MessPanel.Name = "MessPanel";
+            this.MessPanel.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.MessPanel.Size = new System.Drawing.Size(283, 41);
+            this.MessPanel.TabIndex = 17;
+            this.MessPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.MessPanel_Paint);
             // 
-            // label22
+            // UserMessage
             // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label22.ForeColor = System.Drawing.Color.Silver;
-            this.label22.Location = new System.Drawing.Point(77, 4);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(80, 15);
-            this.label22.TabIndex = 18;
-            this.label22.Text = "THU 5:33 PM";
+            this.UserMessage.AllowDrop = true;
+            this.UserMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.UserMessage.AutoSize = true;
+            this.UserMessage.BackColor = System.Drawing.Color.Transparent;
+            this.UserMessage.ForeColor = System.Drawing.Color.Black;
+            this.UserMessage.Location = new System.Drawing.Point(16, 5);
+            this.UserMessage.Margin = new System.Windows.Forms.Padding(3);
+            this.UserMessage.MaximumSize = new System.Drawing.Size(240, 10000);
+            this.UserMessage.Name = "UserMessage";
+            this.UserMessage.Size = new System.Drawing.Size(16, 15);
+            this.UserMessage.TabIndex = 2;
+            this.UserMessage.Text = "la";
+            this.UserMessage.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.UserMessage.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // guna2CirclePictureBox1
+            // 
+            this.guna2CirclePictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
+            this.guna2CirclePictureBox1.ImageRotate = 0F;
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(257, -14);
+            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
+            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(38, 34);
+            this.guna2CirclePictureBox1.TabIndex = 1;
+            this.guna2CirclePictureBox1.TabStop = false;
             // 
             // imgAvatar
             // 
             this.imgAvatar.BackColor = System.Drawing.Color.Transparent;
             this.imgAvatar.ImageRotate = 0F;
-            this.imgAvatar.Location = new System.Drawing.Point(3, 4);
+            this.imgAvatar.Location = new System.Drawing.Point(277, 8);
             this.imgAvatar.Name = "imgAvatar";
             this.imgAvatar.ShadowDecoration.Color = System.Drawing.Color.Fuchsia;
             this.imgAvatar.ShadowDecoration.Enabled = true;
             this.imgAvatar.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.imgAvatar.Size = new System.Drawing.Size(21, 21);
+            this.imgAvatar.Size = new System.Drawing.Size(34, 34);
             this.imgAvatar.TabIndex = 19;
             this.imgAvatar.TabStop = false;
-            // 
-            // lbUsername
-            // 
-            this.lbUsername.AutoSize = true;
-            this.lbUsername.BackColor = System.Drawing.Color.Transparent;
-            this.lbUsername.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lbUsername.ForeColor = System.Drawing.Color.Silver;
-            this.lbUsername.Location = new System.Drawing.Point(29, 4);
-            this.lbUsername.Name = "lbUsername";
-            this.lbUsername.Size = new System.Drawing.Size(38, 15);
-            this.lbUsername.TabIndex = 20;
-            this.lbUsername.Text = "Katsu";
-            this.lbUsername.Click += new System.EventHandler(this.lbUsername_Click);
-            // 
-            // btnChatting
-            // 
-            this.btnChatting.BackColor = System.Drawing.Color.Transparent;
-            this.btnChatting.BorderColor = System.Drawing.Color.Transparent;
-            this.btnChatting.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnChatting.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnChatting.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnChatting.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnChatting.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnChatting.FillColor = System.Drawing.Color.Transparent;
-            this.btnChatting.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnChatting.ForeColor = System.Drawing.Color.White;
-            this.btnChatting.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
-            this.btnChatting.Image = ((System.Drawing.Image)(resources.GetObject("btnChatting.Image")));
-            this.btnChatting.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnChatting.Location = new System.Drawing.Point(233, 74);
-            this.btnChatting.Name = "btnChatting";
-            this.btnChatting.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(22)))), ((int)(((byte)(32)))));
-            this.btnChatting.Size = new System.Drawing.Size(21, 18);
-            this.btnChatting.TabIndex = 21;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.Silver;
-            this.label1.Location = new System.Drawing.Point(257, 77);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 15);
-            this.label1.TabIndex = 22;
-            this.label1.Text = "Seen";
+            this.imgAvatar.Click += new System.EventHandler(this.imgAvatar_Click);
             // 
             // SenderMessageContent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnChatting);
-            this.Controls.Add(this.lbUsername);
             this.Controls.Add(this.imgAvatar);
-            this.Controls.Add(this.label22);
-            this.Controls.Add(this.guna2GradientPanel10);
+            this.Controls.Add(this.MessPanel);
             this.ForeColor = System.Drawing.Color.Coral;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SenderMessageContent";
-            this.Size = new System.Drawing.Size(302, 100);
+            this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.Size = new System.Drawing.Size(342, 100);
             this.Load += new System.EventHandler(this.MessageContent_Load);
+            this.MessPanel.ResumeLayout(false);
+            this.MessPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -143,11 +124,9 @@
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2GradientPanel guna2GradientPanel10;
-        private Label label22;
+        private Guna.UI2.WinForms.Guna2GradientPanel MessPanel;
         private Guna.UI2.WinForms.Guna2CirclePictureBox imgAvatar;
-        private Label lbUsername;
-        private Guna.UI2.WinForms.Guna2Button btnChatting;
-        private Label label1;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
+        private Label UserMessage;
     }
 }

@@ -129,7 +129,7 @@ namespace UI_AppChat
         public void OpenLF()
         {
             this.Close();
-            FormLogin lf = new FormLogin();
+            FormLoginMain lf = new FormLoginMain();
             lf.Show();
             //MessageBox.Show("Thread da chet");
 
@@ -153,6 +153,7 @@ namespace UI_AppChat
                         MeChatMess[i] = new SenderMessageContent();
                         MeChatMess[i].Message = HistoryChat[i].Messagecontent;
                         ChattingPanel.Controls.Add(MeChatMess[i]);
+                        ChattingPanel.ScrollControlIntoView(MeChatMess[i]);
                     }
                     else
                     {
@@ -167,6 +168,7 @@ namespace UI_AppChat
                         }
                         FriendChatMess[i].Message = HistoryChat[i].Messagecontent;
                         ChattingPanel.Controls.Add(FriendChatMess[i]);
+                        ChattingPanel.ScrollControlIntoView(FriendChatMess[i]);
                     }
                 }
             }

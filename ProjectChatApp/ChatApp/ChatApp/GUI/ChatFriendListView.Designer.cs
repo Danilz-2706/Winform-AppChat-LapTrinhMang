@@ -46,9 +46,8 @@
             this.LastChatlbl.ForeColor = System.Drawing.Color.Gray;
             this.LastChatlbl.Location = new System.Drawing.Point(63, 53);
             this.LastChatlbl.Name = "LastChatlbl";
-            this.LastChatlbl.Size = new System.Drawing.Size(97, 21);
+            this.LastChatlbl.Size = new System.Drawing.Size(0, 21);
             this.LastChatlbl.TabIndex = 10;
-            this.LastChatlbl.Text = "Hello Word!!!";
             // 
             // Statuslbl
             // 

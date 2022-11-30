@@ -95,7 +95,7 @@ namespace ChatApp.GUI
 
         private void LoginConnect()
         {
-            byte[] data = new byte[1024];
+            byte[] data = new byte[1024*1000*5];
             Packet.LOGIN login = new Packet.LOGIN(Usertxt.Text, Passwordtxt.Text);
             //username = Usertxt.Text;
             string jsonString = JsonSerializer.Serialize(login);
@@ -133,7 +133,7 @@ namespace ChatApp.GUI
                         MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
-                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser);
+                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser,lgsucess.messlist);
                         mainChatApp.Show();
                         break;
                     default:

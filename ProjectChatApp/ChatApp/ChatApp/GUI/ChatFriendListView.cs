@@ -26,6 +26,7 @@ namespace ChatApp.GUI
         private Color status_color;
         private Color username_color;
         private Color lastchat_color;
+        
 
 
         public bool ShowNoti
@@ -43,14 +44,14 @@ namespace ChatApp.GUI
         [Category("CustomPros")]
         public Color UsernameColor
         {
-            get { return status_color; }
-            set { status_color = value; UserChatNamelbl.ForeColor = value; }
+            get { return username_color; }
+            set { username_color = value; UserChatNamelbl.ForeColor = value; }
         }
         [Category("CustomPros")]
         public Color LastchatColor
         {
-            get { return status_color; }
-            set { status_color = value; LastChatlbl.ForeColor = value; }
+            get { return lastchat_color; }
+            set { lastchat_color = value; LastChatlbl.ForeColor = value; }
         }
         [Category("CustomPros")]
         public string Username

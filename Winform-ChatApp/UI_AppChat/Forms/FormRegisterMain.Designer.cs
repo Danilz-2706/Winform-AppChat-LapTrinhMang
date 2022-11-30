@@ -29,83 +29,85 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Login_Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.SignUp_Button2 = new Guna.UI2.WinForms.Guna2Button();
+            this.Passwordtxt = new System.Windows.Forms.TextBox();
+            this.Mailtxt = new System.Windows.Forms.TextBox();
             this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2PictureBox2 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.guna2CheckBox1 = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.guna2CheckBox2 = new Guna.UI2.WinForms.Guna2CheckBox();
-            this.guna2DateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
+            this.dateTimePicker1 = new Guna.UI2.WinForms.Guna2DateTimePicker();
+            this.guna2CheckBox2 = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.MaleradioButton = new Guna.UI2.WinForms.Guna2CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.Fullnametxt = new System.Windows.Forms.TextBox();
+            this.ConfirmPasswordtxt = new System.Windows.Forms.TextBox();
             this.guna2DragControl1 = new Guna.UI2.WinForms.Guna2DragControl(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox2)).BeginInit();
             this.guna2Panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // guna2Button2
+            // Login_Button2
             // 
-            this.guna2Button2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(20)))), ((int)(((byte)(137)))));
-            this.guna2Button2.BorderRadius = 10;
-            this.guna2Button2.BorderThickness = 2;
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.HoverState.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.guna2Button2.Location = new System.Drawing.Point(176, 526);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(136, 56);
-            this.guna2Button2.TabIndex = 7;
-            this.guna2Button2.Text = "Back to Login";
+            this.Login_Button2.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(20)))), ((int)(((byte)(137)))));
+            this.Login_Button2.BorderRadius = 10;
+            this.Login_Button2.BorderThickness = 2;
+            this.Login_Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.Login_Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.Login_Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.Login_Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.Login_Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
+            this.Login_Button2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Login_Button2.ForeColor = System.Drawing.Color.White;
+            this.Login_Button2.HoverState.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Login_Button2.Location = new System.Drawing.Point(176, 526);
+            this.Login_Button2.Name = "Login_Button2";
+            this.Login_Button2.Size = new System.Drawing.Size(136, 56);
+            this.Login_Button2.TabIndex = 7;
+            this.Login_Button2.Text = "Back to Login";
+            this.Login_Button2.Click += new System.EventHandler(this.Login_Button2_Click);
             // 
-            // guna2Button1
+            // SignUp_Button2
             // 
-            this.guna2Button1.BorderRadius = 10;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(20)))), ((int)(((byte)(137)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(23, 526);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(136, 56);
-            this.guna2Button1.TabIndex = 6;
-            this.guna2Button1.Text = "Sign In";
-            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
+            this.SignUp_Button2.BorderRadius = 10;
+            this.SignUp_Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.SignUp_Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.SignUp_Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.SignUp_Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.SignUp_Button2.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(20)))), ((int)(((byte)(137)))));
+            this.SignUp_Button2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.SignUp_Button2.ForeColor = System.Drawing.Color.White;
+            this.SignUp_Button2.Location = new System.Drawing.Point(23, 526);
+            this.SignUp_Button2.Name = "SignUp_Button2";
+            this.SignUp_Button2.Size = new System.Drawing.Size(136, 56);
+            this.SignUp_Button2.TabIndex = 6;
+            this.SignUp_Button2.Text = "Sign Up";
+            this.SignUp_Button2.Click += new System.EventHandler(this.SignUp_Button2_Click);
             // 
-            // textBox2
+            // Passwordtxt
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
-            this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.textBox2.Location = new System.Drawing.Point(23, 229);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.PlaceholderText = "Password";
-            this.textBox2.Size = new System.Drawing.Size(290, 30);
-            this.textBox2.TabIndex = 2;
+            this.Passwordtxt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
+            this.Passwordtxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.Passwordtxt.Location = new System.Drawing.Point(23, 229);
+            this.Passwordtxt.Name = "Passwordtxt";
+            this.Passwordtxt.PasswordChar = '*';
+            this.Passwordtxt.PlaceholderText = "Password";
+            this.Passwordtxt.Size = new System.Drawing.Size(290, 27);
+            this.Passwordtxt.TabIndex = 2;
             // 
-            // textBox1
+            // Mailtxt
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.textBox1.Location = new System.Drawing.Point(23, 184);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.PlaceholderText = "Email";
-            this.textBox1.Size = new System.Drawing.Size(290, 30);
-            this.textBox1.TabIndex = 1;
+            this.Mailtxt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
+            this.Mailtxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.Mailtxt.Location = new System.Drawing.Point(23, 184);
+            this.Mailtxt.Multiline = true;
+            this.Mailtxt.Name = "Mailtxt";
+            this.Mailtxt.PlaceholderText = "Email";
+            this.Mailtxt.Size = new System.Drawing.Size(290, 30);
+            this.Mailtxt.TabIndex = 1;
+            this.Mailtxt.Text = "abc@gmail.com";
             // 
             // guna2PictureBox1
             // 
@@ -139,16 +141,16 @@
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
             this.guna2Panel1.Controls.Add(this.label2);
-            this.guna2Panel1.Controls.Add(this.guna2DateTimePicker1);
+            this.guna2Panel1.Controls.Add(this.dateTimePicker1);
             this.guna2Panel1.Controls.Add(this.guna2CheckBox2);
-            this.guna2Panel1.Controls.Add(this.guna2CheckBox1);
+            this.guna2Panel1.Controls.Add(this.MaleradioButton);
             this.guna2Panel1.Controls.Add(this.label1);
-            this.guna2Panel1.Controls.Add(this.textBox4);
-            this.guna2Panel1.Controls.Add(this.textBox3);
-            this.guna2Panel1.Controls.Add(this.guna2Button2);
-            this.guna2Panel1.Controls.Add(this.guna2Button1);
-            this.guna2Panel1.Controls.Add(this.textBox2);
-            this.guna2Panel1.Controls.Add(this.textBox1);
+            this.guna2Panel1.Controls.Add(this.Fullnametxt);
+            this.guna2Panel1.Controls.Add(this.ConfirmPasswordtxt);
+            this.guna2Panel1.Controls.Add(this.Login_Button2);
+            this.guna2Panel1.Controls.Add(this.SignUp_Button2);
+            this.guna2Panel1.Controls.Add(this.Passwordtxt);
+            this.guna2Panel1.Controls.Add(this.Mailtxt);
             this.guna2Panel1.Controls.Add(this.guna2PictureBox1);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
@@ -156,58 +158,31 @@
             this.guna2Panel1.Size = new System.Drawing.Size(340, 640);
             this.guna2Panel1.TabIndex = 7;
             // 
-            // textBox3
+            // label2
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
-            this.textBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.textBox3.Location = new System.Drawing.Point(23, 275);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.PlaceholderText = "Confirm Password";
-            this.textBox3.Size = new System.Drawing.Size(290, 30);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.label2.AutoSize = true;
+            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(17, 405);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(89, 28);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Birthday:";
             // 
-            // textBox4
+            // dateTimePicker1
             // 
-            this.textBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
-            this.textBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.textBox4.Location = new System.Drawing.Point(23, 323);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.PlaceholderText = "Enter your name";
-            this.textBox4.Size = new System.Drawing.Size(290, 30);
-            this.textBox4.TabIndex = 9;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(18, 367);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 28);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Sex:";
-            // 
-            // guna2CheckBox1
-            // 
-            this.guna2CheckBox1.AutoSize = true;
-            this.guna2CheckBox1.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2CheckBox1.CheckedState.BorderRadius = 0;
-            this.guna2CheckBox1.CheckedState.BorderThickness = 0;
-            this.guna2CheckBox1.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2CheckBox1.ForeColor = System.Drawing.Color.White;
-            this.guna2CheckBox1.Location = new System.Drawing.Point(84, 373);
-            this.guna2CheckBox1.Name = "guna2CheckBox1";
-            this.guna2CheckBox1.Size = new System.Drawing.Size(64, 24);
-            this.guna2CheckBox1.TabIndex = 11;
-            this.guna2CheckBox1.Text = "Male";
-            this.guna2CheckBox1.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
-            this.guna2CheckBox1.UncheckedState.BorderRadius = 0;
-            this.guna2CheckBox1.UncheckedState.BorderThickness = 0;
-            this.guna2CheckBox1.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.dateTimePicker1.Checked = true;
+            this.dateTimePicker1.FillColor = System.Drawing.Color.White;
+            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Long;
+            this.dateTimePicker1.Location = new System.Drawing.Point(23, 447);
+            this.dateTimePicker1.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
+            this.dateTimePicker1.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
+            this.dateTimePicker1.Name = "dateTimePicker1";
+            this.dateTimePicker1.Size = new System.Drawing.Size(289, 45);
+            this.dateTimePicker1.TabIndex = 13;
+            this.dateTimePicker1.Value = new System.DateTime(2022, 11, 30, 11, 33, 23, 258);
             // 
             // guna2CheckBox2
             // 
@@ -227,31 +202,58 @@
             this.guna2CheckBox2.UncheckedState.BorderThickness = 0;
             this.guna2CheckBox2.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
-            // guna2DateTimePicker1
+            // MaleradioButton
             // 
-            this.guna2DateTimePicker1.Checked = true;
-            this.guna2DateTimePicker1.FillColor = System.Drawing.Color.White;
-            this.guna2DateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.guna2DateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Long;
-            this.guna2DateTimePicker1.Location = new System.Drawing.Point(23, 447);
-            this.guna2DateTimePicker1.MaxDate = new System.DateTime(9998, 12, 31, 0, 0, 0, 0);
-            this.guna2DateTimePicker1.MinDate = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
-            this.guna2DateTimePicker1.Name = "guna2DateTimePicker1";
-            this.guna2DateTimePicker1.Size = new System.Drawing.Size(289, 45);
-            this.guna2DateTimePicker1.TabIndex = 13;
-            this.guna2DateTimePicker1.Value = new System.DateTime(2022, 11, 30, 11, 33, 23, 258);
+            this.MaleradioButton.AutoSize = true;
+            this.MaleradioButton.CheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.MaleradioButton.CheckedState.BorderRadius = 0;
+            this.MaleradioButton.CheckedState.BorderThickness = 0;
+            this.MaleradioButton.CheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.MaleradioButton.ForeColor = System.Drawing.Color.White;
+            this.MaleradioButton.Location = new System.Drawing.Point(84, 373);
+            this.MaleradioButton.Name = "MaleradioButton";
+            this.MaleradioButton.Size = new System.Drawing.Size(64, 24);
+            this.MaleradioButton.TabIndex = 11;
+            this.MaleradioButton.Text = "Male";
+            this.MaleradioButton.UncheckedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.MaleradioButton.UncheckedState.BorderRadius = 0;
+            this.MaleradioButton.UncheckedState.BorderThickness = 0;
+            this.MaleradioButton.UncheckedState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
             // 
-            // label2
+            // label1
             // 
-            this.label2.AutoSize = true;
-            this.label2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(17, 405);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 28);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Birthday:";
+            this.label1.AutoSize = true;
+            this.label1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(18, 367);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(46, 28);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Sex:";
+            // 
+            // Fullnametxt
+            // 
+            this.Fullnametxt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
+            this.Fullnametxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.Fullnametxt.Location = new System.Drawing.Point(23, 323);
+            this.Fullnametxt.Multiline = true;
+            this.Fullnametxt.Name = "Fullnametxt";
+            this.Fullnametxt.PlaceholderText = "Enter your name";
+            this.Fullnametxt.Size = new System.Drawing.Size(290, 30);
+            this.Fullnametxt.TabIndex = 9;
+            // 
+            // ConfirmPasswordtxt
+            // 
+            this.ConfirmPasswordtxt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(9)))), ((int)(((byte)(43)))));
+            this.ConfirmPasswordtxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(137)))), ((int)(((byte)(149)))));
+            this.ConfirmPasswordtxt.Location = new System.Drawing.Point(23, 275);
+            this.ConfirmPasswordtxt.Name = "ConfirmPasswordtxt";
+            this.ConfirmPasswordtxt.PasswordChar = '*';
+            this.ConfirmPasswordtxt.PlaceholderText = "Confirm Password";
+            this.ConfirmPasswordtxt.Size = new System.Drawing.Size(290, 27);
+            this.ConfirmPasswordtxt.TabIndex = 8;
+            this.ConfirmPasswordtxt.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // guna2DragControl1
             // 
@@ -280,19 +282,19 @@
 
         #endregion
 
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private TextBox textBox2;
-        private TextBox textBox1;
+        private Guna.UI2.WinForms.Guna2Button Login_Button2;
+        private Guna.UI2.WinForms.Guna2Button SignUp_Button2;
+        private TextBox Passwordtxt;
+        private TextBox Mailtxt;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox2;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
-        private TextBox textBox3;
-        private Guna.UI2.WinForms.Guna2DateTimePicker guna2DateTimePicker1;
+        private TextBox ConfirmPasswordtxt;
+        private Guna.UI2.WinForms.Guna2DateTimePicker dateTimePicker1;
         private Guna.UI2.WinForms.Guna2CheckBox guna2CheckBox2;
-        private Guna.UI2.WinForms.Guna2CheckBox guna2CheckBox1;
+        private Guna.UI2.WinForms.Guna2CheckBox MaleradioButton;
         private Label label1;
-        private TextBox textBox4;
+        private TextBox Fullnametxt;
         private Label label2;
         private Guna.UI2.WinForms.Guna2DragControl guna2DragControl1;
     }

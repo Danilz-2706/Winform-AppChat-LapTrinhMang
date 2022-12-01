@@ -318,7 +318,8 @@ namespace Server
                                                 List<int> listFriend = BLLfriend.getFriendByID((int)frientRequest.id);        //lấy all bạn của user gửi lời kết bạn
                                                 List<int> listFriendRequest = BLLfriend.getFriendRequestByID((int)frientRequest.id);
                                                 List<int> listMyRequest = BLLfriend.getMyRequestByID((int)frientRequest.id);
-                                                if (!listFriend.Contains(userCheck.Id) && !listFriendRequest.Contains(userCheck.Id) && !listMyRequest.Contains(userCheck.Id)) // nếu user request k nằm trong danh sách bạn và k nằm trong danh sách đã gửi gửi cầu kết bạn đến mình
+                                                if (!listFriend.Contains(userCheck.Id) && !listFriendRequest.Contains(userCheck.Id) 
+                                                    && !listMyRequest.Contains(userCheck.Id) && (int)frientRequest.id != userCheck.Id) // nếu user request k nằm trong danh sách bạn và k nằm trong danh sách đã gửi gửi cầu kết bạn đến mình
                                                 {
                                                     com = new Packet.Packet("FrientRequest", "Send friend request success");
                                                     AppendTextBox(frientRequest.usernameRequest + " server nhan duoc roi!!!" + Environment.NewLine);

@@ -27,6 +27,7 @@ namespace UI_AppChat
         int checkFlag = 1;
         int IdRec = 0;
         int IdSender = 0;
+        int Noti = 0;
 
 
         Thread trd;
@@ -204,7 +205,7 @@ namespace UI_AppChat
 
 
                     listItem[i] = new ItemFriend();
-                    listItem[i].ShowNoti = false;
+                    listItem[i].ShowNoti = Color.Transparent;
                     listItem[i].Iduser = listFriendOfUser[i].Id;
 
                     listItem[i].UserName = listFriendOfUser[i].Name;
@@ -260,7 +261,7 @@ namespace UI_AppChat
 
                         listItem[i] = new ItemFriend();
                         listItem[i].Iduser = listFriendOfUser[i].Id;
-                        listItem[i].ShowNoti = false;
+                        listItem[i].ShowNoti = Color.Transparent;
                         listItem[i].UserName = listFriendOfUser[i].Name;
                         listItem[i].UsernameColor = Color.Silver;
 
@@ -291,7 +292,7 @@ namespace UI_AppChat
 
                         if (Noti == listFriendOfUser[i].Id)
                         {
-                            listItem[i].ShowNoti = false;
+                            listItem[i].ShowNoti = Color.Transparent;
                         }
 
                         listItem[i].LastmessageColor = Color.Gray;
@@ -314,7 +315,7 @@ namespace UI_AppChat
                         listItem[i] = new ItemFriend();
                         listItem[i].Iduser = listFriendOfUser[i].Id;
 
-                        listItem[i].ShowNoti = false;
+                        listItem[i].ShowNoti = Color.Transparent;
 
                         listItem[i].UserName = listFriendOfUser[i].Name;
                         listItem[i].UsernameColor = Color.Silver;
@@ -334,7 +335,7 @@ namespace UI_AppChat
                         {
                             if (OwnClient == IdSender)
                             {
-                                listItem[i].ShowNoti = false;
+                                listItem[i].ShowNoti = Color.Transparent;
                                 if (messlist.ContainsKey(listFriendOfUser[i].Id))
                                 {
                                     message temp = new message();
@@ -353,7 +354,7 @@ namespace UI_AppChat
                             }
                             else
                             {
-                                listItem[i].ShowNoti = true;
+                                listItem[i].ShowNoti = Color.Purple;
                                 if (messlist.ContainsKey(listFriendOfUser[i].Id))
                                 {
                                     message temp = new message();
@@ -373,7 +374,7 @@ namespace UI_AppChat
                         }
                         else
                         {
-                            listItem[i].ShowNoti = false;
+                            listItem[i].ShowNoti = Color.Transparent;
                             if (messlist.ContainsKey(listFriendOfUser[i].Id))
                             {
                                 message temp = new message();
@@ -409,7 +410,7 @@ namespace UI_AppChat
             ChattingPanel.Show();
             SendMessagePanel.Show();
             ItemFriend obj = (ItemFriend)sender;
-            obj.ShowNoti = false;
+            obj.ShowNoti = Color.Transparent;
             IdRec = obj.Iduser;
 
 

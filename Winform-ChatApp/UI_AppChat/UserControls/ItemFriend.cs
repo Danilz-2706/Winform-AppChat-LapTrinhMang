@@ -24,6 +24,7 @@ namespace UI_AppChat
         private Color _statusColor;
         private Color _lastmessageColor;
         private Color _usernameColor;
+        private Color _noti;
         private int iduser;
 
 
@@ -37,10 +38,10 @@ namespace UI_AppChat
 
         #region Properties
 
-        public bool ShowNoti
+        public Color ShowNoti
         {
-            get { return noti.Visible; }
-            set { noti.Visible = true; }
+            get { return this._noti; }
+            set { this._noti = value; noti.FillColor = value; }
         }
 
 
@@ -221,7 +222,7 @@ namespace UI_AppChat
 
         private void ItemFriend_Click(object sender, EventArgs e)
         {
-            noti.FillColor=Color.Transparent;
+            //noti.FillColor=Color.Transparent;
             _bgColor = false;
             _border = false;
             Refresh();

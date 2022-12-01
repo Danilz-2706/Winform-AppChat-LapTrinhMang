@@ -1,4 +1,5 @@
-﻿using Server.DTO;
+﻿using DTO.DTO;
+using Server.DTO;
 using System.ComponentModel;
 using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
@@ -15,7 +16,42 @@ namespace Packet
         }
         public string mess { get; set; }
         public string? content { get; set; }
-        
+
+    }
+
+    public class REQUESTHISTORYCHAT
+    {
+        public REQUESTHISTORYCHAT(int idsender, int idrec)
+        {
+            this.idsender = idsender;
+            this.idrec = idrec;
+        }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+    }
+
+    public class SENDHISTORYCHAT
+    {
+        public SENDHISTORYCHAT(List<message> listHistoryChat)
+        {
+            this.listHistoryChat = listHistoryChat;
+        }
+        public List<message>? listHistoryChat { get; set; }
+    }
+
+    public class SENDMESSAGE
+    {
+        public SENDMESSAGE(int idsender, int idrec, string? contentmess, string? url)
+        {
+            this.idsender = idsender;
+            this.idrec = idrec;
+            this.contentmess = contentmess;
+            this.url = url;
+        }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+        public string? contentmess { get; set; }
+        public string? url { get; set; }
     }
     public class EXIT
     {
@@ -30,7 +66,7 @@ namespace Packet
     }
     public class LOGIN
     {
-        public LOGIN(string ? username,string ? pass)
+        public LOGIN(string? username, string? pass)
         {
             this.username = username;
             this.pass = pass;
@@ -66,7 +102,7 @@ namespace Packet
 
         public user? u { get; set; }
     }
-        
+
 
     public class LOGINSUCESS
     {
@@ -96,19 +132,18 @@ namespace Packet
 
         public List<user>? listFriendOfUser { get; set; }
     }
-    public class SENDMESSAGE
-    {
-        public SENDMESSAGE(string ? usernameSender, string ? usernameReceiver, string ? content)
-        {
-            this.usernameSender = usernameSender;
-            this.usernameReceiver = usernameReceiver;
-            this.content = content;
-        }
-        public string? usernameSender { get; set; }
-        public string? usernameReceiver { get; set; }
-        public string? content { get; set; }
-    }
 
-    
-        
+
+    public class SENFRIENDREQUEST
+    {
+        public SENFRIENDREQUEST(int? id, string? usernameRequest)
+        {
+            this.id = id;
+            this.usernameRequest = usernameRequest;
+        }
+
+        public string? usernameRequest { get; set; }
+        public int? id { get; set; }
+
+    }
 }

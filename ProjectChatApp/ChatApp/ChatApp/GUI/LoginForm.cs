@@ -24,7 +24,7 @@ namespace ChatApp.GUI
     public partial class LoginForm : Form
     {
         IPEndPoint iep;
-       // string username = null;
+        // string username = null;
         Socket server;
         Socket client;
         bool flag = false;
@@ -32,9 +32,9 @@ namespace ChatApp.GUI
         public LoginForm()
         {
             InitializeComponent();
-          
+
         }
-         public string getIPAdress()
+        public string getIPAdress()
         {
             string t = "";
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
@@ -53,17 +53,17 @@ namespace ChatApp.GUI
             }
             return t;
         }
-       
 
-       
 
-        
 
-       
+
+
+
+
 
         private void Exit_Click(object sender, EventArgs e)
-        {         
-            
+        {
+
             this.Close();
             //Environment.Exit(1);
         }
@@ -75,24 +75,24 @@ namespace ChatApp.GUI
             Usertxt.Focus();
         }
 
-       
+
 
         private void Registerbtn_Click(object sender, EventArgs e)
         {
             this.Visible = false;
             RegisterForm registerForm = new RegisterForm();
             registerForm.Visible = true;
-            
-           
+
+
         }
 
-       
+
         private void sendJson(object obj)
         {
             byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
             client.Send(jsonUtf8Bytes, jsonUtf8Bytes.Length, SocketFlags.None);
         }
-       
+
         private void LoginConnect()
         {
             byte[] data = new byte[1024];
@@ -107,7 +107,7 @@ namespace ChatApp.GUI
             jsonString.Replace("\\u0022", "\"");
             Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
 
-            if(com != null)
+            if (com != null)
             {
                 switch (com.mess)
                 {
@@ -133,7 +133,7 @@ namespace ChatApp.GUI
                         MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
-                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name,5 ,(Socket)client, lgsucess.listFriendOfUser);
+                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser);
                         mainChatApp.Show();
                         break;
                     default:
@@ -141,19 +141,19 @@ namespace ChatApp.GUI
                 }
             }
         }
-       
+
         private void Loginbtn_Click(object sender, EventArgs e)
         {
             try
             {
-                string ipaddress = getIPAdress();               
+                string ipaddress = getIPAdress();
                 iep = new IPEndPoint(IPAddress.Parse(ipaddress), 2008);
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.Connect(iep);
                 LoginConnect();
                 /*Thread trd = new Thread(new ThreadStart(this.LoginConnect));
                 trd.IsBackground = true;
-                trd.Start();*/                
+                trd.Start();*/
             }
             catch (Exception)
             {

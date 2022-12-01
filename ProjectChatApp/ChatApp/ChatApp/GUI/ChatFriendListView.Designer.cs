@@ -90,6 +90,7 @@
             this.Controls.Add(this.ImageChatUser);
             this.Name = "ChatFriendListView";
             this.Size = new System.Drawing.Size(284, 103);
+            this.Load += new System.EventHandler(this.ChatFriendListView_Load);
             ((System.ComponentModel.ISupportInitialize)(this.ImageChatUser)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

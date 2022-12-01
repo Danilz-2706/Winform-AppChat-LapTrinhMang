@@ -212,6 +212,17 @@ namespace UI_AppChat
             string jsonString = JsonSerializer.Serialize(exit);
             Packet.Packet packet = new Packet.Packet("ExitApp", jsonString);
             sendJson(packet);
+
+            BeginInvoke((Action)(() => OpenLF()));
+
+        }
+
+        public void OpenLF()
+        {
+            this.Close();
+            FormLoginMain lf = new FormLoginMain();
+            lf.Show();
+
         }
     }
 }

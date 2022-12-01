@@ -142,7 +142,7 @@ namespace UI_AppChat
                 active = false;
                 throw;
             }
-            BeginInvoke((Action)(() => OpenLF()));
+            //BeginInvoke((Action)(() => OpenLF()));
 
         }
         public void OpenLF()
@@ -150,7 +150,6 @@ namespace UI_AppChat
             this.Close();
             FormLoginMain lf = new FormLoginMain();
             lf.Show();
-            //MessageBox.Show("Thread da chet");
 
         }
 

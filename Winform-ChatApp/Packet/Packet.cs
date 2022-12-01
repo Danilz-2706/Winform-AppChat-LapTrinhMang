@@ -21,26 +21,32 @@ namespace Packet
 
     public class REQUESTHISTORYCHAT
     {
-        public REQUESTHISTORYCHAT(int idsender, int idrec)
+        public REQUESTHISTORYCHAT(int idsender, int idrec, bool noti)
         {
             this.idsender = idsender;
             this.idrec = idrec;
+            this.noti = noti;
         }
         public int idsender { get; set; }
         public int idrec { get; set; }
+        public bool noti { get; set; }
     }
 
     public class SENDHISTORYCHAT
     {
-        public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec)
+        public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec, message lastmess, bool noti)
         {
             this.listHistoryChat = listHistoryChat;
             this.idsender = idsender;
             this.idrec = idrec;
+            this.lastmess = lastmess;
+            this.noti = noti;
         }
         public List<message>? listHistoryChat { get; set; }
         public int idsender { get; set; }
         public int idrec { get; set; }
+        public message? lastmess { get; set; }
+        public bool noti { get; set; }
     }
 
     public class SENDMESSAGE
@@ -110,7 +116,7 @@ namespace Packet
 
     public class LOGINSUCESS
     {
-        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser)
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist)
         {
             this.id = id;
             this.email = email;
@@ -122,6 +128,7 @@ namespace Packet
             this.is_active = is_active;
             this.server_block = server_block;
             this.listFriendOfUser = listFriendOfUser;
+            this.messlist = messlist;
         }
 
         public int? id { get; set; }
@@ -133,8 +140,8 @@ namespace Packet
         public int? online_status { get; set; }
         public int? is_active { get; set; }
         public int? server_block { get; set; }
-
         public List<user>? listFriendOfUser { get; set; }
+        public Dictionary<int, message> messlist { get; set; }
     }
 
 

@@ -32,6 +32,7 @@ namespace UI_AppChat.Forms
             string t = "";
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
+                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
                     //Console.WriteLine(ni.Name);
@@ -61,7 +62,7 @@ namespace UI_AppChat.Forms
 
         private void LoginConnect()
         {
-            byte[] data = new byte[1024];
+            byte[] data = new byte[1024 * 1000 * 5];
             Packet.LOGIN login = new Packet.LOGIN(Usertxt.Text, Passwordtxt.Text);
             //username = Usertxt.Text;
             string jsonString = JsonSerializer.Serialize(login);
@@ -99,7 +100,7 @@ namespace UI_AppChat.Forms
                         MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
-                        FormMenuContainer mainChatApp = new FormMenuContainer(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser);
+                        FormMenuContainer mainChatApp = new FormMenuContainer(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser, lgsucess.messlist);
                         mainChatApp.Show();
                         break;
                     default:

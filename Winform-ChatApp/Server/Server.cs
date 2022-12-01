@@ -79,17 +79,17 @@ namespace Server
             try
             {
                 bool tieptuc = true;
-                while(tieptuc)
+                while (tieptuc)
                 {
                     string mess = "";
-                    byte[] data = new byte[1024];
+                    byte[] data = new byte[1024 * 10 * 1000];
                     //nhan thong tin tu client
                     int recv = client.Receive(data);
 
                     if (recv == 0) return;
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-                    AppendTextBox("Nhan duoc goi:" + com.mess + Environment.NewLine);
+                    //AppendTextBox("Nhan duoc goi:" + com.mess + Environment.NewLine);
                     if (com != null)
                     {
                         if (com.content != null)
@@ -97,8 +97,8 @@ namespace Server
                             switch (com.mess)
                             {
                                 case "SendMessage":
-                                    SENDMESSAGE? sm = JsonSerializer.Deserialize<SENDMESSAGE>(com.content);                              
-                                    if(sm!=null)
+                                    SENDMESSAGE? sm = JsonSerializer.Deserialize<SENDMESSAGE>(com.content);
+                                    if (sm != null)
                                     {
                                         BLLmessage.addMessage(sm.idsender, sm.idrec, sm.contentmess, sm.url);
                                     }
@@ -156,8 +156,15 @@ namespace Server
                                                 List<user> listFriendOfUsser = new List<user>();
                                                 listFriendOfUsser = getFriendofUser(temp.Id);
 
+                                                Dictionary<int, message> LastChatOfUser = new Dictionary<int, message>();
+                                                for (int i = 0; i < listFriendOfUsser.Count; i++)
+                                                {
+                                                    List<message> messlist = new List<message>();
+                                                    messlist = BLLmessage.getHistoryChat(temp.Id, listFriendOfUsser[i].Id);
+                                                    LastChatOfUser.Add(listFriendOfUsser[i].Id, messlist[messlist.Count - 1]);
+                                                }
 
-                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);
+                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser, LastChatOfUser);
                                                 string ResultJson = JsonSerializer.Serialize(lgsucess);
                                                 com = new Packet.Packet(mess, ResultJson);
                                                 //tra thong tin ve cho client mo len mainchatapp
@@ -248,7 +255,7 @@ namespace Server
                                         com = new Packet.Packet("OK", "LOGOUT");
                                         AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
                                         sendJson(client, com);
-                                       // client.Close();
+                                        // client.Close();
                                         /*foreach (KeyValuePair<string, Socket> item in OnlineClientList)
                                         {
                                             var itemKey = item.Key;
@@ -269,39 +276,42 @@ namespace Server
                                         }*/
                                         OnlineClientList.Remove(exit.username);
                                         BeginInvoke((Action)(() => updateOnlineUser()));
-                                        
+
                                         tieptuc = false;
                                         //client.Close();
                                     }
                                     break;
 
-                                case "RequestHistoryChat":                    
+                                case "RequestHistoryChat":
                                     Socket socket = null;
-                                    List<message> listHostoryChat = new List<message>();
+                                    List<message> listHistoryChat = new List<message>();
                                     REQUESTHISTORYCHAT? rq = JsonSerializer.Deserialize<REQUESTHISTORYCHAT>(com.content);
                                     user usend = new user();
                                     user urev = new user();
                                     usend = BLLuser.getInfoUserById(rq.idsender);
                                     urev = BLLuser.getInfoUserById(rq.idrec);
-                                    listHostoryChat = BLLmessage.getHistoryChat(rq.idsender, rq.idrec);
-                                    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHostoryChat, rq.idsender, rq.idrec);
+                                    listHistoryChat = BLLmessage.getHistoryChat(rq.idsender, rq.idrec);
+                                    message lastchat = new message();
+                                    lastchat = listHistoryChat[listHistoryChat.Count - 1];
+
+                                    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHistoryChat, rq.idsender, rq.idrec, lastchat, rq.noti);
                                     string Json = JsonSerializer.Serialize(send);
                                     com = new Packet.Packet("SendHistoryChat", Json);
-                                    if(OnlineClientList.ContainsKey(usend.Email))
+                                    if (OnlineClientList.ContainsKey(usend.Email))
                                     {
                                         socket = OnlineClientList[usend.Email];
                                         sendJson(socket, com);
-                                        AppendTextBox("Da gui history chat den id " + usend.Id + Environment.NewLine);
+                                        //AppendTextBox("Da gui history chat den id " + usend.Id + Environment.NewLine);
                                     }
-                                    if(OnlineClientList.ContainsKey(urev.Email))
+                                    if (OnlineClientList.ContainsKey(urev.Email))
                                     {
                                         socket = OnlineClientList[urev.Email];
                                         sendJson(socket, com);
-                                        AppendTextBox("Da gui history chat den id " + urev.Id + Environment.NewLine);
+                                        //AppendTextBox("Da gui history chat den id " + urev.Id + Environment.NewLine);
                                     }
                                     //sendJson(client, Json);
-                                    
-                                    break;                                  
+
+                                    break;
                                 default:
                                     break;
                             }
@@ -317,7 +327,7 @@ namespace Server
 
                 throw;
             }
-            
+
 
         }
 
@@ -408,7 +418,8 @@ namespace Server
 
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 )
+                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
                     //Console.WriteLine(ni.Name);
                     foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)

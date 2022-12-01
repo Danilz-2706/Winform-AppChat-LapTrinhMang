@@ -17,6 +17,7 @@ using Server.DTO;
 using Packet;
 using UI_AppChat.Properties;
 using UI_AppChat.Forms;
+using DTO.DTO;
 
 namespace UI_AppChat
 {
@@ -33,6 +34,7 @@ namespace UI_AppChat
         bool active = false;
         int n;
         List<user> listFriendOfUser = new List<user>();
+        Dictionary<int, message> messlist = new Dictionary<int, message>();
 
         public FormMenuContainer()
         {
@@ -42,7 +44,7 @@ namespace UI_AppChat
             this.Padding = new Padding(borderSize);
         }
 
-        public FormMenuContainer(IPEndPoint ipep, int id, string emailuser, string name, int num, Socket client,List<user> listFriendOfUser)
+        public FormMenuContainer(IPEndPoint ipep, int id, string emailuser, string name, int num, Socket client,List<user> listFriendOfUser, Dictionary<int, message> messlist)
         {
             InitializeComponent();
             active = true;
@@ -54,6 +56,7 @@ namespace UI_AppChat
             n = listFriendOfUser.Count; ;
             lbUsername.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
+            this.messlist = messlist;
 
         }
 
@@ -167,7 +170,7 @@ namespace UI_AppChat
 
         private void btnChatting_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormListFriendChatting(iep, id_user, email, name_user, 5, _client, listFriendOfUser), sender);
+            OpenChildForm(new FormListFriendChatting(iep, id_user, email, name_user, 5, _client, listFriendOfUser, messlist), sender);
         }
 
 

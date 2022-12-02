@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="icon_setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\icons\icon-setting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="icon_attach" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-attach.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -136,6 +139,9 @@
   <data name="icon_check" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-check.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="icon-logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\icons\icon-logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="_lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\imgs\lock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -151,8 +157,8 @@
   <data name="icon_friends" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-friends.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="logoteam1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\imgs\logoteam1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ImageIntro" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\ImageIntro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_send" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-send.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -172,14 +178,17 @@
   <data name="icon_chat" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-chat.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Logo Project AM" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\Logo Project AM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="logoteam1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\imgs\logoteam1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="male_default" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\imgs\male-default.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="icon_minimize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-minimize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="icon_setting" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\icons\icon-setting.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="background_1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\imgs\background_1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -187,13 +196,7 @@
   <data name="icon_maxxed" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\assets\icons\icon-maxxed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="icon-logout" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\icons\icon-logout.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ImageIntro" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\imgs\ImageIntro.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Logo Project AM" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\assets\imgs\Logo Project AM.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="icon-addfriend" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\assets\icons\icon-addfriend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

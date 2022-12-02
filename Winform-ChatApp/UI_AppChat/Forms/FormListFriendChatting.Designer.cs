@@ -34,6 +34,7 @@
             this.flpListItem = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txbSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
@@ -93,12 +94,30 @@
             // 
             // guna2Panel1
             // 
+            this.guna2Panel1.Controls.Add(this.guna2CircleButton3);
             this.guna2Panel1.Controls.Add(this.panel1);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
             this.guna2Panel1.Size = new System.Drawing.Size(298, 73);
             this.guna2Panel1.TabIndex = 4;
+            // 
+            // guna2CircleButton3
+            // 
+            this.guna2CircleButton3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.guna2CircleButton3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.guna2CircleButton3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.guna2CircleButton3.FillColor = System.Drawing.Color.Transparent;
+            this.guna2CircleButton3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.guna2CircleButton3.ForeColor = System.Drawing.Color.White;
+            this.guna2CircleButton3.Image = global::UI_AppChat.Properties.Resources.icon_addfriend;
+            this.guna2CircleButton3.Location = new System.Drawing.Point(228, 22);
+            this.guna2CircleButton3.Name = "guna2CircleButton3";
+            this.guna2CircleButton3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.guna2CircleButton3.Size = new System.Drawing.Size(32, 32);
+            this.guna2CircleButton3.TabIndex = 4;
+            this.guna2CircleButton3.Click += new System.EventHandler(this.guna2CircleButton3_Click);
             // 
             // panel1
             // 
@@ -107,24 +126,22 @@
             this.panel1.Controls.Add(this.btnSearch);
             this.panel1.Location = new System.Drawing.Point(12, 26);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(265, 24);
+            this.panel1.Size = new System.Drawing.Size(212, 24);
             this.panel1.TabIndex = 3;
             // 
             // txbSearch
             // 
-            this.txbSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.txbSearch.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txbSearch.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txbSearch.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txbSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txbSearch.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.txbSearch.Location = new System.Drawing.Point(38, 0);
+            this.txbSearch.Location = new System.Drawing.Point(40, 0);
             this.txbSearch.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
-            this.txbSearch.MinimumSize = new System.Drawing.Size(227, 24);
             this.txbSearch.Multiline = true;
             this.txbSearch.Name = "txbSearch";
-            this.txbSearch.Size = new System.Drawing.Size(227, 24);
-            this.txbSearch.TabIndex = 11;
+            this.txbSearch.Size = new System.Drawing.Size(172, 24);
+            this.txbSearch.TabIndex = 12;
             // 
             // btnSearch
             // 
@@ -149,6 +166,7 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.panel2.BackgroundImage = global::UI_AppChat.Properties.Resources.background_2;
+            this.panel2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.panel2.Controls.Add(this.ChattingPanel);
             this.panel2.Controls.Add(this.SendMessagePanel);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -275,7 +293,6 @@
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Panel panel1;
         private Guna.UI2.WinForms.Guna2Button btnSearch;
-        private TextBox txbSearch;
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private Panel panel2;
         private FlowLayoutPanel ChattingPanel;
@@ -284,5 +301,7 @@
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private TextBox Messagetxt;
         private Guna.UI2.WinForms.Guna2CircleButton SendMessagebtn;
+        private TextBox txbSearch;
+        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton3;
     }
 }

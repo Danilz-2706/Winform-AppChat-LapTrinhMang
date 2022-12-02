@@ -30,10 +30,8 @@
         {
             this.MessPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.UserMessage = new System.Windows.Forms.Label();
-            this.guna2CirclePictureBox1 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.imgAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.MessPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).BeginInit();
             this.SuspendLayout();
             // 
@@ -43,7 +41,6 @@
             this.MessPanel.AutoSize = true;
             this.MessPanel.BorderRadius = 16;
             this.MessPanel.Controls.Add(this.UserMessage);
-            this.MessPanel.Controls.Add(this.guna2CirclePictureBox1);
             this.MessPanel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(152)))), ((int)(((byte)(93)))));
             this.MessPanel.FillColor2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(61)))), ((int)(((byte)(87)))));
             this.MessPanel.ForeColor = System.Drawing.Color.CornflowerBlue;
@@ -72,24 +69,11 @@
             this.UserMessage.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.UserMessage.Click += new System.EventHandler(this.label1_Click);
             // 
-            // guna2CirclePictureBox1
-            // 
-            this.guna2CirclePictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.guna2CirclePictureBox1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2CirclePictureBox1.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
-            this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(257, -14);
-            this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
-            this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(38, 34);
-            this.guna2CirclePictureBox1.TabIndex = 1;
-            this.guna2CirclePictureBox1.TabStop = false;
-            // 
             // imgAvatar
             // 
             this.imgAvatar.BackColor = System.Drawing.Color.Transparent;
             this.imgAvatar.ImageRotate = 0F;
-            this.imgAvatar.Location = new System.Drawing.Point(277, 8);
+            this.imgAvatar.Location = new System.Drawing.Point(297, 8);
             this.imgAvatar.Name = "imgAvatar";
             this.imgAvatar.ShadowDecoration.Color = System.Drawing.Color.Fuchsia;
             this.imgAvatar.ShadowDecoration.Enabled = true;
@@ -115,7 +99,6 @@
             this.Load += new System.EventHandler(this.MessageContent_Load);
             this.MessPanel.ResumeLayout(false);
             this.MessPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -126,7 +109,6 @@
 
         private Guna.UI2.WinForms.Guna2GradientPanel MessPanel;
         private Guna.UI2.WinForms.Guna2CirclePictureBox imgAvatar;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
         private Label UserMessage;
     }
 }

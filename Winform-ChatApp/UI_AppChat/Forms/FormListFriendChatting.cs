@@ -35,7 +35,7 @@ namespace UI_AppChat
         Socket _client;
         string email = null;
         string name_user = null;
-        bool active = false;
+        bool active = false ;
         int n;
         List<user> listFriendOfUser = new List<user>();
         List<message> HistoryChat = new List<message>();
@@ -66,6 +66,7 @@ namespace UI_AppChat
             trd = new Thread(NewThread);
             trd.IsBackground = true;
             trd.Start();
+            
 
             ChattingPanel.Hide();
             SendMessagePanel.Hide();
@@ -130,6 +131,7 @@ namespace UI_AppChat
                                 active = false;
                                 break;
                             default:
+                                active = false;
                                 break;
                         }
                     }
@@ -466,6 +468,24 @@ namespace UI_AppChat
         private void guna2CircleButton2_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txbSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormAllFriend a = new FormAllFriend();
+            a.ShowDialog();
+        }
+
+        private void guna2CircleButton3_Click(object sender, EventArgs e)
+        {
+            FormAllFriend al = new FormAllFriend();
+            al.ShowDialog();
+            
         }
     }
 }

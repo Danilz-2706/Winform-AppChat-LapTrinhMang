@@ -55,9 +55,8 @@
             this.guna2Panel1.Controls.Add(this.guna2CirclePictureBox1);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
-            this.guna2Panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.guna2Panel1.Name = "guna2Panel1";
-            this.guna2Panel1.Size = new System.Drawing.Size(67, 773);
+            this.guna2Panel1.Size = new System.Drawing.Size(59, 580);
             this.guna2Panel1.TabIndex = 1;
             // 
             // btnLogout
@@ -75,10 +74,9 @@
             this.btnLogout.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.btnLogout.Image = global::UI_AppChat.Properties.Resources.icon_logout;
             this.btnLogout.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnLogout.Location = new System.Drawing.Point(0, 706);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLogout.Location = new System.Drawing.Point(0, 530);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(67, 67);
+            this.btnLogout.Size = new System.Drawing.Size(59, 50);
             this.btnLogout.TabIndex = 3;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
@@ -96,12 +94,11 @@
             this.btnAllFriends.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.btnAllFriends.Image = ((System.Drawing.Image)(resources.GetObject("btnAllFriends.Image")));
             this.btnAllFriends.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnAllFriends.Location = new System.Drawing.Point(0, 229);
-            this.btnAllFriends.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAllFriends.Location = new System.Drawing.Point(0, 172);
             this.btnAllFriends.Name = "btnAllFriends";
-            this.btnAllFriends.Size = new System.Drawing.Size(67, 67);
+            this.btnAllFriends.Size = new System.Drawing.Size(59, 50);
             this.btnAllFriends.TabIndex = 2;
-            this.btnAllFriends.Click += new System.EventHandler(this.btnAllFriends_Click);
+            this.btnAllFriends.Visible = false;
             // 
             // btnChatting
             // 
@@ -117,10 +114,9 @@
             this.btnChatting.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
             this.btnChatting.Image = ((System.Drawing.Image)(resources.GetObject("btnChatting.Image")));
             this.btnChatting.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnChatting.Location = new System.Drawing.Point(0, 175);
-            this.btnChatting.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnChatting.Location = new System.Drawing.Point(0, 131);
             this.btnChatting.Name = "btnChatting";
-            this.btnChatting.Size = new System.Drawing.Size(67, 67);
+            this.btnChatting.Size = new System.Drawing.Size(59, 50);
             this.btnChatting.TabIndex = 1;
             this.btnChatting.Click += new System.EventHandler(this.btnChatting_Click);
             // 
@@ -128,13 +124,12 @@
             // 
             this.guna2CirclePictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
             this.guna2CirclePictureBox1.ImageRotate = 0F;
-            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(14, 51);
-            this.guna2CirclePictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.guna2CirclePictureBox1.Location = new System.Drawing.Point(12, 38);
             this.guna2CirclePictureBox1.Name = "guna2CirclePictureBox1";
             this.guna2CirclePictureBox1.ShadowDecoration.Color = System.Drawing.Color.Fuchsia;
             this.guna2CirclePictureBox1.ShadowDecoration.Enabled = true;
             this.guna2CirclePictureBox1.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(41, 48);
+            this.guna2CirclePictureBox1.Size = new System.Drawing.Size(36, 36);
             this.guna2CirclePictureBox1.TabIndex = 0;
             this.guna2CirclePictureBox1.TabStop = false;
             // 
@@ -147,10 +142,9 @@
             this.titleBar.Controls.Add(this.btnMaximize);
             this.titleBar.Controls.Add(this.btnClose);
             this.titleBar.Dock = System.Windows.Forms.DockStyle.Top;
-            this.titleBar.Location = new System.Drawing.Point(67, 0);
-            this.titleBar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.titleBar.Location = new System.Drawing.Point(59, 0);
             this.titleBar.Name = "titleBar";
-            this.titleBar.Size = new System.Drawing.Size(852, 39);
+            this.titleBar.Size = new System.Drawing.Size(745, 29);
             this.titleBar.TabIndex = 3;
             this.titleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.titleBar_MouseDown);
             // 
@@ -158,10 +152,9 @@
             // 
             this.lbUsername.BackColor = System.Drawing.Color.Transparent;
             this.lbUsername.ForeColor = System.Drawing.Color.LightGray;
-            this.lbUsername.Location = new System.Drawing.Point(18, 8);
-            this.lbUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lbUsername.Location = new System.Drawing.Point(16, 6);
             this.lbUsername.Name = "lbUsername";
-            this.lbUsername.Size = new System.Drawing.Size(73, 22);
+            this.lbUsername.Size = new System.Drawing.Size(59, 17);
             this.lbUsername.TabIndex = 4;
             this.lbUsername.Text = "User name";
             // 
@@ -177,10 +170,9 @@
             this.btnMaxxed.ForeColor = System.Drawing.Color.White;
             this.btnMaxxed.Image = ((System.Drawing.Image)(resources.GetObject("btnMaxxed.Image")));
             this.btnMaxxed.ImageSize = new System.Drawing.Size(14, 14);
-            this.btnMaxxed.Location = new System.Drawing.Point(688, 5);
-            this.btnMaxxed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnMaxxed.Location = new System.Drawing.Point(602, 4);
             this.btnMaxxed.Name = "btnMaxxed";
-            this.btnMaxxed.Size = new System.Drawing.Size(32, 25);
+            this.btnMaxxed.Size = new System.Drawing.Size(28, 19);
             this.btnMaxxed.TabIndex = 3;
             this.btnMaxxed.Visible = false;
             this.btnMaxxed.Click += new System.EventHandler(this.btnMaxxed_Click);
@@ -193,10 +185,9 @@
             this.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMinimize.FillColor = System.Drawing.Color.Transparent;
             this.btnMinimize.IconColor = System.Drawing.Color.White;
-            this.btnMinimize.Location = new System.Drawing.Point(737, 5);
-            this.btnMinimize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnMinimize.Location = new System.Drawing.Point(644, 4);
             this.btnMinimize.Name = "btnMinimize";
-            this.btnMinimize.Size = new System.Drawing.Size(32, 29);
+            this.btnMinimize.Size = new System.Drawing.Size(28, 22);
             this.btnMinimize.TabIndex = 2;
             this.btnMinimize.Click += new System.EventHandler(this.btnMinimize_Click);
             // 
@@ -208,10 +199,9 @@
             this.btnMaximize.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMaximize.FillColor = System.Drawing.Color.Transparent;
             this.btnMaximize.IconColor = System.Drawing.Color.White;
-            this.btnMaximize.Location = new System.Drawing.Point(776, 5);
-            this.btnMaximize.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnMaximize.Location = new System.Drawing.Point(678, 4);
             this.btnMaximize.Name = "btnMaximize";
-            this.btnMaximize.Size = new System.Drawing.Size(32, 29);
+            this.btnMaximize.Size = new System.Drawing.Size(28, 22);
             this.btnMaximize.TabIndex = 1;
             this.btnMaximize.Click += new System.EventHandler(this.btnMaximize_Click);
             // 
@@ -222,10 +212,9 @@
             this.btnClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnClose.FillColor = System.Drawing.Color.Transparent;
             this.btnClose.IconColor = System.Drawing.Color.White;
-            this.btnClose.Location = new System.Drawing.Point(815, 5);
-            this.btnClose.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnClose.Location = new System.Drawing.Point(712, 4);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(32, 29);
+            this.btnClose.Size = new System.Drawing.Size(28, 22);
             this.btnClose.TabIndex = 0;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
@@ -235,23 +224,21 @@
             this.panelChatting.BackgroundImage = global::UI_AppChat.Properties.Resources.background_1;
             this.panelChatting.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panelChatting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChatting.Location = new System.Drawing.Point(67, 39);
-            this.panelChatting.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.panelChatting.Location = new System.Drawing.Point(59, 29);
             this.panelChatting.Name = "panelChatting";
-            this.panelChatting.Size = new System.Drawing.Size(852, 734);
+            this.panelChatting.Size = new System.Drawing.Size(745, 551);
             this.panelChatting.TabIndex = 4;
             // 
             // FormMenuContainer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(40)))));
-            this.ClientSize = new System.Drawing.Size(919, 773);
+            this.ClientSize = new System.Drawing.Size(804, 580);
             this.Controls.Add(this.panelChatting);
             this.Controls.Add(this.titleBar);
             this.Controls.Add(this.guna2Panel1);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.MinimumSize = new System.Drawing.Size(935, 810);
+            this.MinimumSize = new System.Drawing.Size(820, 617);
             this.Name = "FormMenuContainer";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMenuContainer";

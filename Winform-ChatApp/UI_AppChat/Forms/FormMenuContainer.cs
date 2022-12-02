@@ -33,6 +33,8 @@ namespace UI_AppChat
         string name_user = null;
         bool active = false;
         int n;
+
+        
         List<user> listFriendOfUser = new List<user>();
         Dictionary<int, message> messlist = new Dictionary<int, message>();
 
@@ -163,10 +165,6 @@ namespace UI_AppChat
             childForm.Show();
         }
 
-        private void btnAllFriends_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(new FormAllFriend(), sender);
-        }
 
         private void btnChatting_Click(object sender, EventArgs e)
         {

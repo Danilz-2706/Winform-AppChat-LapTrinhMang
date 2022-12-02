@@ -56,6 +56,14 @@ namespace Server.BLL
                 return null;
             }
         }
+
+
+        public void addFriend(int id_user1, int id_user2)
+        {
+
+            dalFriend.addFriend(id_user1, id_user2);
+
+        }
     }
    
 }

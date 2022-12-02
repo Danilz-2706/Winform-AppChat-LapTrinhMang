@@ -45,9 +45,7 @@ namespace Server.DAL
             List<int> listFriend = new List<int>();
             try
             {
-                string query = "select id_user_1 from friend where id_user_1 " +
-                    "not in (SELECT id_user_1 FROM friend WHERE id_user_2='"+ idUserReponse + "' " +
-                    "and id_user_1 in (SELECT id_user_2 from friend WHERE id_user_1='"+ idUserReponse + "')) and id_user_1 <> '"+ idUserReponse + "'";
+                string query = "SELECT id_user_1 FROM friend WHERE id_user_2='"+idUserReponse+ "' and id_user_1 not in (SELECT id_user_2 from friend WHERE id_user_1='" + idUserReponse + "')";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -73,9 +71,7 @@ namespace Server.DAL
             List<int> listFriend = new List<int>();
             try
             {
-                string query = "select id_user_2 from friend where id_user_2 " +
-                    "not in (SELECT id_user_2 FROM friend WHERE id_user_1='"+idUserReponse+"' " +
-                    "and id_user_2 in (SELECT id_user_1 from friend WHERE id_user_2='"+idUserReponse+"')) and id_user_2 <> '"+idUserReponse+"'";
+                string query = "SELECT id_user_2 FROM friend WHERE id_user_1='" + idUserReponse + "' and id_user_2 not in (SELECT id_user_1 from friend WHERE id_user_2='"+idUserReponse+"')";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -92,6 +88,30 @@ namespace Server.DAL
             }
             conn.Close();
             return listFriend;
+        }
+
+
+        public void addFriend(int id_user1, int id_user2)
+        {
+            MySqlConnection conn = DB.dbconnect.getconnect();
+            try
+            {
+                
+                string query = "INSERT INTO friend(id_user_1, id_user_2) VALUES (@id_user1,@id_user2)";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_user1", id_user1);
+                    cmd.Parameters.AddWithValue("@id_user2", id_user2);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            conn.Close();
         }
     }
 }

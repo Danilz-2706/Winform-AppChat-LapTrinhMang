@@ -82,7 +82,7 @@ namespace Server
                 while(tieptuc)
                 {
                     string mess = "";
-                    byte[] data = new byte[1024*10*1000];
+                    byte[] data = new byte[1024*5*1000];
                     //nhan thong tin tu client
                     int recv = client.Receive(data);
 
@@ -157,7 +157,10 @@ namespace Server
                                                 listFriendOfUsser = getFriendofUser(temp.Id);
 
 
-                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser);
+                                                List<user> listFriendRequestOfUsser = new List<user>();
+                                                listFriendRequestOfUsser = getFriendRequestOfUser(temp.Id);
+
+                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser, listFriendRequestOfUsser);
                                                 string ResultJson = JsonSerializer.Serialize(lgsucess);
                                                 com = new Packet.Packet(mess, ResultJson);
                                                 //tra thong tin ve cho client mo len mainchatapp
@@ -321,6 +324,7 @@ namespace Server
                                                 if (!listFriend.Contains(userCheck.Id) && !listFriendRequest.Contains(userCheck.Id) 
                                                     && !listMyRequest.Contains(userCheck.Id) && (int)frientRequest.id != userCheck.Id) // nếu user request k nằm trong danh sách bạn và k nằm trong danh sách đã gửi gửi cầu kết bạn đến mình
                                                 {
+                                                    BLLfriend.addFriend((int)frientRequest.id, userCheck.Id);
                                                     com = new Packet.Packet("FrientRequest", "Send friend request success");
                                                     AppendTextBox(frientRequest.usernameRequest + " server nhan duoc roi!!!" + Environment.NewLine);
                                                     sendJson(client, com);
@@ -369,6 +373,21 @@ namespace Server
             }
             return listFriendOfUsser;
         }
+
+        //khanh---------------
+        public List<user> getFriendRequestOfUser(int id)
+        {
+            List<int> listFriendRequestOfUserId = BLLfriend.getFriendRequestByID(id);
+            List<user> listFriendRequestOfUser = new List<user>();
+            foreach (int i in listFriendRequestOfUserId)
+            {
+                user friend = new user();
+                friend = BLLuser.getInfoUserById(i);
+                listFriendRequestOfUser.Add(friend);
+            }
+            return listFriendRequestOfUser;
+        }
+        //------------------
         private List<string> getListUserOnlineFromAnotherSocket(Dictionary<string, Socket> OnlineClientList)
         {
             List<string> list = new List<string>();

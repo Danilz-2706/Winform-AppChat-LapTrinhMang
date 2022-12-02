@@ -30,11 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainChatApp));
             this.RightPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.NotiPanel = new System.Windows.Forms.Panel();
-            this.NofiItemPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.FriendDenybtn = new System.Windows.Forms.Button();
-            this.FriendAcpectbtn = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
+            this.FriendRequestPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.Logoutbtn = new System.Windows.Forms.Button();
             this.HeadPanel = new Guna.UI2.WinForms.Guna2Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
@@ -44,17 +40,17 @@
             this.SearchFriendtxt = new System.Windows.Forms.TextBox();
             this.ImageUser = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.ChatFriendPanel = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SendMessgapanel = new System.Windows.Forms.Panel();
             this.SendMessagebtn = new System.Windows.Forms.Button();
             this.Messagetxt = new System.Windows.Forms.TextBox();
             this.ChattingPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.starttochatlbl = new System.Windows.Forms.Label();
             this.RightPanel.SuspendLayout();
-            this.NotiPanel.SuspendLayout();
-            this.NofiItemPanel.SuspendLayout();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).BeginInit();
+            this.ChatFriendPanel.SuspendLayout();
             this.SendMessgapanel.SuspendLayout();
             this.ChattingPanel.SuspendLayout();
             this.SuspendLayout();
@@ -63,7 +59,7 @@
             // 
             this.RightPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(40)))));
             this.RightPanel.BorderColor = System.Drawing.Color.FloralWhite;
-            this.RightPanel.Controls.Add(this.NotiPanel);
+            this.RightPanel.Controls.Add(this.FriendRequestPanel);
             this.RightPanel.Controls.Add(this.Logoutbtn);
             this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.RightPanel.Location = new System.Drawing.Point(900, 0);
@@ -71,56 +67,13 @@
             this.RightPanel.Size = new System.Drawing.Size(339, 710);
             this.RightPanel.TabIndex = 1;
             // 
-            // NotiPanel
+            // FriendRequestPanel
             // 
-            this.NotiPanel.AutoScroll = true;
-            this.NotiPanel.Controls.Add(this.NofiItemPanel);
-            this.NotiPanel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.NotiPanel.Location = new System.Drawing.Point(0, 0);
-            this.NotiPanel.Name = "NotiPanel";
-            this.NotiPanel.Size = new System.Drawing.Size(339, 593);
-            this.NotiPanel.TabIndex = 6;
-            // 
-            // NofiItemPanel
-            // 
-            this.NofiItemPanel.Controls.Add(this.FriendDenybtn);
-            this.NofiItemPanel.Controls.Add(this.FriendAcpectbtn);
-            this.NofiItemPanel.Controls.Add(this.label10);
-            this.NofiItemPanel.Location = new System.Drawing.Point(7, 23);
-            this.NofiItemPanel.Margin = new System.Windows.Forms.Padding(3, 1, 3, 1);
-            this.NofiItemPanel.Name = "NofiItemPanel";
-            this.NofiItemPanel.Size = new System.Drawing.Size(325, 108);
-            this.NofiItemPanel.TabIndex = 0;
-            // 
-            // FriendDenybtn
-            // 
-            this.FriendDenybtn.Location = new System.Drawing.Point(196, 60);
-            this.FriendDenybtn.Name = "FriendDenybtn";
-            this.FriendDenybtn.Size = new System.Drawing.Size(94, 29);
-            this.FriendDenybtn.TabIndex = 5;
-            this.FriendDenybtn.Text = "Hủy";
-            this.FriendDenybtn.UseVisualStyleBackColor = true;
-            // 
-            // FriendAcpectbtn
-            // 
-            this.FriendAcpectbtn.Location = new System.Drawing.Point(32, 60);
-            this.FriendAcpectbtn.Name = "FriendAcpectbtn";
-            this.FriendAcpectbtn.Size = new System.Drawing.Size(94, 29);
-            this.FriendAcpectbtn.TabIndex = 4;
-            this.FriendAcpectbtn.Text = "Đồng ý";
-            this.FriendAcpectbtn.UseVisualStyleBackColor = true;
-            this.FriendAcpectbtn.Click += new System.EventHandler(this.FriendAcpectbtn_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.ForeColor = System.Drawing.Color.Silver;
-            this.label10.Location = new System.Drawing.Point(3, 12);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(192, 25);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "User2 muốn kết bạn ";
+            this.FriendRequestPanel.Location = new System.Drawing.Point(7, 73);
+            this.FriendRequestPanel.Name = "FriendRequestPanel";
+            this.FriendRequestPanel.Size = new System.Drawing.Size(320, 527);
+            this.FriendRequestPanel.TabIndex = 6;
+       
             // 
             // Logoutbtn
             // 
@@ -225,11 +178,21 @@
             // ChatFriendPanel
             // 
             this.ChatFriendPanel.AutoScroll = true;
+            this.ChatFriendPanel.Controls.Add(this.flowLayoutPanel1);
             this.ChatFriendPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ChatFriendPanel.Location = new System.Drawing.Point(0, 73);
             this.ChatFriendPanel.Name = "ChatFriendPanel";
             this.ChatFriendPanel.Size = new System.Drawing.Size(315, 637);
             this.ChatFriendPanel.TabIndex = 6;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(315, 0);
+            this.flowLayoutPanel1.TabIndex = 7;
             // 
             // SendMessgapanel
             // 
@@ -296,13 +259,11 @@
             this.Name = "MainChatApp";
             this.Text = "MainChatApp";
             this.RightPanel.ResumeLayout(false);
-            this.NotiPanel.ResumeLayout(false);
-            this.NofiItemPanel.ResumeLayout(false);
-            this.NofiItemPanel.PerformLayout();
             this.HeadPanel.ResumeLayout(false);
             this.HeadPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).EndInit();
+            this.ChatFriendPanel.ResumeLayout(false);
             this.SendMessgapanel.ResumeLayout(false);
             this.SendMessgapanel.PerformLayout();
             this.ChattingPanel.ResumeLayout(false);
@@ -320,11 +281,6 @@
         private TextBox SearchFriendtxt;
         private Label Username;
         private Label label9;
-        private Panel NotiPanel;
-        private Guna.UI2.WinForms.Guna2Panel NofiItemPanel;
-        private Button FriendDenybtn;
-        private Button FriendAcpectbtn;
-        private Label label10;
         private PictureBox pictureBox3;
         private FlowLayoutPanel ChatFriendPanel;
         private Panel SendMessgapanel;
@@ -332,5 +288,7 @@
         private TextBox Messagetxt;
         private FlowLayoutPanel ChattingPanel;
         private Label starttochatlbl;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel FriendRequestPanel;
     }
 }

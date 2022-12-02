@@ -106,7 +106,7 @@ namespace Packet
 
     public class LOGINSUCESS
     {
-        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser)
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, List<user> listFriendRequestOfUser)
         {
             this.id = id;
             this.email = email;
@@ -118,6 +118,7 @@ namespace Packet
             this.is_active = is_active;
             this.server_block = server_block;
             this.listFriendOfUser = listFriendOfUser;
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
         }
 
         public int? id { get; set; }
@@ -131,6 +132,8 @@ namespace Packet
         public int? server_block { get; set; }
 
         public List<user>? listFriendOfUser { get; set; }
+        public List<user>? listFriendRequestOfUser { get; set; }
+        
     }
 
 

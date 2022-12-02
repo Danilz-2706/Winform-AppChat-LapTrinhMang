@@ -281,3 +281,4 @@ C:\Users\Admin\Desktop\2023\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\
 C:\Users\Admin\Desktop\2023\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.pdb
 C:\Users\Admin\Desktop\2023\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.genruntimeconfig.cache
 C:\Users\Admin\Desktop\2023\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\obj\Debug\net6.0-windows\ref\ChatApp.dll
+C:\Users\Admin\Desktop\2023\Winform-AppChat-LapTrinhMang\ProjectChatApp\ChatApp\ChatApp\obj\Debug\net6.0-windows\ChatApp.GUI.FriendRequestListView.resources

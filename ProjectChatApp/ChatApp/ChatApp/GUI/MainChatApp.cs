@@ -26,10 +26,12 @@ namespace ChatApp.GUI
         string name_user = null;
         bool active = true;
         int n;
+        int nFriendRequest;
         List<user> listFriendOfUser = new List<user>();
+        List<user> listFriendRequestOfUser = new List<user>();
         List<message> HistoryChat = new List<message>();
         
-        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser)
+        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, List<user> listFriendRequestOfUser)
         {
             InitializeComponent();            
             iep = ipep;
@@ -38,9 +40,12 @@ namespace ChatApp.GUI
             IdSender = id;
             name_user = name;
             n = listFriendOfUser.Count;
+            nFriendRequest = listFriendRequestOfUser.Count;
             Username.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
-            populateFriendListView(n);       
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+            populateFriendListView(n);
+            populateFriendRequestListView(nFriendRequest);
             //new Thread(new ThreadStart(this.NewThread)).Start();
             trd = new Thread(NewThread);
             trd.IsBackground = true;
@@ -74,7 +79,7 @@ namespace ChatApp.GUI
             {
                 while (active)
                 {
-                    byte[] data = new byte[1024*10*1000];
+                    byte[] data = new byte[1024*5*1000];
                     int recv = _clientToServer.Receive(data); // nhan moi thong tin tu server ve o day ne dung r
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     jsonString.Replace("\\u0022", "\"");
@@ -96,6 +101,9 @@ namespace ChatApp.GUI
                                 }
                                 //muốn thay đổi 1 thứ gì đó không đồng bộ 
                                 BeginInvoke((Action)(() => populateFriendListView(n)));
+                                //Khanh sẽ thêm request friend vào đây
+                                //BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
+
                                 //MessageBox.Show(u.Name);                                                             
                                 break;
                             case "SendHistoryChat": //lay lich su chat box giua 2 nguoi dung
@@ -216,6 +224,27 @@ namespace ChatApp.GUI
 
             
         }
+
+        //khanh--------------------------
+        private void populateFriendRequestListView(int n)
+        {
+            FriendRequestPanel.Controls.Clear();
+            FriendRequestListView[] listItem = new FriendRequestListView[n];
+            for (int i = 0; i < listItem.Length; i++)
+            {
+
+                listItem[i] = new FriendRequestListView();
+                listItem[i].Username = listFriendRequestOfUser[i].Name;
+                
+                FriendRequestPanel.Controls.Add(listItem[i]);
+
+
+            }
+
+
+        }
+
+        //---------------------------------
 
         void ClickEvent(object sender,EventArgs e)
         {
@@ -385,5 +414,9 @@ namespace ChatApp.GUI
         {
             FriendRequestConnect();
         }
+
+       
+
+        
     }
 }

@@ -7,6 +7,9 @@
     <Compile Update="GUI\FriendChat.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="GUI\FriendRequestListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="GUI\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>

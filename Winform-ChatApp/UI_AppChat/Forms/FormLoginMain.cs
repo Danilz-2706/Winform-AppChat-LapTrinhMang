@@ -32,14 +32,8 @@ namespace UI_AppChat.Forms
             string t = "";
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
-<<<<<<< HEAD:ProjectChatApp/ChatApp/ChatApp/GUI/LoginForm.cs
-                //khi nào cắm mạng LAN thì xài dòng này:
-                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
-=======
-                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
->>>>>>> 32af5ddc15ee50a2d33978d050bdf642398c7a08:Winform-ChatApp/UI_AppChat/Forms/FormLoginMain.cs
+                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
                     //Console.WriteLine(ni.Name);
                     foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
@@ -104,27 +98,10 @@ namespace UI_AppChat.Forms
                         break;
                     case "dangnhapthanhcong":
                         MessageBox.Show("Welcome to loza!!!!");
-<<<<<<< HEAD:ProjectChatApp/ChatApp/ChatApp/GUI/LoginForm.cs
-                        //this.Visible = false;
-                        // new Thread(new ThreadStart(this.mainchatapp)).Start();
-                        //MainChatApp f = new MainChatApp();
-                        //f.Visible = true;
-                        MainChatApp f = new MainChatApp();
-                        //f.Visible = true;
-                        //this.Hide();
-                        //f.ShowDialog();
-                        
-
-                        this.Hide();
-                        var form2 = new MainChatApp();
-                        form2.Closed += (s, args) => this.Close();
-                        form2.Show();
-=======
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
                         FormMenuContainer mainChatApp = new FormMenuContainer(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser, lgsucess.messlist);
                         mainChatApp.Show();
->>>>>>> 32af5ddc15ee50a2d33978d050bdf642398c7a08:Winform-ChatApp/UI_AppChat/Forms/FormLoginMain.cs
                         break;
                     default:
                         break;
@@ -149,19 +126,10 @@ namespace UI_AppChat.Forms
                 iep = new IPEndPoint(IPAddress.Parse(ipaddress), 2008);
                 client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 client.Connect(iep);
-<<<<<<< HEAD:ProjectChatApp/ChatApp/ChatApp/GUI/LoginForm.cs
-                //Thread trd = new Thread(new ThreadStart(this.LoginConnect));
-                //trd.IsBackground = true;
-                //trd.Start();
-                LoginConnect();
-
-
-=======
                 LoginConnect();
                 /*Thread trd = new Thread(new ThreadStart(this.LoginConnect));
                 trd.IsBackground = true;
                 trd.Start();*/
->>>>>>> 32af5ddc15ee50a2d33978d050bdf642398c7a08:Winform-ChatApp/UI_AppChat/Forms/FormLoginMain.cs
             }
             catch (Exception)
             {

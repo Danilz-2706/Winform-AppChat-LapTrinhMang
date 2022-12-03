@@ -41,14 +41,8 @@ namespace UI_AppChat.Forms
             string t = "";
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
-<<<<<<< HEAD:ProjectChatApp/ChatApp/ChatApp/GUI/RegisterForm.cs
-                //khi nào cắm mạng LAN thì xài dòng này:
-                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
-=======
-                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
->>>>>>> 32af5ddc15ee50a2d33978d050bdf642398c7a08:Winform-ChatApp/UI_AppChat/Forms/FormRegisterMain.cs
+                //if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
                 {
                     //Console.WriteLine(ni.Name);
                     foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
@@ -166,16 +160,9 @@ namespace UI_AppChat.Forms
                 client.Connect(iep);
                 /*Thread trd = new Thread(new ThreadStart(this.RegisterConnect));
                 trd.IsBackground = true;
-<<<<<<< HEAD:ProjectChatApp/ChatApp/ChatApp/GUI/RegisterForm.cs
-                trd.Start();
-                this.Visible = false;
-                MainChatApp f = new MainChatApp();
-                f.Visible = true;
-=======
                 trd.Start();*/
                 RegisterConnect();
 
->>>>>>> 32af5ddc15ee50a2d33978d050bdf642398c7a08:Winform-ChatApp/UI_AppChat/Forms/FormRegisterMain.cs
 
 
 

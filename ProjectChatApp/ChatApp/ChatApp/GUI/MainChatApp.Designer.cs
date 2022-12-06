@@ -49,6 +49,7 @@
             this.Messagetxt = new System.Windows.Forms.TextBox();
             this.ChattingPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.starttochatlbl = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.RightPanel.SuspendLayout();
             this.NotiPanel.SuspendLayout();
             this.NofiItemPanel.SuspendLayout();
@@ -140,6 +141,7 @@
             // HeadPanel
             // 
             this.HeadPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(40)))));
+            this.HeadPanel.Controls.Add(this.label1);
             this.HeadPanel.Controls.Add(this.pictureBox3);
             this.HeadPanel.Controls.Add(this.label9);
             this.HeadPanel.Controls.Add(this.Username);
@@ -279,6 +281,17 @@
             this.starttochatlbl.TabIndex = 0;
             this.starttochatlbl.Text = "Start to chat";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(313, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 28);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "label1";
+            // 
             // MainChatApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -331,5 +344,6 @@
         private TextBox Messagetxt;
         private FlowLayoutPanel ChattingPanel;
         private Label starttochatlbl;
+        private Label label1;
     }
 }

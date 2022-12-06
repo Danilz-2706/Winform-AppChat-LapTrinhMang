@@ -33,6 +33,7 @@ namespace Server
         BLLUser BLLuser = new BLLUser();
         BLLMessage BLLmessage = new BLLMessage();
         BLLFriend BLLfriend = new BLLFriend();
+        BLLViewMessage BLLviewmessage = new BLLViewMessage();
         MySqlConnection conn = DB.dbconnect.getconnect();
         private Packet.Packet com;
 
@@ -82,7 +83,7 @@ namespace Server
                 while(tieptuc)
                 {
                     string mess = "";
-                    byte[] data = new byte[1024*10*1000];
+                    byte[] data = new byte[1024*20*1000]; // 10mb 1kb
                     //nhan thong tin tu client
                     int recv = client.Receive(data);
 
@@ -157,18 +158,42 @@ namespace Server
                                                 listFriendOfUsser = getFriendofUser(temp.Id);
 
                                                 Dictionary<int, message> LastChatOfUser = new Dictionary<int, message>();
-                                                for(int i=0;i<listFriendOfUsser.Count;i++)
+                                                Dictionary<int, bool> CheckSeenMessage = new Dictionary<int, bool>();
+                                                for (int i=0;i<listFriendOfUsser.Count;i++)
                                                 {
                                                     List<message> messlist = new List<message>();
                                                     messlist = BLLmessage.getHistoryChat(temp.Id, listFriendOfUsser[i].Id);
-                                                    LastChatOfUser.Add(listFriendOfUsser[i].Id, messlist[messlist.Count - 1]);
-                                                }
+                                                    if(messlist.Count != 0)
+                                                    {
+                                                        LastChatOfUser.Add(listFriendOfUsser[i].Id, messlist[messlist.Count - 1]);
+                                                        if(messlist[messlist.Count - 1].Idreceiver == temp.Id)
+                                                        {
+                                                            bool checkFlag = BLLviewmessage.checkViewMessage(messlist[messlist.Count - 1].Idreceiver, messlist[messlist.Count - 1].Id);
+                                                            CheckSeenMessage.Add(listFriendOfUsser[i].Id, checkFlag);
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        int p = 0;
 
-                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser, LastChatOfUser);
-                                                string ResultJson = JsonSerializer.Serialize(lgsucess);
-                                                com = new Packet.Packet(mess, ResultJson);
-                                                //tra thong tin ve cho client mo len mainchatapp
-                                                sendJson(client, com);
+                                                        message tempmessage = new message();
+                                                        tempmessage.Idsender = temp.Id;
+                                                        tempmessage.Idreceiver = listFriendOfUsser[i].Id;
+                                                        tempmessage.Messagecontent = "Say something!";
+                                                        tempmessage.Id = p;
+
+                                                        LastChatOfUser.Add(listFriendOfUsser[i].Id, tempmessage);
+                                                        p++;
+                                                    }
+                                                  
+                                                }
+                                                    Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser, LastChatOfUser, CheckSeenMessage);
+                                                    string ResultJson = JsonSerializer.Serialize(lgsucess);
+                                                    com = new Packet.Packet(mess, ResultJson);
+                                                    //tra thong tin ve cho client mo len mainchatapp
+                                                    sendJson(client, com);
+                                                
+                                                
                                                 AppendTextBox("IP: " + client.AddressFamily.ToString() +
                                                     client.RemoteEndPoint.ToString() + " voi username la " +
                                                     login.username + "da ket noi toi server!" + Environment.NewLine);
@@ -281,8 +306,16 @@ namespace Server
                                         //client.Close();
                                     }
                                     break;
-
-                                case "RequestHistoryChat":                    
+                                case "ViewMessage":
+                                    VIEWMESSAGE? vm = JsonSerializer.Deserialize<VIEWMESSAGE>(com.content);
+                                    if(vm != null)
+                                    {
+                                        BLLviewmessage.addViewMessage(vm.iduser,vm.idmess);
+                                    }
+                                    break;
+                                case "RequestHistoryChat":           
+                                    /*int checkTrue = 0;
+                                    int checkFalse = 0;*/
                                     Socket socket = null;
                                     List<message> listHistoryChat = new List<message>();
                                     REQUESTHISTORYCHAT? rq = JsonSerializer.Deserialize<REQUESTHISTORYCHAT>(com.content);
@@ -292,7 +325,41 @@ namespace Server
                                     urev = BLLuser.getInfoUserById(rq.idrec);
                                     listHistoryChat = BLLmessage.getHistoryChat(rq.idsender, rq.idrec);
                                     message lastchat = new message();
-                                    lastchat = listHistoryChat[listHistoryChat.Count - 1];
+                                    if (listHistoryChat.Count == 0)
+                                    {
+                                       
+                                        lastchat.Idsender = rq.idsender;
+                                        lastchat.Idreceiver = rq.idrec;
+                                        lastchat.Messagecontent = "Say something!";
+                                        lastchat.Id = 0;
+                                    }
+                                    else
+                                    {
+                                        
+                                        lastchat = listHistoryChat[listHistoryChat.Count - 1];
+
+                                        if (rq.noti == true)
+                                        {
+                                            BLLviewmessage.addViewMessage(rq.idsender, lastchat.Id);
+                                        }
+                                        else
+                                        {
+                                            for (int l = 0; l < listHistoryChat.Count; l++)
+                                            {
+                                                if (!BLLviewmessage.checkViewMessage(rq.idsender, listHistoryChat[l].Id))
+                                                {
+                                                    BLLviewmessage.addViewMessage(rq.idsender, listHistoryChat[l].Id);
+                                                }
+                                                if (!BLLviewmessage.checkViewMessage(rq.idrec, listHistoryChat[l].Id))
+                                                {
+                                                    BLLviewmessage.addViewMessage(rq.idrec, listHistoryChat[l].Id);
+                                                }
+                                             
+                                            }
+                                        }
+
+                                    }
+                                    
 
                                     Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHistoryChat, rq.idsender, rq.idrec,lastchat,rq.noti);
                                     string Json = JsonSerializer.Serialize(send);
@@ -311,7 +378,9 @@ namespace Server
                                     }
                                     //sendJson(client, Json);
                                     
-                                    break;                          
+                                    break;
+                               
+
                                 default:
                                     break;
                             }

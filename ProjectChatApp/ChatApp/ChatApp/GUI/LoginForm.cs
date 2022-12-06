@@ -82,8 +82,6 @@ namespace ChatApp.GUI
             this.Visible = false;
             RegisterForm registerForm = new RegisterForm();
             registerForm.Visible = true;
-
-
         }
 
 
@@ -133,8 +131,8 @@ namespace ChatApp.GUI
                         MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
-                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser,lgsucess.messlist);
-                        mainChatApp.Show();
+                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser,lgsucess.messlist,lgsucess.CheckSeenMessage);
+                        mainChatApp.ShowDialog();
                         break;
                     default:
                         break;

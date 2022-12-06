@@ -30,10 +30,12 @@ namespace ChatApp.GUI
         int n;
         List<user> listFriendOfUser = new List<user>();
         List<message> HistoryChat = new List<message>();
+       // List<viewmessage> viewmesslist = new List<viewmessage>();
         Dictionary<int, message> messlist = new Dictionary<int, message>();
+        Dictionary<int, bool> CheckSeenMessage = new Dictionary<int, bool>();
         ChatFriendListView[] listItem;
 
-        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, Dictionary<int, message> messlist)
+        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage)
         {
             InitializeComponent();            
             iep = ipep;
@@ -45,6 +47,7 @@ namespace ChatApp.GUI
             Username.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
             this.messlist = messlist;
+            this.CheckSeenMessage = CheckSeenMessage;
             listItem = new ChatFriendListView[n];
             //new Thread(new ThreadStart(this.NewThread)).Start();
             trd = new Thread(NewThread);
@@ -52,6 +55,7 @@ namespace ChatApp.GUI
             trd.Start();
             ChattingPanel.Hide();
             SendMessgapanel.Hide();
+            label1.Hide();
             starttochatlbl.Show(); 
             populateFriendListView(n,0,0,HistoryChat,false);
         }
@@ -80,7 +84,7 @@ namespace ChatApp.GUI
             {
                 while (active)
                 {
-                    int size = 1024 * 1000 * 3;
+                    int size = 1024 * 1000 * 5;
                     byte[] data = new byte[size];
                     int recv = _clientToServer.Receive(data);
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
@@ -107,11 +111,17 @@ namespace ChatApp.GUI
                                 break;
                             case "SendHistoryChat": //lay lich su chat box giua 2 nguoi dung
                                 SENDHISTORYCHAT? send = JsonSerializer.Deserialize<SENDHISTORYCHAT>(com.content);                                                             
-                                HistoryChat = send.listHistoryChat;
-                                if(messlist.ContainsKey(send.idrec))
+                                HistoryChat = send.listHistoryChat;                              
+                                if (messlist.ContainsKey(send.idrec))
                                 {
                                     messlist[send.idrec] = send.lastmess;
-                                }else
+                                    /*viewmessage temp = new viewmessage();
+                                    temp.Iduser = send.idsender;
+                                    temp.Idmess = messlist[send.idrec].Id;
+                                    viewmesslist.Add(temp);*/
+                                    
+                                }
+                                else
                                 if(messlist.ContainsKey(send.idsender))
                                 {
                                     messlist[send.idsender] = send.lastmess;
@@ -125,7 +135,16 @@ namespace ChatApp.GUI
                                 }
                                 else
                                 {
-                                    BeginInvoke((Action)(() => populateFriendListView(n,send.idsender, send.idsender, HistoryChat,send.noti)));
+                                    if(send.idsender == IdRec)
+                                    {
+                                        BeginInvoke((Action)(() => populateHistoryChat(HistoryChat)));
+                                        BeginInvoke((Action)(() => populateFriendListView(n ,send.idrec, send.idsender, HistoryChat,send.noti)));
+                                    }
+                                    else
+                                    {
+                                        BeginInvoke((Action)(() => populateFriendListView(n, send.idsender, send.idsender, HistoryChat, send.noti)));
+                                    }
+                                    
                                 }                           
                                 break;
                            
@@ -167,6 +186,8 @@ namespace ChatApp.GUI
             }
             else
             {
+                int me = 0;
+                int f = 0;
                 ChattingPanel.Controls.Clear();
                 FriendChat[] FriendChatMess = new FriendChat[HistoryChat.Count];
                 MeChat[] MeChatMess = new MeChat[HistoryChat.Count];
@@ -177,6 +198,9 @@ namespace ChatApp.GUI
                         MeChatMess[i] = new MeChat();
                         MeChatMess[i].Message = HistoryChat[i].Messagecontent;
                         ChattingPanel.Controls.Add(MeChatMess[i]);
+                        //ChattingPanel.ScrollControlIntoView(MeChatMess[i]);
+                        me = 1;
+                        f = 0;
                     }
                     else
                     {
@@ -191,8 +215,19 @@ namespace ChatApp.GUI
                         }
                         FriendChatMess[i].Message = HistoryChat[i].Messagecontent;
                         ChattingPanel.Controls.Add(FriendChatMess[i]);
+                      //  ChattingPanel.ScrollControlIntoView(FriendChatMess[i]);
+                        f = 1;
+                        me = 0;
                     }
                 }
+                if(f == 1)
+                {
+                    ChattingPanel.ScrollControlIntoView(FriendChatMess[HistoryChat.Count - 1]);
+                }
+                else
+                {
+                    ChattingPanel.ScrollControlIntoView(MeChatMess[HistoryChat.Count - 1]);
+                }              
             }
             
         }
@@ -219,6 +254,14 @@ namespace ChatApp.GUI
                         else
                         {
                             listItem[i].LastChat = listFriendOfUser[i].Name + ": " + temp.Messagecontent.ToString();
+                        }
+                    }
+                    if (CheckSeenMessage.ContainsKey(listFriendOfUser[i].Id))
+                    {
+                        if (!CheckSeenMessage[listFriendOfUser[i].Id])
+                        {
+                            listItem[i].ShowNoti = true;
+                            listItem[i].LastchatColor = Color.White;
                         }
                     }
                     listItem[i].Username = listFriendOfUser[i].Name;
@@ -413,18 +456,14 @@ namespace ChatApp.GUI
             ChattingPanel.Show();
             SendMessgapanel.Show();
             ChatFriendListView obj = (ChatFriendListView)sender;
-            obj.ShowNoti = false;
-            IdRec = obj.Iduser;
-            
-
-            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender, IdRec,false);
+            obj.ShowNoti = false;          
+            IdRec = obj.Iduser;                  
+            label1.Text = obj.Name;
+            label1.Visible = true;
+            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender,IdRec,false);
             string jsonString = JsonSerializer.Serialize(rqhc);
             Packet.Packet packet = new Packet.Packet("RequestHistoryChat", jsonString);
             sendJson(packet);
-            
-
-
-
         }
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -450,15 +489,9 @@ namespace ChatApp.GUI
         {
 
         }
-       
-        [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
-        public void killthread(Thread trd)
-        {
 
-            trd.Interrupt();
-            
-            
-        }
+        [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
+        public void killthread(Thread trd) => trd.Interrupt();
         private void Loginbtn_Click(object sender, EventArgs e)
         {                  
             
@@ -527,9 +560,11 @@ namespace ChatApp.GUI
             Packet.Packet packet1 = new Packet.Packet("RequestHistoryChat", jsonString1);
             sendJson(packet1);
 
-           // populateHistoryChat(HistoryChat);
 
-            
+           
+            // populateHistoryChat(HistoryChat);
+
+
         }
         private void SendMessagebtn_Click(object sender, EventArgs e)
         {

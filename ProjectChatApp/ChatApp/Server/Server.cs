@@ -342,6 +342,10 @@ namespace Server
                                         }
                                     }
                                     break;
+                                case "FriendReponse":
+                                    AppendTextBox("Da nhan duoc FiendReponse " + Environment.NewLine);
+
+                                    break;
                                 default:
                                     break;
                             }

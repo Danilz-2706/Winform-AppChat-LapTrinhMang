@@ -149,4 +149,17 @@ namespace Packet
         public int? id { get; set; }
 
     }
+
+    public class SENFRIENDREPONSE
+    {
+        public SENFRIENDREPONSE(int idReponse, int idRequest)
+        {
+            this.idReponse = idReponse;
+            this.idRequest = idRequest;
+        }
+
+        public int idReponse { get; set; }
+        public int idRequest { get; set; }
+
+    }
 }

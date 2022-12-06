@@ -233,9 +233,9 @@ namespace ChatApp.GUI
             for (int i = 0; i < listItem.Length; i++)
             {
 
-                listItem[i] = new FriendRequestListView();
+                listItem[i] = new FriendRequestListView(IdSender, listFriendRequestOfUser[i].Id,_clientToServer);
                 listItem[i].Username = listFriendRequestOfUser[i].Name;
-                
+
                 FriendRequestPanel.Controls.Add(listItem[i]);
 
 

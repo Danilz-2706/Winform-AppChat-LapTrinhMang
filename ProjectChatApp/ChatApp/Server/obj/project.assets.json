@@ -985,11 +985,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Server\\Server.csproj",
+      "projectPath": "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Server\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\Server\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -1004,14 +1004,14 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj"
+            "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj"
             },
-            "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj"
+            "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj"
             },
-            "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\2023\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
+            "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-tuankhanh\\Winform-AppChat-LapTrinhMang-tuankhanh\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj"
             }
           }
         }

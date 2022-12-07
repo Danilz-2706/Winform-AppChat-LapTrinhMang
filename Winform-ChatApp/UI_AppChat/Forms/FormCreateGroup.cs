@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace UI_AppChat
 {
-    public partial class FormAllFriend : Form
+    public partial class FormCreateGroup : Form
     {
-        public FormAllFriend()
+        public FormCreateGroup()
         {
             InitializeComponent();
+        }
+
+        private void guna2HtmlLabel1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

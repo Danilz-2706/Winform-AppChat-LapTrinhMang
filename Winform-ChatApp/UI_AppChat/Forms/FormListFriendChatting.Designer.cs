@@ -34,7 +34,8 @@
             this.flpListItem = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2CircleButton3 = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.createGroupbtn = new Guna.UI2.WinForms.Guna2CircleButton();
+            this.addFriendbtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txbSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new Guna.UI2.WinForms.Guna2Button();
@@ -94,7 +95,8 @@
             // 
             // guna2Panel1
             // 
-            this.guna2Panel1.Controls.Add(this.guna2CircleButton3);
+            this.guna2Panel1.Controls.Add(this.createGroupbtn);
+            this.guna2Panel1.Controls.Add(this.addFriendbtn);
             this.guna2Panel1.Controls.Add(this.panel1);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
@@ -102,31 +104,49 @@
             this.guna2Panel1.Size = new System.Drawing.Size(298, 73);
             this.guna2Panel1.TabIndex = 4;
             // 
-            // guna2CircleButton3
+            // createGroupbtn
             // 
-            this.guna2CircleButton3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2CircleButton3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2CircleButton3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2CircleButton3.FillColor = System.Drawing.Color.Transparent;
-            this.guna2CircleButton3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.guna2CircleButton3.ForeColor = System.Drawing.Color.White;
-            this.guna2CircleButton3.Image = global::UI_AppChat.Properties.Resources.icon_addfriend;
-            this.guna2CircleButton3.Location = new System.Drawing.Point(228, 22);
-            this.guna2CircleButton3.Name = "guna2CircleButton3";
-            this.guna2CircleButton3.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CircleButton3.Size = new System.Drawing.Size(32, 32);
-            this.guna2CircleButton3.TabIndex = 4;
-            this.guna2CircleButton3.Click += new System.EventHandler(this.guna2CircleButton3_Click);
+            this.createGroupbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.createGroupbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.createGroupbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.createGroupbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.createGroupbtn.FillColor = System.Drawing.Color.Transparent;
+            this.createGroupbtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.createGroupbtn.ForeColor = System.Drawing.Color.White;
+            this.createGroupbtn.Image = global::UI_AppChat.Properties.Resources.icon_group;
+            this.createGroupbtn.ImageSize = new System.Drawing.Size(32, 32);
+            this.createGroupbtn.Location = new System.Drawing.Point(260, 20);
+            this.createGroupbtn.Name = "createGroupbtn";
+            this.createGroupbtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.createGroupbtn.Size = new System.Drawing.Size(32, 32);
+            this.createGroupbtn.TabIndex = 5;
+            this.createGroupbtn.Click += new System.EventHandler(this.createGroupbtn_Click);
+            // 
+            // addFriendbtn
+            // 
+            this.addFriendbtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.addFriendbtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.addFriendbtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.addFriendbtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.addFriendbtn.FillColor = System.Drawing.Color.Transparent;
+            this.addFriendbtn.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addFriendbtn.ForeColor = System.Drawing.Color.White;
+            this.addFriendbtn.Image = global::UI_AppChat.Properties.Resources.icon_addfriend;
+            this.addFriendbtn.Location = new System.Drawing.Point(222, 20);
+            this.addFriendbtn.Name = "addFriendbtn";
+            this.addFriendbtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.addFriendbtn.Size = new System.Drawing.Size(32, 32);
+            this.addFriendbtn.TabIndex = 4;
+            this.addFriendbtn.Click += new System.EventHandler(this.addFriendbtn_Click);
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.txbSearch);
             this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Location = new System.Drawing.Point(12, 26);
+            this.panel1.Location = new System.Drawing.Point(12, 20);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(212, 24);
+            this.panel1.Size = new System.Drawing.Size(204, 32);
             this.panel1.TabIndex = 3;
             // 
             // txbSearch
@@ -140,8 +160,8 @@
             this.txbSearch.Margin = new System.Windows.Forms.Padding(3, 8, 3, 3);
             this.txbSearch.Multiline = true;
             this.txbSearch.Name = "txbSearch";
-            this.txbSearch.Size = new System.Drawing.Size(172, 24);
-            this.txbSearch.TabIndex = 12;
+            this.txbSearch.Size = new System.Drawing.Size(164, 32);
+            this.txbSearch.TabIndex = 16;
             // 
             // btnSearch
             // 
@@ -159,8 +179,8 @@
             this.btnSearch.IndicateFocus = true;
             this.btnSearch.Location = new System.Drawing.Point(0, 0);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(40, 24);
-            this.btnSearch.TabIndex = 7;
+            this.btnSearch.Size = new System.Drawing.Size(40, 32);
+            this.btnSearch.TabIndex = 14;
             // 
             // panel2
             // 
@@ -292,7 +312,6 @@
         private FlowLayoutPanel flowLayoutPanel1;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Panel panel1;
-        private Guna.UI2.WinForms.Guna2Button btnSearch;
         private Guna.UI2.WinForms.Guna2AnimateWindow guna2AnimateWindow1;
         private Panel panel2;
         private FlowLayoutPanel ChattingPanel;
@@ -301,7 +320,9 @@
         private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton1;
         private TextBox Messagetxt;
         private Guna.UI2.WinForms.Guna2CircleButton SendMessagebtn;
+        private Guna.UI2.WinForms.Guna2CircleButton addFriendbtn;
+        private Guna.UI2.WinForms.Guna2CircleButton createGroupbtn;
         private TextBox txbSearch;
-        private Guna.UI2.WinForms.Guna2CircleButton guna2CircleButton3;
+        private Guna.UI2.WinForms.Guna2Button btnSearch;
     }
 }

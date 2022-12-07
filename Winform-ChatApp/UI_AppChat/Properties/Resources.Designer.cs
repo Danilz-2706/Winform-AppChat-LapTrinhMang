@@ -173,6 +173,16 @@ namespace UI_AppChat.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap icon_group {
+            get {
+                object obj = ResourceManager.GetObject("icon-group", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_logout {
             get {
                 object obj = ResourceManager.GetObject("icon-logout", resourceCulture);

@@ -546,15 +546,21 @@ namespace UI_AppChat
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FormAllFriend a = new FormAllFriend();
+            FormAddFriend a = new FormAddFriend();
             a.ShowDialog();
         }
 
-        private void guna2CircleButton3_Click(object sender, EventArgs e)
+
+        private void addFriendbtn_Click(object sender, EventArgs e)
         {
-            FormAllFriend al = new FormAllFriend();
-            al.ShowDialog();
-            
+            FormAddFriend addFriend = new FormAddFriend();
+            addFriend.ShowDialog();
+        }
+
+        private void createGroupbtn_Click(object sender, EventArgs e)
+        {
+            FormCreateGroup createGroup = new FormCreateGroup();
+            createGroup.ShowDialog();
         }
     }
 }

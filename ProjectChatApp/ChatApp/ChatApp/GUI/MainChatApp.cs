@@ -34,6 +34,7 @@ namespace ChatApp.GUI
         Dictionary<int, message> messlist = new Dictionary<int, message>();
         Dictionary<int, bool> CheckSeenMessage = new Dictionary<int, bool>();
         ChatFriendListView[] listItem;
+        List<int>? checkSeenMessagerUsers = new List<int>();
 
         public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage)
         {
@@ -110,8 +111,9 @@ namespace ChatApp.GUI
                                 //MessageBox.Show(u.Name);                                                             
                                 break;
                             case "SendHistoryChat": //lay lich su chat box giua 2 nguoi dung
-                                SENDHISTORYCHAT? send = JsonSerializer.Deserialize<SENDHISTORYCHAT>(com.content);                                                             
-                                HistoryChat = send.listHistoryChat;                              
+                                SENDHISTORYCHAT? send = JsonSerializer.Deserialize<SENDHISTORYCHAT>(com.content);                                
+                                HistoryChat = send.listHistoryChat;
+                                checkSeenMessagerUsers = send.checkSeenMessageUsers;
                                 if (messlist.ContainsKey(send.idrec))
                                 {
                                     messlist[send.idrec] = send.lastmess;
@@ -196,7 +198,15 @@ namespace ChatApp.GUI
                     if (HistoryChat[i].Idsender == IdSender)
                     {
                         MeChatMess[i] = new MeChat();
+                        MeChatMess[i].ShowSeen = false;
                         MeChatMess[i].Message = HistoryChat[i].Messagecontent;
+                        for(int j=0;j<listFriendOfUser.Count;j++)
+                        {
+                            if (HistoryChat[i].Idreceiver == listFriendOfUser[j].Id)
+                            {
+                                MeChatMess[i].NameFriendChatWithMe = listFriendOfUser[j].Name;
+                            }
+                        }
                         ChattingPanel.Controls.Add(MeChatMess[i]);
                         //ChattingPanel.ScrollControlIntoView(MeChatMess[i]);
                         me = 1;
@@ -205,6 +215,7 @@ namespace ChatApp.GUI
                     else
                     {
                         FriendChatMess[i] = new FriendChat();
+                        FriendChatMess[i].ShowSeen = false;
                         for(int j=0;j<listFriendOfUser.Count;j++)
                         {
                             if (HistoryChat[i].Idsender == listFriendOfUser[j].Id)
@@ -221,11 +232,29 @@ namespace ChatApp.GUI
                     }
                 }
                 if(f == 1)
-                {
+                {                   
+                    if (checkSeenMessagerUsers.Count == 1)
+                    {
+                        FriendChatMess[HistoryChat.Count - 1].SeenMessage = FriendChatMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
+                    }
+                    else
+                    {
+                        FriendChatMess[HistoryChat.Count - 1].SeenMessage = "You,"+FriendChatMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
+                    }
+                    FriendChatMess[HistoryChat.Count - 1].ShowSeen = true;
                     ChattingPanel.ScrollControlIntoView(FriendChatMess[HistoryChat.Count - 1]);
                 }
                 else
                 {
+                    if (checkSeenMessagerUsers.Count == 1)
+                    {
+                        MeChatMess[HistoryChat.Count - 1].SeenMessage = "You had seen";
+                    }
+                    else
+                    {
+                        MeChatMess[HistoryChat.Count - 1].SeenMessage = "You," + MeChatMess[HistoryChat.Count - 1].NameFriendChatWithMe.ToString() + "had seen";
+                    }
+                    MeChatMess[HistoryChat.Count - 1].ShowSeen = true;
                     ChattingPanel.ScrollControlIntoView(MeChatMess[HistoryChat.Count - 1]);
                 }              
             }

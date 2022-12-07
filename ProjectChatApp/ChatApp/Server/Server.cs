@@ -313,9 +313,10 @@ namespace Server
                                         BLLviewmessage.addViewMessage(vm.iduser,vm.idmess);
                                     }
                                     break;
-                                case "RequestHistoryChat":           
+                                case "RequestHistoryChat":
                                     /*int checkTrue = 0;
                                     int checkFalse = 0;*/
+                                    List<int> listUserSeen = new List<int>();
                                     Socket socket = null;
                                     List<message> listHistoryChat = new List<message>();
                                     REQUESTHISTORYCHAT? rq = JsonSerializer.Deserialize<REQUESTHISTORYCHAT>(com.content);
@@ -341,27 +342,28 @@ namespace Server
                                         if (rq.noti == true)
                                         {
                                             BLLviewmessage.addViewMessage(rq.idsender, lastchat.Id);
+                                            listUserSeen = BLLviewmessage.checkSeenMessageUsers(lastchat.Id);
                                         }
                                         else
                                         {
                                             for (int l = 0; l < listHistoryChat.Count; l++)
-                                            {
-                                                if (!BLLviewmessage.checkViewMessage(rq.idsender, listHistoryChat[l].Id))
+                                            {                                                
+                                                if (!BLLviewmessage.checkViewMessage(listHistoryChat[l].Idreceiver, listHistoryChat[l].Id))
+                                                {
+                                                    BLLviewmessage.addViewMessage(listHistoryChat[l].Idreceiver, listHistoryChat[l].Id);
+                                                }
+                                                /*if (!BLLviewmessage.checkViewMessage(rq.idsender, listHistoryChat[l].Id))
                                                 {
                                                     BLLviewmessage.addViewMessage(rq.idsender, listHistoryChat[l].Id);
-                                                }
-                                                if (!BLLviewmessage.checkViewMessage(rq.idrec, listHistoryChat[l].Id))
-                                                {
-                                                    BLLviewmessage.addViewMessage(rq.idrec, listHistoryChat[l].Id);
-                                                }
-                                             
+                                                }*/
                                             }
+                                            listUserSeen = BLLviewmessage.checkSeenMessageUsers(lastchat.Id);
                                         }
 
                                     }
                                     
 
-                                    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHistoryChat, rq.idsender, rq.idrec,lastchat,rq.noti);
+                                    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHistoryChat, rq.idsender, rq.idrec,lastchat,rq.noti, listUserSeen);
                                     string Json = JsonSerializer.Serialize(send);
                                     com = new Packet.Packet("SendHistoryChat", Json);
                                     if(OnlineClientList.ContainsKey(usend.Email))

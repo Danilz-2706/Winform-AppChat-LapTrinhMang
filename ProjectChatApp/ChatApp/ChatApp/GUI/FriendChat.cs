@@ -17,13 +17,23 @@ namespace ChatApp.GUI
             InitializeComponent();
         }
 
-       
+        private string seen;
+
+        public string SeenMessage
+        {
+            get { return seen; }
+            set { seen = value; seenlbl.Text = value; }
+        }
         public string Username
         {
             get { return UserNameMessage.Text; }
             set { UserNameMessage.Text = value; }
         }
-
+        public bool ShowSeen
+        {
+            get { return seenlbl.Visible; }
+            set { seenlbl.Visible = value; }
+        }
         public string Message
         {
             get { return UserMessage.Text; }

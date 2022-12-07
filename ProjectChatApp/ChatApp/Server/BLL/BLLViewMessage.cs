@@ -19,5 +19,10 @@ namespace Server.BLL
         {
             return DALviewmessage.checkViewMessage(iduser, idmess);
         }
+
+        public List<int> checkSeenMessageUsers(int idmess)
+        {
+            return DALviewmessage.checkTheMessageForUsers(idmess);
+        }
     }
 }

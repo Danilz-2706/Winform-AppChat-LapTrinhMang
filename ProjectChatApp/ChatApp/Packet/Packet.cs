@@ -34,19 +34,21 @@ namespace Packet
     
     public class SENDHISTORYCHAT
     {
-        public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec,message lastmess,bool noti)
+        public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec,message lastmess,bool noti,List<int> checkSeenMessageUsers)
         {
             this.listHistoryChat = listHistoryChat;
             this.idsender = idsender;
             this.idrec = idrec;
             this.lastmess = lastmess;
             this.noti = noti;
+            this.checkSeenMessageUsers = checkSeenMessageUsers;
         }
         public List<message>? listHistoryChat { get; set; }
         public int idsender { get; set; }
         public int idrec { get; set; }
         public message? lastmess { get; set; }
         public bool noti { get; set; }
+        public List<int>? checkSeenMessageUsers { get; set; }
     }
     public class VIEWMESSAGE
     {

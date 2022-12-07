@@ -119,7 +119,7 @@ namespace UI_AppChat.Forms
                         MessageBox.Show("Chào mừng bạn đến với loza");
                         this.Visible = false;
                         FormLoginMain login = new FormLoginMain();
-                        login.Show();
+                        login.ShowDialog();
                         break;
                     default:
                         break;

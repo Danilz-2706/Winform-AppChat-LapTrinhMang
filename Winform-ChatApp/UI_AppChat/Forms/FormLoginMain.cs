@@ -100,14 +100,15 @@ namespace UI_AppChat.Forms
                         MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
-                        FormMenuContainer mainChatApp = new FormMenuContainer(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser, lgsucess.messlist);
-                        mainChatApp.Show();
+                        FormMenuContainer mainChatApp = new FormMenuContainer(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser, lgsucess.messlist,lgsucess.CheckSeenMessage);
+                        mainChatApp.ShowDialog();
                         break;
                     default:
                         break;
                 }
             }
         }
+
         private void guna2PictureBox2_Click(object sender, EventArgs e)
         {
 

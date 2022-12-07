@@ -31,6 +31,7 @@
             this.MessPanel = new Guna.UI2.WinForms.Guna2GradientPanel();
             this.UserMessage = new System.Windows.Forms.Label();
             this.imgAvatar = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.seenlbl = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.MessPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgAvatar)).BeginInit();
             this.SuspendLayout();
@@ -83,12 +84,22 @@
             this.imgAvatar.TabStop = false;
             this.imgAvatar.Click += new System.EventHandler(this.imgAvatar_Click);
             // 
+            // seenlbl
+            // 
+            this.seenlbl.BackColor = System.Drawing.Color.Transparent;
+            this.seenlbl.Location = new System.Drawing.Point(270, 75);
+            this.seenlbl.Name = "seenlbl";
+            this.seenlbl.Size = new System.Drawing.Size(27, 17);
+            this.seenlbl.TabIndex = 20;
+            this.seenlbl.Text = "seen";
+            // 
             // SenderMessageContent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(47)))));
+            this.Controls.Add(this.seenlbl);
             this.Controls.Add(this.imgAvatar);
             this.Controls.Add(this.MessPanel);
             this.ForeColor = System.Drawing.Color.Coral;
@@ -110,5 +121,6 @@
         private Guna.UI2.WinForms.Guna2GradientPanel MessPanel;
         private Guna.UI2.WinForms.Guna2CirclePictureBox imgAvatar;
         private Label UserMessage;
+        private Guna.UI2.WinForms.Guna2HtmlLabel seenlbl;
     }
 }

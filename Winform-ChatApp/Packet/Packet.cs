@@ -34,21 +34,32 @@ namespace Packet
 
     public class SENDHISTORYCHAT
     {
-        public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec, message lastmess, bool noti)
+        public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec, message lastmess, bool noti, List<int> checkSeenMessageUsers)
         {
             this.listHistoryChat = listHistoryChat;
             this.idsender = idsender;
             this.idrec = idrec;
             this.lastmess = lastmess;
             this.noti = noti;
+            this.checkSeenMessageUsers = checkSeenMessageUsers;
         }
         public List<message>? listHistoryChat { get; set; }
         public int idsender { get; set; }
         public int idrec { get; set; }
         public message? lastmess { get; set; }
         public bool noti { get; set; }
+        public List<int>? checkSeenMessageUsers { get; set; }
     }
-
+    public class VIEWMESSAGE
+    {
+        public VIEWMESSAGE(int iduser, int idmess)
+        {
+            this.iduser = iduser;
+            this.idmess = idmess;
+        }
+        public int iduser { get; set; }
+        public int idmess { get; set; }
+    }
     public class SENDMESSAGE
     {
         public SENDMESSAGE(int idsender, int idrec, string? contentmess, string? url)
@@ -116,7 +127,7 @@ namespace Packet
 
     public class LOGINSUCESS
     {
-        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist)
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage)
         {
             this.id = id;
             this.email = email;
@@ -129,6 +140,7 @@ namespace Packet
             this.server_block = server_block;
             this.listFriendOfUser = listFriendOfUser;
             this.messlist = messlist;
+            this.CheckSeenMessage = CheckSeenMessage;
         }
 
         public int? id { get; set; }
@@ -142,6 +154,7 @@ namespace Packet
         public int? server_block { get; set; }
         public List<user>? listFriendOfUser { get; set; }
         public Dictionary<int, message> messlist { get; set; }
+        public Dictionary<int, bool> CheckSeenMessage { get; set; }
     }
 
 

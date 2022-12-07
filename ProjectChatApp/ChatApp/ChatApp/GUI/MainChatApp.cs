@@ -12,6 +12,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ChatApp.GUI
 {
@@ -80,13 +81,17 @@ namespace ChatApp.GUI
         }
         private void NewThread()
         {
-
-           string str = "";
-            foreach (string us in listUsernameReponseOff)
+            if (listUsernameReponseOff.Count() != 0)
             {
-                str += us + "\n";
+                string str = "";
+                foreach (string us in listUsernameReponseOff)
+                {
+                    str += us + "\n";
+                }
+                MessageBox.Show(str + "accept request friend");
+                UpdateStatusFriend();
             }
-            MessageBox.Show(str + "accept request friend");
+
             try
             {
                 while (active)
@@ -136,6 +141,8 @@ namespace ChatApp.GUI
                                 break;
                             case "FrientResponseOnline":
                                 MessageBox.Show(com.content);
+                                 populateFriendListView(n);
+                                 populateFriendRequestListView(nFriendRequest);
                                 break;
                       
                             default:
@@ -424,6 +431,18 @@ namespace ChatApp.GUI
             {
                 MessageBox.Show("Code sai rồi");
             }
+        }
+
+
+        public void UpdateStatusFriend()
+        {
+            //-------Nhận dữ liệu từ textbox và thông báo---------//
+
+            Packet.SENUPDATEFRIEND updateStatusFriend = new Packet.SENUPDATEFRIEND(IdSender);
+            string jsonString = JsonSerializer.Serialize(updateStatusFriend);
+            Packet.Packet packet = new Packet.Packet("UpdateStatusFriend", jsonString);
+            sendJson(packet);
+                
         }
         private void pictureBox3_Click(object sender, EventArgs e)
         {

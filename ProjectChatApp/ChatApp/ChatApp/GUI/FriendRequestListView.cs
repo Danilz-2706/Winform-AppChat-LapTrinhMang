@@ -72,9 +72,28 @@ namespace ChatApp.GUI
            
         }
 
+        
+        public void CancelFriendRequest(int idReponse, int idRequest)
+        {
+            //-------Nhận dữ liệu từ textbox và thông báo---------//
+
+       
+            Packet.SENFRIENDREPONSE friendReponse = new Packet.SENFRIENDREPONSE(idReponse, idRequest);
+            string jsonString = JsonSerializer.Serialize(friendReponse);
+            Packet.Packet packet = new Packet.Packet("CancelFriendReponse", jsonString);
+            sendJson(packet);
+            DialogResult dlr = MessageBox.Show("ban da từ choi ket ban");
+            //-------Kết thúc Nhận dữ liệu từ textbox và thông báo---------//
+
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             AcceptFriendRequest(idRespone, idRequest);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            CancelFriendRequest(idRespone, idRequest);
         }
     }
 }

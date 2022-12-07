@@ -139,5 +139,56 @@ namespace Server.DAL
 
             conn.Close();
         }
+
+        //UPDATE friend SET status=1 WHERE id_user_1=10 AND id_user_2=11
+
+        public void updateStatusFriend(int id_user1, int id_user2, int status)
+        {
+            MySqlConnection conn = DB.dbconnect.getconnect();
+            try
+            {
+
+                string query = "UPDATE friend SET status=@status WHERE id_user_1=@id_user1 AND id_user_2=@id_user2";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_user1", id_user1);
+                    cmd.Parameters.AddWithValue("@id_user2", id_user2);
+                    cmd.Parameters.AddWithValue("@status", status);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            conn.Close();
+        }
+
+        //DELETE FROM friend WHERE id_user_1=11 AND id_user_2=12
+
+        public void deleteFriendRequest(int id_user1, int id_user2)
+        {
+            MySqlConnection conn = DB.dbconnect.getconnect();
+            try
+            {
+
+                string query = "DELETE FROM friend WHERE id_user_1=@id_user1 AND id_user_2=@id_user2";
+                using (MySqlCommand cmd = new MySqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@id_user1", id_user1);
+                    cmd.Parameters.AddWithValue("@id_user2", id_user2);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            conn.Close();
+        }
     }
 }

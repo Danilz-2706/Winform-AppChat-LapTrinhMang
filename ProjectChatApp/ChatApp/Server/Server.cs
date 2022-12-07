@@ -374,19 +374,25 @@ namespace Server
                                     {
                                         BLLfriend.addFriend(userReponse.Id, userRequest.Id, 0);
                                     }
+                                    //nếu như k online luu friend vào list gởi gói phản hồi khi offline                                 
+                                    //bên cliet đăng nhập nhận gói                       
+                                    break;
 
-                                    /*socket = OnlineClientList[userRequest.Email];
-                                    com = new Packet.Packet("FrientResponseOffline", userReponse.Email + " accept friend request");
-                                    sendJson(socket, com);
-                                    AppendTextBox("FiendReponseOff " + frientReponse.idReponse + ":" + frientReponse.idRequest + Environment.NewLine);
-                                    */
+                                case "UpdateStatusFriend":
 
+                                    SENUPDATEFRIEND? updateFriend = JsonSerializer.Deserialize<SENUPDATEFRIEND>(com.content);
+                                    List<int> listFriendUpdateStatus = BLLfriend.getFriendReponseOffByID(updateFriend.id);
+                                    foreach(int id in listFriendUpdateStatus)
+                                    {
+                                        BLLfriend.updateStatusFriend(id, updateFriend.id, 1);
+                                    }
+                                    
+                                    AppendTextBox("UpdateStatusFriend" + Environment.NewLine);
+                                    break;
 
-                                    //nếu như k online luu friend vào list gởi gói phản hồi khi offline
-                                   
-                                    //bên cliet đăng nhập nhận gói
-                                   
-
+                                case "CancelFriendReponse":
+                                    SENFRIENDREPONSE? deleteFriend = JsonSerializer.Deserialize<SENFRIENDREPONSE>(com.content);
+                                    BLLfriend.deleteFriendRequest(deleteFriend.idRequest, deleteFriend.idReponse);
                                     break;
                                 default:
                                     break;

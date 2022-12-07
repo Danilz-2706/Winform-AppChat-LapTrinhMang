@@ -164,5 +164,19 @@ namespace Packet
 
     }
 
-    
+
+    public class SENUPDATEFRIEND
+    {
+        public SENUPDATEFRIEND(int id)
+        {
+            this.id = id;
+           
+        }
+
+        public int id { get; set; }
+        
+
+    }
+
+
 }

@@ -75,6 +75,20 @@ namespace Server.BLL
             dalFriend.addFriend(id_user1, id_user2, status);
 
         }
+
+        public void updateStatusFriend(int id_user1, int id_user2, int status)
+        {
+
+            dalFriend.updateStatusFriend(id_user1, id_user2, status);
+
+        }
+
+        public void deleteFriendRequest(int id_user1, int id_user2)
+        {
+
+            dalFriend.deleteFriendRequest(id_user1, id_user2);
+
+        }
     }
    
 }

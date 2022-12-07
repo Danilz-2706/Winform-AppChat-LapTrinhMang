@@ -69,9 +69,6 @@ namespace ChatApp.GUI
             sendJson(packet);
             DialogResult dlr = MessageBox.Show("ban da dong y ket ban");
             //-------Kết thúc Nhận dữ liệu từ textbox và thông báo---------//
-
-
-
            
         }
 

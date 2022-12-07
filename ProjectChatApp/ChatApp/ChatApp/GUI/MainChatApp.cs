@@ -28,10 +28,11 @@ namespace ChatApp.GUI
         int n;
         int nFriendRequest;
         List<user> listFriendOfUser = new List<user>();
-        List<user> listFriendRequestOfUser = new List<user>();
+        List<user>? listFriendRequestOfUser = new List<user>();
+        List<string> listUsernameReponseOff = new List<string>();
         List<message> HistoryChat = new List<message>();
         
-        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, List<user> listFriendRequestOfUser)
+        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, List<user> listFriendRequestOfUser, List<string> listUsernameReponseOff)
         {
             InitializeComponent();            
             iep = ipep;
@@ -40,10 +41,14 @@ namespace ChatApp.GUI
             IdSender = id;
             name_user = name;
             n = listFriendOfUser.Count;
+            
             nFriendRequest = listFriendRequestOfUser.Count;
             Username.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
             this.listFriendRequestOfUser = listFriendRequestOfUser;
+            this.listUsernameReponseOff = listUsernameReponseOff;
+
+
             populateFriendListView(n);
             populateFriendRequestListView(nFriendRequest);
             //new Thread(new ThreadStart(this.NewThread)).Start();
@@ -75,16 +80,24 @@ namespace ChatApp.GUI
         }
         private void NewThread()
         {
+
+           string str = "";
+            foreach (string us in listUsernameReponseOff)
+            {
+                str += us + "\n";
+            }
+            MessageBox.Show(str + "accept request friend");
             try
             {
                 while (active)
                 {
-                    byte[] data = new byte[1024*5*1000];
+                    byte[] data = new byte[1024*20*1000];
                     int recv = _clientToServer.Receive(data); // nhan moi thong tin tu server ve o day ne dung r
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     jsonString.Replace("\\u0022", "\"");
                     Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
 
+                    
                     if (com != null)
                     {
                         switch (com.mess)
@@ -102,7 +115,7 @@ namespace ChatApp.GUI
                                 //muốn thay đổi 1 thứ gì đó không đồng bộ 
                                 BeginInvoke((Action)(() => populateFriendListView(n)));
                                 //Khanh sẽ thêm request friend vào đây
-                                //BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
+                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
 
                                 //MessageBox.Show(u.Name);                                                             
                                 break;
@@ -121,6 +134,10 @@ namespace ChatApp.GUI
                             case "NoFrientRequest":
                                 MessageBox.Show(com.content);
                                 break;
+                            case "FrientResponseOnline":
+                                MessageBox.Show(com.content);
+                                break;
+                      
                             default:
                                 break;
                         }
@@ -398,12 +415,10 @@ namespace ChatApp.GUI
             if (dlr == DialogResult.Yes)
             {
                 
-
                 //---------Gửi Nhận packet-server------------------------------//
                 sendJson(packet);
                 // sai r khuc nay moi thu khi ma client nhan dc no phai nam o thread hieu hk??
-             
-               
+    
             }
             else
             {

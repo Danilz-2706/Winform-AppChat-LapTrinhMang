@@ -64,7 +64,7 @@ namespace Server.DAL
             return listFriend;
         }
 
-        //lấy những người mình đã gửi lời mời kết bạn
+        //lấy những người mình đã gửi lời mời kết bạn 
         public List<int> getMyRequestByID(int idUserReponse)
         {
             MySqlConnection conn = DB.dbconnect.getconnect();
@@ -90,18 +90,44 @@ namespace Server.DAL
             return listFriend;
         }
 
+        public List<int> getMyReponseOffByID(int idUserRequest)
+        {
+            MySqlConnection conn = DB.dbconnect.getconnect();
+            List<int> listFriend = new List<int>();
+            try
+            {
+                string query = "SELECT id_user_1 FROM friend WHERE id_user_2='"+ idUserRequest + "' and id_user_1 in (SELECT id_user_2 from friend WHERE id_user_1='"+ idUserRequest + "') and status=0";
+                MySqlCommand cmd = new MySqlCommand(query, conn);
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+                while (dataReader.Read())
+                {
+                    listFriend.Add(dataReader.GetInt32("id_user_1"));
 
-        public void addFriend(int id_user1, int id_user2)
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            conn.Close();
+            return listFriend;
+        }
+
+
+        public void addFriend(int id_user1, int id_user2, int status)
         {
             MySqlConnection conn = DB.dbconnect.getconnect();
             try
             {
                 
-                string query = "INSERT INTO friend(id_user_1, id_user_2) VALUES (@id_user1,@id_user2)";
+                string query = "INSERT INTO friend(id_user_1, id_user_2, status) VALUES (@id_user1,@id_user2,@status)";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id_user1", id_user1);
                     cmd.Parameters.AddWithValue("@id_user2", id_user2);
+                    cmd.Parameters.AddWithValue("@status", status);
                     cmd.ExecuteNonQuery();
                 }
             }

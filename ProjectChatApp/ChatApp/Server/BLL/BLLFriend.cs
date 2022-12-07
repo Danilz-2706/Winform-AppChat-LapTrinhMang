@@ -43,7 +43,18 @@ namespace Server.BLL
             }
         }
 
-
+        public List<int> getFriendReponseOffByID(int id)
+        {
+            List<int> list = dalFriend.getMyReponseOffByID(id);
+            if (list != null)
+            {
+                return list;
+            }
+            else
+            {
+                return null;
+            }
+        }
         public List<int> getMyRequestByID(int id)
         {
             List<int> list = dalFriend.getMyRequestByID(id);
@@ -58,10 +69,10 @@ namespace Server.BLL
         }
 
 
-        public void addFriend(int id_user1, int id_user2)
+        public void addFriend(int id_user1, int id_user2, int status)
         {
 
-            dalFriend.addFriend(id_user1, id_user2);
+            dalFriend.addFriend(id_user1, id_user2, status);
 
         }
     }

@@ -27,6 +27,7 @@ namespace Server
         Socket server;
         List<int> listFriendOfUsserId = new List<int>();
         List<user> userlist;
+        List<string> listUsernaemReponse = new List<string>();
         Dictionary<string, Socket> OnlineClientList;
         Dictionary<int, string> UserListFromDB;
         bool active = false;
@@ -82,7 +83,7 @@ namespace Server
                 while(tieptuc)
                 {
                     string mess = "";
-                    byte[] data = new byte[1024*5*1000];
+                    byte[] data = new byte[1024*20*1000];
                     //nhan thong tin tu client
                     int recv = client.Receive(data);
 
@@ -160,7 +161,18 @@ namespace Server
                                                 List<user> listFriendRequestOfUsser = new List<user>();
                                                 listFriendRequestOfUsser = getFriendRequestOfUser(temp.Id);
 
-                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser, listFriendRequestOfUsser);
+                                                AppendTextBox("listFriendRequestOfUsser " + listFriendRequestOfUsser.Count());
+
+
+                                                List<int> listUsernameReponseOffById = BLLfriend.getFriendReponseOffByID(temp.Id);
+                                                List<string> listUsernameReponseOff = new List<string>();
+                                                foreach (int i in listUsernameReponseOffById)
+                                                {
+                                                    user userTmp = BLLuser.getInfoUserById(i);
+                                                    listUsernameReponseOff.Add(userTmp.Email);
+                                                }
+
+                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser, listFriendRequestOfUsser, listUsernameReponseOff);
                                                 string ResultJson = JsonSerializer.Serialize(lgsucess);
                                                 com = new Packet.Packet(mess, ResultJson);
                                                 //tra thong tin ve cho client mo len mainchatapp
@@ -324,7 +336,7 @@ namespace Server
                                                 if (!listFriend.Contains(userCheck.Id) && !listFriendRequest.Contains(userCheck.Id) 
                                                     && !listMyRequest.Contains(userCheck.Id) && (int)frientRequest.id != userCheck.Id) // nếu user request k nằm trong danh sách bạn và k nằm trong danh sách đã gửi gửi cầu kết bạn đến mình
                                                 {
-                                                    BLLfriend.addFriend((int)frientRequest.id, userCheck.Id);
+                                                    BLLfriend.addFriend((int)frientRequest.id, userCheck.Id, 1);
                                                     com = new Packet.Packet("FrientRequest", "Send friend request success");
                                                     AppendTextBox(frientRequest.usernameRequest + " server nhan duoc roi!!!" + Environment.NewLine);
                                                     sendJson(client, com);
@@ -335,15 +347,45 @@ namespace Server
                   
                                                     sendJson(client, com);
                                                 }
-                                                
-                                               
+                                            }
+                                            else
+                                            {
+
+                                                com = new Packet.Packet("NoFrientRequest", "Send friend request no success");
+                                                sendJson(client, com);
                                             }
                                             
                                         }
                                     }
                                     break;
-                                case "FriendReponse":
-                                    AppendTextBox("Da nhan duoc FiendReponse " + Environment.NewLine);
+                                case "FriendReponse":  // user được yêu cầu kb (idReponse) phản hồi user yêu cầu kb (id Request)
+                                    SENFRIENDREPONSE? frientReponse = JsonSerializer.Deserialize<SENFRIENDREPONSE>(com.content);
+                                    user userRequest = BLLuser.getInfoUserById(frientReponse.idRequest);
+                                    user userReponse = BLLuser.getInfoUserById(frientReponse.idReponse);
+                                    if (OnlineClientList.ContainsKey(userRequest.Email))   //kiểm tra xem thằng request có online k?
+                                    {
+                                        socket = OnlineClientList[userRequest.Email];
+                                        com = new Packet.Packet("FrientResponseOnline", userReponse.Email+" accept friend request");
+                                        sendJson(socket, com);
+                                        BLLfriend.addFriend(userReponse.Id, userRequest.Id, 1);
+                                        AppendTextBox("FiendReponseOnl " + userRequest.Id + ":" + userReponse.Id + Environment.NewLine);
+                                    }
+                                    else
+                                    {
+                                        BLLfriend.addFriend(userReponse.Id, userRequest.Id, 0);
+                                    }
+
+                                    /*socket = OnlineClientList[userRequest.Email];
+                                    com = new Packet.Packet("FrientResponseOffline", userReponse.Email + " accept friend request");
+                                    sendJson(socket, com);
+                                    AppendTextBox("FiendReponseOff " + frientReponse.idReponse + ":" + frientReponse.idRequest + Environment.NewLine);
+                                    */
+
+
+                                    //nếu như k online luu friend vào list gởi gói phản hồi khi offline
+                                   
+                                    //bên cliet đăng nhập nhận gói
+                                   
 
                                     break;
                                 default:

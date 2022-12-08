@@ -78,7 +78,7 @@ namespace UI_AppChat.Forms
             {
                 sex = 0;
             }
-            byte[] data = new byte[1024];
+            byte[] data = new byte[1024 * 20 * 1000];
             Packet.REGISTER register = new Packet.REGISTER(email, password, confirmpassword, name, sex, bd);
             string jsonString = JsonSerializer.Serialize(register);
             Packet.Packet packet = new Packet.Packet("Register", jsonString);

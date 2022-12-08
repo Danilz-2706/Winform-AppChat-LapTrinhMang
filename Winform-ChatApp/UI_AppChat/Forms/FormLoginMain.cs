@@ -62,7 +62,7 @@ namespace UI_AppChat.Forms
 
         private void LoginConnect()
         {
-            byte[] data = new byte[1024 * 1000 * 5];
+            byte[] data = new byte[1024 * 40 * 1000];
             Packet.LOGIN login = new Packet.LOGIN(Usertxt.Text, Passwordtxt.Text);
             //username = Usertxt.Text;
             string jsonString = JsonSerializer.Serialize(login);
@@ -99,8 +99,9 @@ namespace UI_AppChat.Forms
                     case "dangnhapthanhcong":
                         MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
+
                         this.Visible = false;
-                        FormMenuContainer mainChatApp = new FormMenuContainer(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser, lgsucess.messlist,lgsucess.CheckSeenMessage);
+                        FormMenuContainer mainChatApp = new FormMenuContainer(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser, lgsucess.messlist,lgsucess.CheckSeenMessage, lgsucess.listFriendRequestOfUser, lgsucess.listUsernaemReponseOff);
                         mainChatApp.ShowDialog();
                         break;
                     default:
@@ -145,5 +146,6 @@ namespace UI_AppChat.Forms
             FormRegisterMain registerForm = new FormRegisterMain();
             registerForm.Visible = true;
         }
+
     }
 }

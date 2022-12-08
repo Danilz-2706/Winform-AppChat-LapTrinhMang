@@ -36,9 +36,13 @@ namespace UI_AppChat
 
         
         List<user> listFriendOfUser = new List<user>();
+        List<user>? listFriendRequestOfUser = new List<user>();
+        List<string> listUsernameReponseOff = new List<string>();
+
         Dictionary<int, bool> CheckSeenMessage = new Dictionary<int, bool>();
 
         Dictionary<int, message> messlist = new Dictionary<int, message>();
+
 
         public FormMenuContainer()
         {
@@ -48,7 +52,7 @@ namespace UI_AppChat
             this.Padding = new Padding(borderSize);
         }
 
-        public FormMenuContainer(IPEndPoint ipep, int id, string emailuser, string name, int num, Socket client,List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage)
+        public FormMenuContainer(IPEndPoint ipep, int id, string emailuser, string name, int num, Socket client,List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user> listFriendRequestOfUser, List<string> listUsernameReponseOff)
         {
             InitializeComponent();
             active = true;
@@ -62,6 +66,9 @@ namespace UI_AppChat
             lbUsername.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
             this.messlist = messlist;
+
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+            this.listUsernameReponseOff = listUsernameReponseOff;
 
         }
 
@@ -171,7 +178,7 @@ namespace UI_AppChat
 
         private void btnChatting_Click(object sender, EventArgs e)
         {
-            OpenChildForm(new FormListFriendChatting(iep, id_user, email, name_user, 5, _client, listFriendOfUser, messlist, CheckSeenMessage), sender);
+            OpenChildForm(new FormListFriendChatting(iep, id_user, email, name_user, 5, _client, listFriendOfUser, messlist, CheckSeenMessage, listFriendRequestOfUser, listUsernameReponseOff), sender);
         }
 
 

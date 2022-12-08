@@ -38,8 +38,13 @@ namespace UI_AppChat
         string name_user = null;
         bool active = false ;
         int n;
+        int nFriendRequest;
+
         List<user> listFriendOfUser = new List<user>();
+        List<user>? listFriendRequestOfUser = new List<user>();
+        List<string> listUsernameReponseOff = new List<string>();
         List<message> HistoryChat = new List<message>();
+
         Dictionary<int, message> messlist = new Dictionary<int, message>();
         Dictionary<int, bool> CheckSeenMessage = new Dictionary<int, bool>();
 
@@ -52,7 +57,7 @@ namespace UI_AppChat
             InitializeComponent();
             
         }
-        public FormListFriendChatting(IPEndPoint ipep, int id, string emailuser, string name, int num, Socket client, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage)
+        public FormListFriendChatting(IPEndPoint ipep, int id, string emailuser, string name, int num, Socket client, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user> listFriendRequestOfUser, List<string> listUsernameReponseOff)
         {
             InitializeComponent();
             active = true;
@@ -66,7 +71,13 @@ namespace UI_AppChat
             this.listFriendOfUser = listFriendOfUser;
             this.messlist = messlist;
             listItem = new ItemFriend[n];
+
+            nFriendRequest = listFriendRequestOfUser.Count;
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+            this.listUsernameReponseOff = listUsernameReponseOff;
+
             populateFriendListView(n,0,0,HistoryChat,false);
+            populateFriendRequestListView(nFriendRequest);
 
             trd = new Thread(NewThread);
             trd.IsBackground = true;
@@ -83,13 +94,12 @@ namespace UI_AppChat
             {
                 while (active)
                 {
-                    int size = 1024 * 1000 * 5;
+                    int size = 1024 * 20 * 1000;
                     byte[] data = new byte[size];
                     int recv = _client.Receive(data);
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     jsonString.Replace("\\u0022", "\"");
                     Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-
                     if (com != null)
                     {
                         switch (com.mess)
@@ -143,6 +153,17 @@ namespace UI_AppChat
                                 break;
                             case "OK":
                                 active = false;
+                                break;
+                            case "FrientRequest":
+                                MessageBox.Show(com.content);
+                                break;
+                            case "NoFrientRequest":
+                                MessageBox.Show(com.content);
+                                break;
+                            case "FrientResponseOnline":
+                                MessageBox.Show(com.content);
+                                //populateFriendListView(n, send.idrec, send.idsender, HistoryChat, send.noti);
+                                populateFriendRequestListView(nFriendRequest);
                                 break;
                             default:
                                 active = false;
@@ -472,6 +493,23 @@ namespace UI_AppChat
             }
         }
 
+        private void populateFriendRequestListView(int n)
+        {
+            //FriendRequestPanel.Controls.Clear();
+            //FriendRequestListView[] listItem = new FriendRequestListView[n];
+            //for (int i = 0; i < listItem.Length; i++)
+            //{
+
+            //    listItem[i] = new FriendRequestListView(IdSender, listFriendRequestOfUser[i].Id, _clientToServer);
+            //    listItem[i].Username = listFriendRequestOfUser[i].Name;
+
+            //    FriendRequestPanel.Controls.Add(listItem[i]);
+
+
+            //}
+
+
+        }
         void ClickEvent(object sender, EventArgs e)
         {
             ChattingPanel.Show();
@@ -521,6 +559,34 @@ namespace UI_AppChat
             }
         }
 
+        //public void FriendRequestConnect()
+        //{
+        //    //-------Nhận dữ liệu từ textbox và thông báo---------//
+        //    string username = SearchFriendtxt.Text;
+        //    byte[] data = new byte[1024];
+        //    Packet.SENFRIENDREQUEST friendRequest = new Packet.SENFRIENDREQUEST(IdSender, username);
+        //    string jsonString = JsonSerializer.Serialize(friendRequest);
+        //    Packet.Packet packet = new Packet.Packet("FrientRequest", jsonString);
+        //    DialogResult dlr = MessageBox.Show("Bạn muốn kết bạn với: " + username,
+        //    "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        //    //-------Kết thúc Nhận dữ liệu từ textbox và thông báo---------//
+
+
+
+        //    if (dlr == DialogResult.Yes)
+        //    {
+
+        //        //---------Gửi Nhận packet-server------------------------------//
+        //        sendJson(packet);
+        //        // sai r khuc nay moi thu khi ma client nhan dc no phai nam o thread hieu hk??
+
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Code sai rồi");
+        //    }
+        //}
+       
         private void SendMessagebtn_Click(object sender, EventArgs e)
         {
             SendMessage();

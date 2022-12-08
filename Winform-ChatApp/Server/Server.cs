@@ -1,4 +1,4 @@
-using System.Net;
+﻿using System.Net;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -59,12 +59,6 @@ namespace Server
 
         }
 
-        /*private List<user> getAllUser()
-        {
-            userlist = new List<user>();
-            userlist = DALuser.LoadAllUser();
-            return userlist;
-        }*/
         private void updateTotalUser()
         {
             TotalUsertxt.Text = UserListFromDB.Count().ToString();
@@ -75,7 +69,7 @@ namespace Server
             OnlineUsertxt.Text = OnlineClientList.Count().ToString();
 
         }
-        private void ThreadClient(Socket client)
+        private async void ThreadClient(Socket client)
         {
             try
             {
@@ -83,14 +77,13 @@ namespace Server
                 while (tieptuc)
                 {
                     string mess = "";
-                    byte[] data = new byte[1024 * 20 * 1000]; // 10mb 1kb
+                    byte[] data = new byte[1024 * 40 * 1000]; // 10mb 1kb
                     //nhan thong tin tu client
                     int recv = client.Receive(data);
 
                     if (recv == 0) return;
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     Packet.Packet? com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
-                    //AppendTextBox("Nhan duoc goi:" + com.mess + Environment.NewLine);
                     if (com != null)
                     {
                         if (com.content != null)
@@ -139,26 +132,42 @@ namespace Server
                                                 BeginInvoke((Action)(() => updateOnlineUser()));
 
                                                 BLLuser.updateonlinestatus(temp.Id, "online");
-                                                //com = new Packet.Packet(mess, "OK");
-
-
-                                                //------------------khanh-------------------------
-                                                /*List<int> listFriendOfUsserId = BLLfriend.getFriendByID(temp.Id);
-                                                List<user> listFriendOfUsser = new List<user>();
-                                                foreach (int i in listFriendOfUsserId)
-                                                {
-                                                    user friend = new user();
-                                                    friend = BLLuser.getInfoUserById(i);
-                                                    listFriendOfUsser.Add(friend);
-                                                }*/
-
-                                                //-------------------khanh-------------------------
+                                                
 
                                                 List<user> listFriendOfUsser = new List<user>();
                                                 listFriendOfUsser = getFriendofUser(temp.Id);
 
+
+
                                                 Dictionary<int, message> LastChatOfUser = new Dictionary<int, message>();
                                                 Dictionary<int, bool> CheckSeenMessage = new Dictionary<int, bool>();
+
+
+                                                List<user> listFriendRequestOfUsser = new List<user>();
+                                                listFriendRequestOfUsser = getFriendRequestOfUser(temp.Id);
+
+                                                //AppendTextBox("listFriendRequestOfUsser " + listFriendRequestOfUsser.Count());
+
+                                                //List<int> listUsernameReponseOffById = new List<int>(10);
+
+
+                                                List<int> listUsernameReponseOffById = BLLfriend.getFriendReponseOffByID(temp.Id);
+
+                                                List<string> listUsernameReponseOff = new List<string>();
+
+                                                if (listUsernameReponseOffById != null)
+                                                {
+                                                    foreach (int i in listUsernameReponseOffById)
+                                                    {
+                                                        user userTmp = BLLuser.getInfoUserById(i);
+                                                        listUsernameReponseOff.Add(userTmp.Email);
+                                                    }
+                                                }
+                                                
+
+
+
+
                                                 for (int i = 0; i < listFriendOfUsser.Count; i++)
                                                 {
                                                     List<message> messlist = new List<message>();
@@ -187,7 +196,11 @@ namespace Server
                                                     }
 
                                                 }
-                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser, LastChatOfUser, CheckSeenMessage);
+
+                                                
+
+
+                                                Packet.LOGINSUCESS lgsucess = new Packet.LOGINSUCESS(temp.Id, temp.Email, temp.Password, temp.Name, temp.Sex, temp.Bd, temp.Online_status, temp.Is_active, temp.Server_block, listFriendOfUsser, LastChatOfUser, CheckSeenMessage, listFriendRequestOfUsser, listUsernameReponseOff);
                                                 string ResultJson = JsonSerializer.Serialize(lgsucess);
                                                 com = new Packet.Packet(mess, ResultJson);
                                                 //tra thong tin ve cho client mo len mainchatapp
@@ -198,7 +211,7 @@ namespace Server
                                                     client.RemoteEndPoint.ToString() + " voi username la " +
                                                     login.username + "da ket noi toi server!" + Environment.NewLine);
 
-                                                //send status user (online or offline cho mainchatapp
+                                          
 
                                                 SendDataToMainChatApp(OnlineClientList, temp.Email, (int)temp.Id);
 
@@ -280,25 +293,7 @@ namespace Server
                                         com = new Packet.Packet("OK", "LOGOUT");
                                         AppendTextBox(exit.username + " da log out!!!" + Environment.NewLine);
                                         sendJson(client, com);
-                                        // client.Close();
-                                        /*foreach (KeyValuePair<string, Socket> item in OnlineClientList)
-                                        {
-                                            var itemKey = item.Key;
-                                            var itemValue = item.Value;
-                                            if (itemKey.Equals(exit.username))
-                                            {
-                                                try
-                                                {
-                                                    itemValue.Shutdown(SocketShutdown.Both);
-                                                    break;
-                                                }
-                                                catch (Exception e)
-                                                {
-                                                    MessageBox.Show(e.ToString());
-                                                    throw;
-                                                }
-                                            }
-                                        }*/
+                                        
                                         OnlineClientList.Remove(exit.username);
                                         BeginInvoke((Action)(() => updateOnlineUser()));
 
@@ -314,8 +309,6 @@ namespace Server
                                     }
                                     break;
                                 case "RequestHistoryChat":
-                                    /*int checkTrue = 0;
-                                    int checkFalse = 0;*/
                                     List<int> listUserSeen = new List<int>();
                                     Socket socket = null;
                                     List<message> listHistoryChat = new List<message>();
@@ -352,10 +345,7 @@ namespace Server
                                                 {
                                                     BLLviewmessage.addViewMessage(listHistoryChat[l].Idreceiver, listHistoryChat[l].Id);
                                                 }
-                                                /*if (!BLLviewmessage.checkViewMessage(rq.idsender, listHistoryChat[l].Id))
-                                                {
-                                                    BLLviewmessage.addViewMessage(rq.idsender, listHistoryChat[l].Id);
-                                                }*/
+                                                
                                             }
                                             listUserSeen = BLLviewmessage.checkSeenMessageUsers(lastchat.Id);
                                         }
@@ -370,19 +360,90 @@ namespace Server
                                     {
                                         socket = OnlineClientList[usend.Email];
                                         sendJson(socket, com);
-                                        //AppendTextBox("Da gui history chat den id " + usend.Id + Environment.NewLine);
                                     }
                                     if (OnlineClientList.ContainsKey(urev.Email))
                                     {
                                         socket = OnlineClientList[urev.Email];
                                         sendJson(socket, com);
-                                        //AppendTextBox("Da gui history chat den id " + urev.Id + Environment.NewLine);
                                     }
-                                    //sendJson(client, Json);
 
                                     break;
 
+                                case "FrientRequest":
+                                    SENFRIENDREQUEST? frientRequest = JsonSerializer.Deserialize<SENFRIENDREQUEST>(com.content);
+                                    if (frientRequest != null)
+                                    {
+                                        //lấy được id kiểm tra 
 
+                                        foreach (user user in userlist)
+                                        {
+                                            if (user.Email.Equals(frientRequest.usernameRequest))  //có nằm trong danh sách user 
+                                            {
+                                                user userCheck = BLLuser.getInfoUser(frientRequest.usernameRequest); //lấy user đó kiểm tra 2 điều kiện tiếp theo
+                                                List<int> listFriend = BLLfriend.getFriendByID((int)frientRequest.id);        //lấy all bạn của user gửi lời kết bạn
+                                                List<int> listFriendRequest = BLLfriend.getFriendRequestByID((int)frientRequest.id);
+                                                List<int> listMyRequest = BLLfriend.getMyRequestByID((int)frientRequest.id);
+                                                if (!listFriend.Contains(userCheck.Id) && !listFriendRequest.Contains(userCheck.Id)
+                                                    && !listMyRequest.Contains(userCheck.Id) && (int)frientRequest.id != userCheck.Id) // nếu user request k nằm trong danh sách bạn và k nằm trong danh sách đã gửi gửi cầu kết bạn đến mình
+                                                {
+                                                    BLLfriend.addFriend((int)frientRequest.id, userCheck.Id, 1);
+                                                    com = new Packet.Packet("FrientRequest", "Send friend request success");
+                                                    AppendTextBox(frientRequest.usernameRequest + " server nhan duoc roi!!!" + Environment.NewLine);
+                                                    sendJson(client, com);
+                                                }
+                                                else
+                                                {
+                                                    com = new Packet.Packet("NoFrientRequest", "Send friend request no success");
+
+                                                    sendJson(client, com);
+                                                }
+                                            }
+                                            else
+                                            {
+
+                                                com = new Packet.Packet("NoFrientRequest", "Send friend request no success");
+                                                sendJson(client, com);
+                                            }
+
+                                        }
+                                    }
+                                    break;
+                                case "FriendReponse":  // user được yêu cầu kb (idReponse) phản hồi user yêu cầu kb (id Request)
+                                    SENFRIENDREPONSE? frientReponse = JsonSerializer.Deserialize<SENFRIENDREPONSE>(com.content);
+                                    user userRequest = BLLuser.getInfoUserById(frientReponse.idRequest);
+                                    user userReponse = BLLuser.getInfoUserById(frientReponse.idReponse);
+                                    if (OnlineClientList.ContainsKey(userRequest.Email))   //kiểm tra xem thằng request có online k?
+                                    {
+                                        socket = OnlineClientList[userRequest.Email];
+                                        com = new Packet.Packet("FrientResponseOnline", userReponse.Email + " accept friend request");
+                                        sendJson(socket, com);
+                                        BLLfriend.addFriend(userReponse.Id, userRequest.Id, 1);
+                                        AppendTextBox("FiendReponseOnl " + userRequest.Id + ":" + userReponse.Id + Environment.NewLine);
+                                    }
+                                    else
+                                    {
+                                        BLLfriend.addFriend(userReponse.Id, userRequest.Id, 0);
+                                    }
+                                    //nếu như k online luu friend vào list gởi gói phản hồi khi offline                                 
+                                    //bên cliet đăng nhập nhận gói                       
+                                    break;
+
+                                case "UpdateStatusFriend":
+
+                                    SENUPDATEFRIEND? updateFriend = JsonSerializer.Deserialize<SENUPDATEFRIEND>(com.content);
+                                    List<int> listFriendUpdateStatus = BLLfriend.getFriendReponseOffByID(updateFriend.id);
+                                    foreach (int id in listFriendUpdateStatus)
+                                    {
+                                        BLLfriend.updateStatusFriend(id, updateFriend.id, 1);
+                                    }
+
+                                    AppendTextBox("UpdateStatusFriend" + Environment.NewLine);
+                                    break;
+
+                                case "CancelFriendReponse":
+                                    SENFRIENDREPONSE? deleteFriend = JsonSerializer.Deserialize<SENFRIENDREPONSE>(com.content);
+                                    BLLfriend.deleteFriendRequest(deleteFriend.idRequest, deleteFriend.idReponse);
+                                    break;
                                 default:
                                     break;
                             }
@@ -414,6 +475,20 @@ namespace Server
             }
             return listFriendOfUsser;
         }
+
+        public List<user> getFriendRequestOfUser(int id)
+        {
+            List<int> listFriendRequestOfUserId = BLLfriend.getFriendRequestByID(id);
+            List<user> listFriendRequestOfUser = new List<user>();
+            foreach (int i in listFriendRequestOfUserId)
+            {
+                user friend = new user();
+                friend = BLLuser.getInfoUserById(i);
+                listFriendRequestOfUser.Add(friend);
+            }
+            return listFriendRequestOfUser;
+        }
+
         private List<string> getListUserOnlineFromAnotherSocket(Dictionary<string, Socket> OnlineClientList)
         {
             List<string> list = new List<string>();
@@ -442,7 +517,7 @@ namespace Server
                     {
                         if (itemKey == temp[i].Email)
                         {
-                            byte[] data = new byte[1024];
+                            byte[] data = new byte[1024 * 20 * 1000];
                             Packet.SENDUSERSTATUS senduserstatus = new Packet.SENDUSERSTATUS(u);
                             string jsonString = JsonSerializer.Serialize(senduserstatus);
                             com = new Packet.Packet("StatusUser", jsonString);

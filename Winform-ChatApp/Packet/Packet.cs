@@ -127,7 +127,7 @@ namespace Packet
 
     public class LOGINSUCESS
     {
-        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage)
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user> listFriendRequestOfUser, List<string> listUsernaemReponseOff)
         {
             this.id = id;
             this.email = email;
@@ -141,6 +141,8 @@ namespace Packet
             this.listFriendOfUser = listFriendOfUser;
             this.messlist = messlist;
             this.CheckSeenMessage = CheckSeenMessage;
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+            this.listUsernaemReponseOff = listUsernaemReponseOff;
         }
 
         public int? id { get; set; }
@@ -155,6 +157,48 @@ namespace Packet
         public List<user>? listFriendOfUser { get; set; }
         public Dictionary<int, message> messlist { get; set; }
         public Dictionary<int, bool> CheckSeenMessage { get; set; }
+        public List<user>? listFriendRequestOfUser { get; set; }
+        public List<string>? listUsernaemReponseOff { get; set; }
+    }
+
+    public class SENFRIENDREQUEST
+    {
+        public SENFRIENDREQUEST(int? id, string? usernameRequest)
+        {
+            this.id = id;
+            this.usernameRequest = usernameRequest;
+        }
+
+        public string? usernameRequest { get; set; }
+        public int? id { get; set; }
+
+    }
+
+    public class SENFRIENDREPONSE
+    {
+        public SENFRIENDREPONSE(int idReponse, int idRequest)
+        {
+            this.idReponse = idReponse;
+            this.idRequest = idRequest;
+        }
+
+        public int idReponse { get; set; }
+        public int idRequest { get; set; }
+
+    }
+
+
+    public class SENUPDATEFRIEND
+    {
+        public SENUPDATEFRIEND(int id)
+        {
+            this.id = id;
+
+        }
+
+        public int id { get; set; }
+
+
     }
 
 

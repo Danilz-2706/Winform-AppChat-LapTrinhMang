@@ -32,6 +32,19 @@ namespace Packet
         public bool noti { get; set; }
     }
 
+    public class REQUESTHISTORYIMAGECHAT
+    {
+        public REQUESTHISTORYIMAGECHAT(int idsender, int idrec, bool noti)
+        {
+            this.idsender = idsender;
+            this.idrec = idrec;
+            this.noti = noti;
+        }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+        public bool noti { get; set; }
+    }
+
     public class SENDHISTORYCHAT
     {
         public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec, message lastmess, bool noti)
@@ -43,6 +56,22 @@ namespace Packet
             this.noti = noti;
         }
         public List<message>? listHistoryChat { get; set; }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+        public message? lastmess { get; set; }
+        public bool noti { get; set; }
+    }
+    public class SENDHISTORYIMAGECHAT
+    {
+        public SENDHISTORYIMAGECHAT(List<message> listHistoryImageChat, int idsender, int idrec, message lastmess, bool noti)
+        {
+            this.listHistoryImageChat = listHistoryImageChat;
+            this.idsender = idsender;
+            this.idrec = idrec;
+            this.lastmess = lastmess;
+            this.noti = noti;
+        }
+        public List<message>? listHistoryImageChat { get; set; }
         public int idsender { get; set; }
         public int idrec { get; set; }
         public message? lastmess { get; set; }
@@ -61,6 +90,36 @@ namespace Packet
         public int idsender { get; set; }
         public int idrec { get; set; }
         public string? contentmess { get; set; }
+        public string? url { get; set; }
+    }
+
+    public class SENDIMAGE
+    {
+        public SENDIMAGE(int idsender, int idrec, string? contentmess, string? url)
+        {
+            this.idsender = idsender;
+            this.idrec = idrec;
+            this.contentmess = contentmess;
+            this.url = url;
+        }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+        public String? contentmess { get; set; }
+        public string? url { get; set; }
+    }
+
+    public class SENDIMAGETOCLIENT
+    {
+        public SENDIMAGETOCLIENT(int idsender, int idrec, string? contentmess, string? url)
+        {
+            this.idsender = idsender;
+            this.idrec = idrec;
+            this.contentmess = contentmess;
+            this.url = url;
+        }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+        public String? contentmess { get; set; }
         public string? url { get; set; }
     }
     public class EXIT

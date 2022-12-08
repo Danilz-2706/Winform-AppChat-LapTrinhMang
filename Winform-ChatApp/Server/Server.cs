@@ -1,23 +1,15 @@
-using System.Net;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Net.Sockets;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿using DTO.DTO;
 using MySql.Data.MySqlClient;
-using Server.BLL;
-using Server.DB;
-using Server.DTO;
-using System.Runtime.CompilerServices;
-using System.Windows.Forms;
 using Packet;
-using System.Net.NetworkInformation;
+using Server.BLL;
 using Server.DAL;
-using Microsoft.VisualBasic.Logging;
-using Microsoft.Win32;
-using System.Net.WebSockets;
-using DTO.DTO;
+using Server.DTO;
+using System.Drawing.Imaging;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Net.Sockets;
+using System.Text;
+using System.Text.Json;
 
 namespace Server
 {
@@ -102,6 +94,33 @@ namespace Server
                                     {
                                         BLLmessage.addMessage(sm.idsender, sm.idrec, sm.contentmess, sm.url);
                                     }
+                                    break;
+                                case "SendImage":
+                                    SENDIMAGE? guihinh = JsonSerializer.Deserialize<SENDIMAGE>(com.content);
+                                    MemoryStream memory = new MemoryStream(Encoding.ASCII.GetBytes(guihinh.contentmess.ToString()));
+                                    Image hinh = Image.FromStream(memory);
+                                    DALMessage message = new DALMessage();
+                                    try
+                                    {
+                                        if (hinh != null)
+                                        {
+                                            DirectoryInfo drinfo = Directory.CreateDirectory("../../Hinh/" + guihinh.idsender + "_" + guihinh.idrec);
+                                            hinh.Save(drinfo.FullName + "\\" + guihinh.contentmess, ImageFormat.Png);
+                                            if (UserListFromDB.ContainsKey(guihinh.idrec))
+                                            {
+                                               
+                                                message.addMessage(guihinh.idsender, guihinh.idrec, drinfo.FullName + "\\" + guihinh.contentmess, drinfo.Root.ToString());
+                                            }
+                                            else{ message.addMessage(guihinh.idsender, guihinh.idrec, drinfo.FullName + "\\" + guihinh.contentmess, drinfo.Root.ToString()); }
+                                        }
+
+                                    }
+                                    catch { }
+
+                                    //if (si != null)
+                                    //{
+                                    //    BLLmessage.addImage(si.idsender, si.idrec, si.contentmess, si.url);
+                                    //}
                                     break;
                                 case "Login":
                                     LOGIN? login = JsonSerializer.Deserialize<LOGIN>(com.content);
@@ -282,36 +301,138 @@ namespace Server
                                     }
                                     break;
 
-                                case "RequestHistoryChat":
-                                    Socket socket = null;
-                                    List<message> listHistoryChat = new List<message>();
-                                    REQUESTHISTORYCHAT? rq = JsonSerializer.Deserialize<REQUESTHISTORYCHAT>(com.content);
+                                //case "RequestHistoryChat":
+                                //    Socket socket = null;
+                                //    List<message> listHistoryChat = new List<message>();
+                                //    REQUESTHISTORYCHAT? rq = JsonSerializer.Deserialize<REQUESTHISTORYCHAT>(com.content);
+                                //    user usend = new user();
+                                //    user urev = new user();
+                                //    usend = BLLuser.getInfoUserById(rq.idsender);
+                                //    urev = BLLuser.getInfoUserById(rq.idrec);
+                                //    listHistoryChat = BLLmessage.getHistoryChat(rq.idsender, rq.idrec);
+                                //    message lastchat = new message();
+                                //    lastchat = listHistoryChat[listHistoryChat.Count - 1];
+
+                                //    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHistoryChat, rq.idsender, rq.idrec, lastchat, rq.noti);
+                                //    string Json = JsonSerializer.Serialize(send);
+                                //    com = new Packet.Packet("SendHistoryChat", Json);
+                                //    if (OnlineClientList.ContainsKey(usend.Email))
+                                //    {
+                                //        socket = OnlineClientList[usend.Email];
+                                //        sendJson(socket, com);
+                                //        //AppendTextBox("Da gui history chat den id " + usend.Id + Environment.NewLine);
+                                //    }
+                                //    if (OnlineClientList.ContainsKey(urev.Email))
+                                //    {
+                                //        socket = OnlineClientList[urev.Email];
+                                //        sendJson(socket, com);
+                                //        //AppendTextBox("Da gui history chat den id " + urev.Id + Environment.NewLine);
+                                //    }
+                                //    //sendJson(client, Json);
+
+                                //    break;
+
+                                case "returnImage":
+                                    Socket socket2 = null;
+                                    List<message> listHistoryChatImage = new List<message>();
+                                    REQUESTHISTORYIMAGECHAT? rqim = JsonSerializer.Deserialize<REQUESTHISTORYIMAGECHAT>(com.content);
                                     user usend = new user();
                                     user urev = new user();
-                                    usend = BLLuser.getInfoUserById(rq.idsender);
-                                    urev = BLLuser.getInfoUserById(rq.idrec);
-                                    listHistoryChat = BLLmessage.getHistoryChat(rq.idsender, rq.idrec);
-                                    message lastchat = new message();
-                                    lastchat = listHistoryChat[listHistoryChat.Count - 1];
-
-                                    Packet.SENDHISTORYCHAT send = new Packet.SENDHISTORYCHAT(listHistoryChat, rq.idsender, rq.idrec, lastchat, rq.noti);
-                                    string Json = JsonSerializer.Serialize(send);
-                                    com = new Packet.Packet("SendHistoryChat", Json);
+                                    usend = BLLuser.getInfoUserById(rqim.idsender);
+                                    urev = BLLuser.getInfoUserById(rqim.idrec);
+                                    listHistoryChatImage = BLLmessage.getHistoryImageChat(rqim.idsender, rqim.idrec);
+                                    message lastchatImage = new message();
+                                    lastchatImage = listHistoryChatImage[listHistoryChatImage.Count - 1];
+                                    //Lúc này lasschat = path ảnh 
+                                    Packet.SENDHISTORYIMAGECHAT send2 = new Packet.SENDHISTORYIMAGECHAT(listHistoryChatImage, rqim.idsender, rqim.idrec, lastchatImage, rqim.noti);
+                                    string Json2 = JsonSerializer.Serialize(send2);
+                                    com = new Packet.Packet("SendImageToClient", Json2);
                                     if (OnlineClientList.ContainsKey(usend.Email))
                                     {
-                                        socket = OnlineClientList[usend.Email];
-                                        sendJson(socket, com);
+                                        socket2 = OnlineClientList[usend.Email];
+                                        sendJson(socket2, com);
                                         //AppendTextBox("Da gui history chat den id " + usend.Id + Environment.NewLine);
                                     }
                                     if (OnlineClientList.ContainsKey(urev.Email))
                                     {
-                                        socket = OnlineClientList[urev.Email];
-                                        sendJson(socket, com);
+                                        socket2 = OnlineClientList[urev.Email];
+                                        sendJson(socket2, com);
                                         //AppendTextBox("Da gui history chat den id " + urev.Id + Environment.NewLine);
                                     }
-                                    //sendJson(client, Json);
+
 
                                     break;
+                                //case "RequestHistoryImageChat":
+                                //    REQUESTHISTORYCHAT? rqim = JsonSerializer.Deserialize<REQUESTHISTORYCHAT>(com.content);
+                                //    user usend2 = new user();
+                                //    user urev2 = new user();
+                                //    usend = BLLuser.getInfoUserById(rqim.idsender);
+                                //    urev = BLLuser.getInfoUserById(rqim.idrec);
+                                //    SENDIMAGE? savei = JsonSerializer.Deserialize<SENDIMAGE>(com.content);
+
+                                //    if (com.content != null)
+                                //    {
+                                //        Packet.SENDHISTORYIMAGECHAT guihinh = JsonSerializer.Deserialize<Packet.SENDHISTORYIMAGECHAT>(com.content);
+                                //        MemoryStream memory = new MemoryStream(Encoding.ASCII.GetBytes(guihinh.lastmess.ToString()));
+                                //        Image hinh = Image.FromStream(memory);
+                                //        try
+                                //        {
+                                //            if (hinh != null)
+                                //            {
+                                //                DirectoryInfo drinfo = Directory.CreateDirectory("../../Hinh/" + guihinh.idsender + "_" + guihinh.idrec);
+                                //                hinh.Save(drinfo.FullName + "\\" + guihinh.lastmess, ImageFormat.Png);
+                                //                if (UserListFromDB.ContainsKey(guihinh.idrec))
+                                //                {
+                                //                    BLLmessage.addMessage(guihinh.idsender, guihinh.idrec, drinfo.FullName + "\\" + guihinh.lastmess, drinfo.Root.ToString());
+                                //                }
+                                //            }
+
+                                //        }
+                                //        catch { }
+                                //    }
+                                //    break;
+                                //case "RequestHistoryImageChat":
+                                //    Socket socket2 = null;
+                                //    List<message> listHistoryImageChat = new List<message>();
+                                //    REQUESTHISTORYIMAGECHAT? rqim = JsonSerializer.Deserialize<REQUESTHISTORYIMAGECHAT>(com.content);
+                                //    user usend2 = new user();
+                                //    user urev2 = new user();
+                                //    usend = BLLuser.getInfoUserById(rqim.idsender);
+                                //    urev = BLLuser.getInfoUserById(rqim.idrec);
+                                //    listHistoryImageChat = BLLmessage.getHistoryChat(rqim.idsender, rqim.idrec);
+                                //    message lastchat2 = new message();
+                                //    lastchat = listHistoryImageChat[listHistoryImageChat.Count - 1];
+
+
+
+                                //    Packet.SENDHISTORYIMAGECHAT send2 = new Packet.SENDHISTORYIMAGECHAT(listHistoryImageChat, rqim.idsender, rqim.idrec, lastchat, rqim.noti);
+                                //    //12:57
+                                //    MemoryStream memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(send2.lastmess.ToString()));
+                                //    MessageBox.Show(memoryStream.ToString());
+                                //    Image hinh = Image.FromStream(memoryStream);
+                                //    if (hinh != null)
+                                //    {
+                                //        DirectoryInfo drinfo = Directory.CreateDirectory("../../..Hinh/" + send2.idsender + "_" + send2.idrec);
+                                //        hinh.Save(drinfo.FullName + "\\" + send2.lastmess, ImageFormat.Png);
+                                //    }
+                                //    //MessageBox.Show(hinh.ToString());
+                                //    string Json2 = JsonSerializer.Serialize(hinh);
+                                //    com = new Packet.Packet("SendHistoryImageChat", Json2);
+                                //    if (OnlineClientList.ContainsKey(usend.Email))
+                                //    {
+                                //        socket = OnlineClientList[usend.Email];
+                                //        sendJson(socket, com);
+                                //        //AppendTextBox("Da gui history chat den id " + usend.Id + Environment.NewLine);
+                                //    }
+                                //    if (OnlineClientList.ContainsKey(urev.Email))
+                                //    {
+                                //        socket = OnlineClientList[urev.Email];
+                                //        sendJson(socket, com);
+                                //        //AppendTextBox("Da gui history chat den id " + urev.Id + Environment.NewLine);
+                                //    }
+                                //    //sendJson(client, Json2);
+
+                                //    break;
                                 default:
                                     break;
                             }

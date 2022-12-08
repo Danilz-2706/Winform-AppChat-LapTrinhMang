@@ -28,7 +28,13 @@
     <Compile Update="UserControls\ReceiverMessageContent.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="UserControls\ReceiverMessageImageContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserControls\SenderMessageContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UserControls\SenderMessageImageContent.cs">
       <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>

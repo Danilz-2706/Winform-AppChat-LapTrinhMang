@@ -15,10 +15,18 @@ namespace Server.BLL
         {
             DALmessage.addMessage(idsender, idreceiver, messagecontent, url);
         }
+        public void addImage(int idsender, int idreceiver, string messagecontent, string url)
+        {
+            DALmessage.addImage(idsender, idreceiver, messagecontent, url);
+        }
 
         public List<message> getHistoryChat(int idsender,int idrev)
         {
             return DALmessage.getHistoryChat(idsender,idrev);
+        }
+        public List<message> getHistoryImageChat(int idsender, int idrev)
+        {
+            return DALmessage.getHistoryImageChat(idsender, idrev);
         }
     }
 }

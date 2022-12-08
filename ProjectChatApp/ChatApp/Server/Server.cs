@@ -412,7 +412,7 @@ namespace Server
             
 
         }
-
+        //Comment để push code
         public List<user> getFriendofUser(int id)
         {
             List<int> listFriendOfUsserId = BLLfriend.getFriendByID(id);

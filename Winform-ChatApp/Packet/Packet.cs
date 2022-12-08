@@ -18,7 +18,6 @@ namespace Packet
         public string? content { get; set; }
 
     }
-
     public class REQUESTHISTORYCHAT
     {
         public REQUESTHISTORYCHAT(int idsender, int idrec, bool noti)
@@ -31,7 +30,6 @@ namespace Packet
         public int idrec { get; set; }
         public bool noti { get; set; }
     }
-
     public class SENDHISTORYCHAT
     {
         public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec, message lastmess, bool noti, List<int> checkSeenMessageUsers)
@@ -95,7 +93,6 @@ namespace Packet
         public string? username { get; set; }
         public string? pass { get; set; }
     }
-
     public class REGISTER
     {
         public REGISTER(string? username, string? pass, string? confirmpass, string? name, int? sex, string? bd)
@@ -123,8 +120,6 @@ namespace Packet
 
         public user? u { get; set; }
     }
-
-
     public class LOGINSUCESS
     {
         public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user> listFriendRequestOfUser, List<string> listUsernaemReponseOff)
@@ -160,7 +155,6 @@ namespace Packet
         public List<user>? listFriendRequestOfUser { get; set; }
         public List<string>? listUsernaemReponseOff { get; set; }
     }
-
     public class SENFRIENDREQUEST
     {
         public SENFRIENDREQUEST(int? id, string? usernameRequest)
@@ -173,7 +167,6 @@ namespace Packet
         public int? id { get; set; }
 
     }
-
     public class SENFRIENDREPONSE
     {
         public SENFRIENDREPONSE(int idReponse, int idRequest)
@@ -186,8 +179,6 @@ namespace Packet
         public int idRequest { get; set; }
 
     }
-
-
     public class SENUPDATEFRIEND
     {
         public SENUPDATEFRIEND(int id)
@@ -200,8 +191,4 @@ namespace Packet
 
 
     }
-
-
-
-
 }

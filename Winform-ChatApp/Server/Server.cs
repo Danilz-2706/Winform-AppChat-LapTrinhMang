@@ -148,7 +148,6 @@ namespace Server
 
                                                 //AppendTextBox("listFriendRequestOfUsser " + listFriendRequestOfUsser.Count());
 
-                                                //List<int> listUsernameReponseOffById = new List<int>(10);
 
 
                                                 List<int> listUsernameReponseOffById = BLLfriend.getFriendReponseOffByID(temp.Id);

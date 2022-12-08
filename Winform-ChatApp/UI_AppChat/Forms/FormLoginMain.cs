@@ -97,7 +97,6 @@ namespace UI_AppChat.Forms
                         MessageBox.Show("Tai khoan cua ban hien tai dang bi khoa!");
                         break;
                     case "dangnhapthanhcong":
-                        MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
 
                         this.Visible = false;

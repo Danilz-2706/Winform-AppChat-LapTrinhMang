@@ -508,7 +508,6 @@ namespace UI_AppChat
 
             //}
 
-
         }
         void ClickEvent(object sender, EventArgs e)
         {

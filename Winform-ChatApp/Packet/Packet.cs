@@ -30,6 +30,18 @@ namespace Packet
         public int idrec { get; set; }
         public bool noti { get; set; }
     }
+    public class REQUESTHISTORYCHATGROUP
+    {
+        public REQUESTHISTORYCHATGROUP(int idUser, int idGroup, bool noti)
+        {
+            this.idUser = idUser;
+            this.idGroup = idGroup;
+            this.noti = noti;
+        }
+        public int idUser { get; set; }
+        public int idGroup { get; set; }
+        public bool noti { get; set; }
+    }
     public class SENDHISTORYCHAT
     {
         public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec, message lastmess, bool noti, List<int> checkSeenMessageUsers)
@@ -48,9 +60,37 @@ namespace Packet
         public bool noti { get; set; }
         public List<int>? checkSeenMessageUsers { get; set; }
     }
+    public class SENDHISTORYCHATGROUP
+    {
+        public SENDHISTORYCHATGROUP(List<message_group> listHistoryChat, int idUser, int idGroup, message_group lastmess, bool noti, List<int> checkSeenMessageUsers)
+        {
+            this.listHistoryChat = listHistoryChat;
+            this.idUser = idUser;
+            this.idGroup = idGroup;
+            this.lastmess = lastmess;
+            this.noti = noti;
+            this.checkSeenMessageUsers = checkSeenMessageUsers;
+        }
+        public List<message_group>? listHistoryChat { get; set; }
+        public int idUser { get; set; }
+        public int idGroup { get; set; }
+        public message_group? lastmess { get; set; }
+        public bool noti { get; set; }
+        public List<int>? checkSeenMessageUsers { get; set; }
+    }
     public class VIEWMESSAGE
     {
         public VIEWMESSAGE(int iduser, int idmess)
+        {
+            this.iduser = iduser;
+            this.idmess = idmess;
+        }
+        public int iduser { get; set; }
+        public int idmess { get; set; }
+    }
+    public class VIEWMESSAGEGROUP
+    {
+        public VIEWMESSAGEGROUP(int iduser, int idmess)
         {
             this.iduser = iduser;
             this.idmess = idmess;
@@ -69,6 +109,20 @@ namespace Packet
         }
         public int idsender { get; set; }
         public int idrec { get; set; }
+        public string? contentmess { get; set; }
+        public string? url { get; set; }
+    }
+    public class SENDMESSAGEGROUP
+    {
+        public SENDMESSAGEGROUP(int idUser, int idGroup, string? contentmess, string? url)
+        {
+            this.idUser = idUser;
+            this.idGroup = idGroup;
+            this.contentmess = contentmess;
+            this.url = url;
+        }
+        public int idUser { get; set; }
+        public int idGroup { get; set; }
         public string? contentmess { get; set; }
         public string? url { get; set; }
     }

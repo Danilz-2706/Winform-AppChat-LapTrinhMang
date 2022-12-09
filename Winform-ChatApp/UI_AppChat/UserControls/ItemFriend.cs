@@ -58,21 +58,21 @@ namespace UI_AppChat
             get { return this._avatar; }
             set { this._avatar = value; imgAvatar.Image = value; }
         }
-        
+
         [Category("Custom Props")]
         public string UserName
         {
             get { return this._userName; }
             set { this._userName = value; lbUsername.Text = value; }
         }
-        
+
         [Category("Custom Props")]
         public string Lastmessage
         {
             get { return this._lastmessage; }
             set { this._lastmessage = value; lbMess.Text = value; }
         }
-        
+
         [Category("Custom Props")]
         public string Status
         {
@@ -80,7 +80,7 @@ namespace UI_AppChat
             set { this._status = value; lbStatus.Text = value;
             }
         }
-        
+
         [Category("Custom Props")]
         public Color StatusColor
         {
@@ -90,7 +90,7 @@ namespace UI_AppChat
                 this._statusColor = value; lbStatus.ForeColor = value;
             }
         }
-        
+
         [Category("Custom Props")]
         public Color UsernameColor
         {
@@ -100,7 +100,7 @@ namespace UI_AppChat
                 this._usernameColor = value; lbUsername.ForeColor = value;
             }
         }
-        
+
         [Category("Custom Props")]
         public Color LastmessageColor
         {
@@ -122,25 +122,7 @@ namespace UI_AppChat
                 Invalidate();
             }
         }
-        public new event EventHandler Click
-        {
-            add
-            {
-                base.Click += value;
-                foreach (Control control in Controls)
-                {
-                    control.Click += value;
-                }
-            }
-            remove
-            {
-                base.Click -= value;
-                foreach (Control control in Controls)
-                {
-                    control.Click -= value;
-                }
-            }
-        }
+        
         public new event EventHandler MouseHover
         {
             add

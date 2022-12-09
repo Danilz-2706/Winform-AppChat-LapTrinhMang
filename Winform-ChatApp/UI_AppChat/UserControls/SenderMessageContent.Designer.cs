@@ -59,7 +59,7 @@
             this.UserMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.UserMessage.AutoSize = true;
             this.UserMessage.BackColor = System.Drawing.Color.Transparent;
-            this.UserMessage.ForeColor = System.Drawing.Color.Black;
+            this.UserMessage.ForeColor = System.Drawing.Color.White;
             this.UserMessage.Location = new System.Drawing.Point(16, 5);
             this.UserMessage.Margin = new System.Windows.Forms.Padding(3);
             this.UserMessage.MaximumSize = new System.Drawing.Size(240, 10000);

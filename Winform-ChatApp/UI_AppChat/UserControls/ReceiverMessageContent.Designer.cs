@@ -59,7 +59,8 @@
             this.UserMessage.AllowDrop = true;
             this.UserMessage.AutoSize = true;
             this.UserMessage.BackColor = System.Drawing.Color.Transparent;
-            this.UserMessage.ForeColor = System.Drawing.Color.Black;
+            this.UserMessage.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.UserMessage.ForeColor = System.Drawing.Color.White;
             this.UserMessage.Location = new System.Drawing.Point(24, 14);
             this.UserMessage.MaximumSize = new System.Drawing.Size(240, 10000);
             this.UserMessage.Name = "UserMessage";

@@ -29,7 +29,7 @@ namespace UI_AppChat
             try
             {
                 byte[] jsonUtf8Bytes = JsonSerializer.SerializeToUtf8Bytes(obj);
-                _client.Send(jsonUtf8Bytes, jsonUtf8Bytes.Length, SocketFlags.None);
+                //_client.Send(jsonUtf8Bytes, jsonUtf8Bytes.Length, SocketFlags.None);
             }
             catch (Exception)
             {

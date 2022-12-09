@@ -86,7 +86,6 @@ namespace UI_AppChat
 
             ChattingPanel.Hide();
             SendMessagePanel.Hide();
-
         }
         private void NewThread()
         {
@@ -171,7 +170,6 @@ namespace UI_AppChat
                         }
                     }
                 }
-
             }
             catch (Exception e)
             {
@@ -188,7 +186,6 @@ namespace UI_AppChat
             lf.Show();
 
         }
-
         private void populateHistoryChat(List<message> HistoryChat)
         {
             if (HistoryChat.Count == 0)
@@ -492,7 +489,6 @@ namespace UI_AppChat
 
             }
         }
-
         private void populateFriendRequestListView(int n)
         {
             //FriendRequestPanel.Controls.Clear();

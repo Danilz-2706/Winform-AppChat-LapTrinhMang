@@ -29,10 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainChatApp));
-            this.RightPanel = new Guna.UI2.WinForms.Guna2Panel();
-            this.FriendRequestPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.Logoutbtn = new System.Windows.Forms.Button();
             this.HeadPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label9 = new System.Windows.Forms.Label();
             this.Username = new System.Windows.Forms.Label();
@@ -40,59 +38,26 @@
             this.SearchFriendtxt = new System.Windows.Forms.TextBox();
             this.ImageUser = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.ChatFriendPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.SendMessgapanel = new System.Windows.Forms.Panel();
             this.SendMessagebtn = new System.Windows.Forms.Button();
             this.Messagetxt = new System.Windows.Forms.TextBox();
             this.ChattingPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.starttochatlbl = new System.Windows.Forms.Label();
-            this.RightPanel.SuspendLayout();
+            this.Logoutbtn = new System.Windows.Forms.Button();
+            this.RightPanel = new Guna.UI2.WinForms.Guna2Panel();
+            this.FriendRequestPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.HeadPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).BeginInit();
-            this.ChatFriendPanel.SuspendLayout();
             this.SendMessgapanel.SuspendLayout();
             this.ChattingPanel.SuspendLayout();
+            this.RightPanel.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // RightPanel
-            // 
-            this.RightPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(40)))));
-            this.RightPanel.BorderColor = System.Drawing.Color.FloralWhite;
-            this.RightPanel.Controls.Add(this.FriendRequestPanel);
-            this.RightPanel.Controls.Add(this.Logoutbtn);
-            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.RightPanel.Location = new System.Drawing.Point(900, 0);
-            this.RightPanel.Name = "RightPanel";
-            this.RightPanel.Size = new System.Drawing.Size(339, 710);
-            this.RightPanel.TabIndex = 1;
-            // 
-            // FriendRequestPanel
-            // 
-            this.FriendRequestPanel.Location = new System.Drawing.Point(7, 73);
-            this.FriendRequestPanel.Name = "FriendRequestPanel";
-            this.FriendRequestPanel.Size = new System.Drawing.Size(320, 527);
-            this.FriendRequestPanel.TabIndex = 6;
-       
-            // 
-            // Logoutbtn
-            // 
-            this.Logoutbtn.BackColor = System.Drawing.Color.OrangeRed;
-            this.Logoutbtn.FlatAppearance.BorderSize = 0;
-            this.Logoutbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Logoutbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Logoutbtn.ForeColor = System.Drawing.Color.White;
-            this.Logoutbtn.Location = new System.Drawing.Point(96, 626);
-            this.Logoutbtn.Name = "Logoutbtn";
-            this.Logoutbtn.Size = new System.Drawing.Size(177, 64);
-            this.Logoutbtn.TabIndex = 5;
-            this.Logoutbtn.Text = "LOG OUT";
-            this.Logoutbtn.UseVisualStyleBackColor = false;
-            this.Logoutbtn.Click += new System.EventHandler(this.Loginbtn_Click);
             // 
             // HeadPanel
             // 
             this.HeadPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(40)))));
+            this.HeadPanel.Controls.Add(this.label1);
             this.HeadPanel.Controls.Add(this.pictureBox3);
             this.HeadPanel.Controls.Add(this.label9);
             this.HeadPanel.Controls.Add(this.Username);
@@ -105,6 +70,17 @@
             this.HeadPanel.Size = new System.Drawing.Size(900, 73);
             this.HeadPanel.TabIndex = 2;
             this.HeadPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.HeadPanel_Paint);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label1.Location = new System.Drawing.Point(313, 36);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(65, 28);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "label1";
             // 
             // pictureBox3
             // 
@@ -178,21 +154,11 @@
             // ChatFriendPanel
             // 
             this.ChatFriendPanel.AutoScroll = true;
-            this.ChatFriendPanel.Controls.Add(this.flowLayoutPanel1);
             this.ChatFriendPanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.ChatFriendPanel.Location = new System.Drawing.Point(0, 73);
             this.ChatFriendPanel.Name = "ChatFriendPanel";
             this.ChatFriendPanel.Size = new System.Drawing.Size(315, 637);
             this.ChatFriendPanel.TabIndex = 6;
-            // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.AutoScroll = true;
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(315, 0);
-            this.flowLayoutPanel1.TabIndex = 7;
             // 
             // SendMessgapanel
             // 
@@ -243,6 +209,40 @@
             this.starttochatlbl.TabIndex = 0;
             this.starttochatlbl.Text = "Start to chat";
             // 
+            // Logoutbtn
+            // 
+            this.Logoutbtn.BackColor = System.Drawing.Color.OrangeRed;
+            this.Logoutbtn.FlatAppearance.BorderSize = 0;
+            this.Logoutbtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.Logoutbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Logoutbtn.ForeColor = System.Drawing.Color.White;
+            this.Logoutbtn.Location = new System.Drawing.Point(96, 626);
+            this.Logoutbtn.Name = "Logoutbtn";
+            this.Logoutbtn.Size = new System.Drawing.Size(177, 64);
+            this.Logoutbtn.TabIndex = 5;
+            this.Logoutbtn.Text = "LOG OUT";
+            this.Logoutbtn.UseVisualStyleBackColor = false;
+            this.Logoutbtn.Click += new System.EventHandler(this.Loginbtn_Click);
+            // 
+            // RightPanel
+            // 
+            this.RightPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(19)))), ((int)(((byte)(25)))), ((int)(((byte)(40)))));
+            this.RightPanel.BorderColor = System.Drawing.Color.FloralWhite;
+            this.RightPanel.Controls.Add(this.FriendRequestPanel);
+            this.RightPanel.Controls.Add(this.Logoutbtn);
+            this.RightPanel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.RightPanel.Location = new System.Drawing.Point(900, 0);
+            this.RightPanel.Name = "RightPanel";
+            this.RightPanel.Size = new System.Drawing.Size(339, 710);
+            this.RightPanel.TabIndex = 1;
+            // 
+            // FriendRequestPanel
+            // 
+            this.FriendRequestPanel.Location = new System.Drawing.Point(7, 51);
+            this.FriendRequestPanel.Name = "FriendRequestPanel";
+            this.FriendRequestPanel.Size = new System.Drawing.Size(290, 534);
+            this.FriendRequestPanel.TabIndex = 6;
+            // 
             // MainChatApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -258,25 +258,22 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainChatApp";
             this.Text = "MainChatApp";
-            this.RightPanel.ResumeLayout(false);
             this.HeadPanel.ResumeLayout(false);
             this.HeadPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ImageUser)).EndInit();
-            this.ChatFriendPanel.ResumeLayout(false);
             this.SendMessgapanel.ResumeLayout(false);
             this.SendMessgapanel.PerformLayout();
             this.ChattingPanel.ResumeLayout(false);
             this.ChattingPanel.PerformLayout();
+            this.RightPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private Guna.UI2.WinForms.Guna2Panel RightPanel;
         private Guna.UI2.WinForms.Guna2Panel HeadPanel;
         private Guna.UI2.WinForms.Guna2CirclePictureBox ImageUser;
-        private Button Logoutbtn;
         private Panel panel4;
         private TextBox SearchFriendtxt;
         private Label Username;
@@ -288,7 +285,9 @@
         private TextBox Messagetxt;
         private FlowLayoutPanel ChattingPanel;
         private Label starttochatlbl;
-        private FlowLayoutPanel flowLayoutPanel1;
+        private Label label1;
+        private Button Logoutbtn;
+        private Guna.UI2.WinForms.Guna2Panel RightPanel;
         private FlowLayoutPanel FriendRequestPanel;
     }
 }

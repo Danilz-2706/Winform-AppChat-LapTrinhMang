@@ -129,7 +129,7 @@ namespace ChatApp.GUI
                         MessageBox.Show("Chào mừng bạn đến với loza");                    
                         this.Visible = false;
                         LoginForm login = new LoginForm();
-                        login.Show();
+                        login.ShowDialog();
                         break;
                     default:
                         break;

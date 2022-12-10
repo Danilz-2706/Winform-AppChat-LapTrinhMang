@@ -29,61 +29,62 @@
         private void InitializeComponent()
         {
             this.UsernameRequestlbl = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btn_accept = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // UsernameRequestlbl
             // 
             this.UsernameRequestlbl.AutoSize = true;
             this.UsernameRequestlbl.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.UsernameRequestlbl.Location = new System.Drawing.Point(30, 21);
+            this.UsernameRequestlbl.Location = new System.Drawing.Point(17, 15);
             this.UsernameRequestlbl.Name = "UsernameRequestlbl";
             this.UsernameRequestlbl.Size = new System.Drawing.Size(0, 20);
             this.UsernameRequestlbl.TabIndex = 0;
+            this.UsernameRequestlbl.Click += new System.EventHandler(this.lbl_username_Click);
             // 
-            // button1
+            // label2
             // 
-            this.button1.Location = new System.Drawing.Point(17, 73);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(88, 29);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Chấp nhận";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label2.Location = new System.Drawing.Point(17, 44);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Muon ket ban";
             // 
-            // button2
+            // btn_accept
             // 
-            this.button2.Location = new System.Drawing.Point(143, 73);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(88, 29);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "Hủy";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btn_accept.Location = new System.Drawing.Point(21, 69);
+            this.btn_accept.Name = "btn_accept";
+            this.btn_accept.Size = new System.Drawing.Size(80, 29);
+            this.btn_accept.TabIndex = 2;
+            this.btn_accept.Text = "Dong y";
+            this.btn_accept.UseVisualStyleBackColor = true;
+            this.btn_accept.Click += new System.EventHandler(this.btn_accept_Click);
             // 
-            // label1
+            // btn_cancel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 20);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "muốn kết bạn";
+            this.btn_cancel.Location = new System.Drawing.Point(134, 69);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(80, 29);
+            this.btn_cancel.TabIndex = 3;
+            this.btn_cancel.Text = "Huy";
+            this.btn_cancel.UseVisualStyleBackColor = true;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
             // FriendRequestListView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btn_cancel);
+            this.Controls.Add(this.btn_accept);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.UsernameRequestlbl);
             this.Name = "FriendRequestListView";
-            this.Size = new System.Drawing.Size(251, 116);
-            this.Load += new System.EventHandler(this.FriendRequestListView_Load);
+            this.Size = new System.Drawing.Size(235, 109);
+            this.Load += new System.EventHandler(this.FriendRequestListView_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -92,8 +93,8 @@
         #endregion
 
         private Label UsernameRequestlbl;
-        private Button button1;
-        private Button button2;
-        private Label label1;
+        private Label label2;
+        private Button btn_accept;
+        private Button btn_cancel;
     }
 }

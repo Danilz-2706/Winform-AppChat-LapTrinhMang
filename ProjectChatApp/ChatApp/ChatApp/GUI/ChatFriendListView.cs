@@ -22,12 +22,18 @@ namespace ChatApp.GUI
         private int iduser;
         private string status;
         private string username;
-        private Image userimage;
+        private Image userimage; 
         private Color status_color;
         private Color username_color;
         private Color lastchat_color;
         
 
+
+        public bool ShowNoti
+        {
+            get { return noti.Visible; }
+            set { noti.Visible = value; }
+        }
 
         [Category("CustomPros")]
         public Color StatusColor
@@ -38,14 +44,14 @@ namespace ChatApp.GUI
         [Category("CustomPros")]
         public Color UsernameColor
         {
-            get { return status_color; }
-            set { status_color = value; UserChatNamelbl.ForeColor = value; }
+            get { return username_color; }
+            set { username_color = value; UserChatNamelbl.ForeColor = value; }
         }
         [Category("CustomPros")]
         public Color LastchatColor
         {
-            get { return status_color; }
-            set { status_color = value; LastChatlbl.ForeColor = value; }
+            get { return lastchat_color; }
+            set { lastchat_color = value; LastChatlbl.ForeColor = value; }
         }
         [Category("CustomPros")]
         public string Username
@@ -83,6 +89,15 @@ namespace ChatApp.GUI
             }
 
         }
+        /*public Image Noti
+        {
+            get { return notiImgage; }
+            set
+            {
+                notiImgage = value; ImageChatUser.Image = value;
+            }
+
+        }*/
 
         private void MainPanel_Paint(object sender, PaintEventArgs e)
         {

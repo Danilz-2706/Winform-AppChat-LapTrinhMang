@@ -30,6 +30,7 @@
         {
             this.UserMessage = new System.Windows.Forms.Label();
             this.MessPanel = new System.Windows.Forms.Panel();
+            this.seenlbl = new System.Windows.Forms.Label();
             this.MessPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -39,7 +40,7 @@
             this.UserMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.UserMessage.Location = new System.Drawing.Point(9, 8);
             this.UserMessage.Name = "UserMessage";
-            this.UserMessage.Size = new System.Drawing.Size(360, 111);
+            this.UserMessage.Size = new System.Drawing.Size(305, 44);
             this.UserMessage.TabIndex = 2;
             this.UserMessage.Text = "Chat Message";
             // 
@@ -49,25 +50,37 @@
             this.MessPanel.Controls.Add(this.UserMessage);
             this.MessPanel.Location = new System.Drawing.Point(112, 7);
             this.MessPanel.Name = "MessPanel";
-            this.MessPanel.Size = new System.Drawing.Size(404, 125);
+            this.MessPanel.Size = new System.Drawing.Size(328, 136);
             this.MessPanel.TabIndex = 3;
+            // 
+            // seenlbl
+            // 
+            this.seenlbl.AutoSize = true;
+            this.seenlbl.Location = new System.Drawing.Point(3, 7);
+            this.seenlbl.Name = "seenlbl";
+            this.seenlbl.Size = new System.Drawing.Size(50, 20);
+            this.seenlbl.TabIndex = 3;
+            this.seenlbl.Text = "label1";
             // 
             // MeChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.seenlbl);
             this.Controls.Add(this.MessPanel);
             this.Name = "MeChat";
-            this.Size = new System.Drawing.Size(531, 135);
+            this.Size = new System.Drawing.Size(453, 163);
             this.Load += new System.EventHandler(this.ListChat_Load);
             this.MessPanel.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private Label UserMessage;
         private Panel MessPanel;
+        private Label seenlbl;
     }
 }

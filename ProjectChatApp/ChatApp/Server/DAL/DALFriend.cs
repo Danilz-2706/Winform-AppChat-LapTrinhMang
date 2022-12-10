@@ -11,7 +11,6 @@ namespace Server.DAL
     public class DALFriend
     {
 
-        //lấy bạn của mình
         public List<int> getFriendByID(int id)
         {
             MySqlConnection conn = DB.dbconnect.getconnect();
@@ -45,7 +44,7 @@ namespace Server.DAL
             List<int> listFriend = new List<int>();
             try
             {
-                string query = "SELECT id_user_1 FROM friend WHERE id_user_2='"+idUserReponse+ "' and id_user_1 not in (SELECT id_user_2 from friend WHERE id_user_1='" + idUserReponse + "')";
+                string query = "SELECT id_user_1 FROM friend WHERE id_user_2='" + idUserReponse + "' and id_user_1 not in (SELECT id_user_2 from friend WHERE id_user_1='" + idUserReponse + "')";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -71,7 +70,7 @@ namespace Server.DAL
             List<int> listFriend = new List<int>();
             try
             {
-                string query = "SELECT id_user_2 FROM friend WHERE id_user_1='" + idUserReponse + "' and id_user_2 not in (SELECT id_user_1 from friend WHERE id_user_2='"+idUserReponse+"')";
+                string query = "SELECT id_user_2 FROM friend WHERE id_user_1='" + idUserReponse + "' and id_user_2 not in (SELECT id_user_1 from friend WHERE id_user_2='" + idUserReponse + "')";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -96,7 +95,7 @@ namespace Server.DAL
             List<int> listFriend = new List<int>();
             try
             {
-                string query = "SELECT id_user_1 FROM friend WHERE id_user_2='"+ idUserRequest + "' and id_user_1 in (SELECT id_user_2 from friend WHERE id_user_1='"+ idUserRequest + "') and status=0";
+                string query = "SELECT id_user_1 FROM friend WHERE id_user_2='" + idUserRequest + "' and id_user_1 in (SELECT id_user_2 from friend WHERE id_user_1='" + idUserRequest + "') and status=0";
                 MySqlCommand cmd = new MySqlCommand(query, conn);
                 MySqlDataReader dataReader = cmd.ExecuteReader();
                 while (dataReader.Read())
@@ -121,7 +120,7 @@ namespace Server.DAL
             MySqlConnection conn = DB.dbconnect.getconnect();
             try
             {
-                
+
                 string query = "INSERT INTO friend(id_user_1, id_user_2, status) VALUES (@id_user1,@id_user2,@status)";
                 using (MySqlCommand cmd = new MySqlCommand(query, conn))
                 {
@@ -190,5 +189,6 @@ namespace Server.DAL
 
             conn.Close();
         }
+
     }
 }

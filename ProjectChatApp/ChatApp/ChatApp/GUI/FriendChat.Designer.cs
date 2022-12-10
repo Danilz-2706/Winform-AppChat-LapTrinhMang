@@ -31,6 +31,7 @@
             this.UserNameMessage = new System.Windows.Forms.Label();
             this.UserMessage = new System.Windows.Forms.Label();
             this.MessPanel = new System.Windows.Forms.Panel();
+            this.seenlbl = new System.Windows.Forms.Label();
             this.MessPanel.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -50,7 +51,7 @@
             this.UserMessage.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.UserMessage.Location = new System.Drawing.Point(9, 8);
             this.UserMessage.Name = "UserMessage";
-            this.UserMessage.Size = new System.Drawing.Size(360, 111);
+            this.UserMessage.Size = new System.Drawing.Size(360, 33);
             this.UserMessage.TabIndex = 2;
             this.UserMessage.Text = "Chat Message";
             // 
@@ -60,14 +61,24 @@
             this.MessPanel.Controls.Add(this.UserMessage);
             this.MessPanel.Location = new System.Drawing.Point(140, 0);
             this.MessPanel.Name = "MessPanel";
-            this.MessPanel.Size = new System.Drawing.Size(378, 128);
+            this.MessPanel.Size = new System.Drawing.Size(378, 132);
             this.MessPanel.TabIndex = 3;
+            // 
+            // seenlbl
+            // 
+            this.seenlbl.AutoSize = true;
+            this.seenlbl.Location = new System.Drawing.Point(6, 8);
+            this.seenlbl.Name = "seenlbl";
+            this.seenlbl.Size = new System.Drawing.Size(50, 20);
+            this.seenlbl.TabIndex = 3;
+            this.seenlbl.Text = "label1";
             // 
             // FriendChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.seenlbl);
             this.Controls.Add(this.MessPanel);
             this.Controls.Add(this.UserNameMessage);
             this.Name = "FriendChat";
@@ -83,5 +94,6 @@
         private Label UserNameMessage;
         private Label UserMessage;
         private Panel MessPanel;
+        private Label seenlbl;
     }
 }

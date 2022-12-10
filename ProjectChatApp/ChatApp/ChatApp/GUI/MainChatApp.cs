@@ -12,14 +12,15 @@ using System.Security.Permissions;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace ChatApp.GUI
 {
     public partial class MainChatApp : Form
     {
+        int checkFlag = 1;
         int IdSender = 0;
-        int IdRec = 0;        
+        int IdRec = 0;
+        int Noti = 0;
         Thread trd;  
         IPEndPoint iep;
         Socket _clientToServer;
@@ -32,8 +33,13 @@ namespace ChatApp.GUI
         List<user>? listFriendRequestOfUser = new List<user>();
         List<string> listUsernameReponseOff = new List<string>();
         List<message> HistoryChat = new List<message>();
-        
-        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, List<user> listFriendRequestOfUser, List<string> listUsernameReponseOff)
+       // List<viewmessage> viewmesslist = new List<viewmessage>();
+        Dictionary<int, message> messlist = new Dictionary<int, message>();
+        Dictionary<int, bool> CheckSeenMessage = new Dictionary<int, bool>();
+        ChatFriendListView[] listItem;
+        List<int>? checkSeenMessagerUsers = new List<int>();
+
+        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user> listFriendRequestOfUser, List<string> listUsernameReponseOff)
         {
             InitializeComponent();            
             iep = ipep;
@@ -42,23 +48,24 @@ namespace ChatApp.GUI
             IdSender = id;
             name_user = name;
             n = listFriendOfUser.Count;
-            
             nFriendRequest = listFriendRequestOfUser.Count;
             Username.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
             this.listFriendRequestOfUser = listFriendRequestOfUser;
             this.listUsernameReponseOff = listUsernameReponseOff;
-
-
-            populateFriendListView(n);
-            populateFriendRequestListView(nFriendRequest);
+            this.messlist = messlist;
+            this.CheckSeenMessage = CheckSeenMessage;
+            listItem = new ChatFriendListView[n];
             //new Thread(new ThreadStart(this.NewThread)).Start();
             trd = new Thread(NewThread);
             trd.IsBackground = true;
             trd.Start();
             ChattingPanel.Hide();
             SendMessgapanel.Hide();
-            starttochatlbl.Show();
+            label1.Hide();
+            starttochatlbl.Show(); 
+            populateFriendListView(n,0,0,HistoryChat,false);
+            populateFriendRequestListView(nFriendRequest);
         }
         public string getIPAdress()
         {
@@ -81,28 +88,17 @@ namespace ChatApp.GUI
         }
         private void NewThread()
         {
-            if (listUsernameReponseOff.Count() != 0)
-            {
-                string str = "";
-                foreach (string us in listUsernameReponseOff)
-                {
-                    str += us + "\n";
-                }
-                MessageBox.Show(str + "accept request friend");
-                UpdateStatusFriend();
-            }
-
             try
             {
                 while (active)
                 {
-                    byte[] data = new byte[1024*20*1000];
-                    int recv = _clientToServer.Receive(data); // nhan moi thong tin tu server ve o day ne dung r
+                    int size = 1024 * 1000 * 5;
+                    byte[] data = new byte[size];
+                    int recv = _clientToServer.Receive(data);
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     jsonString.Replace("\\u0022", "\"");
                     Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
 
-                    
                     if (com != null)
                     {
                         switch (com.mess)
@@ -118,33 +114,114 @@ namespace ChatApp.GUI
                                     }
                                 }
                                 //muốn thay đổi 1 thứ gì đó không đồng bộ 
-                                BeginInvoke((Action)(() => populateFriendListView(n)));
-                                //Khanh sẽ thêm request friend vào đây
-                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
 
+                                BeginInvoke((Action)(() => populateFriendListView(n,0,0,HistoryChat,false)));
+                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
                                 //MessageBox.Show(u.Name);                                                             
                                 break;
                             case "SendHistoryChat": //lay lich su chat box giua 2 nguoi dung
-                                SENDHISTORYCHAT? send = JsonSerializer.Deserialize<SENDHISTORYCHAT>(com.content);
+                                SENDHISTORYCHAT? send = JsonSerializer.Deserialize<SENDHISTORYCHAT>(com.content);                                
                                 HistoryChat = send.listHistoryChat;
+                                checkSeenMessagerUsers = send.checkSeenMessageUsers;
+                                if (messlist.ContainsKey(send.idrec))
+                                {
+                                    messlist[send.idrec] = send.lastmess;
+                                    /*viewmessage temp = new viewmessage();
+                                    temp.Iduser = send.idsender;
+                                    temp.Idmess = messlist[send.idrec].Id;
+                                    viewmesslist.Add(temp);*/
+                                    
+                                }
+                                else
+                                if(messlist.ContainsKey(send.idsender))
+                                {
+                                    messlist[send.idsender] = send.lastmess;
+                                }
+               
                                 //MessageBox.Show(HistoryChat.Count.ToString());
-                                BeginInvoke((Action)(() => populateHistoryChat(HistoryChat)));
-                                    break;
+                                if(send.idrec == IdRec)
+                                {
+                                    BeginInvoke((Action)(() => populateHistoryChat(HistoryChat)));                                  
+                                    BeginInvoke((Action)(() => populateFriendListView(n ,send.idrec, send.idsender, HistoryChat,send.noti)));
+                                }
+                                else
+                                {
+                                    if(send.idsender == IdRec)
+                                    {
+                                        BeginInvoke((Action)(() => populateHistoryChat(HistoryChat)));
+                                        BeginInvoke((Action)(() => populateFriendListView(n ,send.idrec, send.idsender, HistoryChat,send.noti)));
+                                    }
+                                    else
+                                    {
+                                        BeginInvoke((Action)(() => populateFriendListView(n, send.idsender, send.idsender, HistoryChat, send.noti)));
+                                    }
+                                    
+                                }                           
+                                break;
+                           
                             case "OK":                                                                
                                     active = false;                                                                   
                                 break;
+
                             case "FrientRequest":
                                 MessageBox.Show(com.content);
                                 break;
                             case "NoFrientRequest":
                                 MessageBox.Show(com.content);
                                 break;
-                            case "FrientResponseOnline":
-                                MessageBox.Show(com.content);
-                                 populateFriendListView(n);
-                                 populateFriendRequestListView(nFriendRequest);
+                            case "FrientResponseOnline":      // cập nhật lại list frient của thằng gửi lời mời kết bạn trong khi nó online
+
+                                UPDATELISTFRIENDOFUSER? list = JsonSerializer.Deserialize<UPDATELISTFRIENDOFUSER>(com.content);
+                                MessageBox.Show(list.mess);
+                                listFriendOfUser = list.listFriendOfUser;
+                                n = list.listFriendOfUser.Count();
+                                messlist = list.messlist;
+                                CheckSeenMessage = list.CheckSeenMessage;
+                                BeginInvoke((Action)(() => populateFriendListView(n, 0,0, HistoryChat, false)));
                                 break;
-                      
+                            case "FrientRequestOnline": // cập nhật lại danh sách bạn và danh sách thông báo của được gửi lời mời kb khi nó online
+                                UPDATELISTREQUESTFRIENDOFUSER? list2 = JsonSerializer.Deserialize<UPDATELISTREQUESTFRIENDOFUSER>(com.content);
+                                listFriendOfUser = list2.listFriendOfUser;
+                                n = listFriendOfUser.Count();
+                                listFriendRequestOfUser = list2.listFriendRequestOfUser;
+                                nFriendRequest = listFriendRequestOfUser.Count();
+                                messlist = list2.messlist;
+                                CheckSeenMessage = list2.CheckSeenMessage;
+                                BeginInvoke((Action)(() => populateFriendListView(n, 0, 0, HistoryChat, false)));
+                                BeginInvoke((Action)(() =>populateFriendRequestListView(nFriendRequest)));
+                                break;
+
+                            /*case "UpdateFrientRequestOnline":  //cập nhật lời mời kb khi online
+                                UPDATELISTREQUESTFRIENDOFUSER? list3 = JsonSerializer.Deserialize<UPDATELISTREQUESTFRIENDOFUSER>(com.content);
+                                listFriendOfUser = list3.listFriendOfUser;
+                                n = list3.listFriendOfUser.Count();
+                                listFriendRequestOfUser = list3.listFriendRequestOfUser;
+                                nFriendRequest = listFriendRequestOfUser.Count();
+                                messlist = list3.messlist;
+                                CheckSeenMessage = list3.CheckSeenMessage;
+                                BeginInvoke((Action)(() => populateFriendListView(n, 0, 0, HistoryChat, false)));
+                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
+                                break;*/
+
+                            case "UpdateListRequestFriendOfUserOnline":
+                                UPDATELISTREQUESTFRIENDOFUSERONLINE? list3 = JsonSerializer.Deserialize<UPDATELISTREQUESTFRIENDOFUSERONLINE>(com.content);
+                                listFriendRequestOfUser = list3.listFriendRequestOfUser;
+                               
+                                nFriendRequest = listFriendRequestOfUser.Count();
+                                
+                               
+                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
+                                break;
+
+                            case "UpdateListRequestFriendOfUserOnlineCancel":
+                                UPDATELISTREQUESTFRIENDOFUSERONLINE? list4 = JsonSerializer.Deserialize<UPDATELISTREQUESTFRIENDOFUSERONLINE>(com.content);
+                                listFriendRequestOfUser = list4.listFriendRequestOfUser;
+
+                                nFriendRequest = listFriendRequestOfUser.Count();
+
+
+                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
+                                break;
                             default:
                                 break;
                         }
@@ -180,6 +257,8 @@ namespace ChatApp.GUI
             }
             else
             {
+                int me = 0;
+                int f = 0;
                 ChattingPanel.Controls.Clear();
                 FriendChat[] FriendChatMess = new FriendChat[HistoryChat.Count];
                 MeChat[] MeChatMess = new MeChat[HistoryChat.Count];
@@ -188,12 +267,24 @@ namespace ChatApp.GUI
                     if (HistoryChat[i].Idsender == IdSender)
                     {
                         MeChatMess[i] = new MeChat();
+                        MeChatMess[i].ShowSeen = false;
                         MeChatMess[i].Message = HistoryChat[i].Messagecontent;
+                        for(int j=0;j<listFriendOfUser.Count;j++)
+                        {
+                            if (HistoryChat[i].Idreceiver == listFriendOfUser[j].Id)
+                            {
+                                MeChatMess[i].NameFriendChatWithMe = listFriendOfUser[j].Name;
+                            }
+                        }
                         ChattingPanel.Controls.Add(MeChatMess[i]);
+                        //ChattingPanel.ScrollControlIntoView(MeChatMess[i]);
+                        me = 1;
+                        f = 0;
                     }
                     else
                     {
                         FriendChatMess[i] = new FriendChat();
+                        FriendChatMess[i].ShowSeen = false;
                         for(int j=0;j<listFriendOfUser.Count;j++)
                         {
                             if (HistoryChat[i].Idsender == listFriendOfUser[j].Id)
@@ -204,70 +295,285 @@ namespace ChatApp.GUI
                         }
                         FriendChatMess[i].Message = HistoryChat[i].Messagecontent;
                         ChattingPanel.Controls.Add(FriendChatMess[i]);
+                      //  ChattingPanel.ScrollControlIntoView(FriendChatMess[i]);
+                        f = 1;
+                        me = 0;
                     }
                 }
-            }
-            
-        }
-        private void populateFriendListView(int n)
-        {
-            ChatFriendPanel.Controls.Clear();
-            ChatFriendListView[] listItem = new ChatFriendListView[n];
-            for(int i=0;i< listItem.Length;i++)
-            {
-              
-
-                listItem[i] = new ChatFriendListView();
-                listItem[i].Username = listFriendOfUser[i].Name;
-                listItem[i].UsernameColor = Color.Silver;
-                
-                if (listFriendOfUser[i].Online_status == 1)
-                {
-                    listItem[i].Status = "Online";
-                    listItem[i].StatusColor = Color.Lime;
+                if(f == 1)
+                {                   
+                    if (checkSeenMessagerUsers.Count == 1)
+                    {
+                        FriendChatMess[HistoryChat.Count - 1].SeenMessage = FriendChatMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
+                    }
+                    else
+                    {
+                        FriendChatMess[HistoryChat.Count - 1].SeenMessage = "You,"+FriendChatMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
+                    }
+                    FriendChatMess[HistoryChat.Count - 1].ShowSeen = true;
+                    ChattingPanel.ScrollControlIntoView(FriendChatMess[HistoryChat.Count - 1]);
                 }
                 else
                 {
-                    listItem[i].Status = "Offline";
-                    listItem[i].StatusColor = Color.Red;
-                }
-
-
-                listItem[i].LastChat = "Hello World";
-                listItem[i].LastchatColor = Color.Gray;
-                listItem[i].UserIcon = Resources.male_default;
-                //list[i].Click += (sender, e) => TestEvent(sender, e);
-                listItem[i].Name = listItem[i].Username;
-                listItem[i].Iduser = listFriendOfUser[i].Id;
-                ChatFriendPanel.Controls.Add(listItem[i]);
-
-                listItem[i].Click += new System.EventHandler(this.ClickEvent);
-
-
+                    if (checkSeenMessagerUsers.Count == 1)
+                    {
+                        MeChatMess[HistoryChat.Count - 1].SeenMessage = "You had seen";
+                    }
+                    else
+                    {
+                        MeChatMess[HistoryChat.Count - 1].SeenMessage = "You," + MeChatMess[HistoryChat.Count - 1].NameFriendChatWithMe.ToString() + "had seen";
+                    }
+                    MeChatMess[HistoryChat.Count - 1].ShowSeen = true;
+                    ChattingPanel.ScrollControlIntoView(MeChatMess[HistoryChat.Count - 1]);
+                }              
             }
-
             
         }
+        private void populateFriendListView(int n, int Noti,int OwnClient, List<message> M,bool noti)
+        {
+            
+            if (M.Count == 0 && Noti == 0 && OwnClient == 0)
+            {
+                ChatFriendPanel.Controls.Clear();
+                ChatFriendListView[] listItem = new ChatFriendListView[n];
+                for (int i = 0; i < listItem.Length; i++)
+                {
+                    listItem[i] = new ChatFriendListView();
+                    listItem[i].Iduser = listFriendOfUser[i].Id;                    
+                    listItem[i].ShowNoti = false;
+                    if (messlist.ContainsKey(listFriendOfUser[i].Id))
+                    {
+                        message temp = new message();
+                        temp = messlist[listFriendOfUser[i].Id];
+                        if(temp.Idsender == IdSender)
+                        {
+                            listItem[i].LastChat = "You: " + temp.Messagecontent.ToString();
+                        }
+                        else
+                        {
+                            listItem[i].LastChat = listFriendOfUser[i].Name + ": " + temp.Messagecontent.ToString();
+                        }
+                    }
+                    if (CheckSeenMessage.ContainsKey(listFriendOfUser[i].Id))
+                    {
+                        if (!CheckSeenMessage[listFriendOfUser[i].Id])
+                        {
+                            listItem[i].ShowNoti = true;
+                            listItem[i].LastchatColor = Color.White;
+                        }
+                    }
+                    listItem[i].Username = listFriendOfUser[i].Name;
+                    listItem[i].UsernameColor = Color.Silver;
+
+                    if (listFriendOfUser[i].Online_status == 1)
+                    {
+                        listItem[i].Status = "Online";
+                        listItem[i].StatusColor = Color.Lime;
+                    }
+                    else
+                    {
+                        listItem[i].Status = "Offline";
+                        listItem[i].StatusColor = Color.Red;
+                    }
+
+                    //listItem[i].LastChat = "";
+                    
+                    listItem[i].LastchatColor = Color.Gray;
+                    listItem[i].UserIcon = Resources.male_default;
+                    //list[i].Click += (sender, e) => TestEvent(sender, e);
+                    listItem[i].Name = listItem[i].Username;
+                    
+                    ChatFriendPanel.Controls.Add(listItem[i]);
+
+                    listItem[i].Click += new System.EventHandler(this.ClickEvent);
+
+
+                }
+            }
+            else
+            {
+
+                if(noti == false )
+                {
+                    ChatFriendPanel.Controls.Clear();
+                    ChatFriendListView[] listItem = new ChatFriendListView[n];
+                    for (int i = 0; i < listItem.Length; i++)
+                    {
+                        
+
+                        listItem[i] = new ChatFriendListView();
+                        listItem[i].Iduser = listFriendOfUser[i].Id;
+                        listItem[i].ShowNoti = false;
+                        
+                        //listItem[i].ShowNoti = false;
+                        if (messlist.ContainsKey(listFriendOfUser[i].Id))
+                        {
+                            message temp = new message();
+                            temp = messlist[listFriendOfUser[i].Id];
+                            if (temp.Idsender == IdSender)
+                            {
+                                listItem[i].LastChat = "You: " + temp.Messagecontent.ToString();
+                            }
+                            else
+                            {
+                                listItem[i].LastChat = listFriendOfUser[i].Name + ": " + temp.Messagecontent.ToString();
+                            }
+                        }
+                        listItem[i].Username = listFriendOfUser[i].Name;
+                        listItem[i].UsernameColor = Color.Silver;
+
+                        if (listFriendOfUser[i].Online_status == 1)
+                        {
+                            listItem[i].Status = "Online";
+                            listItem[i].StatusColor = Color.Lime;
+                        }
+                        else
+                        {
+                            listItem[i].Status = "Offline";
+                            listItem[i].StatusColor = Color.Red;
+                        }
+
+                        if (Noti == listFriendOfUser[i].Id)
+                        {
+                            listItem[i].ShowNoti = false;
+                        }
+                        //listItem[i].LastChat = "Hello World";
+                        listItem[i].LastchatColor = Color.Gray;
+                        listItem[i].UserIcon = Resources.male_default;
+                        //list[i].Click += (sender, e) => TestEvent(sender, e);
+                        listItem[i].Name = listItem[i].Username;
+                       
+                        ChatFriendPanel.Controls.Add(listItem[i]);
+
+                        listItem[i].Click += new System.EventHandler(this.ClickEvent);
+                        checkFlag = 2;
+
+                    }
+                }
+                else
+                {
+                    ChatFriendPanel.Controls.Clear();
+                    ChatFriendListView[] listItem = new ChatFriendListView[n];
+                    for (int i = 0; i < listItem.Length; i++)
+                    {
+                        listItem[i] = new ChatFriendListView();
+                        listItem[i].Iduser = listFriendOfUser[i].Id;
+                        listItem[i].ShowNoti = false;
+                        
+                        
+                        listItem[i].Username = listFriendOfUser[i].Name;
+                        listItem[i].UsernameColor = Color.Silver;
+
+                        if (listFriendOfUser[i].Online_status == 1)
+                        {
+                            listItem[i].Status = "Online";
+                            listItem[i].StatusColor = Color.Lime;
+                        }
+                        else
+                        {
+                            listItem[i].Status = "Offline";
+                            listItem[i].StatusColor = Color.Red;
+                        }
+                        if(Noti == listFriendOfUser[i].Id)
+                        {
+                            if (OwnClient == IdSender)
+                            {
+                                listItem[i].ShowNoti = false;
+                                if (messlist.ContainsKey(listFriendOfUser[i].Id))
+                                {
+                                    message temp = new message();
+                                    temp = messlist[listFriendOfUser[i].Id];
+                                    if (temp.Idsender == IdSender)
+                                    {
+                                        listItem[i].LastChat = "You: " + temp.Messagecontent.ToString();
+                                        listItem[i].LastchatColor = Color.Gray;
+                                    }
+                                    else
+                                    {
+                                        listItem[i].LastChat = listFriendOfUser[i].Name + ": " + temp.Messagecontent.ToString();
+                                        listItem[i].LastchatColor = Color.Gray;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                listItem[i].ShowNoti = true;
+                                if (messlist.ContainsKey(listFriendOfUser[i].Id))
+                                {
+                                    message temp = new message();
+                                    temp = messlist[listFriendOfUser[i].Id];
+                                    if (temp.Idsender == IdSender)
+                                    {
+                                        listItem[i].LastChat = "You: " + temp.Messagecontent.ToString();
+                                        listItem[i].LastchatColor = Color.White;
+                                    }
+                                    else
+                                    {
+                                        listItem[i].LastChat = listFriendOfUser[i].Name + ": " + temp.Messagecontent.ToString();
+                                        listItem[i].LastchatColor = Color.White;
+                                    }
+                                }
+                            }
+                        }                       
+                        else
+                        {
+                            listItem[i].ShowNoti = false;
+                            if (messlist.ContainsKey(listFriendOfUser[i].Id))
+                            {
+                                message temp = new message();
+                                temp = messlist[listFriendOfUser[i].Id];
+                                if (temp.Idsender == IdSender)
+                                {
+                                    listItem[i].LastChat = "You: " + temp.Messagecontent.ToString();
+                                    listItem[i].LastchatColor = Color.Gray;
+                                }
+                                else
+                                {
+                                    listItem[i].LastChat = listFriendOfUser[i].Name + ": " + temp.Messagecontent.ToString();
+                                    listItem[i].LastchatColor = Color.Gray;
+                                }
+                            }
+                        }                                                                   
+                        //listItem[i].LastChat = "Hello World";
+                        
+                        listItem[i].UserIcon = Resources.male_default;
+                        //list[i].Click += (sender, e) => TestEvent(sender, e);
+                        listItem[i].Name = listItem[i].Username;
+
+                        ChatFriendPanel.Controls.Add(listItem[i]);
+
+                        listItem[i].Click += new System.EventHandler(this.ClickEvent);
+                    }
+                }
+
+            }
+        }
+
 
         //khanh--------------------------
         private void populateFriendRequestListView(int n)
         {
-            FriendRequestPanel.Controls.Clear();
-            FriendRequestListView[] listItem = new FriendRequestListView[n];
-            for (int i = 0; i < listItem.Length; i++)
+            if (n == 0)
             {
+                FriendRequestPanel.Controls.Clear();
+            }
+            else
+            {
+                FriendRequestPanel.Controls.Clear();
+                FriendRequestListView[] listItem = new FriendRequestListView[n];
+                for (int i = 0; i < listItem.Length; i++)
+                {
 
-                listItem[i] = new FriendRequestListView(IdSender, listFriendRequestOfUser[i].Id,_clientToServer);
-                listItem[i].Username = listFriendRequestOfUser[i].Name;
+                    listItem[i] = new FriendRequestListView(IdSender, listFriendRequestOfUser[i].Id, _clientToServer);
+                    listItem[i].Username = listFriendRequestOfUser[i].Name;
 
-                FriendRequestPanel.Controls.Add(listItem[i]);
+                    FriendRequestPanel.Controls.Add(listItem[i]);
 
 
+                }
             }
 
-
         }
-
         //---------------------------------
 
         void ClickEvent(object sender,EventArgs e)
@@ -275,16 +581,14 @@ namespace ChatApp.GUI
             ChattingPanel.Show();
             SendMessgapanel.Show();
             ChatFriendListView obj = (ChatFriendListView)sender;
-            IdRec = obj.Iduser;
-
-
-            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender, IdRec);
+            obj.ShowNoti = false;          
+            IdRec = obj.Iduser;                  
+            label1.Text = obj.Name;
+            label1.Visible = true;
+            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender,IdRec,false);
             string jsonString = JsonSerializer.Serialize(rqhc);
             Packet.Packet packet = new Packet.Packet("RequestHistoryChat", jsonString);
             sendJson(packet);
-         
-
-
         }
         private void guna2Panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -310,15 +614,9 @@ namespace ChatApp.GUI
         {
 
         }
-       
-        [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
-        public void killthread(Thread trd)
-        {
 
-            trd.Interrupt();
-            
-            
-        }
+        [SecurityPermission(SecurityAction.Demand, ControlThread = true)]
+        public void killthread(Thread trd) => trd.Interrupt();
         private void Loginbtn_Click(object sender, EventArgs e)
         {                  
             
@@ -382,10 +680,16 @@ namespace ChatApp.GUI
            // MessageBox.Show("ID gui:" + IdSender + "ID nhan:" + IdRec + "ND:" + packet.content);
             Messagetxt.Text = "";
 
-            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender, IdRec);
+            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender, IdRec,true);
             string jsonString1 = JsonSerializer.Serialize(rqhc);
             Packet.Packet packet1 = new Packet.Packet("RequestHistoryChat", jsonString1);
             sendJson(packet1);
+
+
+           
+            // populateHistoryChat(HistoryChat);
+
+
         }
         private void SendMessagebtn_Click(object sender, EventArgs e)
         {
@@ -404,12 +708,12 @@ namespace ChatApp.GUI
 
         }
 
-
         public void FriendRequestConnect()
         {
             //-------Nhận dữ liệu từ textbox và thông báo---------//
+            bool flag = true;
             string username = SearchFriendtxt.Text;
-            byte[] data = new byte[1024];
+            byte[] data = new byte[1024 * 3 * 1000];
             Packet.SENFRIENDREQUEST friendRequest = new Packet.SENFRIENDREQUEST(IdSender, username);
             string jsonString = JsonSerializer.Serialize(friendRequest);
             Packet.Packet packet = new Packet.Packet("FrientRequest", jsonString);
@@ -421,16 +725,33 @@ namespace ChatApp.GUI
 
             if (dlr == DialogResult.Yes)
             {
-                
+
                 //---------Gửi Nhận packet-server------------------------------//
-                sendJson(packet);
+                if(username == email)
+                {
+                    MessageBox.Show("Khong the ket ban voi chinh minh!");
+                    flag = false;
+                }
+                for(int i=0;i<listFriendOfUser.Count;i++)
+                {
+                    if(username == listFriendOfUser[i].Email)
+                    {
+                        MessageBox.Show("Nguoi nay da la ban be cua ban!");
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag)
+                {
+                    sendJson(packet);
+                }         
                 // sai r khuc nay moi thu khi ma client nhan dc no phai nam o thread hieu hk??
-    
+
             }
-            else
+           /* else
             {
                 MessageBox.Show("Code sai rồi");
-            }
+            }*/
         }
 
 
@@ -442,15 +763,12 @@ namespace ChatApp.GUI
             string jsonString = JsonSerializer.Serialize(updateStatusFriend);
             Packet.Packet packet = new Packet.Packet("UpdateStatusFriend", jsonString);
             sendJson(packet);
-                
+
         }
+
         private void pictureBox3_Click(object sender, EventArgs e)
         {
             FriendRequestConnect();
         }
-
-       
-
-        
     }
 }

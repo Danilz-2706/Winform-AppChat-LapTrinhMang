@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "VY5/plNYRnOlKPGv/+GI6Amb9h3EG2hG1UZQALwUrWrnQ9wqg2gvdw7sCuCZwx+9DwJHOPcS5Qduj4I2SRlZng==",
+  "dgSpecHash": "6xEC7HpRETLcLv/hpJKma1lHxu6A4pVGghoDZPZIbJOl6s01K0MmUak2WA3UAD6o7WC0LyYUKw+1CLMUTyxZlw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Desktop\\ltm_TK\\Winform-AppChat-LapTrinhMang\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Downloads\\Winform-AppChat-LapTrinhMang-duyviet\\Winform-AppChat-LapTrinhMang-duyviet\\ProjectChatApp\\ChatApp\\ChatApp\\ChatApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\google.protobuf\\3.19.4\\google.protobuf.3.19.4.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\guna.ui2.winforms\\2.0.3.5\\guna.ui2.winforms.2.0.3.5.nupkg.sha512",

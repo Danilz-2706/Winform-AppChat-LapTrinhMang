@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Security.AccessControl;
 
 namespace Packet
-{
+{ 
     public class Packet
     {
         public Packet(string mess, string? content)
@@ -16,34 +16,55 @@ namespace Packet
         }
         public string mess { get; set; }
         public string? content { get; set; }
-
+        
     }
 
     public class REQUESTHISTORYCHAT
     {
-        public REQUESTHISTORYCHAT(int idsender, int idrec)
+        public REQUESTHISTORYCHAT(int idsender, int idrec,bool noti)
         {
             this.idsender = idsender;
             this.idrec = idrec;
+            this.noti = noti;
         }
         public int idsender { get; set; }
         public int idrec { get; set; }
+        public bool noti { get; set; }
     }
-
+    
     public class SENDHISTORYCHAT
     {
-        public SENDHISTORYCHAT(List<message> listHistoryChat)
+        public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec,message lastmess,bool noti,List<int> checkSeenMessageUsers)
         {
             this.listHistoryChat = listHistoryChat;
+            this.idsender = idsender;
+            this.idrec = idrec;
+            this.lastmess = lastmess;
+            this.noti = noti;
+            this.checkSeenMessageUsers = checkSeenMessageUsers;
         }
         public List<message>? listHistoryChat { get; set; }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+        public message? lastmess { get; set; }
+        public bool noti { get; set; }
+        public List<int>? checkSeenMessageUsers { get; set; }
     }
-
+    public class VIEWMESSAGE
+    {
+        public VIEWMESSAGE(int iduser,int idmess)
+        {
+            this.iduser = iduser;
+            this.idmess = idmess;
+        }
+        public int iduser { get; set; }
+        public int idmess { get; set; }
+    }
     public class SENDMESSAGE
     {
         public SENDMESSAGE(int idsender, int idrec, string? contentmess, string? url)
         {
-            this.idsender = idsender;
+            this.idsender = idsender; 
             this.idrec = idrec;
             this.contentmess = contentmess;
             this.url = url;
@@ -66,7 +87,7 @@ namespace Packet
     }
     public class LOGIN
     {
-        public LOGIN(string? username, string? pass)
+        public LOGIN(string ? username,string ? pass)
         {
             this.username = username;
             this.pass = pass;
@@ -102,11 +123,11 @@ namespace Packet
 
         public user? u { get; set; }
     }
-
+        
 
     public class LOGINSUCESS
     {
-        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, List<user> listFriendRequestOfUser, List<string> listUsernaemReponseOff)
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user> listFriendRequestOfUser, List<string> listUsernaemReponseOff)
         {
             this.id = id;
             this.email = email;
@@ -120,6 +141,8 @@ namespace Packet
             this.listFriendOfUser = listFriendOfUser;
             this.listFriendRequestOfUser = listFriendRequestOfUser;
             this.listUsernaemReponseOff = listUsernaemReponseOff;
+            this.messlist = messlist;
+            this.CheckSeenMessage = CheckSeenMessage;
         }
 
         public int? id { get; set; }
@@ -131,10 +154,11 @@ namespace Packet
         public int? online_status { get; set; }
         public int? is_active { get; set; }
         public int? server_block { get; set; }
-
         public List<user>? listFriendOfUser { get; set; }
         public List<user>? listFriendRequestOfUser { get; set; }
         public List<string>? listUsernaemReponseOff { get; set; }
+        public Dictionary<int, message> messlist { get; set; }
+        public Dictionary<int, bool> CheckSeenMessage { get; set; }
     }
 
 
@@ -170,13 +194,63 @@ namespace Packet
         public SENUPDATEFRIEND(int id)
         {
             this.id = id;
-           
+
         }
 
         public int id { get; set; }
-        
+
 
     }
 
 
+    public class UPDATELISTFRIENDOFUSER
+    {
+
+        public UPDATELISTFRIENDOFUSER(List<user>? listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, string mess)
+        {
+            this.listFriendOfUser = listFriendOfUser;
+            this.messlist = messlist;
+            this.CheckSeenMessage = CheckSeenMessage;
+            this.mess = mess;
+        }
+
+        public List<user>? listFriendOfUser { get; set; }
+        public string mess { get; set; }
+        public Dictionary<int, message> messlist { get; set; }
+        public Dictionary<int, bool> CheckSeenMessage { get; set; }
+
+    }
+
+
+    public class UPDATELISTREQUESTFRIENDOFUSER
+    {
+
+        
+
+        public UPDATELISTREQUESTFRIENDOFUSER(List<user>? listFriendRequestOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user>? listFriendOfUser)
+        {
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+            this.messlist = messlist;
+            this.CheckSeenMessage = CheckSeenMessage;
+            this.listFriendOfUser = listFriendOfUser;
+        }
+
+        public List<user>? listFriendRequestOfUser { get; set; }
+        public List<user>? listFriendOfUser { get; set; }
+        public Dictionary<int, message> messlist { get; set; }
+        public Dictionary<int, bool> CheckSeenMessage { get; set; }
+
+    }
+
+    public class UPDATELISTREQUESTFRIENDOFUSERONLINE
+    {
+        public UPDATELISTREQUESTFRIENDOFUSERONLINE(List<user>? listFriendRequestOfUser)
+        {
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+
+        }
+        public List<user>? listFriendRequestOfUser { get; set; }
+    }
+
+    
 }

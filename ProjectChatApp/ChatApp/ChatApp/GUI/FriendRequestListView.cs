@@ -12,11 +12,12 @@ using System.Windows.Forms;
 
 namespace ChatApp.GUI
 {
+
     public partial class FriendRequestListView : UserControl
     {
 
         private string username;
-     
+
         private int idRespone;
         private int idRequest;
         private Socket server;
@@ -24,6 +25,13 @@ namespace ChatApp.GUI
         {
             InitializeComponent();
         }
+
+        private void lbl_username_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
         public FriendRequestListView(int idRespone, int idRequest, Socket server)
         {
             InitializeComponent();
@@ -61,23 +69,23 @@ namespace ChatApp.GUI
         public void AcceptFriendRequest(int idReponse, int idRequest)
         {
             //-------Nhận dữ liệu từ textbox và thông báo---------//
-   
+
             byte[] data = new byte[1024];
             Packet.SENFRIENDREPONSE friendReponse = new Packet.SENFRIENDREPONSE(idReponse, idRequest);
             string jsonString = JsonSerializer.Serialize(friendReponse);
             Packet.Packet packet = new Packet.Packet("FriendReponse", jsonString);
             sendJson(packet);
-            DialogResult dlr = MessageBox.Show("ban da dong y ket ban");
+            // DialogResult dlr = MessageBox.Show("ban da dong y ket ban");
             //-------Kết thúc Nhận dữ liệu từ textbox và thông báo---------//
-           
+
         }
 
-        
+
         public void CancelFriendRequest(int idReponse, int idRequest)
         {
             //-------Nhận dữ liệu từ textbox và thông báo---------//
 
-       
+
             Packet.SENFRIENDREPONSE friendReponse = new Packet.SENFRIENDREPONSE(idReponse, idRequest);
             string jsonString = JsonSerializer.Serialize(friendReponse);
             Packet.Packet packet = new Packet.Packet("CancelFriendReponse", jsonString);
@@ -86,14 +94,20 @@ namespace ChatApp.GUI
             //-------Kết thúc Nhận dữ liệu từ textbox và thông báo---------//
 
         }
-        private void button1_Click(object sender, EventArgs e)
+
+        private void btn_accept_Click(object sender, EventArgs e)
         {
             AcceptFriendRequest(idRespone, idRequest);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btn_cancel_Click(object sender, EventArgs e)
         {
             CancelFriendRequest(idRespone, idRequest);
+        }
+
+        private void FriendRequestListView_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

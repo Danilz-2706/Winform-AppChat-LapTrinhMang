@@ -12,6 +12,7 @@ using System.Security.Permissions;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using UI_AppChat.UserControls;
 
 namespace ChatApp.GUI
 {
@@ -260,42 +261,42 @@ namespace ChatApp.GUI
                 int me = 0;
                 int f = 0;
                 ChattingPanel.Controls.Clear();
-                FriendChat[] FriendChatMess = new FriendChat[HistoryChat.Count];
-                MeChat[] MeChatMess = new MeChat[HistoryChat.Count];
+                ReceiverMessageContent[] ReceiverMessageContentMess = new ReceiverMessageContent[HistoryChat.Count];
+                SenderMessageContent[] SenderMessageContentMess = new SenderMessageContent[HistoryChat.Count];
                 for(int i=0;i< HistoryChat.Count;i++)
                 {
                     if (HistoryChat[i].Idsender == IdSender)
                     {
-                        MeChatMess[i] = new MeChat();
-                        MeChatMess[i].ShowSeen = false;
-                        MeChatMess[i].Message = HistoryChat[i].Messagecontent;
+                        SenderMessageContentMess[i] = new SenderMessageContent();
+                        SenderMessageContentMess[i].ShowSeen = false;
+                        SenderMessageContentMess[i].Message = HistoryChat[i].Messagecontent;
                         for(int j=0;j<listFriendOfUser.Count;j++)
                         {
                             if (HistoryChat[i].Idreceiver == listFriendOfUser[j].Id)
                             {
-                                MeChatMess[i].NameFriendChatWithMe = listFriendOfUser[j].Name;
+                                SenderMessageContentMess[i].NameFriendChatWithMe = listFriendOfUser[j].Name;
                             }
                         }
-                        ChattingPanel.Controls.Add(MeChatMess[i]);
-                        //ChattingPanel.ScrollControlIntoView(MeChatMess[i]);
+                        ChattingPanel.Controls.Add(SenderMessageContentMess[i]);
+                        //ChattingPanel.ScrollControlIntoView(SenderMessageContentMess[i]);
                         me = 1;
                         f = 0;
                     }
                     else
                     {
-                        FriendChatMess[i] = new FriendChat();
-                        FriendChatMess[i].ShowSeen = false;
+                        ReceiverMessageContentMess[i] = new ReceiverMessageContent();
+                        ReceiverMessageContentMess[i].ShowSeen = false;
                         for(int j=0;j<listFriendOfUser.Count;j++)
                         {
                             if (HistoryChat[i].Idsender == listFriendOfUser[j].Id)
                             {
-                                FriendChatMess[i].Username = listFriendOfUser[j].Name;
+                                ReceiverMessageContentMess[i].Username = listFriendOfUser[j].Name;
                                 break;
                             }
                         }
-                        FriendChatMess[i].Message = HistoryChat[i].Messagecontent;
-                        ChattingPanel.Controls.Add(FriendChatMess[i]);
-                      //  ChattingPanel.ScrollControlIntoView(FriendChatMess[i]);
+                        ReceiverMessageContentMess[i].Message = HistoryChat[i].Messagecontent;
+                        ChattingPanel.Controls.Add(ReceiverMessageContentMess[i]);
+                      //  ChattingPanel.ScrollControlIntoView(ReceiverMessageContentMess[i]);
                         f = 1;
                         me = 0;
                     }
@@ -304,31 +305,33 @@ namespace ChatApp.GUI
                 {                   
                     if (checkSeenMessagerUsers.Count == 1)
                     {
-                        FriendChatMess[HistoryChat.Count - 1].SeenMessage = FriendChatMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
+                        ReceiverMessageContentMess[HistoryChat.Count - 1].SeenMessage = ReceiverMessageContentMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
                     }
                     else
                     {
-                        FriendChatMess[HistoryChat.Count - 1].SeenMessage = "You,"+FriendChatMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
+                        ReceiverMessageContentMess[HistoryChat.Count - 1].SeenMessage = "You,"+ReceiverMessageContentMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
                     }
-                    FriendChatMess[HistoryChat.Count - 1].ShowSeen = true;
-                    ChattingPanel.ScrollControlIntoView(FriendChatMess[HistoryChat.Count - 1]);
+                    ReceiverMessageContentMess[HistoryChat.Count - 1].ShowSeen = true;
+                    ChattingPanel.ScrollControlIntoView(ReceiverMessageContentMess[HistoryChat.Count - 1]);
                 }
                 else
                 {
                     if (checkSeenMessagerUsers.Count == 1)
                     {
-                        MeChatMess[HistoryChat.Count - 1].SeenMessage = "You had seen";
+                        SenderMessageContentMess[HistoryChat.Count - 1].SeenMessage = "You had seen";
                     }
                     else
                     {
-                        MeChatMess[HistoryChat.Count - 1].SeenMessage = "You," + MeChatMess[HistoryChat.Count - 1].NameFriendChatWithMe.ToString() + "had seen";
+                        SenderMessageContentMess[HistoryChat.Count - 1].SeenMessage = "You," + SenderMessageContentMess[HistoryChat.Count - 1].NameFriendChatWithMe.ToString() + "had seen";
                     }
-                    MeChatMess[HistoryChat.Count - 1].ShowSeen = true;
-                    ChattingPanel.ScrollControlIntoView(MeChatMess[HistoryChat.Count - 1]);
+                    SenderMessageContentMess[HistoryChat.Count - 1].ShowSeen = true;
+                    ChattingPanel.ScrollControlIntoView(SenderMessageContentMess[HistoryChat.Count - 1]);
                 }              
             }
             
         }
+
+
         private void populateFriendListView(int n, int Noti,int OwnClient, List<message> M,bool noti)
         {
             

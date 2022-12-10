@@ -131,7 +131,7 @@
             this.SearchFriendtxt.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.SearchFriendtxt.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.SearchFriendtxt.ForeColor = System.Drawing.Color.Transparent;
-            this.SearchFriendtxt.Location = new System.Drawing.Point(644, 24);
+            this.SearchFriendtxt.Location = new System.Drawing.Point(635, 24);
             this.SearchFriendtxt.Name = "SearchFriendtxt";
             this.SearchFriendtxt.PlaceholderText = "Tìm kiếm bạn bè";
             this.SearchFriendtxt.Size = new System.Drawing.Size(248, 21);
@@ -167,13 +167,13 @@
             this.SendMessgapanel.Controls.Add(this.Messagetxt);
             this.SendMessgapanel.Location = new System.Drawing.Point(313, 637);
             this.SendMessgapanel.Name = "SendMessgapanel";
-            this.SendMessgapanel.Size = new System.Drawing.Size(588, 70);
+            this.SendMessgapanel.Size = new System.Drawing.Size(534, 70);
             this.SendMessgapanel.TabIndex = 7;
             this.SendMessgapanel.Paint += new System.Windows.Forms.PaintEventHandler(this.SendMessgapanel_Paint);
             // 
             // SendMessagebtn
             // 
-            this.SendMessagebtn.Location = new System.Drawing.Point(469, 26);
+            this.SendMessagebtn.Location = new System.Drawing.Point(426, 26);
             this.SendMessagebtn.Name = "SendMessagebtn";
             this.SendMessagebtn.Size = new System.Drawing.Size(94, 29);
             this.SendMessagebtn.TabIndex = 1;
@@ -183,7 +183,7 @@
             // 
             // Messagetxt
             // 
-            this.Messagetxt.Location = new System.Drawing.Point(244, 26);
+            this.Messagetxt.Location = new System.Drawing.Point(201, 26);
             this.Messagetxt.Name = "Messagetxt";
             this.Messagetxt.Size = new System.Drawing.Size(219, 27);
             this.Messagetxt.TabIndex = 0;
@@ -193,10 +193,12 @@
             this.ChattingPanel.AutoScroll = true;
             this.ChattingPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.ChattingPanel.Controls.Add(this.starttochatlbl);
+            this.ChattingPanel.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.ChattingPanel.Location = new System.Drawing.Point(313, 73);
             this.ChattingPanel.Name = "ChattingPanel";
-            this.ChattingPanel.Size = new System.Drawing.Size(588, 569);
+            this.ChattingPanel.Size = new System.Drawing.Size(534, 569);
             this.ChattingPanel.TabIndex = 8;
+            this.ChattingPanel.WrapContents = false;
             // 
             // starttochatlbl
             // 

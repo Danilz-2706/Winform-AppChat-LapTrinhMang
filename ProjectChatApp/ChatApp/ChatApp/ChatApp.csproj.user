@@ -16,8 +16,14 @@
     <Compile Update="GUI\MainChatApp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="GUI\ReceiverMessageContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="GUI\RegisterForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GUI\SenderMessageContent.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 </Project>

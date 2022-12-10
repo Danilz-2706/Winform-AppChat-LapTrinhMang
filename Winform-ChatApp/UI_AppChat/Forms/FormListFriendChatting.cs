@@ -554,34 +554,34 @@ namespace UI_AppChat
             }
         }
 
-        //public void FriendRequestConnect()
-        //{
-        //    //-------Nhận dữ liệu từ textbox và thông báo---------//
-        //    string username = SearchFriendtxt.Text;
-        //    byte[] data = new byte[1024];
-        //    Packet.SENFRIENDREQUEST friendRequest = new Packet.SENFRIENDREQUEST(IdSender, username);
-        //    string jsonString = JsonSerializer.Serialize(friendRequest);
-        //    Packet.Packet packet = new Packet.Packet("FrientRequest", jsonString);
-        //    DialogResult dlr = MessageBox.Show("Bạn muốn kết bạn với: " + username,
-        //    "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-        //    //-------Kết thúc Nhận dữ liệu từ textbox và thông báo---------//
+        public void FriendRequestConnect()
+        {
+            //-------Nhận dữ liệu từ textbox và thông báo---------//
+            string username = SearchFriendtxt.Text;
+            byte[] data = new byte[1024];
+            Packet.SENFRIENDREQUEST friendRequest = new Packet.SENFRIENDREQUEST(IdSender, username);
+            string jsonString = JsonSerializer.Serialize(friendRequest);
+            Packet.Packet packet = new Packet.Packet("FrientRequest", jsonString);
+            DialogResult dlr = MessageBox.Show("Bạn muốn kết bạn với: " + username,
+            "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //-------Kết thúc Nhận dữ liệu từ textbox và thông báo---------//
 
 
 
-        //    if (dlr == DialogResult.Yes)
-        //    {
+            if (dlr == DialogResult.Yes)
+            {
 
-        //        //---------Gửi Nhận packet-server------------------------------//
-        //        sendJson(packet);
-        //        // sai r khuc nay moi thu khi ma client nhan dc no phai nam o thread hieu hk??
+                //---------Gửi Nhận packet-server------------------------------//
+                sendJson(packet);
+                // sai r khuc nay moi thu khi ma client nhan dc no phai nam o thread hieu hk??
 
-        //    }
-        //    else
-        //    {
-        //        MessageBox.Show("Code sai rồi");
-        //    }
-        //}
-       
+            }
+            else
+            {
+                MessageBox.Show("Code sai rồi");
+            }
+        }
+
         private void SendMessagebtn_Click(object sender, EventArgs e)
         {
             SendMessage();
@@ -614,8 +614,7 @@ namespace UI_AppChat
 
         private void addFriendbtn_Click(object sender, EventArgs e)
         {
-            FormAddFriend addFriend = new FormAddFriend();
-            addFriend.ShowDialog();
+            
         }
 
         private void createGroupbtn_Click(object sender, EventArgs e)

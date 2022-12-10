@@ -19,6 +19,9 @@
     <Compile Update="Forms\FormRegisterMain.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UserControls\FriendRequest.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="UserControls\ItemFriend.cs">
       <SubType>UserControl</SubType>
     </Compile>

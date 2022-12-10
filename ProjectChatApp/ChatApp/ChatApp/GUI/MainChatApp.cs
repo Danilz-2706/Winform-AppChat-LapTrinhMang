@@ -88,6 +88,18 @@ namespace ChatApp.GUI
         }
         private void NewThread()
         {
+
+            if (listUsernameReponseOff.Count() != 0)
+            {
+                string str = "";
+                foreach (string us in listUsernameReponseOff)
+                {
+                    str += us + "\n";
+                }
+                MessageBox.Show(str + "accept request friend");
+                BeginInvoke((Action)(() => UpdateStatusFriend()));
+              
+            }
             try
             {
                 while (active)

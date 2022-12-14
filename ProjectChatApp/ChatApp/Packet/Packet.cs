@@ -32,6 +32,8 @@ namespace Packet
         public bool noti { get; set; }
     }
     
+    
+
     public class SENDHISTORYCHAT
     {
         public SENDHISTORYCHAT(List<message> listHistoryChat, int idsender, int idrec,message lastmess,bool noti,List<int> checkSeenMessageUsers)
@@ -59,6 +61,22 @@ namespace Packet
         }
         public int iduser { get; set; }
         public int idmess { get; set; }
+    }
+    public class SENDIMAGE
+    {
+        public SENDIMAGE(int idsender, int idrec, string? contentmess, string? url, byte[] data)
+        {
+            this.idsender = idsender;
+            this.idrec = idrec;
+            this.contentmess = contentmess;
+            this.url = url;
+            this.data = data;
+        }
+        public int idsender { get; set; }
+        public int idrec { get; set; }
+        public string? contentmess { get; set; }
+        public string? url { get; set; }
+        public byte[] data { get; set; }
     }
     public class SENDMESSAGE
     {
@@ -127,7 +145,7 @@ namespace Packet
 
     public class LOGINSUCESS
     {
-        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage)
+        public LOGINSUCESS(int? id, string? email, string? password, string? name, int? sex, string? bd, int? online_status, int? is_active, int? server_block, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user> listFriendRequestOfUser, List<string> listUsernaemReponseOff)
         {
             this.id = id;
             this.email = email;
@@ -139,6 +157,8 @@ namespace Packet
             this.is_active = is_active;
             this.server_block = server_block;
             this.listFriendOfUser = listFriendOfUser;
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+            this.listUsernaemReponseOff = listUsernaemReponseOff;
             this.messlist = messlist;
             this.CheckSeenMessage = CheckSeenMessage;
         }
@@ -153,11 +173,102 @@ namespace Packet
         public int? is_active { get; set; }
         public int? server_block { get; set; }
         public List<user>? listFriendOfUser { get; set; }
+        public List<user>? listFriendRequestOfUser { get; set; }
+        public List<string>? listUsernaemReponseOff { get; set; }
         public Dictionary<int, message> messlist { get; set; }
         public Dictionary<int, bool> CheckSeenMessage { get; set; }
     }
-    
+
+
+    public class SENFRIENDREQUEST
+    {
+        public SENFRIENDREQUEST(int? id, string? usernameRequest)
+        {
+            this.id = id;
+            this.usernameRequest = usernameRequest;
+        }
+
+        public string? usernameRequest { get; set; }
+        public int? id { get; set; }
+
+    }
+
+    public class SENFRIENDREPONSE
+    {
+        public SENFRIENDREPONSE(int idReponse, int idRequest)
+        {
+            this.idReponse = idReponse;
+            this.idRequest = idRequest;
+        }
+
+        public int idReponse { get; set; }
+        public int idRequest { get; set; }
+
+    }
+
+
+    public class SENUPDATEFRIEND
+    {
+        public SENUPDATEFRIEND(int id)
+        {
+            this.id = id;
+
+        }
+
+        public int id { get; set; }
+
+
+    }
+
+
+    public class UPDATELISTFRIENDOFUSER
+    {
+
+        public UPDATELISTFRIENDOFUSER(List<user>? listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, string mess)
+        {
+            this.listFriendOfUser = listFriendOfUser;
+            this.messlist = messlist;
+            this.CheckSeenMessage = CheckSeenMessage;
+            this.mess = mess;
+        }
+
+        public List<user>? listFriendOfUser { get; set; }
+        public string mess { get; set; }
+        public Dictionary<int, message> messlist { get; set; }
+        public Dictionary<int, bool> CheckSeenMessage { get; set; }
+
+    }
+
+
+    public class UPDATELISTREQUESTFRIENDOFUSER
+    {
+
+        
+
+        public UPDATELISTREQUESTFRIENDOFUSER(List<user>? listFriendRequestOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user>? listFriendOfUser)
+        {
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+            this.messlist = messlist;
+            this.CheckSeenMessage = CheckSeenMessage;
+            this.listFriendOfUser = listFriendOfUser;
+        }
+
+        public List<user>? listFriendRequestOfUser { get; set; }
+        public List<user>? listFriendOfUser { get; set; }
+        public Dictionary<int, message> messlist { get; set; }
+        public Dictionary<int, bool> CheckSeenMessage { get; set; }
+
+    }
+
+    public class UPDATELISTREQUESTFRIENDOFUSERONLINE
+    {
+        public UPDATELISTREQUESTFRIENDOFUSERONLINE(List<user>? listFriendRequestOfUser)
+        {
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+
+        }
+        public List<user>? listFriendRequestOfUser { get; set; }
+    }
 
     
-        
 }

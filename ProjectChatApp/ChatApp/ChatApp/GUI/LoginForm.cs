@@ -39,7 +39,7 @@ namespace ChatApp.GUI
             string t = "";
             foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
             {
-                if (ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 || ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet)
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet || ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
                 {
                     //Console.WriteLine(ni.Name);
                     foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
@@ -131,7 +131,7 @@ namespace ChatApp.GUI
                         MessageBox.Show("Welcome to loza!!!!");
                         LOGINSUCESS? lgsucess = JsonSerializer.Deserialize<LOGINSUCESS>(com.content);
                         this.Visible = false;
-                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser,lgsucess.messlist,lgsucess.CheckSeenMessage);
+                        MainChatApp mainChatApp = new MainChatApp(iep, (int)lgsucess.id, lgsucess.email, lgsucess.name, 5, (Socket)client, lgsucess.listFriendOfUser, lgsucess.messlist,lgsucess.CheckSeenMessage, lgsucess.listFriendRequestOfUser, lgsucess.listUsernaemReponseOff);
                         mainChatApp.ShowDialog();
                         break;
                     default:

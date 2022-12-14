@@ -32,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-duyviet\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+      "projectUniqueName": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-lastupdate\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
       "projectName": "Packet",
-      "projectPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-duyviet\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
+      "projectPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-lastupdate\\ProjectChatApp\\ChatApp\\Packet\\Packet.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-duyviet\\ProjectChatApp\\ChatApp\\Packet\\obj\\",
+      "outputPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-lastupdate\\ProjectChatApp\\ChatApp\\Packet\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -53,8 +53,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-duyviet\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj": {
-              "projectPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-duyviet\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj"
+            "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-lastupdate\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj": {
+              "projectPath": "C:\\Users\\Admin\\Desktop\\Winform-AppChat-LapTrinhMang-lastupdate\\ProjectChatApp\\ChatApp\\DTO\\DTO.csproj"
             }
           }
         }

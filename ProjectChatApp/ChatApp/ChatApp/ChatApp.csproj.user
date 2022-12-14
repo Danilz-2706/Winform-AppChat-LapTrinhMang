@@ -7,14 +7,29 @@
     <Compile Update="GUI\FriendChat.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Update="GUI\FriendImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="GUI\FriendRequestListView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="GUI\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="GUI\MainChatApp.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="GUI\MeImage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="GUI\ReceiverMessageContent.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Update="GUI\RegisterForm.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="GUI\SenderMessageContent.cs">
+      <SubType>UserControl</SubType>
     </Compile>
   </ItemGroup>
 </Project>

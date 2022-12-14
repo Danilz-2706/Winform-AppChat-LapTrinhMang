@@ -1,9 +1,12 @@
 ﻿using ChatApp.Properties;
 using DTO.DTO;
+using K4os.Compression.LZ4.Internal;
 using Microsoft.VisualBasic.Logging;
 using Org.BouncyCastle.Bcpg;
 using Packet;
 using Server.DTO;
+using System;
+using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Net.NetworkInformation;
@@ -12,6 +15,8 @@ using System.Security.Permissions;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using System.Windows.Forms;
+using UI_AppChat.UserControls;
 
 namespace ChatApp.GUI
 {
@@ -28,7 +33,10 @@ namespace ChatApp.GUI
         string name_user = null;
         bool active = true;
         int n;
+        int nFriendRequest;
         List<user> listFriendOfUser = new List<user>();
+        List<user>? listFriendRequestOfUser = new List<user>();
+        List<string> listUsernameReponseOff = new List<string>();
         List<message> HistoryChat = new List<message>();
        // List<viewmessage> viewmesslist = new List<viewmessage>();
         Dictionary<int, message> messlist = new Dictionary<int, message>();
@@ -36,7 +44,7 @@ namespace ChatApp.GUI
         ChatFriendListView[] listItem;
         List<int>? checkSeenMessagerUsers = new List<int>();
 
-        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage)
+        public MainChatApp(IPEndPoint ipep,int id ,string emailuser, string name,int num,Socket client, List<user> listFriendOfUser, Dictionary<int, message> messlist, Dictionary<int, bool> CheckSeenMessage, List<user> listFriendRequestOfUser, List<string> listUsernameReponseOff)
         {
             InitializeComponent();            
             iep = ipep;
@@ -45,8 +53,11 @@ namespace ChatApp.GUI
             IdSender = id;
             name_user = name;
             n = listFriendOfUser.Count;
+            nFriendRequest = listFriendRequestOfUser.Count;
             Username.Text = name_user;
             this.listFriendOfUser = listFriendOfUser;
+            this.listFriendRequestOfUser = listFriendRequestOfUser;
+            this.listUsernameReponseOff = listUsernameReponseOff;
             this.messlist = messlist;
             this.CheckSeenMessage = CheckSeenMessage;
             listItem = new ChatFriendListView[n];
@@ -59,6 +70,14 @@ namespace ChatApp.GUI
             label1.Hide();
             starttochatlbl.Show(); 
             populateFriendListView(n,0,0,HistoryChat,false);
+            populateFriendRequestListView(nFriendRequest);
+            testpicMethod(testpic, "logoteam-33023322856.png");
+            testpic.Hide();
+        }
+        public void testpicMethod(PictureBox p, string nameimg)
+        {
+            p.Image = new Bitmap("../../../../Server/User/" + nameimg);
+            p.SizeMode = PictureBoxSizeMode.StretchImage;
         }
         public string getIPAdress()
         {
@@ -81,6 +100,17 @@ namespace ChatApp.GUI
         }
         private void NewThread()
         {
+            if (listUsernameReponseOff.Count() != 0)
+            {
+                string str = "";
+                foreach (string us in listUsernameReponseOff)
+                {
+                    str += us + "\n";
+                }
+                MessageBox.Show(str + "accept request friend");
+                BeginInvoke((Action)(() => UpdateStatusFriend()));
+
+            }
             try
             {
                 while (active)
@@ -90,6 +120,7 @@ namespace ChatApp.GUI
                     int recv = _clientToServer.Receive(data);
                     string jsonString = Encoding.ASCII.GetString(data, 0, recv);
                     jsonString.Replace("\\u0022", "\"");
+                    
                     Packet.Packet com = JsonSerializer.Deserialize<Packet.Packet>(jsonString);
 
                     if (com != null)
@@ -107,7 +138,9 @@ namespace ChatApp.GUI
                                     }
                                 }
                                 //muốn thay đổi 1 thứ gì đó không đồng bộ 
+
                                 BeginInvoke((Action)(() => populateFriendListView(n,0,0,HistoryChat,false)));
+                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
                                 //MessageBox.Show(u.Name);                                                             
                                 break;
                             case "SendHistoryChat": //lay lich su chat box giua 2 nguoi dung
@@ -153,6 +186,47 @@ namespace ChatApp.GUI
                             case "OK":                                                                
                                     active = false;                                                                   
                                 break;
+
+                            case "FrientRequest":
+                                MessageBox.Show(com.content);
+                                break;
+                            case "NoFrientRequest":
+                                MessageBox.Show(com.content);
+                                break;
+                            case "FrientResponseOnline":      // cập nhật lại list frient của thằng gửi lời mời kết bạn trong khi nó online
+
+                                UPDATELISTFRIENDOFUSER? list = JsonSerializer.Deserialize<UPDATELISTFRIENDOFUSER>(com.content);
+                                MessageBox.Show(list.mess);
+                                listFriendOfUser = list.listFriendOfUser;
+                                n = list.listFriendOfUser.Count();
+                                messlist = list.messlist;
+                                CheckSeenMessage = list.CheckSeenMessage;
+                                BeginInvoke((Action)(() => populateFriendListView(n, 0,0, HistoryChat, false)));
+                                break;
+                            case "FrientRequestOnline": // cập nhật lại danh sách bạn và danh sách thông báo của được gửi lời mời kb khi nó online
+                                UPDATELISTREQUESTFRIENDOFUSER? list2 = JsonSerializer.Deserialize<UPDATELISTREQUESTFRIENDOFUSER>(com.content);
+                                listFriendOfUser = list2.listFriendOfUser;
+                                n = listFriendOfUser.Count();
+                                listFriendRequestOfUser = list2.listFriendRequestOfUser;
+                                nFriendRequest = listFriendRequestOfUser.Count();
+                                messlist = list2.messlist;
+                                CheckSeenMessage = list2.CheckSeenMessage;
+                                BeginInvoke((Action)(() => populateFriendListView(n, 0, 0, HistoryChat, false)));
+                                BeginInvoke((Action)(() =>populateFriendRequestListView(nFriendRequest)));
+                                break;                         
+                            case "UpdateListRequestFriendOfUserOnline":
+                                UPDATELISTREQUESTFRIENDOFUSERONLINE? list3 = JsonSerializer.Deserialize<UPDATELISTREQUESTFRIENDOFUSERONLINE>(com.content);
+                                listFriendRequestOfUser = list3.listFriendRequestOfUser;                            
+                                nFriendRequest = listFriendRequestOfUser.Count();                                                          
+                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
+                                break;
+
+                            case "UpdateListRequestFriendOfUserOnlineCancel":
+                                UPDATELISTREQUESTFRIENDOFUSERONLINE? list4 = JsonSerializer.Deserialize<UPDATELISTREQUESTFRIENDOFUSERONLINE>(com.content);
+                                listFriendRequestOfUser = list4.listFriendRequestOfUser;
+                                nFriendRequest = listFriendRequestOfUser.Count();
+                                BeginInvoke((Action)(() => populateFriendRequestListView(nFriendRequest)));
+                                break;
                             default:
                                 break;
                         }
@@ -188,85 +262,165 @@ namespace ChatApp.GUI
             }
             else
             {
-                int me = 0;
-                int f = 0;
+                int meChat = 0;
+                int fChat = 0;
+                int MeI = 0;
+                int FrI = 0;
                 ChattingPanel.Controls.Clear();
-                FriendChat[] FriendChatMess = new FriendChat[HistoryChat.Count];
-                MeChat[] MeChatMess = new MeChat[HistoryChat.Count];
+                ReceiverMessageContent[] ReceiverMessageContentMess = new ReceiverMessageContent[HistoryChat.Count];
+                SenderMessageContent[] SenderMessageContentMess = new SenderMessageContent[HistoryChat.Count];
+                MeImage[] MeImage = new MeImage[HistoryChat.Count];
+                FriendImage[] FriendImage = new FriendImage[HistoryChat.Count];
                 for(int i=0;i< HistoryChat.Count;i++)
                 {
                     if (HistoryChat[i].Idsender == IdSender)
                     {
-                        MeChatMess[i] = new MeChat();
-                        MeChatMess[i].ShowSeen = false;
-                        MeChatMess[i].Message = HistoryChat[i].Messagecontent;
-                        for(int j=0;j<listFriendOfUser.Count;j++)
+                        if (HistoryChat[i].Url == 1)
                         {
-                            if (HistoryChat[i].Idreceiver == listFriendOfUser[j].Id)
+                            MeImage[i] = new MeImage();
+                            MeImage[i].ShowSeen = false;
+                            MeImage[i].ImagePicMethod(HistoryChat[i].Messagecontent.ToString());
+                            for (int j = 0; j < listFriendOfUser.Count; j++)
                             {
-                                MeChatMess[i].NameFriendChatWithMe = listFriendOfUser[j].Name;
+                                if (HistoryChat[i].Idreceiver == listFriendOfUser[j].Id)
+                                {
+                                    MeImage[i].NameFriendChatWithMe = listFriendOfUser[j].Name;
+                                    break;
+                                }
                             }
+                            ChattingPanel.Controls.Add(MeImage[i]);
+                            meChat = 0;
+                            fChat = 0;
+                            MeI = 1;
+                            FrI = 0;
                         }
-                        ChattingPanel.Controls.Add(MeChatMess[i]);
-                        //ChattingPanel.ScrollControlIntoView(MeChatMess[i]);
-                        me = 1;
-                        f = 0;
+                        else
+                        {
+                            SenderMessageContentMess[i] = new SenderMessageContent();
+                            SenderMessageContentMess[i].ShowSeen = false;
+                            SenderMessageContentMess[i].Message = HistoryChat[i].Messagecontent;
+                            for (int j = 0; j < listFriendOfUser.Count; j++)
+                            {
+                                if (HistoryChat[i].Idreceiver == listFriendOfUser[j].Id)
+                                {
+                                    SenderMessageContentMess[i].NameFriendChatWithMe = listFriendOfUser[j].Name;
+                                    break;
+                                }
+                            }
+                            ChattingPanel.Controls.Add(SenderMessageContentMess[i]);
+                            //ChattingPanel.ScrollControlIntoView(SenderMessageContentMess[i]);
+                            meChat = 1;
+                            fChat = 0;
+                            MeI = 0;
+                            FrI = 0;
+                        }                       
                     }
                     else
                     {
-                        FriendChatMess[i] = new FriendChat();
-                        FriendChatMess[i].ShowSeen = false;
-                        for(int j=0;j<listFriendOfUser.Count;j++)
+                        if (HistoryChat[i].Url == 1)
                         {
-                            if (HistoryChat[i].Idsender == listFriendOfUser[j].Id)
+                            FriendImage[i] = new FriendImage();
+                            FriendImage[i].ShowSeen = false;
+                            for (int j = 0; j < listFriendOfUser.Count; j++)
                             {
-                                FriendChatMess[i].Username = listFriendOfUser[j].Name;
-                                break;
+                                if (HistoryChat[i].Idsender == listFriendOfUser[j].Id)
+                                {
+                                    FriendImage[i].Username = listFriendOfUser[j].Name;
+                                    break;
+                                }
                             }
+                            FriendImage[i].ImagePicMethod(HistoryChat[i].Messagecontent);
+                            ChattingPanel.Controls.Add(FriendImage[i]);
+                            meChat = 0;
+                            fChat = 0;
+                            MeI = 0;
+                            FrI = 1;
                         }
-                        FriendChatMess[i].Message = HistoryChat[i].Messagecontent;
-                        ChattingPanel.Controls.Add(FriendChatMess[i]);
-                      //  ChattingPanel.ScrollControlIntoView(FriendChatMess[i]);
-                        f = 1;
-                        me = 0;
+                        else
+                        {
+                            ReceiverMessageContentMess[i] = new ReceiverMessageContent();
+                            ReceiverMessageContentMess[i].ShowSeen = false;
+                            for (int j = 0; j < listFriendOfUser.Count; j++)
+                            {
+                                if (HistoryChat[i].Idsender == listFriendOfUser[j].Id)
+                                {
+                                    ReceiverMessageContentMess[i].Username = listFriendOfUser[j].Name;
+                                    break;
+                                }
+                            }
+                            ReceiverMessageContentMess[i].Message = HistoryChat[i].Messagecontent;
+                            ChattingPanel.Controls.Add(ReceiverMessageContentMess[i]);
+                            //  ChattingPanel.ScrollControlIntoView(ReceiverMessageContentMess[i]);
+                            meChat = 0;
+                            fChat = 1;
+                            MeI = 0;
+                            FrI = 0;
+                        }                       
                     }
                 }
-                if(f == 1)
+                if(fChat == 1)
                 {                   
                     if (checkSeenMessagerUsers.Count == 1)
                     {
-                        FriendChatMess[HistoryChat.Count - 1].SeenMessage = FriendChatMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
+                        ReceiverMessageContentMess[HistoryChat.Count - 1].SeenMessage = ReceiverMessageContentMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
                     }
                     else
                     {
-                        FriendChatMess[HistoryChat.Count - 1].SeenMessage = "You,"+FriendChatMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
+                        ReceiverMessageContentMess[HistoryChat.Count - 1].SeenMessage = "You,"+ReceiverMessageContentMess[HistoryChat.Count - 1].Username.ToString() + "had seen";
                     }
-                    FriendChatMess[HistoryChat.Count - 1].ShowSeen = true;
-                    ChattingPanel.ScrollControlIntoView(FriendChatMess[HistoryChat.Count - 1]);
+                    ReceiverMessageContentMess[HistoryChat.Count - 1].ShowSeen = true;
+                    ChattingPanel.ScrollControlIntoView(ReceiverMessageContentMess[HistoryChat.Count - 1]);
+                }
+                else if(meChat == 1)
+                {
+                    if (checkSeenMessagerUsers.Count == 1)
+                    {
+                        SenderMessageContentMess[HistoryChat.Count - 1].SeenMessage = "You had seen";
+                    }
+                    else
+                    {
+                        SenderMessageContentMess[HistoryChat.Count - 1].SeenMessage = "You," + SenderMessageContentMess[HistoryChat.Count - 1].NameFriendChatWithMe.ToString() + "had seen";
+                    }
+                    SenderMessageContentMess[HistoryChat.Count - 1].ShowSeen = true;
+                    ChattingPanel.ScrollControlIntoView(SenderMessageContentMess[HistoryChat.Count - 1]);
+                }else if(MeI == 1)
+                {
+                    if (checkSeenMessagerUsers.Count == 1)
+                    {
+                        MeImage[HistoryChat.Count - 1].SeenMessage = "You had seen";
+                    }
+                    else
+                    {
+                        MeImage[HistoryChat.Count - 1].SeenMessage = "You," + MeImage[HistoryChat.Count - 1].NameFriendChatWithMe.ToString() + "had seen";
+                    }
+                    MeImage[HistoryChat.Count - 1].ShowSeen = true;
+                    ChattingPanel.ScrollControlIntoView(MeImage[HistoryChat.Count - 1]);
                 }
                 else
                 {
                     if (checkSeenMessagerUsers.Count == 1)
                     {
-                        MeChatMess[HistoryChat.Count - 1].SeenMessage = "You had seen";
+                        FriendImage[HistoryChat.Count - 1].SeenMessage = FriendImage[HistoryChat.Count - 1].Username.ToString() + "had seen";
                     }
                     else
                     {
-                        MeChatMess[HistoryChat.Count - 1].SeenMessage = "You," + MeChatMess[HistoryChat.Count - 1].NameFriendChatWithMe.ToString() + "had seen";
+                        FriendImage[HistoryChat.Count - 1].SeenMessage = "You," + FriendImage[HistoryChat.Count - 1].Username.ToString() + "had seen";
                     }
-                    MeChatMess[HistoryChat.Count - 1].ShowSeen = true;
-                    ChattingPanel.ScrollControlIntoView(MeChatMess[HistoryChat.Count - 1]);
-                }              
+                    FriendImage[HistoryChat.Count - 1].ShowSeen = true;
+                    ChattingPanel.ScrollControlIntoView(FriendImage[HistoryChat.Count - 1]);
+                }
             }
             
         }
+
+
         private void populateFriendListView(int n, int Noti,int OwnClient, List<message> M,bool noti)
         {
             
             if (M.Count == 0 && Noti == 0 && OwnClient == 0)
             {
                 ChatFriendPanel.Controls.Clear();
-                //ChatFriendListView[] listItem = new ChatFriendListView[n];
+                ChatFriendListView[] listItem = new ChatFriendListView[n];
                 for (int i = 0; i < listItem.Length; i++)
                 {
                     listItem[i] = new ChatFriendListView();
@@ -327,7 +481,7 @@ namespace ChatApp.GUI
                 if(noti == false )
                 {
                     ChatFriendPanel.Controls.Clear();
-                    //ChatFriendListView[] listItem = new ChatFriendListView[n];
+                    ChatFriendListView[] listItem = new ChatFriendListView[n];
                     for (int i = 0; i < listItem.Length; i++)
                     {
                         
@@ -480,6 +634,33 @@ namespace ChatApp.GUI
             }
         }
 
+
+        //khanh--------------------------
+        private void populateFriendRequestListView(int n)
+        {
+            if (n == 0)
+            {
+                FriendRequestPanel.Controls.Clear();
+            }
+            else
+            {
+                FriendRequestPanel.Controls.Clear();
+                FriendRequestListView[] listItem = new FriendRequestListView[n];
+                for (int i = 0; i < listItem.Length; i++)
+                {
+
+                    listItem[i] = new FriendRequestListView(IdSender, listFriendRequestOfUser[i].Id, _clientToServer);
+                    listItem[i].Username = listFriendRequestOfUser[i].Name;
+
+                    FriendRequestPanel.Controls.Add(listItem[i]);
+
+
+                }
+            }
+
+        }
+        //---------------------------------
+
         void ClickEvent(object sender,EventArgs e)
         {
             ChattingPanel.Show();
@@ -609,6 +790,117 @@ namespace ChatApp.GUI
 
         private void ImageUser_Click(object sender, EventArgs e)
         {
+
+        }
+
+        public void FriendRequestConnect()
+        {
+            //-------Nhận dữ liệu từ textbox và thông báo---------//
+            bool flag = true;
+            string username = SearchFriendtxt.Text;
+            byte[] data = new byte[1024 * 3 * 1000];
+            Packet.SENFRIENDREQUEST friendRequest = new Packet.SENFRIENDREQUEST(IdSender, username);
+            string jsonString = JsonSerializer.Serialize(friendRequest);
+            Packet.Packet packet = new Packet.Packet("FrientRequest", jsonString);
+            DialogResult dlr = MessageBox.Show("Bạn muốn kết bạn với: " + username,
+            "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //-------Kết thúc Nhận dữ liệu từ textbox và thông báo---------//
+
+
+
+            if (dlr == DialogResult.Yes)
+            {
+
+                //---------Gửi Nhận packet-server------------------------------//
+                if(username == email)
+                {
+                    MessageBox.Show("Khong the ket ban voi chinh minh!");
+                    flag = false;
+                }
+                for(int i=0;i<listFriendOfUser.Count;i++)
+                {
+                    if(username == listFriendOfUser[i].Email)
+                    {
+                        MessageBox.Show("Nguoi nay da la ban be cua ban!");
+                        flag = false;
+                        break;
+                    }
+                }
+                if(flag)
+                {
+                    sendJson(packet);
+                }         
+                // sai r khuc nay moi thu khi ma client nhan dc no phai nam o thread hieu hk??
+
+            }
+           /* else
+            {
+                MessageBox.Show("Code sai rồi");
+            }*/
+        }
+
+
+        public void UpdateStatusFriend()
+        {
+            //-------Nhận dữ liệu từ textbox và thông báo---------//
+
+            Packet.SENUPDATEFRIEND updateStatusFriend = new Packet.SENUPDATEFRIEND(IdSender);
+            string jsonString = JsonSerializer.Serialize(updateStatusFriend);
+            Packet.Packet packet = new Packet.Packet("UpdateStatusFriend", jsonString);
+            sendJson(packet);
+
+        }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            FriendRequestConnect();
+        }
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
+        }
+
+        public byte[] ImageToByte(Image img)
+        {
+            using (MemoryStream mStream = new MemoryStream())
+            {
+                img.Save(mStream, img.RawFormat);
+                return mStream.ToArray();
+            }
+        }
+        private void filebtn_Click(object sender, EventArgs e)
+        {
+            
+            string path = "";
+            string filename = "";
+
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.CheckFileExists = true;
+            openFileDialog.AddExtension = true;
+            openFileDialog.Multiselect = false;
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.gif;*.bmp";
+
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                path = openFileDialog.FileName;
+                string imagepath = path.ToString();
+                imagepath = imagepath.Substring(imagepath.LastIndexOf("\\"));
+                filename = imagepath.Remove(0, 1);
+                Image hinh = Image.FromFile(path);
+                //Image hinhresize = (Image)resizeImage(hinh, new Size(150,150));
+                //Send Hinh qua Server
+                
+                byte[] BStream = ImageToByte(hinh);
+                Packet.SENDIMAGE sendimage = new Packet.SENDIMAGE(IdSender, IdRec, filename.ToString(), 1.ToString(), BStream);
+                string jsonString = JsonSerializer.Serialize(sendimage);
+                Packet.Packet packet = new Packet.Packet("SendImage", jsonString);
+                sendJson(packet);
+            }
+
+            Packet.REQUESTHISTORYCHAT rqhc = new Packet.REQUESTHISTORYCHAT(IdSender, IdRec, true);
+            string jsonString1 = JsonSerializer.Serialize(rqhc);
+            Packet.Packet packet1 = new Packet.Packet("RequestHistoryChat", jsonString1);
+            sendJson(packet1);
 
         }
     }
